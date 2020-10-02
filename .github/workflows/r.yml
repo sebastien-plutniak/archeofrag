@@ -15,19 +15,11 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
-      - name: Install BiocManager
-        run: |
-          message(paste('****', Sys.time(), 'installing BiocManager ****'))
-          remotes::install_cran("BiocManager")
-        shell: Rscript {0}
-      - name: Set BiocVersion
-        run: |
-          BiocManager::install(version = "devel", ask = FALSE)
-        shell: Rscript {0}    
+      - uses: r-lib/actions/setup-r@master   
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_cran("BiocManager")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("lcolladotor/biocthis")
           biocthis::use_bioc_github_action()
