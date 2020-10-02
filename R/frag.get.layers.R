@@ -5,7 +5,7 @@ frag.get.layers <- function(graph, layer.attr, sel.layers){
   if(! is.character(layer.attr) )  stop("'layer.attr' invalid")
   
   layers <- vertex_attr(graph, layer.attr)
-  if(sum(sel.layers %in% layers) != 2) stop("The two 'selected layers' are not in the 'layers' vector.")
+  if(sum(sel.layers %in% layers) != length(sel.layers)) stop("Some 'selected layers' are not in the 'layers' vector.")
   
   g.list <- lapply(sel.layers,
                    function(x) induced_subgraph(graph, V(graph)[layers == x] ))

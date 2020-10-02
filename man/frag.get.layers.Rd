@@ -1,10 +1,10 @@
 \name{frag.get.layers}
 \alias{frag.get.layers}
 \title{
-Returns the subgraph of each selected stratigraphic layers.
+Extracts the subgraph of each selected stratigraphic layers.
 }
 \description{
-Returns the subgraph of each selected stratigraphic layers.
+Extracts the subgraph of each selected stratigraphic layers.
 }
 \usage{
 frag.get.layers(graph, layer.attr, sel.layers)
@@ -12,14 +12,14 @@ frag.get.layers(graph, layer.attr, sel.layers)
 \arguments{
   \item{graph}{An undirected \code{igraph} object.}
   \item{layer.attr}{Character. The name of the vertices attribute giving the layer of each fragment.}
-  \item{sel.layers}{A numeric vector with the stratigraphic layers to be extracted.}
+  \item{sel.layers}{Character. The identifier(s) of the stratigraphic layers to retrieve.}
 }
 \details{
 This function is only a convenient function to extract the subgraphs of selected stratigraphic layers. 
 A graph is created for each layer in the vertex attribute given by the \code{layer.attr} argument.
 }
 \value{
-A list with a graph for each selected stratigraphic layers.
+A list with a graph for each selected stratigraphic layer.
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 

@@ -15,6 +15,177 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+
+## Introduction 
+
+```{r setup, message=F}
 library(archeofrag)
 ```
+
+On the field, the two main categories of facts that archaeologists distinguish include layers and archaeological objects.
+Layers are superposed masses of matter that archaeologists address using the principles of stratigraphy. Layers are considered as containers: they can include the so-called archaeological objects (bones, lithic pieces, pottery sherds, etc.).
+Whereas most objects have clear boundaries, this is not the case for layers: the boundary between two layer is fuzzy one. 
+In addition, a distinction between two layers does not imply that their content are also different. The relationships between layers and those between their contents are independent, due to the post-depositionnal processes: two layers different from a sedimentological perspective can contain objects related to the same chronological period; to the contrary, post-depositionnal processes can mixed two different sets of objects into a single layer.
+Consequently, a dialectical study of the containers and their contents is necessary.
+
+The fragments of an object can be concentrated into a single layer or, to the contrary, scattered into two or more layers. Consequently, studying the location and relationships between fragments is worthwhile to assess the relevance of the boundaries between layers. The so-called “refitting analysis” serves this purpose: archaeologists try to identify fragments with matching edges, proving that they were parts of the same initial object, in which they had adjacent locations.
+
+The *Archeofrag* package includes a set of tools for this purpose. 
+The approach implemented in this package relies on graph to model the relationships between fragments and layers. Fragments are represented by vertices, which are connected by an edge if they have “connecting” edges. The location within layers are integrated as vertices attribute.
+
+
+## Build fragmentation graphs
+
+There are two ways to input data in *Archeofrag*: 
+* loading empirical observations, and
+* generating simulated data.
+
+### Using empirical data
+
+The package comes with an example data set, called “Liang Abu” (from the name of a cave in Borneo). It contains three tables:
+* a table with information about the fragments (a unique identifier, and other information such as the layer),
+* a table with the connection relationships between these fragments (each row contains the unique identifiers of two connecting fragments),
+* a table with the similarity relationships between them (two fragments are said to be “similar” if they seem to come from the same object but do not have connecting edges. Similarity relationships are discussed in this presentation).
+
+The `make_frag_object` function builds objects with the class “frag”. The use of this builder is not a requirement of the other *Archeofrag* functions, however, it ensures that the data are suitable for the next steps of the analysis.
+The `make_cr_graph` is then used to build a an igraph graph object representing the connection relationships.
+
+```{r make-empirical-graph}
+data(LiangAbu)
+abu.g <- make_frag_object(df.cr, fragments = fragments.info)
+abu.g <- make_cr_graph(abu.g)
+```
+
+### Generating simulated data
+
+The other way to get data to use with *Archeofrag* is the `frag.simul.process` function to generate artificial cases.
+The next command generates a situation in which 20 initial objects (corresponding to the “connected components” of a graph) are fragmented into a total of 50 pieces and spread between two layers.
+The `frag.simul.process` function has many options but, at this step, we use it in its simplest form.
+
+```{r make-simulatd-graph, message=FALSE}
+simul.g <-frag.simul.process(n.components = 20, vertices = 50)
+```
+
+## Manipulate fragmentation graphs
+
+Once we have a fragmentation graph, several *Archeofrag* functions are convenient for a first examination of the data.
+First of all, a visual representation of the graph can be generated with the `frag.graph.plot` function, here for the Liang Abu data:
+
+```{r manipulate:plot-abu}
+frag.graph.plot(abu.g, "layer")
+```
+
+Then we plot our artificial fragmentation graph:
+
+```{r manipulate:plot-simul}
+frag.graph.plot(simul.g, "layer")
+```
+
+Note that the artificial graph has only two layers, whereas the Liang Abu graph features fragments from three layers.
+The `frag.get.layers.pair` function is a convenient function to extract a pair of layers.
+
+```{r manipulate:get.layer.pair}
+abu.g12 <- frag.get.layers.pair(abu.g, "layer", c("1", "2"))
+```
+
+Let's now plot the connected fragments from layer 1 and 2 of Liang Abu:
+
+```{r manipulate:plot-abu2}
+frag.graph.plot(abu.g12, "layer")
+```
+
+In addition, the `frag.get.layers` enables to extract as much layers as needed, for example the first layer of our artificial graph:
+```{r manipulate:frag.get.layers}
+frag.get.layers(simul.g, "layer", sel.layers = "1")
+
+```
+
+
+## Measure admixture of two layers
+
+
+```{r measure-admixture}
+
+frag.get.parameters(abu.g12, "layer")
+
+frag.relations.by.layers(simul.g, "layer")
+
+
+
+simul2.g <-frag.simul.process(initial.layers = 2, n.components = 20,
+                             vertices = 50, disturbance = .1)
+frag.relations.by.layers(simul2.g, "layer")
+
+```
+
+
+
+
+```{r measure-admixture2}
+
+simul.g <- frag.edges.weighting(simul.g, "layer")
+
+
+frag.layers.cohesion(simul.g, "layer")
+
+frag.layers.admixture(simul.g, "layer")
+
+
+simul2.g <- frag.edges.weighting(simul2.g, "layer")
+frag.layers.admixture(simul2.g, "layer")
+
+
+```
+
+
+
+## Characterising fragmentation in a particular layer
+
+```{r measure-properties}
+
+frag.cycles(simul.g, kmax=4)
+
+frag.path.lengths(simul.g)
+frag.path.lengths(simul.g, cumulative = T)
+
+frag.diameters(simul.g)
+frag.diameters(simul.g, cumulative = T)
+
+```
+
+
+## More on simulation
+
+
+```{r simulator-initial-layers}
+
+simul.2layers.g <-frag.simul.process(initial.layers = 2,
+                              n.components = 20,
+                              vertices = 50, disturbance = .1)
+
+
+simul.1layer.g <-frag.simul.process(initial.layers = 1,
+                              n.components = 20,
+                              vertices = 50, disturbance = .1)
+
+
+frag.simul.process(initial.layers = 1,
+                   n.components = 20,
+                   vertices = 50, edges = 40,
+                   disturbance = .1,
+                   balance = .5,
+                   components.balance = .5,
+                   aggreg.factor = 0,
+                   planar = T)
+
+```
+
+
+
+
+
+
+
+
+
+
