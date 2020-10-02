@@ -22,7 +22,22 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("lcolladotor/biocthis")
           biocthis::use_bioc_github_action()
+        shell: Rscript {0}        
+      - name: Install BiocManager
+        run: |
+          message(paste('****', Sys.time(), 'installing BiocManager ****'))
+          remotes::install_cran("BiocManager")
         shell: Rscript {0}
+      - name: Set BiocVersion
+        run: |
+          BiocManager::install(version = "devel", ask = FALSE)
+        shell: Rscript {0}
+      - name: Install RBGL
+        if:  env.has_RUnit == 'true'
+        run: |
+          ## Install RBGL
+          BiocManager::install("RBGL")
+        shell: Rscript {0}       
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
         shell: Rscript {0}
