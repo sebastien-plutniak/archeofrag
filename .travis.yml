@@ -3,3 +3,4 @@
 language: R
 cache: packages
 bioc_packages: RBGL
+warnings_are_errors: true
