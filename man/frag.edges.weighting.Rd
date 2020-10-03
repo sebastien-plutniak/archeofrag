@@ -10,22 +10,21 @@
   \item{layer.attr}{Character. The name of the vertice attribute giving the layer of each fragment.}
 }
 \details{
-Considerng two layers, internal (inside a layer) and external relations (between the two layers) are distinguished.
-The weights of their edges is computed in different ways.
+Considering two layers, internal (within a layer) and external relations (between the two layers) are distinguished.
+The weights of their edges is computed in two different ways.
 Three subgraphs are first generated, one for each layer and one only for the external relations.
 
-
-Intra-layer edges (E) are given the sum of the degrees (d) of the vertices (i and j) they connect: 
+The weights of intra-layer edges (E) is equal to the sum of the degrees (d) of the vertices (i and j) they connect: 
 
     W_intra(E_ij)= di + dj  
 
-For extra-layers, edges the same computation is done but with an alteration in order to take into account the balance between the set of fragments related to each layer:  
+For inter-layers edges, the same calculation is done but with a modifier to account for the balance of information available for each layer:  
 
-    W_extra(E_ij)= (di + dj) * TODO
+    W_inter(E_ij)= (di + dj) * (1 + ( 1 / (1 +  sum(W_intra 1)/sum(W_intra 2)) ) )
 
-with Gmin the minimal number of fragments from the same layer in the given connected set of fragments, and Gmax the maximal number of fragments from the same layer in the given connected set of fragments.  
+with \code{W_intra 1} the internal weights within layer 1 and \code{W_intra 2} the internal weights within layer 2.
 
-An error message is displayed if the vertice "layer" attribute has more than two layers.
+An error message is displayed if the vertices "layer" attribute has more than two layers.
 }
 \value{
 The input graph, with a new "weight" edge attribute.
@@ -34,8 +33,7 @@ The input graph, with a new "weight" edge attribute.
 
 \examples{
 g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)
-g <- frag.edges.weighting(g , "layer")
-E(g)$weight
+frag.edges.weighting(g , "layer")
 }
  
 \keyword{graphs}

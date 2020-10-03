@@ -9,7 +9,7 @@ frag.diameters(graph, cumulative = FALSE)
 }
 \arguments{
   \item{graph}{An \code{igraph} object.}
-  \item{cumulative}{Logical. If TRUE the cumulative diameter distribution is reported.}
+  \item{cumulative}{Logical. If TRUE the cumulative relative frequency of the diameters is reported.}
 }
 \details{
 \code{frag.diameters} wraps the \code{igraph} \code{diameter} function.

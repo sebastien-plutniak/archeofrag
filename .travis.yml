@@ -1,6 +1,10 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
+os:
+  - linux
+  - osx
+  - windows
 language: R
 cache: packages
 bioc_packages: RBGL
+dist: focal
 warnings_are_errors: true

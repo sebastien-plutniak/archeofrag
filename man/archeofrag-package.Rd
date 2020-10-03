@@ -22,4 +22,3 @@ Maintainer: Sebastien Plutniak <sebastien.plutniak at posteo.net>
 \code{\link[igraph:igraph-package]{igraph}} 
 \code{\link[RBGL:RBGL.overview]{RBGL}} 
 }
-\examples{}

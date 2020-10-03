@@ -7,7 +7,8 @@ Extracts the subraph corresponding to a pair of stratigraphic layers.
 Extracts the subraph corresponding to a pair of stratigraphic layers.
 }
 \usage{
-frag.get.layers.pair(graph, layer.attr, sel.layers, size.mini=2, mixed.components.only=FALSE)
+frag.get.layers.pair(graph, layer.attr, sel.layers, size.mini=2,
+                     mixed.components.only=FALSE)
 }
 
 \arguments{
