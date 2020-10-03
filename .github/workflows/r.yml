@@ -28,7 +28,11 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master   
+      - uses: r-lib/actions/setup-r@master
+      - name: Install Dependencies (Linux)
+        run: sudo apt-get install build-essential libglpk40
+        if: matrix.os == 'ubuntu-latest'        
+        
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
