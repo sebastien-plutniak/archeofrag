@@ -1,7 +1,9 @@
 .git
 .gitignore
+README.Rmd
 README.md
 LICENSE
+man/figures
 cran-comments.md
 ^\.travis\.yml$
 ^doc$
