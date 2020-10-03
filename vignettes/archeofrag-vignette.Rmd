@@ -95,7 +95,7 @@ frag.graph.plot(abu.g, "layer")
 We can then plot the artificial fragmentation graph:
 
 ```{r manipulate:plot-simul, fig.align="center"}
-frag.graph.plot(simul.g, "layer")
+frag.graph.plot(simul.g, "layer", asp=F)
 ```
 
 Note that this artificial graph has two layers, whereas the Liang Abu graph includes fragments from three layers.
@@ -108,7 +108,7 @@ abu.g12 <- frag.get.layers.pair(abu.g, "layer", c("1", "2"))
 Let's now plot the connected fragments from layer 1 and 2 of Liang Abu:
 
 ```{r manipulate:plot-abu2, fig.align="center"}
-frag.graph.plot(abu.g12, "layer")
+frag.graph.plot(abu.g12, "layer", asp=F )
 ```
 
 In addition, the `frag.get.layers` enables to extract as much layers as needed, for example the first layer of our artificial graph:
