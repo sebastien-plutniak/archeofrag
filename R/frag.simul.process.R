@@ -38,7 +38,7 @@
     if(planar){
       g <- .connect.neighbors.if.planar(g, v, v.to.add.name, neighbors)
     }else{
-      g <- add_edges(g, c(rbind(v.to.add.name, neighbors)) ) # sans test de planarité
+      g <- add_edges(g, c(rbind(v.to.add.name, neighbors)) ) # planarity test
     }
   }
   g
@@ -143,7 +143,7 @@
 
 
 #'	@export
-frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=NULL, disturbance=0, aggreg.factor=0, planar=TRUE){
+frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE){
   # tests:
   if(! planar %in% c(T,F)) stop("Planar must be True or False.")
   if(is.null(n.components)) stop("No 'n.components' parameter.")
@@ -180,10 +180,6 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
   }
   
   if(initial.layers == 2){
-    if(is.null(components.balance)){
-      message("No value for 'components.balance', 'balance' was used instead.")
-      components.balance <- balance
-    }
     if(!is.infinite(edges)){message("The 'edge' parameter is not used if two 'initial layers' are used.")}
     n.components.l1 <- round(n.components * components.balance)
     n.components.l2 <- n.components - n.components.l1

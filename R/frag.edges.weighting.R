@@ -1,8 +1,6 @@
 .set.edge.weight <- function(g){
   # set edges weight = sum of the degrees of their vertices:
-  if(gsize(g) == 0 ){
-    return(0)
-  }
+  if(gsize(g) == 0 )  return(0)
   e.list <- as_edgelist(g)
   colnames(e.list) <- c("src", "tgt")
   v.list <- cbind(name = V(g)$name, deg = igraph::degree(g))
@@ -63,7 +61,6 @@ frag.edges.weighting <- function (graph, layer.attr)
     
     # compute edge weights:
     E(graph)[ E(graph)$id %in% E(g12)$id ]$weight <- .set.edge.weight(g12) * cohesive.ratio
-    # .set.edge.weight(g12) * ( 1 + 1 / (1 + vertice.ratio ))
     # add tag to edges:
     E(graph)[ e2 ]$scope <- "intra"
     E(graph)[ E(graph)$id %in% E(g12)$id ]$scope <- "extra"

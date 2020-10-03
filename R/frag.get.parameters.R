@@ -7,6 +7,7 @@ frag.get.parameters <- function(graph, layer.attr){
   if(! is.character(layer.attr) ) stop("'layer.attr' invalid")
   if(is.null(vertex_attr(graph, layer.attr))) stop("'layer.attr' invalid")
   V(graph)$layer <- vertex_attr(graph, layer.attr)
+  if(length(unique(V(graph)$layer)) != 2) warning("The graph does not have two layers, disturbance and balance values will be meaningless")
   # balance: proportion of non-disturbed pieces in the two layers:
   v1 <- V(graph)[V(graph)$layer == unique(V(graph)$layer)[1]]
   v2 <- V(graph)[V(graph)$layer == unique(V(graph)$layer)[2]]
@@ -34,6 +35,7 @@ frag.get.parameters <- function(graph, layer.attr){
               balance = balance,
               components.balance = compo.balance,
               disturbance = disturbance, 
-              aggreg.factor = aggreg.factor)
+              aggreg.factor = aggreg.factor,
+              planar =  boyerMyrvoldPlanarityTest(as_graphnel(graph)))
   lapply(res, c, use.names = FALSE)
 }

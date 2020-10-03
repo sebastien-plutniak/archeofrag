@@ -26,7 +26,6 @@ frag.cycles <- function(graph, kmax, max.cycles.only=FALSE) {
     warning("Cycle detection in a 'connection and similarity' fragmentation graph is meaningless.")
   }
   if(kmax < 3) stop("k must be >= 3")
-  if(kmax > 4) message("In cycles > 4 the fragments are not necessary all connected to each other.")
   
   results <- lapply(kmax:3, function(x) .detect.cycle(graph, x))
   if(max.cycles.only){
