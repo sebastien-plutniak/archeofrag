@@ -109,14 +109,14 @@ simul.g <-frag.simul.process(n.components = 20, vertices = 50)
 Once we have a fragmentation graph, several *Archeofrag* functions are convenient for a first examination of the data.
 First, the `frag.graph.plot` function generates a visual representation of the graph, here for the Liang Abu data:
 
-```{r manipulate:plot-abu, fig.align="center"}
+```{r plot-abu, fig.align="center"}
 frag.graph.plot(abu.g, "layer")
 ```
 
 
 We can then plot the artificial fragmentation graph:
 
-```{r manipulate:plot-simul, fig.align="center"}
+```{r plot-simul, fig.align="center"}
 frag.graph.plot(simul.g, "layer")
 ```
 
@@ -129,7 +129,7 @@ abu.g12 <- frag.get.layers.pair(abu.g, "layer", c("1", "2"))
 
 Let's now plot the connected fragments from layer 1 and 2 of Liang Abu:
 
-```{r manipulate:plot-abu2, fig.align="center"}
+```{r plot-abu2, fig.align="center"}
 frag.graph.plot(abu.g12, "layer")
 ```
 
@@ -357,12 +357,12 @@ test2.results <- lapply(1:40, run.test2)
 We can then compare the distribution of, for instance, the number of edges to the empirical value observed at Liang Abu (red line):
 
 
-```{r manipulate:param-plot-mar, echo=FALSE}
+```{r manipulate-param-plot-mar, echo=FALSE}
 par(mar=c(5, 4, 4, 2))
 ```
 
 
-```{r simulator-test2-examine, message=FALSE, fig.align="center", fig.width=5}
+```{r plot-simulated-edges, message=FALSE, fig.align="center"}
 edges.res <- sapply(test2.results,
                     function(g) frag.get.parameters(g, "layer")$edges)
 plot(density(edges.res), main="Edges")

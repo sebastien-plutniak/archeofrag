@@ -137,7 +137,7 @@ data:
 frag.graph.plot(abu.g, "layer")
 ```
 
-<img src="man/figures/README-manipulate:plot-abu-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-plot-abu-1.png" style="display: block; margin: auto;" />
 
 We can then plot the artificial fragmentation
 graph:
@@ -146,7 +146,7 @@ graph:
 frag.graph.plot(simul.g, "layer")
 ```
 
-<img src="man/figures/README-manipulate:plot-simul-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-plot-simul-1.png" style="display: block; margin: auto;" />
 
 Note that this artificial graph has two layers, whereas the Liang Abu
 graph includes fragments from three layers. The `frag.get.layers.pair`
@@ -163,7 +163,7 @@ Abu:
 frag.graph.plot(abu.g12, "layer")
 ```
 
-<img src="man/figures/README-manipulate:plot-abu2-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-plot-abu2-1.png" style="display: block; margin: auto;" />
 
 In addition, the `frag.get.layers` enables to extract as much layers as
 needed, for example the first layer of our artificial graph:
@@ -171,11 +171,11 @@ needed, for example the first layer of our artificial graph:
 ``` r
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 #> $`1`
-#> IGRAPH 7387f09 UN-- 25 16 -- 
+#> IGRAPH 7fbb30d UN-- 25 17 -- 
 #> + attr: frag_type (g/c), name (v/c), object.id (v/n), layer (v/c)
-#> + edges from 7387f09 (vertex names):
+#> + edges from 7fbb30d (vertex names):
 #>  [1] 1 --2  3 --4  5 --6  7 --8  9 --10 11--12 13--14 15--16 17--18 19--20
-#> [11] 10--21 4 --22 21--23 1 --24 17--25 18--25
+#> [11] 17--21 18--21 7 --22 8 --22 15--23 11--24 10--25
 ```
 
 ## Measuring the admixture of two layers
@@ -191,8 +191,8 @@ returning the count of intra-layers and inter-layers relationships.
 frag.relations.by.layers(simul.g, "layer")
 #>    
 #>      1  2
-#>   1 16  0
-#>   2  0 17
+#>   1 17  0
+#>   2  0 19
 ```
 
 The diagonal of the matrix contain the number of intra-layers
@@ -211,8 +211,8 @@ simul2.g <-frag.simul.process(n.components=20, vertices=50, disturbance=.1)
 frag.relations.by.layers(simul2.g, "layer")
 #>    
 #>      1  2
-#>   1 13  8
-#>   2  8 15
+#>   1 20  5
+#>   2  5 14
 ```
 
 As expected, this graph has inter-layers connections.
@@ -269,11 +269,11 @@ cbind(
 #>                    [,1]      [,2]     
 #> n.components       20        20       
 #> vertices           50        50       
-#> edges              33        36       
-#> balance            0.5       0.5609756
-#> components.balance 0.5       0.59     
-#> disturbance        0         0.1      
-#> aggreg.factor      0.4483452 0.5955602
+#> edges              36        39       
+#> balance            0.5       0.5909091
+#> components.balance 0.5       0.61     
+#> disturbance        0         0.08     
+#> aggreg.factor      0.5535105 0.5683877
 #> planar             TRUE      TRUE
 ```
 
@@ -287,7 +287,7 @@ E(simul.g)$weight
 #> NULL
 simul.g <- frag.edges.weighting(simul.g, "layer")
 E(simul.g)$weight
-#>  [1] 3 3 3 2 2 3 2 2 2 4 4 4 2 4 3 3 2 3 3 3 2 3 3 4 4 4 2 2 2 4 4 4 3
+#>  [1] 2 2 2 4 4 4 3 3 3 2 3 3 4 4 4 2 3 2 3 2 2 2 6 6 6 6 6 6 4 4 4 2 2 3 3 3
 ```
 
 Note that the weighting of the edges is mandatory, otherwise an error is
@@ -299,7 +299,7 @@ cohesion value of each layer:
 ``` r
 frag.layers.cohesion(simul.g, "layer")
 #>         1         2 
-#> 0.4693878 0.5306122
+#> 0.4193548 0.5806452
 ```
 
 Compare with the second artificial graph:
@@ -308,7 +308,7 @@ Compare with the second artificial graph:
 simul2.g <- frag.edges.weighting(simul2.g, "layer")
 frag.layers.cohesion(simul2.g, "layer")
 #>         1         2 
-#> 0.2352941 0.4705882
+#> 0.5301530 0.3348335
 ```
 
 These values tell how much each layer is cohesive (self-adhesive).
@@ -320,7 +320,7 @@ quantifying the mixture between two layers:
 frag.layers.admixture(simul.g, "layer")
 #> [1] 0
 frag.layers.admixture(simul2.g, "layer")
-#> [1] 0.2941176
+#> [1] 0.1350135
 ```
 
 ## Characterising fragmentation within a layer
@@ -351,13 +351,13 @@ artificial graph:
 ``` r
 frag.cycles(simul.l1.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        0        0        0
+#>        6        1        0
 ```
 
 ``` r
 frag.cycles(simul.l2.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        5        1        0
+#>        3        0        0
 ```
 
 The `frag.path.lengths` function the distribution of the path lengths in
@@ -369,9 +369,9 @@ path lengths.
 
 ``` r
 frag.path.lengths(simul.l1.g)
-#> [1] 13  3
+#> [1] 20
 frag.path.lengths(simul.l2.g, cumulative=T)
-#> [1] 1.0000000 0.1333333
+#> [1] 1.00000000 0.07142857
 ```
 
 In a graph, the shortest path between two vertices is the path including
@@ -383,11 +383,11 @@ cumulative relative frequency of the diameters.
 
 ``` r
 frag.diameters(simul.l1.g)
-#>  1  2 
-#> 10  3
+#>  1 
+#> 13
 frag.diameters(simul.l2.g)
 #>  1  2 
-#> 12  1
+#> 10  1
 ```
 
 ## More on artificial graphs
@@ -445,13 +445,13 @@ frag.simul.process(initial.layers = 1,
                    components.balance = .4,
                    aggreg.factor = 0,
                    planar = T)
-#> IGRAPH 5a72175 UN-- 50 40 -- 
+#> IGRAPH 023943f UN-- 50 40 -- 
 #> + attr: frag_type (g/c), name (v/n), object.id (v/n), layer (v/c)
-#> + edges from 5a72175 (vertex names):
+#> + edges from 023943f (vertex names):
 #>  [1]  1-- 2  3-- 4  5-- 6  7-- 8  9--10 11--12 13--14 15--16 17--18 19--20
 #> [11] 21--22 23--24 25--26 27--28 29--30 31--32 33--34 35--36 37--38 39--40
-#> [21] 32--41 14--42 20--43 15--44 21--45 29--46 12--47 44--48 26--49 33--50
-#> [31] 34--50 19--43 22--45 30--46 31--41 11--47 16--48 25--49 15--48 13--42
+#> [21] 28--41 21--42 23--43  9--44 30--45 21--46 39--47 12--48  6--49 36--50
+#> [31] 22--42 42--46 10--44 40--47 29--45 22--46 35--50 24--43  5--49 11--48
 ```
 
 ### Hypotheses testing
@@ -518,4 +518,4 @@ plot(density(edges.res), main="Edges")
 abline(v=params$edges, col="red")
 ```
 
-<img src="man/figures/README-simulator-test2-examine-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-plot-simulated-edges-1.png" style="display: block; margin: auto;" />
