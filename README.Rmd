@@ -1,19 +1,41 @@
 ---
-title: "Archeofrag: tools to analyse archaeological fragmentation"
-author: "Sébastien Plutniak"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Archeofrag: tools to analyse archaeological fragmentation}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
-```{r, include = FALSE}
+
+
+```{r, echo=FALSE, message=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.path = "man/figures/",
+  out.width = NULL
 )
 ```
+
+# Archeofrag
+R package to analyse the fragmentation of archeological objects.
+
+
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![R build status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
+[![Travis-CI Build Status](https://travis-ci.org/sebastien-plutniak/archeofrag.svg?branch=master)](https://travis-ci.org/sebastien-plutniak/archeofrag)
+[![license](https://img.shields.io/badge/license-GPL%202-B50B82.svg)](https://www.r-project.org/Licenses/GPL-2)
+
+
+
+## Installation
+
+
+The development version can be installed from GitHub with:
+
+```{r github-install, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("sebastien-plutniak/archeofrag")
+```
+ 
 
 
 - [**Introduction**](#Introduction)
