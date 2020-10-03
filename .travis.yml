@@ -8,4 +8,4 @@ dist: focal
 warnings_are_errors: true
 
 before_install:
-  - sudo apt-get -y build-essential libglpk40
+  - sudo apt-get installbuild-essential libglpk40  libglpk-dev  gcc-7 g++-7 gfortran-7
