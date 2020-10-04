@@ -4,7 +4,7 @@ os:
 language: R
 cache: packages
 bioc_packages: RBGL
-dist: focal
+dist: bionic
 warnings_are_errors: true
 
 before_install:
