@@ -19,9 +19,9 @@ frag.layers.cohesion <- function(graph, layer.attr){
   g2 <-  subgraph.edges(graph, E(graph)[ V(graph)[v2] %--% V(graph)[v2] ])
   g12 <- subgraph.edges(graph, E(graph)[ V(graph)[v1] %--% V(graph)[v2] ])
   
-  res1 <- sum(E(g1)$weight) / sum(E(graph)$weight) 
-  res2 <- sum(E(g2)$weight) / sum(E(graph)$weight) 
-  
+  # # Sums 
+  res1 <-  sum(v1, E(g1)$weight) / sum(gorder(graph), E(graph)$weight)
+  res2 <-  sum(v2, E(g2)$weight) / sum(gorder(graph), E(graph)$weight)
   res <- c(res1, res2)
   names(res) <- layers
   res[order(names(res))]

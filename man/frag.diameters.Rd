@@ -13,12 +13,12 @@ frag.diameters(graph, cumulative = FALSE)
 }
 \details{
 \code{frag.diameters} wraps the \code{igraph} \code{diameter} function.
-For graphs representing the fragmentation of archeological objects, the diameter of each components of the graph (i.e. archeological objects) can be interpreted:
-as a measure of the insensity of the fragmentation (when all the fragments of the initial object are known);
+For graphs representing the fragmentation of archeological objects, the diameter of each component of the graph (i.e. archeological objects) can be interpreted:
+as a measure of the intensity of the fragmentation (when all the fragments of the initial object are known);
 as a measure of the scattering of the fragments (when not all the fragments are known);
 }
 \value{
-A numeric vector of the length equal to the maximum diameter value found. The first element is the frequence of the diameter values = 1, the second element is the frequence of diameter values = 2, etc. If \code{cumulative} is True, the cumulative density is returned.
+A numeric vector of the length equal to the maximum diameter value found. The first element is the frequency of the diameter values = 1, the second element is the frequency of diameter values = 2, etc. If \code{cumulative} is True, the cumulative density is returned.
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 

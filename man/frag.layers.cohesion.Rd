@@ -20,7 +20,7 @@ The cohesion value for a given layer is given by:
 with W_inLayer for the weights of the internal edges of the layer under consideration, W_in for the weights of all the internal edges,  and W_ex for the weights of the external edges. 
 
 The measure integrates the balance between the information about each layer.
-Result ranges between [0;1] with 0 for two layers having only inter-layers connection, and 1 for the case of absence of inter-layers connections and an important inequal information about the two layers.
+Results range in [0;1] with 0 for two layers only with inter-layers connection relationships, and 1 if there is no inter-layers relationships and important inequal information about the two layers.
 
 An error message is displayed if the vertice "layer" attribute has more or less than two layers.
 }

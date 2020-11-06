@@ -17,7 +17,8 @@
 
 The function returns an undirected graph of "\code{igraph}" class, using the "fragments" data frame of the frag.object to set the vertices attributes. 
 
-In the resultant graph, both "connection" and "similarity" relations are included.  A "type" edge attribute is set with a character "cr" value for "connection" relation and a "sr" value for the "similarity" relations. The function let the user free to set a numeric weight to the edges afterwards. A "frag_type" graph attribute is set with a "connection and similarity" value.
+Both "connection" and "similarity" relations are included in the resulting graph. A "type" edge attribute is set with a character "cr" value for "connection" relationships and  "sr" for the "similarity" relationships. 
+Edge weights are not set by this function, and it is recommended to use the \code{frag.edges.weighting} function. A "frag_type" graph attribute is set with a "connection and similarity" value.
 }
 
 \value{An undirected of "igraph" class graph.}

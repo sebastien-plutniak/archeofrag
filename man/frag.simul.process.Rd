@@ -27,7 +27,7 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
 This function simulates the fragmentation of archeological objects within and between two adjacent stratigraphic layers.
 Fragments are represented by vertices and the "connection" relationships ("refittings") between them are represented by edges.
 
-Some parameters are optional or depends on other parameters (messages are displayed accordingly). Namely, if two \code{initial.layers} are set, then only one of the \code{vertices} and \code{edges} parameters can be used. Using only one layer as initial condition enables to constraint the graph with both vertices and edges number. 
+Some parameters are optional or depend on other parameters (messages are displayed accordingly). Namely, if two \code{initial.layers} are set, then only one of the \code{vertices} and \code{edges} parameters can be used. Using only one layer as initial condition enables to constraint the graph with both vertices and edges number. 
 The \code{disturbance} determines the proportion of fragments to "move" from a layer to the other one. Consequently, it generates inter-layers relationships.
 Note that the \code{balance} parameter determines the proportion of fragments in the first layer before the application of the disturbance process.
 

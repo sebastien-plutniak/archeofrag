@@ -17,7 +17,7 @@ frag.relations.by.layers(graph, layer.attr)
 This function is a handy method to summarize the distribution of the relations within and between stratigraphic layers.
 }
 \value{
-A symmetric matrix with the number of relations within and between the layers. 
+A symmetrical matrix with the number of relations within and between the layers. 
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 \examples{

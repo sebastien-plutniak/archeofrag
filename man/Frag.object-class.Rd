@@ -9,7 +9,7 @@
 
 \title{Class \code{"Frag.object"}}
 \description{
-    A class for archaeological "fragmentation" dataset. This class construction is mainly devoted to ensure that the data have been properly builded before the next steps of the analysis will be done with the others \code{archeofrag} functions.
+    A class for archaeological "fragmentation" dataset. This class construction aims to ensure that the data have been properly built before performing the next steps of the analysis.
     A convenient constructor function, \link{make_frag_object}, is provided.
     
 }
