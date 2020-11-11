@@ -4,7 +4,7 @@ author: "Sébastien Plutniak"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Archeofrag: Tools for refitting and stratigraphical analysis in archaeology}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
  
