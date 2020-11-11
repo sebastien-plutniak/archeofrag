@@ -1,29 +1,22 @@
 ---
-output: github_document
-editor_options: 
-chunk_output_type: console
+title: "Archeofrag: Tools for refitting and stratigraphical analysis in archaeology"
+author: "Sébastien Plutniak"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Archeofrag: Tools for refitting and stratigraphical analysis in archaeology}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
 ---
+ 
 
-
-
-```{r, echo=FALSE, message=FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = NULL
+  fig.path = "man/figures/",
+  comment = "#>"
 )
 ```
-
-# the Archeofrag R package
-Tools for refitting and stratigraphical analysis in archaeology
-
-
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![R build status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
-[![Travis-CI Build Status](https://travis-ci.org/sebastien-plutniak/archeofrag.svg?branch=master)](https://travis-ci.org/sebastien-plutniak/archeofrag)
-[![license](https://img.shields.io/badge/license-GPL%202-B50B82.svg)](https://www.r-project.org/Licenses/GPL-2)
-
+ 
 
 
 
@@ -105,7 +98,7 @@ simul.g <-frag.simul.process(n.components = 20, vertices = 50)
 ## Manipulating fragmentation graphs
 
 
-```{r manipulate:param-plot, echo=FALSE}
+```{r manipulate-param-plot, echo=FALSE}
 par(mar=rep(0, 4))
 ```
 
@@ -113,31 +106,31 @@ par(mar=rep(0, 4))
 Once we have a fragmentation graph, several *Archeofrag* functions are convenient for a first examination of the data.
 First, the `frag.graph.plot` function generates a visual representation of the graph, here for the Liang Abu data:
 
-```{r manipulate:plot-abu, fig.align="center"}
+```{r manipulate-plot-abu, fig.align="center"}
 frag.graph.plot(abu.g, "layer")
 ```
 
 We can then plot the artificial fragmentation graph:
 
-```{r manipulate:plot-simul, fig.align="center"}
+```{r manipulate-plot-simul, fig.align="center"}
 frag.graph.plot(simul.g, "layer")
 ```
 
 Note that this artificial graph has two layers, whereas the Liang Abu graph includes fragments from three layers.
 The `frag.get.layers.pair` function is a convenient function to extract a pair of layers.
 
-```{r manipulate:get.layer.pair}
+```{r manipulate-get.layer.pair}
 abu.g12 <- frag.get.layers.pair(abu.g, "layer", c("1", "2"))
 ```
 
 Let's now plot the connected fragments from layer 1 and 2 of Liang Abu:
 
-```{r manipulate:plot-abu2, fig.align="center"}
+```{r manipulate-plot-abu2, fig.align="center"}
 frag.graph.plot(abu.g12, "layer")
 ```
 
 In addition, the `frag.get.layers` enables to extract as much layers as needed, for example the first layer of our artificial graph:
-```{r manipulate:frag.get.layers}
+```{r manipulate-frag.get.layers}
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 
 ```
@@ -360,7 +353,7 @@ test2.results <- lapply(1:40, run.test2)
 We can then compare the distribution of, for instance, the number of edges to the empirical value observed at Liang Abu (red line):
 
 
-```{r manipulate:param-plot-mar, echo=FALSE}
+```{r manipulate-param-plot-mar, echo=FALSE}
 par(mar=c(5, 4, 4, 2))
 ```
 

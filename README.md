@@ -1,5 +1,4 @@
 
-
 # the Archeofrag R package
 Tools for refitting and stratigraphical analysis in archaeology
 
@@ -20,7 +19,7 @@ The development version can be installed from GitHub with:
 # install.packages("devtools")
 devtools::install_github("sebastien-plutniak/archeofrag")
 ```
-For an interaction demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
+For an interactive demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
 
 
 - [**Introduction**](#Introduction)
@@ -137,11 +136,11 @@ In addition, the `frag.get.layers` enables to extract as much layers as needed, 
 ```r
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 #> $`1`
-#> IGRAPH 988630a UN-- 25 20 -- 
+#> IGRAPH 88edfeb UN-- 25 18 -- 
 #> + attr: frag_type (g/c), name (v/c), object.id (v/n), layer (v/c)
-#> + edges from 988630a (vertex names):
+#> + edges from 88edfeb (vertex names):
 #>  [1] 1 --2  3 --4  5 --6  7 --8  9 --10 11--12 13--14 15--16 17--18 19--20
-#> [11] 13--21 13--22 14--22 21--22 4 --23 7 --24 8 --24 13--25 14--25 22--25
+#> [11] 15--21 13--22 14--22 8 --23 8 --24 23--24 17--25 18--25
 ```
 
 
@@ -156,7 +155,7 @@ The `frag.relations.by.layers`  function enables a first appreciation by returni
 frag.relations.by.layers(simul.g, "layer")
 #>    
 #>      1  2
-#>   1 20  0
+#>   1 18  0
 #>   2  0 19
 ```
 
@@ -170,8 +169,8 @@ simul2.g <-frag.simul.process(n.components=20, vertices=50, disturbance=.1)
 frag.relations.by.layers(simul2.g, "layer")
 #>    
 #>      1  2
-#>   1 15  7
-#>   2  7 12
+#>   1 20  5
+#>   2  5 13
 ```
 As expected, this graph has inter-layers connections.
 
@@ -226,11 +225,11 @@ cbind(
 #>                    [,1]      [,2]     
 #> n.components       20        20       
 #> vertices           50        50       
-#> edges              39        34       
-#> balance            0.5       0.5348837
-#> components.balance 0.5       0.5      
-#> disturbance        0         0.1      
-#> aggreg.factor      0.6253817 0.494623 
+#> edges              37        38       
+#> balance            0.5       0.5681818
+#> components.balance 0.5       0.56     
+#> disturbance        0         0.08     
+#> aggreg.factor      0.5507271 0.5560225
 #> planar             TRUE      TRUE
 ```
 
@@ -244,8 +243,7 @@ E(simul.g)$weight
 #> NULL
 simul.g <- frag.edges.weighting(simul.g, "layer")
 E(simul.g)$weight
-#>  [1] 2 3 2 4 4 4 2 2 7 7 6 7 6 6 8 7 2 2 2 3 2 3 2 4 4 4 2 4 4 4 2 4 4 4 4 4 4 2
-#> [39] 3
+#>  [1] 2 2 2 4 2 2 4 4 4 3 3 4 4 4 2 5 4 5 5 5 6 5 5 2 2 2 4 4 4 4 4 4 2 3 2 2 3
 ```
 Note that the weighting of the edges is mandatory, otherwise an error is raised.
 
@@ -254,8 +252,8 @@ Then, the `frag.layers.cohesion`  function is used to calculate the cohesion val
 
 ```r
 frag.layers.cohesion(simul.g, "layer")
-#>         1         2 
-#> 0.5733333 0.4266667
+#>       1       2 
+#> 0.46875 0.53125
 ```
 
 Compare with the second artificial graph:
@@ -265,7 +263,7 @@ Compare with the second artificial graph:
 simul2.g <- frag.edges.weighting(simul2.g, "layer")
 frag.layers.cohesion(simul2.g, "layer")
 #>         1         2 
-#> 0.4213710 0.3064516
+#> 0.5531078 0.2989772
 ```
 These values tell how much each layer is cohesive (self-adhesive).
 
@@ -277,7 +275,7 @@ In complement, the `frag.layers.admixture` function returns a value quantifying 
 frag.layers.admixture(simul.g, "layer")
 #> [1] 0
 frag.layers.admixture(simul2.g, "layer")
-#> [1] 0.2721774
+#> [1] 0.147915
 ```
 
 
@@ -304,14 +302,14 @@ Let's compare the cycles found in two layers of the artificial graph:
 ```r
 frag.cycles(simul.l1.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        1        0        0
+#>        5        1        0
 ```
 
 
 ```r
 frag.cycles(simul.l2.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        1        0        0
+#>        2        0        0
 ```
 
 
@@ -323,9 +321,9 @@ If the `cumulative` parameter is set to `TRUE`, the function returns the cumulat
 
 ```r
 frag.path.lengths(simul.l1.g)
-#> [1] 15  4  1
+#> [1] 20  1
 frag.path.lengths(simul.l2.g, cumulative=T)
-#> [1] 1.00000000 0.08333333
+#> [1] 1.00000000 0.07692308
 ```
 
 In a graph, the shortest path between two vertices is the path including th less number of edges. The diameter of a graph is its longest shortest path.
@@ -334,8 +332,8 @@ The `frag.diameters` function calculates the diameter of each component of the g
 
 ```r
 frag.diameters(simul.l1.g)
-#>  1  2  3 
-#> 11  2  1
+#>  1  2 
+#> 12  1
 frag.diameters(simul.l2.g)
 #>  1  2 
 #> 10  1
@@ -383,13 +381,13 @@ frag.simul.process(initial.layers = 1,
                    components.balance = .4,
                    aggreg.factor = 0,
                    planar = T)
-#> IGRAPH 9027b3a UN-- 50 40 -- 
+#> IGRAPH a21202b UN-- 50 40 -- 
 #> + attr: frag_type (g/c), name (v/n), object.id (v/n), layer (v/c)
-#> + edges from 9027b3a (vertex names):
+#> + edges from a21202b (vertex names):
 #>  [1]  1-- 2  3-- 4  5-- 6  7-- 8  9--10 11--12 13--14 15--16 17--18 19--20
 #> [11] 21--22 23--24 25--26 27--28 29--30 31--32 33--34 35--36 37--38 39--40
-#> [21] 15--41 28--42 17--43 26--44 30--45 43--46 45--47  4--48 12--49 46--50
-#> [31] 16--41 11--49 27--42  3--48 43--50 18--50 25--44 30--47 17--46 17--50
+#> [21] 18--41  8--42 13--43 27--44 12--45 27--46 21--47 38--48 23--49 29--50
+#> [31] 30--50 37--48 17--41 11--45 24--49 22--47 28--44 14--43  7--42 28--46
 ```
 
 ### Hypotheses testing
