@@ -1,3 +1,11 @@
+---
+output: github_document
+editor_options: 
+chunk_output_type: console
+---
+
+
+
 
 
 # the Archeofrag R package
@@ -11,9 +19,8 @@ Tools for refitting and stratigraphical analysis in archaeology
 
 
 
+
 ## Installation
-
-
 The development version can be installed from GitHub with:
 
 
@@ -21,11 +28,11 @@ The development version can be installed from GitHub with:
 # install.packages("devtools")
 devtools::install_github("sebastien-plutniak/archeofrag")
 ```
- 
+For an interaction demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
 
 
 - [**Introduction**](#Introduction)
-- [**Building fragmentation graphs**](#building-fragmentation-graphs): [Using empirical data](#using-empirical-data),  [Generating artificial data](#generating-artificial-data)
+- [**Building fragmentation graphs**](#building-fragmentation-graphs): [Using empirical data](#Using empirical data),  [Generating artificial data](Generating artificial data#)
 - [**Manipulating fragmentation graphs**](#manipulating-fragmentation-graphs)
 - [**Measuring the admixture of two layers**](#measuring-the-admixture-of-two-layers)
 - [**Characterising fragmentation within a layer**](#characterising-fragmentation-within-a-layer)
@@ -47,9 +54,9 @@ Consequently, a dialectical study of the containers and their contents is necess
 
 The fragments of an object can be concentrated into a single layer or, to the contrary, scattered into two or more layers. Consequently, studying the location and relationships between fragments is worthwhile to assess the relevance of the boundaries between layers. The so-called “refitting analysis” serves this purpose: archaeologists try to identify fragments with matching edges, proving that they were parts of the same initial object, in which they had adjacent locations.
 
-The *Archeofrag* package includes a set of tools for this purpose, based on the assumption that the **topological relationships between fragments matters** for the archaeological interpretation of fragmentation processes and layer formation.
-Consequently, graphs are used to account for these relationships and to model them. Fragments are represented by vertices, and are connected by an edge if the fragments have physical “connecting” edges. The layer in which the fragments are located is integrated as a vertex attribute.
-The approach implemented into *Archeofrag* addresses two main problems:
+The *Archeofrag* package includes a set of tools for this purpose. 
+The approach implemented in this package relies on graphs to model the relationships between fragments and layers. Fragments are represented by vertices, which are connected by an edge if they have “connecting” edges. The information about the layer in which the fragments are located is integrated as a vertex attribute.
+Two main questions are addressed:
 
 1. measuring the cohesion of the layers and, when applicable, their admixture;
 2. determining the topological properties of the relationships between fragments within a given layer.
@@ -94,6 +101,9 @@ simul.g <-frag.simul.process(n.components = 20, vertices = 50)
 ## Manipulating fragmentation graphs
 
 
+
+
+
 Once we have a fragmentation graph, several *Archeofrag* functions are convenient for a first examination of the data.
 First, the `frag.graph.plot` function generates a visual representation of the graph, here for the Liang Abu data:
 
@@ -102,8 +112,7 @@ First, the `frag.graph.plot` function generates a visual representation of the g
 frag.graph.plot(abu.g, "layer")
 ```
 
-<img src="man/figures/README-plot-abu-1.png" title="plot of chunk plot-abu" alt="plot of chunk plot-abu" style="display: block; margin: auto;" />
-
+<img src="man/figures/README-manipulate:plot-abu-1.png" title="plot of chunk manipulate:plot-abu" alt="plot of chunk manipulate:plot-abu" style="display: block; margin: auto;" />
 
 We can then plot the artificial fragmentation graph:
 
@@ -112,7 +121,7 @@ We can then plot the artificial fragmentation graph:
 frag.graph.plot(simul.g, "layer")
 ```
 
-<img src="man/figures/README-plot-simul-1.png" title="plot of chunk plot-simul" alt="plot of chunk plot-simul" style="display: block; margin: auto;" />
+<img src="man/figures/README-manipulate:plot-simul-1.png" title="plot of chunk manipulate:plot-simul" alt="plot of chunk manipulate:plot-simul" style="display: block; margin: auto;" />
 
 Note that this artificial graph has two layers, whereas the Liang Abu graph includes fragments from three layers.
 The `frag.get.layers.pair` function is a convenient function to extract a pair of layers.
@@ -129,18 +138,18 @@ Let's now plot the connected fragments from layer 1 and 2 of Liang Abu:
 frag.graph.plot(abu.g12, "layer")
 ```
 
-<img src="man/figures/README-plot-abu2-1.png" title="plot of chunk plot-abu2" alt="plot of chunk plot-abu2" style="display: block; margin: auto;" />
+<img src="man/figures/README-manipulate:plot-abu2-1.png" title="plot of chunk manipulate:plot-abu2" alt="plot of chunk manipulate:plot-abu2" style="display: block; margin: auto;" />
 
 In addition, the `frag.get.layers` enables to extract as much layers as needed, for example the first layer of our artificial graph:
 
 ```r
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 #> $`1`
-#> IGRAPH a4de0bd UN-- 25 16 -- 
+#> IGRAPH 988630a UN-- 25 20 -- 
 #> + attr: frag_type (g/c), name (v/c), object.id (v/n), layer (v/c)
-#> + edges from a4de0bd (vertex names):
+#> + edges from 988630a (vertex names):
 #>  [1] 1 --2  3 --4  5 --6  7 --8  9 --10 11--12 13--14 15--16 17--18 19--20
-#> [11] 13--21 5 --22 6 --22 1 --23 8 --24 17--25
+#> [11] 13--21 13--22 14--22 21--22 4 --23 7 --24 8 --24 13--25 14--25 22--25
 ```
 
 
@@ -155,8 +164,8 @@ The `frag.relations.by.layers`  function enables a first appreciation by returni
 frag.relations.by.layers(simul.g, "layer")
 #>    
 #>      1  2
-#>   1 16  0
-#>   2  0 18
+#>   1 20  0
+#>   2  0 19
 ```
 
 The diagonal of the matrix contain the number of intra-layers relationships and the other values refer to inter-layers relationships. Note that our simulated graph does not has connection relationships between layers 1 and 2.
@@ -169,8 +178,8 @@ simul2.g <-frag.simul.process(n.components=20, vertices=50, disturbance=.1)
 frag.relations.by.layers(simul2.g, "layer")
 #>    
 #>      1  2
-#>   1 15  4
-#>   2  4 16
+#>   1 15  7
+#>   2  7 12
 ```
 As expected, this graph has inter-layers connections.
 
@@ -225,11 +234,11 @@ cbind(
 #>                    [,1]      [,2]     
 #> n.components       20        20       
 #> vertices           50        50       
-#> edges              34        35       
-#> balance            0.5       0.4444444
-#> components.balance 0.5       0.44     
-#> disturbance        0         0.06     
-#> aggreg.factor      0.5400789 0.5168904
+#> edges              39        34       
+#> balance            0.5       0.5348837
+#> components.balance 0.5       0.5      
+#> disturbance        0         0.1      
+#> aggreg.factor      0.6253817 0.494623 
 #> planar             TRUE      TRUE
 ```
 
@@ -243,7 +252,8 @@ E(simul.g)$weight
 #> NULL
 simul.g <- frag.edges.weighting(simul.g, "layer")
 E(simul.g)$weight
-#>  [1] 3 3 2 4 4 4 3 2 2 3 3 2 3 3 2 3 2 2 2 6 6 6 6 6 6 3 3 2 2 2 3 3 3 3
+#>  [1] 2 3 2 4 4 4 2 2 7 7 6 7 6 6 8 7 2 2 2 3 2 3 2 4 4 4 2 4 4 4 2 4 4 4 4 4 4 2
+#> [39] 3
 ```
 Note that the weighting of the edges is mandatory, otherwise an error is raised.
 
@@ -253,7 +263,7 @@ Then, the `frag.layers.cohesion`  function is used to calculate the cohesion val
 ```r
 frag.layers.cohesion(simul.g, "layer")
 #>         1         2 
-#> 0.4107143 0.5892857
+#> 0.5733333 0.4266667
 ```
 
 Compare with the second artificial graph:
@@ -263,7 +273,7 @@ Compare with the second artificial graph:
 simul2.g <- frag.edges.weighting(simul2.g, "layer")
 frag.layers.cohesion(simul2.g, "layer")
 #>         1         2 
-#> 0.4679376 0.3986135
+#> 0.4213710 0.3064516
 ```
 These values tell how much each layer is cohesive (self-adhesive).
 
@@ -275,7 +285,7 @@ In complement, the `frag.layers.admixture` function returns a value quantifying 
 frag.layers.admixture(simul.g, "layer")
 #> [1] 0
 frag.layers.admixture(simul2.g, "layer")
-#> [1] 0.1334489
+#> [1] 0.2721774
 ```
 
 
@@ -302,7 +312,7 @@ Let's compare the cycles found in two layers of the artificial graph:
 ```r
 frag.cycles(simul.l1.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        3        1        0
+#>        1        0        0
 ```
 
 
@@ -321,9 +331,9 @@ If the `cumulative` parameter is set to `TRUE`, the function returns the cumulat
 
 ```r
 frag.path.lengths(simul.l1.g)
-#> [1] 15  2
+#> [1] 15  4  1
 frag.path.lengths(simul.l2.g, cumulative=T)
-#> [1] 1.00 0.25
+#> [1] 1.00000000 0.08333333
 ```
 
 In a graph, the shortest path between two vertices is the path including th less number of edges. The diameter of a graph is its longest shortest path.
@@ -332,11 +342,11 @@ The `frag.diameters` function calculates the diameter of each component of the g
 
 ```r
 frag.diameters(simul.l1.g)
-#> 1 2 
-#> 8 2
+#>  1  2  3 
+#> 11  2  1
 frag.diameters(simul.l2.g)
-#> 1 2 
-#> 9 4
+#>  1  2 
+#> 10  1
 ```
 
 ## More on artificial graphs
@@ -381,18 +391,18 @@ frag.simul.process(initial.layers = 1,
                    components.balance = .4,
                    aggreg.factor = 0,
                    planar = T)
-#> IGRAPH 7504e1b UN-- 50 40 -- 
+#> IGRAPH 9027b3a UN-- 50 40 -- 
 #> + attr: frag_type (g/c), name (v/n), object.id (v/n), layer (v/c)
-#> + edges from 7504e1b (vertex names):
+#> + edges from 9027b3a (vertex names):
 #>  [1]  1-- 2  3-- 4  5-- 6  7-- 8  9--10 11--12 13--14 15--16 17--18 19--20
 #> [11] 21--22 23--24 25--26 27--28 29--30 31--32 33--34 35--36 37--38 39--40
-#> [21] 21--41  5--42 36--43 39--44  4--45 34--46 23--47 33--48 31--49 29--50
-#> [31] 35--43 24--47 22--41 46--48 33--46  3--45 34--48 30--50 32--49 40--44
+#> [21] 15--41 28--42 17--43 26--44 30--45 43--46 45--47  4--48 12--49 46--50
+#> [31] 16--41 11--49 27--42  3--48 43--50 18--50 25--44 30--47 17--46 17--50
 ```
 
 ### Hypotheses testing
 
-The purpose of offering two methods (set by the `initial.layers` parameter) is to enable to test empirical results against simulated results generated based from two different hypotheses. The most likely scenario is identified from the simulated results closer to the empirical results.
+Two methods are possible (set by the `initial.layers` parameter) to enable to test empirical results against simulated results generated based from two different hypotheses. The most likely scenario is identified from the simulated results closer to the empirical results.
 
 Note that the `frag.get.parameters` returns a list whose elements are named with the parameters names, what is a handy way to set the simulator.
 
@@ -455,5 +465,5 @@ plot(density(edges.res), main="Edges")
 abline(v=params$edges, col="red")
 ```
 
-<img src="man/figures/README-plot-simulated-edges-1.png" title="plot of chunk plot-simulated-edges" alt="plot of chunk plot-simulated-edges" style="display: block; margin: auto;" />
+<img src="man/figures/README-simulator-test2-examine-1.png" title="plot of chunk simulator-test2-examine" alt="plot of chunk simulator-test2-examine" style="display: block; margin: auto;" />
 

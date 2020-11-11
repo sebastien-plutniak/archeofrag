@@ -7,7 +7,7 @@ frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mi
   if(! is.character(layer.attr))  stop("'layer.attr' invalid")
   V(graph)$tmp <- vertex_attr(graph, layer.attr)
   
-  if(sum(sel.layers %in% V(graph)$tmp) != 2 ) stop("Two 'selected layers' present in the 'layers' vector are required")
+  if(sum(sel.layers %in% V(graph)$tmp) != 2 ) stop("The two 'selected layers' must exists in the 'layer' attribute.")
   
   subgraph <- induced_subgraph(graph, V(graph)[ V(graph)$tmp %in% sel.layers ])
   

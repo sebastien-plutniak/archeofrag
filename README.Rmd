@@ -1,7 +1,7 @@
 ---
 output: github_document
 editor_options: 
-  chunk_output_type: console
+chunk_output_type: console
 ---
 
 
@@ -26,20 +26,20 @@ Tools for refitting and stratigraphical analysis in archaeology
 
 
 
+
 ## Installation
-
-
 The development version can be installed from GitHub with:
 
-```{r github-install, eval = FALSE}
+
+```r
 # install.packages("devtools")
 devtools::install_github("sebastien-plutniak/archeofrag")
 ```
- 
+For an interaction demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
 
 
 - [**Introduction**](#Introduction)
-- [**Building fragmentation graphs**](#building-fragmentation-graphs): [Using empirical data](#using-empirical-data),  [Generating artificial data](#generating-artificial-data)
+- [**Building fragmentation graphs**](#building-fragmentation-graphs): [Using empirical data](#Using empirical data),  [Generating artificial data](Generating artificial data#)
 - [**Manipulating fragmentation graphs**](#manipulating-fragmentation-graphs)
 - [**Measuring the admixture of two layers**](#measuring-the-admixture-of-two-layers)
 - [**Characterising fragmentation within a layer**](#characterising-fragmentation-within-a-layer)
@@ -60,9 +60,9 @@ Consequently, a dialectical study of the containers and their contents is necess
 
 The fragments of an object can be concentrated into a single layer or, to the contrary, scattered into two or more layers. Consequently, studying the location and relationships between fragments is worthwhile to assess the relevance of the boundaries between layers. The so-called “refitting analysis” serves this purpose: archaeologists try to identify fragments with matching edges, proving that they were parts of the same initial object, in which they had adjacent locations.
 
-The *Archeofrag* package includes a set of tools for this purpose, based on the assumption that the **topological relationships between fragments matters** for the archaeological interpretation of fragmentation processes and layer formation.
-Consequently, graphs are used to account for these relationships and to model them. Fragments are represented by vertices, and are connected by an edge if the fragments have physical “connecting” edges. The layer in which the fragments are located is integrated as a vertex attribute.
-The approach implemented into *Archeofrag* addresses two main problems:
+The *Archeofrag* package includes a set of tools for this purpose. 
+The approach implemented in this package relies on graphs to model the relationships between fragments and layers. Fragments are represented by vertices, which are connected by an edge if they have “connecting” edges. The information about the layer in which the fragments are located is integrated as a vertex attribute.
+Two main questions are addressed:
 
 1. measuring the cohesion of the layers and, when applicable, their admixture;
 2. determining the topological properties of the relationships between fragments within a given layer.
@@ -105,17 +105,21 @@ simul.g <-frag.simul.process(n.components = 20, vertices = 50)
 ## Manipulating fragmentation graphs
 
 
-Once we have a fragmentation graph, several *Archeofrag* functions are convenient for a first examination of the data.
-First, the `frag.graph.plot` function generates a visual representation of the graph, here for the Liang Abu data:
-
-```{r plot-abu, fig.align="center"}
-frag.graph.plot(abu.g, "layer")
+```{r manipulate:param-plot, echo=FALSE}
+par(mar=rep(0, 4))
 ```
 
 
+Once we have a fragmentation graph, several *Archeofrag* functions are convenient for a first examination of the data.
+First, the `frag.graph.plot` function generates a visual representation of the graph, here for the Liang Abu data:
+
+```{r manipulate:plot-abu, fig.align="center"}
+frag.graph.plot(abu.g, "layer")
+```
+
 We can then plot the artificial fragmentation graph:
 
-```{r plot-simul, fig.align="center"}
+```{r manipulate:plot-simul, fig.align="center"}
 frag.graph.plot(simul.g, "layer")
 ```
 
@@ -128,7 +132,7 @@ abu.g12 <- frag.get.layers.pair(abu.g, "layer", c("1", "2"))
 
 Let's now plot the connected fragments from layer 1 and 2 of Liang Abu:
 
-```{r plot-abu2, fig.align="center"}
+```{r manipulate:plot-abu2, fig.align="center"}
 frag.graph.plot(abu.g12, "layer")
 ```
 
@@ -308,7 +312,7 @@ frag.simul.process(initial.layers = 1,
 
 ### Hypotheses testing
 
-The purpose of offering two methods (set by the `initial.layers` parameter) is to enable to test empirical results against simulated results generated based from two different hypotheses. The most likely scenario is identified from the simulated results closer to the empirical results.
+Two methods are possible (set by the `initial.layers` parameter) to enable to test empirical results against simulated results generated based from two different hypotheses. The most likely scenario is identified from the simulated results closer to the empirical results.
 
 Note that the `frag.get.parameters` returns a list whose elements are named with the parameters names, what is a handy way to set the simulator.
 
@@ -356,12 +360,12 @@ test2.results <- lapply(1:40, run.test2)
 We can then compare the distribution of, for instance, the number of edges to the empirical value observed at Liang Abu (red line):
 
 
-```{r manipulate-param-plot-mar, echo=FALSE}
+```{r manipulate:param-plot-mar, echo=FALSE}
 par(mar=c(5, 4, 4, 2))
 ```
 
 
-```{r plot-simulated-edges, message=FALSE, fig.align="center"}
+```{r simulator-test2-examine, message=FALSE, fig.align="center", fig.width=5}
 edges.res <- sapply(test2.results,
                     function(g) frag.get.parameters(g, "layer")$edges)
 plot(density(edges.res), main="Edges")
