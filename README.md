@@ -1,14 +1,22 @@
+---
+output: github_document
+editor_options: 
+chunk_output_type: console
+---
 
-# the Archeofrag R package
-Tools for refitting and stratigraphical analysis in archaeology
 
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+
+
+# Archeofrag 
+an R package for refitting and stratigraphic analysis in archaeology
+
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
 [![Travis-CI Build Status](https://travis-ci.org/sebastien-plutniak/archeofrag.svg?branch=master)](https://travis-ci.org/sebastien-plutniak/archeofrag)
 [![license](https://img.shields.io/badge/license-GPL%202-B50B82.svg)](https://www.r-project.org/Licenses/GPL-2)
-
-
+[![DOI Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.4271900.svg)](https://doi.org/10.5281/zenodo.4271900)
 
 
 ## Installation
@@ -136,11 +144,11 @@ In addition, the `frag.get.layers` enables to extract as much layers as needed, 
 ```r
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 #> $`1`
-#> IGRAPH 88edfeb UN-- 25 18 -- 
+#> IGRAPH a241fde UN-- 25 17 -- 
 #> + attr: frag_type (g/c), name (v/c), object.id (v/n), layer (v/c)
-#> + edges from 88edfeb (vertex names):
+#> + edges from a241fde (vertex names):
 #>  [1] 1 --2  3 --4  5 --6  7 --8  9 --10 11--12 13--14 15--16 17--18 19--20
-#> [11] 15--21 13--22 14--22 8 --23 8 --24 23--24 17--25 18--25
+#> [11] 3 --21 17--22 18--22 16--23 16--24 23--24 13--25
 ```
 
 
@@ -155,8 +163,8 @@ The `frag.relations.by.layers`  function enables a first appreciation by returni
 frag.relations.by.layers(simul.g, "layer")
 #>    
 #>      1  2
-#>   1 18  0
-#>   2  0 19
+#>   1 17  0
+#>   2  0 20
 ```
 
 The diagonal of the matrix contain the number of intra-layers relationships and the other values refer to inter-layers relationships. Note that our simulated graph does not has connection relationships between layers 1 and 2.
@@ -169,8 +177,8 @@ simul2.g <-frag.simul.process(n.components=20, vertices=50, disturbance=.1)
 frag.relations.by.layers(simul2.g, "layer")
 #>    
 #>      1  2
-#>   1 20  5
-#>   2  5 13
+#>   1 20  3
+#>   2  3 14
 ```
 As expected, this graph has inter-layers connections.
 
@@ -225,11 +233,11 @@ cbind(
 #>                    [,1]      [,2]     
 #> n.components       20        20       
 #> vertices           50        50       
-#> edges              37        38       
-#> balance            0.5       0.5681818
-#> components.balance 0.5       0.56     
-#> disturbance        0         0.08     
-#> aggreg.factor      0.5507271 0.5560225
+#> edges              37        37       
+#> balance            0.5       0.5319149
+#> components.balance 0.5       0.53     
+#> disturbance        0         0.04     
+#> aggreg.factor      0.5741942 0.5590883
 #> planar             TRUE      TRUE
 ```
 
@@ -243,7 +251,7 @@ E(simul.g)$weight
 #> NULL
 simul.g <- frag.edges.weighting(simul.g, "layer")
 E(simul.g)$weight
-#>  [1] 2 2 2 4 2 2 4 4 4 3 3 4 4 4 2 5 4 5 5 5 6 5 5 2 2 2 4 4 4 4 4 4 2 3 2 2 3
+#>  [1] 2 3 3 2 2 2 2 3 3 4 4 4 4 2 5 5 4 3 3 2 2 2 2 4 4 4 2 6 6 6 6 6 6 2 4 4 4
 ```
 Note that the weighting of the edges is mandatory, otherwise an error is raised.
 
@@ -252,8 +260,8 @@ Then, the `frag.layers.cohesion`  function is used to calculate the cohesion val
 
 ```r
 frag.layers.cohesion(simul.g, "layer")
-#>       1       2 
-#> 0.46875 0.53125
+#>         1         2 
+#> 0.4090909 0.5909091
 ```
 
 Compare with the second artificial graph:
@@ -263,7 +271,7 @@ Compare with the second artificial graph:
 simul2.g <- frag.edges.weighting(simul2.g, "layer")
 frag.layers.cohesion(simul2.g, "layer")
 #>         1         2 
-#> 0.5531078 0.2989772
+#> 0.5941131 0.3046734
 ```
 These values tell how much each layer is cohesive (self-adhesive).
 
@@ -275,7 +283,7 @@ In complement, the `frag.layers.admixture` function returns a value quantifying 
 frag.layers.admixture(simul.g, "layer")
 #> [1] 0
 frag.layers.admixture(simul2.g, "layer")
-#> [1] 0.147915
+#> [1] 0.1012135
 ```
 
 
@@ -302,14 +310,14 @@ Let's compare the cycles found in two layers of the artificial graph:
 ```r
 frag.cycles(simul.l1.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        5        1        0
+#>        6        1        0
 ```
 
 
 ```r
 frag.cycles(simul.l2.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        2        0        0
+#>        1        0        0
 ```
 
 
@@ -323,7 +331,7 @@ If the `cumulative` parameter is set to `TRUE`, the function returns the cumulat
 frag.path.lengths(simul.l1.g)
 #> [1] 20  1
 frag.path.lengths(simul.l2.g, cumulative=T)
-#> [1] 1.00000000 0.07692308
+#> [1] 1.0000000 0.2142857
 ```
 
 In a graph, the shortest path between two vertices is the path including th less number of edges. The diameter of a graph is its longest shortest path.
@@ -333,10 +341,10 @@ The `frag.diameters` function calculates the diameter of each component of the g
 ```r
 frag.diameters(simul.l1.g)
 #>  1  2 
-#> 12  1
-frag.diameters(simul.l2.g)
-#>  1  2 
 #> 10  1
+frag.diameters(simul.l2.g)
+#> 1 2 
+#> 8 3
 ```
 
 ## More on artificial graphs
@@ -381,13 +389,13 @@ frag.simul.process(initial.layers = 1,
                    components.balance = .4,
                    aggreg.factor = 0,
                    planar = T)
-#> IGRAPH a21202b UN-- 50 40 -- 
+#> IGRAPH af9308f UN-- 50 40 -- 
 #> + attr: frag_type (g/c), name (v/n), object.id (v/n), layer (v/c)
-#> + edges from a21202b (vertex names):
+#> + edges from af9308f (vertex names):
 #>  [1]  1-- 2  3-- 4  5-- 6  7-- 8  9--10 11--12 13--14 15--16 17--18 19--20
 #> [11] 21--22 23--24 25--26 27--28 29--30 31--32 33--34 35--36 37--38 39--40
-#> [21] 18--41  8--42 13--43 27--44 12--45 27--46 21--47 38--48 23--49 29--50
-#> [31] 30--50 37--48 17--41 11--45 24--49 22--47 28--44 14--43  7--42 28--46
+#> [21]  6--41  4--42 27--43  6--44 21--45 14--46 44--47 27--48 31--49 17--50
+#> [31] 32--49 18--50  3--42 22--45 28--43 43--48 28--48  6--47 13--46  5--47
 ```
 
 ### Hypotheses testing
