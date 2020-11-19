@@ -1,10 +1,9 @@
 .git
+.github
 .gitignore
 README.Rmd
 README.md
-LICENSE
 man/figures
 cran-comments.md
-^\.travis\.yml$
-^doc$
-^Meta$
+.travis.yml
+Meta

@@ -258,7 +258,7 @@ frag.path.lengths(simul.l1.g)
 frag.path.lengths(simul.l2.g, cumulative=T)
 ```
 
-In a graph, the shortest path between two vertices is the path including th less number of edges. The diameter of a graph is its longest shortest path.
+In a graph, the shortest path between two vertices is the path including the less number of edges. The diameter of a graph is its longest shortest path.
 The `frag.diameters` function calculates the diameter of each component of the graph and returns the frequency of the values. If the `cumulative` parameter is set to `TRUE`, the function returns the cumulative relative frequency of the diameters.
 
 ```{r diameters}
