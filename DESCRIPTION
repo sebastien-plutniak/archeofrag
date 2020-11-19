@@ -1,12 +1,12 @@
 Package: archeofrag
 Type: Package
-Title: Archeofrag. Tools to Analyse the Fragmentation of Archeological Objects
+Title: Archeofrag. Tools for refitting and stratigraphic analysis in archaeology
 Version: 0.6.0
-Date: 2020-11-13
+Date: 2020-11-19
 Authors@R: person("Sebastien", "Plutniak", email = "sebastien.plutniak@posteo.net", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6674-3806"))
 Author: Sebastien Plutniak [aut, cre] (<https://orcid.org/0000-0002-6674-3806>)
 Maintainer: Sebastien Plutniak <sebastien.plutniak@posteo.net>
-Description: The Archeofrag package implements a comprehensive method to analyse fragmentation processes in archeology, based on the fragments of archeological objects scattered in stratigraphic layers and connected by physical "refitting" relationships. Graphs and graph theory are used to model these archaeological observations. The package is mainly based on the igraph package for graph analysis. It offers functions to manipulate fragment datasets, to measure the properties of the graphs, and to generate artificial cases to compare with archaeological observations. An empirical dataset is also provided as an example.
+Description: The Archeofrag package offers methods for the stratigraphic analysis of fragmented objects in archaeology, from "refitting" relationships between fragments scattered in stratigraphic layers. Graphs and graph theory are used to model archaeological observations. The package is mainly based on the igraph package for graph analysis. Functions enable to 1) read, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of stratigraphic layers, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.
 License: GPL-2
 Depends: RBGL, igraph
 Imports: 

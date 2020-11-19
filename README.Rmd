@@ -38,7 +38,7 @@ For an interactive demonstration, see also the [Shiny application](https://analy
 
 
 - [**Introduction**](#Introduction)
-- [**Building fragmentation graphs**](#building-fragmentation-graphs): [Using empirical data](#Using empirical data),  [Generating artificial data](Generating artificial data#)
+- [**Building fragmentation graphs**](#building-fragmentation-graphs): [Using empirical data](#using-empirical-data), [Generating artificial data](#generating-artificial-data)
 - [**Manipulating fragmentation graphs**](#manipulating-fragmentation-graphs)
 - [**Measuring the admixture of two layers**](#measuring-the-admixture-of-two-layers)
 - [**Characterising fragmentation within a layer**](#characterising-fragmentation-within-a-layer)
