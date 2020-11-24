@@ -1,19 +1,11 @@
 #   Frag.object CLASS-SPECIFIC FUNCTIONS ####
 
-#' @import igraph
-#' @importFrom grDevices rainbow rgb
-#' @importFrom graphics hist plot
-#' @importFrom methods new
-#' @importFrom stats na.omit reshape
-
-
-#' @export
 setGeneric(
   name= "make_crsr_graph",
   def = function(object){standardGeneric("make_crsr_graph")}
 )
 
-#' @export
+
 setGeneric(
   name= "make_cr_graph",
   def = function(object){standardGeneric("make_cr_graph")}
@@ -47,7 +39,7 @@ make_frag_set_validation <- function(object)
   return(TRUE)
 }
 
-#'	@export
+
 setClass(
   Class="Frag.object", 
   representation=representation(
@@ -64,12 +56,14 @@ setMethod(
   f="show",
   signature = "Frag.object",
   definition = function (object){
-    cat("______ Frag.object ______")
-    cat("\n*   Frag_type =  " ); cat(paste(object@frag_type)) ; cat("\t*")
-    cat("\n*   N fragments = " ); 
-    cat( length(unique( na.omit(c(object@cr.df[,1], object@cr.df[,2], object@sr.df[,1]))) )  )
-    cat("\t*")
-    cat("\n_________________________\n")
+    message(paste(
+      "------ Frag.object ------",
+      "\n*   Frag_type = ", object@frag_type,
+      "\n*   N fragments = ",
+      length(unique( na.omit(c(object@cr.df[,1],
+                               object@cr.df[,2], object@sr.df[,1]))) ),
+      "\n-------------------------",
+      sep=""))
   }
 )
 
@@ -163,7 +157,6 @@ setMethod(
 
 
 # Class constructor
-#'	@export
 make_frag_object <- function(cr, sr, fragments)
 {
   if ( is.data.frame(cr) ) {
