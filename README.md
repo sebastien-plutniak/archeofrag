@@ -1,8 +1,15 @@
+---
+output: github_document
+editor_options: 
+chunk_output_type: console
+---
+
+
 
 
 
 # Archeofrag 
-an R package for refitting and stratigraphic analysis in archaeology
+an R package for refitting and stratigraphic analysis in archeology
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -104,7 +111,7 @@ First, the `frag.graph.plot` function generates a visual representation of the g
 frag.graph.plot(abu.g, "layer")
 ```
 
-<img src="man/figures/README-manipulate:plot-abu-1.png" title="plot of chunk manipulate:plot-abu" alt="plot of chunk manipulate:plot-abu" style="display: block; margin: auto;" />
+<img src="man/figures/README-manipulate-plot-abu-1.png" title="plot of chunk manipulate-plot-abu" alt="plot of chunk manipulate-plot-abu" style="display: block; margin: auto;" />
 
 We can then plot the artificial fragmentation graph:
 
@@ -113,7 +120,7 @@ We can then plot the artificial fragmentation graph:
 frag.graph.plot(simul.g, "layer")
 ```
 
-<img src="man/figures/README-manipulate:plot-simul-1.png" title="plot of chunk manipulate:plot-simul" alt="plot of chunk manipulate:plot-simul" style="display: block; margin: auto;" />
+<img src="man/figures/README-manipulate-plot-simul-1.png" title="plot of chunk manipulate-plot-simul" alt="plot of chunk manipulate-plot-simul" style="display: block; margin: auto;" />
 
 Note that this artificial graph has two layers, whereas the Liang Abu graph includes fragments from three layers.
 The `frag.get.layers.pair` function is a convenient function to extract a pair of layers.
@@ -130,18 +137,18 @@ Let's now plot the connected fragments from layer 1 and 2 of Liang Abu:
 frag.graph.plot(abu.g12, "layer")
 ```
 
-<img src="man/figures/README-manipulate:plot-abu2-1.png" title="plot of chunk manipulate:plot-abu2" alt="plot of chunk manipulate:plot-abu2" style="display: block; margin: auto;" />
+<img src="man/figures/README-manipulate-plot-abu2-1.png" title="plot of chunk manipulate-plot-abu2" alt="plot of chunk manipulate-plot-abu2" style="display: block; margin: auto;" />
 
 In addition, the `frag.get.layers` enables to extract as much layers as needed, for example the first layer of our artificial graph:
 
 ```r
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 #> $`1`
-#> IGRAPH 5f2b22e UN-- 25 17 -- 
+#> IGRAPH 1a01c98 UN-- 25 17 -- 
 #> + attr: frag_type (g/c), name (v/c), object.id (v/n), layer (v/c)
-#> + edges from 5f2b22e (vertex names):
+#> + edges from 1a01c98 (vertex names):
 #>  [1] 1 --2  3 --4  5 --6  7 --8  9 --10 11--12 13--14 15--16 17--18 19--20
-#> [11] 12--21 17--22 18--22 15--23 3 --24 4 --24 8 --25
+#> [11] 14--21 11--22 12--22 1 --23 7 --24 8 --24 16--25
 ```
 
 
@@ -157,7 +164,7 @@ frag.relations.by.layers(simul.g, "layer")
 #>    
 #>      1  2
 #>   1 17  0
-#>   2  0 19
+#>   2  0 18
 ```
 
 The diagonal of the matrix contain the number of intra-layers relationships and the other values refer to inter-layers relationships. Note that our simulated graph does not has connection relationships between layers 1 and 2.
@@ -170,8 +177,8 @@ simul2.g <-frag.simul.process(n.components=20, vertices=50, disturbance=.1)
 frag.relations.by.layers(simul2.g, "layer")
 #>    
 #>      1  2
-#>   1 16  7
-#>   2  7 12
+#>   1 19  3
+#>   2  3 12
 ```
 As expected, this graph has inter-layers connections.
 
@@ -226,11 +233,11 @@ cbind(
 #>                    [,1]      [,2]     
 #> n.components       20        20       
 #> vertices           50        50       
-#> edges              36        35       
-#> balance            0.5       0.5853659
-#> components.balance 0.5       0.59     
-#> disturbance        0         0.1      
-#> aggreg.factor      0.5447274 0.4914941
+#> edges              35        34       
+#> balance            0.5       0.5777778
+#> components.balance 0.5       0.56     
+#> disturbance        0         0.06     
+#> aggreg.factor      0.5168904 0.5302024
 #> planar             TRUE      TRUE
 ```
 
@@ -244,7 +251,7 @@ E(simul.g)$weight
 #> NULL
 simul.g <- frag.edges.weighting(simul.g, "layer")
 E(simul.g)$weight
-#>  [1] 2 4 4 4 2 3 2 3 2 3 3 4 4 4 2 3 3 2 2 2 2 2 2 4 4 4 5 5 6 2 5 4 5 4 5 5
+#>  [1] 3 3 2 2 4 4 4 2 4 4 4 3 3 2 2 3 3 2 2 2 2 3 4 4 4 3 3 2 2 5 6 5 5 5 3
 ```
 Note that the weighting of the edges is mandatory, otherwise an error is raised.
 
@@ -254,7 +261,7 @@ Then, the `frag.layers.cohesion`  function is used to calculate the cohesion val
 ```r
 frag.layers.cohesion(simul.g, "layer")
 #>         1         2 
-#> 0.4262295 0.5737705
+#> 0.4561404 0.5438596
 ```
 
 Compare with the second artificial graph:
@@ -264,7 +271,7 @@ Compare with the second artificial graph:
 simul2.g <- frag.edges.weighting(simul2.g, "layer")
 frag.layers.cohesion(simul2.g, "layer")
 #>         1         2 
-#> 0.4208809 0.3331974
+#> 0.6002183 0.3092033
 ```
 These values tell how much each layer is cohesive (self-adhesive).
 
@@ -276,7 +283,7 @@ In complement, the `frag.layers.admixture` function returns a value quantifying 
 frag.layers.admixture(simul.g, "layer")
 #> [1] 0
 frag.layers.admixture(simul2.g, "layer")
-#> [1] 0.2459217
+#> [1] 0.09057839
 ```
 
 
@@ -303,14 +310,14 @@ Let's compare the cycles found in two layers of the artificial graph:
 ```r
 frag.cycles(simul.l1.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        2        0        0
+#>        3        1        0
 ```
 
 
 ```r
 frag.cycles(simul.l2.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        2        0        0
+#>        1        0        0
 ```
 
 
@@ -322,9 +329,9 @@ If the `cumulative` parameter is set to `TRUE`, the function returns the cumulat
 
 ```r
 frag.path.lengths(simul.l1.g)
-#> [1] 16  2
+#> [1] 19  4  1
 frag.path.lengths(simul.l2.g, cumulative=T)
-#> [1] 1.00000000 0.08333333
+#> [1] 1.0000000 0.1666667
 ```
 
 In a graph, the shortest path between two vertices is the path including the less number of edges. The diameter of a graph is its longest shortest path.
@@ -333,11 +340,11 @@ The `frag.diameters` function calculates the diameter of each component of the g
 
 ```r
 frag.diameters(simul.l1.g)
-#>  1  2 
-#> 12  2
+#> 1 2 3 
+#> 9 2 1
 frag.diameters(simul.l2.g)
-#>  1  2 
-#> 11  1
+#> 1 2 
+#> 9 2
 ```
 
 ## More on artificial graphs
@@ -382,13 +389,13 @@ frag.simul.process(initial.layers = 1,
                    components.balance = .4,
                    aggreg.factor = 0,
                    planar = T)
-#> IGRAPH 46eff96 UN-- 50 40 -- 
+#> IGRAPH d939fe8 UN-- 50 40 -- 
 #> + attr: frag_type (g/c), name (v/n), object.id (v/n), layer (v/c)
-#> + edges from 46eff96 (vertex names):
+#> + edges from d939fe8 (vertex names):
 #>  [1]  1-- 2  3-- 4  5-- 6  7-- 8  9--10 11--12 13--14 15--16 17--18 19--20
 #> [11] 21--22 23--24 25--26 27--28 29--30 31--32 33--34 35--36 37--38 39--40
-#> [21]  8--41 38--42 32--43 19--44 28--45 30--46 26--47 28--48 16--49 33--50
-#> [31] 29--46 25--47 31--43 20--44 15--49 27--45 37--42 27--48 45--48 34--50
+#> [21] 12--41 34--42 17--43 39--44  6--45 28--46 36--47 22--48  9--49  3--50
+#> [31] 21--48 35--47  4--50 10--49  5--45 18--43 27--46 11--41 33--42 40--44
 ```
 
 ### Hypotheses testing
@@ -458,3 +465,12 @@ abline(v=params$edges, col="red")
 
 <img src="man/figures/README-simulator-test2-examine-1.png" title="plot of chunk simulator-test2-examine" alt="plot of chunk simulator-test2-examine" style="display: block; margin: auto;" />
 
+
+```
+#> Warning in par(pardefault): le paramètre graphique "cin" ne peut être changé
+#> Warning in par(pardefault): le paramètre graphique "cra" ne peut être changé
+#> Warning in par(pardefault): le paramètre graphique "csi" ne peut être changé
+#> Warning in par(pardefault): le paramètre graphique "cxy" ne peut être changé
+#> Warning in par(pardefault): le paramètre graphique "din" ne peut être changé
+#> Warning in par(pardefault): le paramètre graphique "page" ne peut être changé
+```
