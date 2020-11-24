@@ -372,6 +372,6 @@ plot(density(edges.res), main="Edges")
 abline(v=params$edges, col="red")
 ```
 
-```{r restore-param, echo=FALSE}
+```{r restore-param, echo=FALSE, warning=FALSE, message=FALSE}
 par(pardefault)
 ```
