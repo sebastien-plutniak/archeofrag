@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 # Archeofrag 
-an R package for refitting and stratigraphic analysis in archaeology
+an R package for refitting and stratigraphic analysis in archeology
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -104,7 +104,8 @@ simul.g <-frag.simul.process(n.components = 20, vertices = 50)
 ## Manipulating fragmentation graphs
 
 
-```{r manipulate:param-plot, echo=FALSE}
+```{r manipulate-param-plot, echo=FALSE}
+pardefault <- par()
 par(mar=rep(0, 4))
 ```
 
@@ -112,31 +113,31 @@ par(mar=rep(0, 4))
 Once we have a fragmentation graph, several *Archeofrag* functions are convenient for a first examination of the data.
 First, the `frag.graph.plot` function generates a visual representation of the graph, here for the Liang Abu data:
 
-```{r manipulate:plot-abu, fig.align="center"}
+```{r manipulate-plot-abu, fig.align="center"}
 frag.graph.plot(abu.g, "layer")
 ```
 
 We can then plot the artificial fragmentation graph:
 
-```{r manipulate:plot-simul, fig.align="center"}
+```{r manipulate-plot-simul, fig.align="center"}
 frag.graph.plot(simul.g, "layer")
 ```
 
 Note that this artificial graph has two layers, whereas the Liang Abu graph includes fragments from three layers.
 The `frag.get.layers.pair` function is a convenient function to extract a pair of layers.
 
-```{r manipulate:get.layer.pair}
+```{r manipulate-get.layer.pair}
 abu.g12 <- frag.get.layers.pair(abu.g, "layer", c("1", "2"))
 ```
 
 Let's now plot the connected fragments from layer 1 and 2 of Liang Abu:
 
-```{r manipulate:plot-abu2, fig.align="center"}
+```{r manipulate-plot-abu2, fig.align="center"}
 frag.graph.plot(abu.g12, "layer")
 ```
 
 In addition, the `frag.get.layers` enables to extract as much layers as needed, for example the first layer of our artificial graph:
-```{r manipulate:frag.get.layers}
+```{r manipulate-frag.get.layers}
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 
 ```
@@ -359,7 +360,7 @@ test2.results <- lapply(1:40, run.test2)
 We can then compare the distribution of, for instance, the number of edges to the empirical value observed at Liang Abu (red line):
 
 
-```{r manipulate:param-plot-mar, echo=FALSE}
+```{r manipulate-param-plot-mar, echo=FALSE}
 par(mar=c(5, 4, 4, 2))
 ```
 
@@ -371,3 +372,6 @@ plot(density(edges.res), main="Edges")
 abline(v=params$edges, col="red")
 ```
 
+```{r restore-param, echo=FALSE}
+par(pardefault)
+```
