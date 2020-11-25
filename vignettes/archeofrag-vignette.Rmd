@@ -98,10 +98,11 @@ simul.g <-frag.simul.process(n.components = 20, vertices = 50)
 ## Manipulating fragmentation graphs
 
 
-```{r manipulate:param-plot, echo=FALSE}
+
+```{r manipulate-param-plot, echo=FALSE}
+pardefault <- par()
 par(mar=rep(0, 4))
 ```
-
 
 Once we have a fragmentation graph, several *Archeofrag* functions are convenient for a first examination of the data.
 First, the `frag.graph.plot` function generates a visual representation of the graph, here for the Liang Abu data:
@@ -363,5 +364,10 @@ edges.res <- sapply(test2.results,
                     function(g) frag.get.parameters(g, "layer")$edges)
 plot(density(edges.res), main="Edges")
 abline(v=params$edges, col="red")
+```
+
+
+```{r restore-param, echo=FALSE, warning=FALSE, message=FALSE}
+par(pardefault)
 ```
 
