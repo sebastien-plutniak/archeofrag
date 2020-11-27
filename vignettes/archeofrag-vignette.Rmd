@@ -100,7 +100,7 @@ simul.g <-frag.simul.process(n.components = 20, vertices = 50)
 
 
 ```{r manipulate-param-plot, echo=FALSE}
-pardefault <- par()
+pardefault <- par(no.readonly = TRUE)
 par(mar=rep(0, 4))
 ```
 
