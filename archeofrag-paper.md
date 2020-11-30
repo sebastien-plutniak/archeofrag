@@ -16,7 +16,7 @@ affiliations:
  - name: TRACES Laboratory, Toulouse, France
    index: 1
 date: 30 November 2020
-bibliography: biblio.bib
+bibliography: archeofrag-paper.bib
 ---
 
 # Summary
