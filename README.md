@@ -1,3 +1,13 @@
+---
+output: github_document
+editor_options: 
+chunk_output_type: console
+---
+
+
+
+
+
 # Archeofrag 
 an R package for refitting and stratigraphic analysis in archeology
 
@@ -18,6 +28,14 @@ an R package for refitting and stratigraphic analysis in archeology
 
 ```r
 install.packages("archeofrag")
+```
+
+Note that *Archeofrag* requires the *RBGL* package available through *Bioconductor*:
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("RBGL")
 ```
 
 Alternatively, the development version, which includes the last changes and fixes, can be installed from GitHub with:
@@ -143,11 +161,11 @@ In addition, the `frag.get.layers` enables to extract as much layers as needed, 
 ```r
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 #> $`1`
-#> IGRAPH b7c33ba UN-- 25 18 -- 
+#> IGRAPH 1ffa98e UN-- 25 19 -- 
 #> + attr: frag_type (g/c), name (v/c), object.id (v/n), layer (v/c)
-#> + edges from b7c33ba (vertex names):
+#> + edges from 1ffa98e (vertex names):
 #>  [1] 1 --2  3 --4  5 --6  7 --8  9 --10 11--12 13--14 15--16 17--18 19--20
-#> [11] 12--21 1 --22 11--23 12--23 11--24 12--24 23--24 16--25
+#> [11] 13--21 14--21 17--22 18--22 16--23 9 --24 10--24 5 --25 6 --25
 ```
 
 
@@ -162,8 +180,8 @@ The `frag.relations.by.layers`  function enables a first appreciation by returni
 frag.relations.by.layers(simul.g, "layer")
 #>    
 #>      1  2
-#>   1 18  0
-#>   2  0 17
+#>   1 19  0
+#>   2  0 19
 ```
 
 The diagonal of the matrix contain the number of intra-layers relationships and the other values refer to inter-layers relationships. Note that our simulated graph does not has connection relationships between layers 1 and 2.
@@ -176,8 +194,8 @@ simul2.g <-frag.simul.process(n.components=20, vertices=50, disturbance=.1)
 frag.relations.by.layers(simul2.g, "layer")
 #>    
 #>      1  2
-#>   1 13  6
-#>   2  6 16
+#>   1 13  7
+#>   2  7 15
 ```
 As expected, this graph has inter-layers connections.
 
@@ -229,15 +247,15 @@ cbind(
   frag.get.parameters(simul.g, "layer"),
   frag.get.parameters(simul2.g, "layer")
 )
-#>                    [,1]      [,2]     
-#> n.components       20        20       
-#> vertices           50        50       
-#> edges              35        35       
-#> balance            0.5       0.4418605
-#> components.balance 0.5       0.44     
-#> disturbance        0         0.1      
-#> aggreg.factor      0.5849854 0.4596628
-#> planar             TRUE      TRUE
+#>                    [,1]     [,2]     
+#> n.components       20       20       
+#> vertices           50       50       
+#> edges              38       35       
+#> balance            0.5      0.475    
+#> components.balance 0.5      0.5      
+#> disturbance        0        0.1      
+#> aggreg.factor      0.564025 0.5558152
+#> planar             TRUE     TRUE
 ```
 
 
@@ -250,7 +268,11 @@ E(simul.g)$weight
 #> NULL
 simul.g <- frag.edges.weighting(simul.g, "layer")
 E(simul.g)$weight
-#>  [1] 3 3 2 2 2 2 7 6 7 6 7 6 2 3 2 2 5 3 2 2 4 4 4 3 3 3 2 4 4 4 3 3 2 2 3
+#>  [1] 1.442432 1.442432 5.769727 5.769727 5.769727 1.442432 5.769727 5.769727
+#>  [9] 5.769727 1.442432 5.769727 5.769727 5.769727 2.163648 5.769727 5.769727
+#> [17] 5.769727 1.442432 2.163648 1.442432 2.163648 2.163648 2.163648 1.442432
+#> [25] 5.769727 5.769727 5.769727 1.442432 1.442432 1.442432 1.442432 8.654591
+#> [33] 8.654591 8.654591 8.654591 8.654591 8.654591 2.163648
 ```
 Note that the weighting of the edges is mandatory, otherwise an error is raised.
 
@@ -260,7 +282,7 @@ Then, the `frag.layers.cohesion`  function is used to calculate the cohesion val
 ```r
 frag.layers.cohesion(simul.g, "layer")
 #>         1         2 
-#> 0.5737705 0.4262295
+#> 0.4867254 0.5132746
 ```
 
 Compare with the second artificial graph:
@@ -270,7 +292,7 @@ Compare with the second artificial graph:
 simul2.g <- frag.edges.weighting(simul2.g, "layer")
 frag.layers.cohesion(simul2.g, "layer")
 #>         1         2 
-#> 0.3648425 0.4378109
+#> 0.4387750 0.4936421
 ```
 These values tell how much each layer is cohesive (self-adhesive).
 
@@ -282,7 +304,7 @@ In complement, the `frag.layers.admixture` function returns a value quantifying 
 frag.layers.admixture(simul.g, "layer")
 #> [1] 0
 frag.layers.admixture(simul2.g, "layer")
-#> [1] 0.1973466
+#> [1] 0.0675829
 ```
 
 
@@ -309,14 +331,14 @@ Let's compare the cycles found in two layers of the artificial graph:
 ```r
 frag.cycles(simul.l1.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        2        0        0
+#>        2        1        0
 ```
 
 
 ```r
 frag.cycles(simul.l2.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        2        0        0
+#>        2        1        0
 ```
 
 
@@ -328,9 +350,9 @@ If the `cumulative` parameter is set to `TRUE`, the function returns the cumulat
 
 ```r
 frag.path.lengths(simul.l1.g)
-#> [1] 13  1
+#> [1] 13  2
 frag.path.lengths(simul.l2.g, cumulative=T)
-#> [1] 1.000 0.125
+#> [1] 1.0000000 0.2666667
 ```
 
 In a graph, the shortest path between two vertices is the path including the less number of edges. The diameter of a graph is its longest shortest path.
@@ -340,10 +362,10 @@ The `frag.diameters` function calculates the diameter of each component of the g
 ```r
 frag.diameters(simul.l1.g)
 #>  1  2 
-#> 10  1
+#> 11  2
 frag.diameters(simul.l2.g)
-#>  1  2 
-#> 12  2
+#> 1 2 
+#> 9 4
 ```
 
 ## More on artificial graphs
@@ -388,13 +410,13 @@ frag.simul.process(initial.layers = 1,
                    components.balance = .4,
                    aggreg.factor = 0,
                    planar = T)
-#> IGRAPH eb3424a UN-- 50 40 -- 
+#> IGRAPH 5afb49e UN-- 50 40 -- 
 #> + attr: frag_type (g/c), name (v/n), object.id (v/n), layer (v/c)
-#> + edges from eb3424a (vertex names):
+#> + edges from 5afb49e (vertex names):
 #>  [1]  1-- 2  3-- 4  5-- 6  7-- 8  9--10 11--12 13--14 15--16 17--18 19--20
 #> [11] 21--22 23--24 25--26 27--28 29--30 31--32 33--34 35--36 37--38 39--40
-#> [21] 11--41 24--42 39--43 30--44 41--45 27--46  4--47 15--48 22--49 42--50
-#> [31] 23--42  3--47 11--45 28--46 12--41 16--48 23--50 40--43 21--49 24--50
+#> [21] 13--41  6--42 40--43 24--44 41--45 16--46 44--47 32--48 10--49  7--50
+#> [31]  5--42  8--50  9--49 14--41 23--47 14--45 13--45 24--47 15--46 23--44
 ```
 
 ### Hypotheses testing

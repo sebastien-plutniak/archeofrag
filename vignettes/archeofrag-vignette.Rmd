@@ -28,6 +28,15 @@ The development version can be installed from GitHub with:
 # install.packages("devtools")
 devtools::install_github("sebastien-plutniak/archeofrag")
 ```
+
+Note that *Archeofrag* requires the *RBGL* package available through *Bioconductor*:
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("RBGL")
+```
+
 For an interactive demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
 
 

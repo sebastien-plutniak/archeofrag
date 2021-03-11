@@ -31,10 +31,18 @@ an R package for refitting and stratigraphic analysis in archeology
 
 ## Installation
 
-'Archeofrag' reference version can be installed from CRAN with:
+*Archeofrag* reference version can be installed from CRAN with:
 
 ```r
 install.packages("archeofrag")
+```
+
+Note that *Archeofrag* requires the *RBGL* package available through *Bioconductor*:
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("RBGL")
 ```
 
 Alternatively, the development version, which includes the last changes and fixes, can be installed from GitHub with:

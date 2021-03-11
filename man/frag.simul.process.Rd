@@ -9,7 +9,8 @@ Simulate the fragmentation of archaeological objects scattered in two stratigrap
 \usage{
 frag.simul.process(initial.layers=2, n.components, vertices=Inf,
                    edges=Inf, balance=.5, components.balance=.5,
-                   disturbance=0, aggreg.factor=0, planar=TRUE)
+                   disturbance=0, aggreg.factor=0, planar=TRUE,
+                   from.observed.graph=NULL, observed.layer.attr=NULL)
 }
 
 \arguments{
@@ -22,6 +23,8 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
   \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from a layer to the other.}
   \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
   \item{planar}{Logical. If TRUE, generates a planar graph.}
+  \item{from.observed.graph}{igraph object. If not NULL, the parameters observed in this fragmentation graph are used instead of the previous parameters.}
+  \item{observed.layer.attr}{character. Required if the \code{from.observed.graph} option is used. Name of the layer attribute in the observed graph.}
 }
 \details{
 This function simulates the fragmentation of archeological objects within and between two adjacent stratigraphic layers.
@@ -30,16 +33,18 @@ Fragments are represented by vertices and the "connection" relationships ("refit
 Some parameters are optional or depend on other parameters (messages are displayed accordingly). Namely, if two \code{initial.layers} are set, then only one of the \code{vertices} and \code{edges} parameters can be used. Using only one layer as initial condition enables to constraint the graph with both vertices and edges number. 
 The \code{disturbance} determines the proportion of fragments to "move" from a layer to the other one. Consequently, it generates inter-layers relationships.
 Note that the \code{balance} parameter determines the proportion of fragments in the first layer before the application of the disturbance process.
+If a graph is given to the \code{from.observed.graph} parameter, the properties of this graph are internally retrieved with the \code{frag.get.parameters} function. If some others parameters of the \code{frag.simul.process} function are set, the values retrieved from the observed graph are used in replacement.
 
 Note that the simulator is faster with 2 \code{initial.layers} and when not using the planarity constraint.
 }
 \value{
-An igraph object with a "frag_type" graph attribute (with the value "cr", for "connection relationship") and three vertices attributes: "name" (vertices identifiers), "layer" (with "1" and "2" values), and "object.id" (components identifiers).
+An igraph object with a "frag_type" graph attribute (with the value "cr", for "connection relationship") and three vertices attributes: "name" (vertices identifiers), "layer" (with the values "1" and "2"), and "object.id" (component identifiers).
 
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 \seealso{
     \code{\link[RBGL]{boyerMyrvoldPlanarityTest}}
+    \code{\link[archeofrag]{frag.get.parameters}}
 }
 
 \examples{

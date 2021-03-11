@@ -7,7 +7,7 @@ frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mi
   if(! is.character(layer.attr))  stop("'layer.attr' invalid")
   V(graph)$tmp <- vertex_attr(graph, layer.attr)
   
-  if(sum(sel.layers %in% V(graph)$tmp) != 2 ) stop("The two 'selected layers' must exists in the 'layer' attribute.")
+  if(sum(sel.layers %in% V(graph)$tmp) != 2 ) stop("The two 'selected layers' must exist in the 'layer' attribute.")
   
   subgraph <- induced_subgraph(graph, V(graph)[ V(graph)$tmp %in% sel.layers ])
   
@@ -27,9 +27,12 @@ frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mi
   
   g <- induced_subgraph(subgraph, V(subgraph)[V(subgraph)$membership %in% which(sel.components)])
   if(gorder(g) == 0){
-    warnings("No mixed component between these layers")
+    warnings("There is no mixed component between these layers.")
     return(NULL)
   }
+  # remove singletons:
+  g <- induced_subgraph(g, degree(g) > 0)
+  # remove vertex attribute and return result:
   delete_vertex_attr(g, "tmp")
 }
 

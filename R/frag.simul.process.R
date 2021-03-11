@@ -143,8 +143,23 @@
 
 
 #'	@export
-frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE){
-  # tests:
+frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE, from.observed.graph=NULL, observed.layer.attr=NULL){
+  
+  #  If requested input parameters from observed graph (except the number of edges):
+  if(! is.null(from.observed.graph) & ! is.null(observed.layer.attr)){
+    # run the get.parameters function:
+    params <- frag.get.parameters(from.observed.graph, observed.layer.attr)
+    # input the observed parameters:
+    n.components <- params$components
+    vertices <- params$vertices
+    balance <- params$balance
+    components.balance <- params$components.balance
+    disturbance <- params$disturbance
+    aggreg.factor <- params$aggreg.factor
+    planar <- params$planar
+  }
+  
+  # Tests:
   if(! planar %in% c(T,F)) stop("Planar must be True or False.")
   if(is.null(n.components)) stop("No 'n.components' parameter.")
   if(balance <= 0 | balance >= 1) stop("'Balance' must range in ]0;1[")
@@ -170,7 +185,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     V(g)$layer <- 2
     V(g)[ V(g)$object.id %in% sel.clusters ]$layer <- 1
     
-    # DISTURBANCE
+    # ADD DISTURBANCE:
     v.to.disturb <- round(gorder(g) * disturbance)
     if(v.to.disturb != 0){
       v.to.disturb <- sample(1:gorder(g), v.to.disturb)
@@ -180,7 +195,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
   }
   
   if(initial.layers == 2){
-    if(!is.infinite(edges)){message("The 'edge' parameter is not used if two 'initial layers' are used.")}
+    if(! is.infinite(edges)){message("The 'edge' parameter is not used if two 'initial layers' are used.")}
     n.components.l1 <- round(n.components * components.balance)
     n.components.l2 <- n.components - n.components.l1
     vertices.l1 <- round(vertices * balance)
@@ -205,7 +220,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     V(g.layer2)$layer <- 2
     V(g.layer2)$name <- paste(V(g.layer2)$name, ".2", sep="")
     g <- g.layer1 %du% g.layer2
-    # DISTURBANCE
+    # ADD DISTURBANCE:
     v.to.disturb <- round(gorder(g) * disturbance)
     v.to.disturb <- sample(1:gorder(g), v.to.disturb)
     V(g)[v.to.disturb]$layer <- as.character(factor(V(g)[v.to.disturb]$layer,

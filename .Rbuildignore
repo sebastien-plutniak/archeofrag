@@ -1,11 +1,15 @@
+..Rcheck
 .git
 .github
 .gitignore
+archeofrag-paper.md
+archeofrag-paper.png
+archeofrag-paper.bib
 README.Rmd
 README.md
 man/figures
 cran-comments.md
 .travis.yml
-Meta
+^Meta$
 ^doc$
 ^Meta$
