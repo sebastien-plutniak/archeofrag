@@ -150,7 +150,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     # run the get.parameters function:
     params <- frag.get.parameters(from.observed.graph, observed.layer.attr)
     # input the observed parameters:
-    n.components <- params$components
+    n.components <- params$n.components
     vertices <- params$vertices
     balance <- params$balance
     components.balance <- params$components.balance
