@@ -1,41 +1,41 @@
 \name{frag.layers.cohesion}
 \alias{frag.layers.cohesion}
 
-\title{Cohesion measure for two layers}
-\description{Returns a cohesion value for each stratigraphic layer. Must be used after weighting the edges with \code{frag.edges.weighting}.}
+\title{Cohesion measure of layers}
+\description{Returns the cohesion value of stratigraphic layers or other archeological spatial unit. Must be used after weighting the edges with \code{frag.edges.weighting}.}
 \usage{frag.layers.cohesion(graph, layer.attr)}
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object.} 
-  \item{layer.attr}{Character. The name of the vertices attribute giving the layer of each fragment.}
+  \item{layer.attr}{Character. The name of the vertices attribute giving the layer of the fragments.}
 }
 \details{
-This function returns a vector with a cohesion value for each layer. 
+The cohesion value of a layer is computed as: 
 
-The cohesion value for a given layer is given by: 
+    \code{sum(W_inLayer) / (sum(W_in) + sum(W_ex))}
 
-    \code{sum(W_inLayer) / (sum(w_in) + sum(W_ex))}
+with W_inLayer for the weights of the internal edges of the layer under consideration, W_in for the weights of all the internal edges, and W_ex for the weights of the external edges. 
 
+The measure take into account the balance between the information about each layer.
+Results range in [0;1], with 0 for two layers only with inter-layers connection relationships, and 1 if there is no inter-layers relationships and a  significant unbalance of information about the two layers.
 
-with W_inLayer for the weights of the internal edges of the layer under consideration, W_in for the weights of all the internal edges,  and W_ex for the weights of the external edges. 
+The basic use of this function is intended for a graph with two layers, whose edges have been previously weighted using the \code{frag.edges.weighting} function (an error message is displayed if the vertice attribute "layer" contains less than two layers, and if the graph has not edge attribute "weight").
 
-The measure integrates the balance between the information about each layer.
-Results range in [0;1] with 0 for two layers only with inter-layers connection relationships, and 1 if there is no inter-layers relationships and important inequal information about the two layers.
-
-An error message is displayed if the vertice "layer" attribute has more or less than two layers.
+However, the function can also be used for a graph with more two layers. In this case, a subgraph is generated for each pair of layers (using the \code{frag.get.layers.pair} function), the \code{frag.edges.weighting} function is applied to weigth their edges (a warning message is displayed), and the cohesion is computed.
 }
 \value{
-A numeric vector with the cohesion values ([0;1]) for each layer of the graph.
+If the graph has only two layers, the function returns a numeric vector with a cohesion value ([0;1]) for each layer.
+If the graph has more than two layers, the function returns a matrix with a cohesion value for each pair of layer.
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
 \seealso{
-\code{\link[archeofrag]{frag.edges.weighting}}
+\code{\link[archeofrag]{frag.edges.weighting}},
+\code{\link[archeofrag]{frag.get.layers.pair}}
 }
 \examples{
 g <- frag.simul.process(n.components=20, vertices=50, disturbance=.1)
-g <- frag.edges.weighting(g, layer.attr="layer")
-cohesion.values <- frag.layers.cohesion(g, layer.attr="layer")
+frag.layers.cohesion(g, layer.attr="layer")
 }
  
 \keyword{graphs}

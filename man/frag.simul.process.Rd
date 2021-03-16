@@ -34,6 +34,7 @@ Some parameters are optional or depend on other parameters (messages are display
 The \code{disturbance} determines the proportion of fragments to "move" from a layer to the other one. Consequently, it generates inter-layers relationships.
 Note that the \code{balance} parameter determines the proportion of fragments in the first layer before the application of the disturbance process.
 If a graph is given to the \code{from.observed.graph} parameter, the properties of this graph are internally retrieved with the \code{frag.get.parameters} function. If some others parameters of the \code{frag.simul.process} function are set, the values retrieved from the observed graph are used in replacement.
+The \code{frag.edges.weighting} is internally applied to weight the graph edges.
 
 Note that the simulator is faster with 2 \code{initial.layers} and when not using the planarity constraint.
 }
@@ -45,6 +46,7 @@ An igraph object with a "frag_type" graph attribute (with the value "cr", for "c
 \seealso{
     \code{\link[RBGL]{boyerMyrvoldPlanarityTest}}
     \code{\link[archeofrag]{frag.get.parameters}}
+    \code{\link[archeofrag]{frag.edges.weighting}}
 }
 
 \examples{

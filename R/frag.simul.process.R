@@ -226,6 +226,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     V(g)[v.to.disturb]$layer <- as.character(factor(V(g)[v.to.disturb]$layer,
                                                     levels = c(1,2), labels = c(2,1)))
   }
+  g <- frag.edges.weighting(g, layer.attr="layer")
   g <- delete_vertex_attr(g, "which")
   g$frag_type <- "cr"
   g

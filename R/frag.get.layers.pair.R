@@ -11,8 +11,6 @@ frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mi
   
   subgraph <- induced_subgraph(graph, V(graph)[ V(graph)$tmp %in% sel.layers ])
   
-  if(gorder(subgraph)) return(subgraph)
-  
   V(subgraph)$membership <- clusters(subgraph)$membership
   
   g.list <- decompose(subgraph)   
@@ -30,8 +28,6 @@ frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mi
     warnings("There is no mixed component between these layers.")
     return(NULL)
   }
-  # remove singletons:
-  g <- induced_subgraph(g, degree(g) > 0)
   # remove vertex attribute and return result:
   delete_vertex_attr(g, "tmp")
 }
