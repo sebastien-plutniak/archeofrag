@@ -18,24 +18,28 @@ setGeneric(
 
 make_frag_set_validation <- function(object)
 {
-  if(! object@frag_type %in% c("cr", "crsr", "none") ){
-    stop("frag_type must be either 'cr' or 'crsr' ")
-  }else{}
+  if( ncol(object@cr.df) == 1 & ncol(object@sr.df) == 1 ){
+    stop("At least one of the 'cr' and 'sr' arguments is required")
+  }
   
-  if(is.null(object@cr.df) & is.null(object@sr.df) ){
-    stop("cr.df and/or sr.df are missing")
-  }
-  if( object@frag_type=="crsr" & is.null(object@sr.df)){
-    stop("'crsr' frag_type requires a 'sr' argument")
-  }
-  if(object@frag_type=="crsr"){
-    if ( ! is.matrix(object@sr.df) ) {
-      stop("With 'frag_type' = 'crsr', a matrix or a data frame is required for the 'sr' argument")
+  if( ncol(object@sr.df) > 1 ) {
+    if(ncol(object@sr.df) < 2) {
+      stop("The data frame for the 'sr' argument must have at least two columns")
     }
-    if (ncol(object@sr.df) < 2) {
-      stop("'sr.df' must have at least two columns")
+    if( sum( ! object@sr.df[,1] %in% object@fragments.df[, 1]) != 0){
+      stop("Some objects in 'sr' are not documented in the 'fragments' data frame")
     }
   }
+
+  if( ncol(object@cr.df) > 1 ) {
+    if(ncol(object@cr.df) < 2) {
+      stop("The data frame for the 'cr' argument must have at least two columns")
+    }
+    if( sum( ! c(object@cr.df[,1], object@cr.df[,2]) %in% object@fragments.df[, 1]) != 0){
+      stop("Some objects in 'cr' are not documented in the 'fragments' data frame")
+    }
+  } 
+ 
   return(TRUE)
 }
 
@@ -61,7 +65,8 @@ setMethod(
       "\n*   Frag_type = ", object@frag_type,
       "\n*   N fragments = ",
       length(unique( na.omit(c(object@cr.df[,1],
-                               object@cr.df[,2], object@sr.df[,1]))) ),
+                               object@cr.df[,2],
+                               object@sr.df[,1]))) ),
       "\n-------------------------",
       sep=""))
   }
@@ -72,6 +77,9 @@ setMethod(
   signature = "Frag.object",
   definition = function(object)
   {
+    if( object@frag_type == "sr" ){
+      stop("No available data for the connection relationships")
+    }
     cr.net <- graph_from_data_frame(object@cr.df, directed=FALSE, vertices=object@fragments.df)
     cr.net <- delete_vertices(cr.net, degree(cr.net, mode="total") == 0)
     E(cr.net)$type <- "cr"
@@ -85,6 +93,9 @@ setMethod(
   signature = "Frag.object",
   definition = function(object)
   {
+    if( object@frag_type == "cr" ){
+      stop("No available data about the similarity relationships")
+    }
     #  'similarity units' ids are recoded to avoid confusion with the fragments ids:
     object@sr.df[,2] <- as.character(factor(
       object@sr.df[,2], labels=paste("su", c(1:(0 + length(unique((object@sr.df[,2]))) )))
@@ -96,6 +107,7 @@ setMethod(
     # vertices attributes:
     fragments.df <- object@fragments.df
     names(fragments.df)[1] <- "name"
+    
     attributes <- merge(                 #retrieve the  graph attributes
       cbind(name = V(sr.net)$name),
       cbind(fragments.df),
@@ -112,8 +124,8 @@ setMethod(
   signature = "Frag.object",
   definition = function(object)
   {
-    if(object@frag_type == "cr"){
-      stop("This frag.object does not include 'similarity' relationships.")
+    if(object@frag_type != "crsr"){
+      stop("The 'cr' and 'sr' arguments are required for this function")
     }
     cr.net <- make_cr_graph(object)
     sr.net <- make_sr_graph(object)
@@ -153,7 +165,7 @@ setMethod(
     
     # setting the "type" edge attribute to "cr"
     E(crsr.net)$type <- NA
-    E(crsr.net)[ which(crsr.net.edgelist %in% cr.net.edgelist)  ]$type <- "cr"
+    E(crsr.net)[ which(crsr.net.edgelist %in% cr.net.edgelist) ]$type <- "cr"
     E(crsr.net)[ is.na( E(crsr.net)$type ) ]$type <- "sr"
     graph_attr(crsr.net) <- list()
     crsr.net <- set_graph_attr(crsr.net, "frag_type", "connection and similarity relations")
@@ -166,21 +178,24 @@ setMethod(
 # Class constructor
 make_frag_object <- function(cr, sr, fragments)
 {
-  if(missing(cr)){
-    cr <- matrix()
-  }
-  if(is.data.frame(cr)) {
+  if( missing(fragments) ){
+      stop("A matrix or a data frame is required for the 'fragments' argument")
+  } 
+     
+  if( ! missing(cr) & ! missing(sr) ){
     cr <- as.matrix(cr)
-  }
-  if(missing(sr)){
+    sr <- as.matrix(sr)
+    frag_type <- "crsr"
+  } else if( ! missing(cr) ){
+    cr <- as.matrix(cr)
     sr <- matrix()
     frag_type <- "cr"
-  }else{
-    if ( is.data.frame(sr) ) {
-      sr <- as.matrix(sr)
-    }
-    frag_type <- "crsr"
-  }
+  } else if( ! missing(sr) ){
+    sr <- as.matrix(sr)
+    cr <- matrix()
+    frag_type <- "sr"
+  }   
+  
   new(Class="Frag.object", cr.df=cr, sr.df=sr, fragments.df=fragments, frag_type=frag_type)
 }
 
