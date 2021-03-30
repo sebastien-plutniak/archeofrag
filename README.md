@@ -161,11 +161,12 @@ In addition, the `frag.get.layers` enables to extract as much layers as needed, 
 ```r
 frag.get.layers(simul.g, "layer", sel.layers = "1")
 #> $`1`
-#> IGRAPH 1ffa98e UN-- 25 19 -- 
-#> + attr: frag_type (g/c), name (v/c), object.id (v/n), layer (v/c)
-#> + edges from 1ffa98e (vertex names):
+#> IGRAPH a4815a9 UNW- 25 18 -- 
+#> + attr: frag_type (g/c), name (v/c), object.id (v/n), layer (v/c),
+#> | morphometry (v/n), id (e/n), weight (e/n), scope (e/c)
+#> + edges from a4815a9 (vertex names):
 #>  [1] 1 --2  3 --4  5 --6  7 --8  9 --10 11--12 13--14 15--16 17--18 19--20
-#> [11] 13--21 14--21 17--22 18--22 16--23 9 --24 10--24 5 --25 6 --25
+#> [11] 5 --21 15--22 16--22 7 --23 5 --24 6 --24 21--24 2 --25
 ```
 
 
@@ -180,8 +181,8 @@ The `frag.relations.by.layers`  function enables a first appreciation by returni
 frag.relations.by.layers(simul.g, "layer")
 #>    
 #>      1  2
-#>   1 19  0
-#>   2  0 19
+#>   1 18  0
+#>   2  0 18
 ```
 
 The diagonal of the matrix contain the number of intra-layers relationships and the other values refer to inter-layers relationships. Note that our simulated graph does not has connection relationships between layers 1 and 2.
@@ -194,8 +195,8 @@ simul2.g <-frag.simul.process(n.components=20, vertices=50, disturbance=.1)
 frag.relations.by.layers(simul2.g, "layer")
 #>    
 #>      1  2
-#>   1 13  7
-#>   2  7 15
+#>   1 14  5
+#>   2  5 20
 ```
 As expected, this graph has inter-layers connections.
 
@@ -247,15 +248,15 @@ cbind(
   frag.get.parameters(simul.g, "layer"),
   frag.get.parameters(simul2.g, "layer")
 )
-#>                    [,1]     [,2]     
-#> n.components       20       20       
-#> vertices           50       50       
-#> edges              38       35       
-#> balance            0.5      0.475    
-#> components.balance 0.5      0.5      
-#> disturbance        0        0.1      
-#> aggreg.factor      0.564025 0.5558152
-#> planar             TRUE     TRUE
+#>                    [,1]      [,2]     
+#> n.components       20        20       
+#> vertices           50        50       
+#> edges              36        39       
+#> balance            0.5       0.4186047
+#> components.balance 0.5       0.41     
+#> disturbance        0         0.08     
+#> aggreg.factor      0.5447274 0.594827 
+#> planar             TRUE      TRUE
 ```
 
 
@@ -265,14 +266,18 @@ The first step is to weight the edges of the graph. This is done with the `frag.
 
 ```r
 E(simul.g)$weight
-#> NULL
+#>  [1] 2.154776 1.436517 6.856106 6.856106 7.757194 6.856106 6.856106 2.154776
+#>  [9] 2.154776 1.436517 1.436517 1.436517 5.746069 5.746069 5.746069 1.436517
+#> [17] 1.436517 2.154776 2.154776 2.154776 6.464328 6.464328 5.746069 3.693902
+#> [25] 5.746069 5.746069 5.746069 1.436517 1.436517 1.436517 1.436517 1.436517
+#> [33] 1.436517 5.746069 5.746069 5.746069
 simul.g <- frag.edges.weighting(simul.g, "layer")
 E(simul.g)$weight
-#>  [1] 1.442432 1.442432 5.769727 5.769727 5.769727 1.442432 5.769727 5.769727
-#>  [9] 5.769727 1.442432 5.769727 5.769727 5.769727 2.163648 5.769727 5.769727
-#> [17] 5.769727 1.442432 2.163648 1.442432 2.163648 2.163648 2.163648 1.442432
-#> [25] 5.769727 5.769727 5.769727 1.442432 1.442432 1.442432 1.442432 8.654591
-#> [33] 8.654591 8.654591 8.654591 8.654591 8.654591 2.163648
+#>  [1] 2.154776 1.436517 6.856106 6.856106 7.757194 6.856106 6.856106 2.154776
+#>  [9] 2.154776 1.436517 1.436517 1.436517 5.746069 5.746069 5.746069 1.436517
+#> [17] 1.436517 2.154776 2.154776 2.154776 6.464328 6.464328 5.746069 3.693902
+#> [25] 5.746069 5.746069 5.746069 1.436517 1.436517 1.436517 1.436517 1.436517
+#> [33] 1.436517 5.746069 5.746069 5.746069
 ```
 Note that the weighting of the edges is mandatory, otherwise an error is raised.
 
@@ -281,8 +286,8 @@ Then, the `frag.layers.cohesion`  function is used to calculate the cohesion val
 
 ```r
 frag.layers.cohesion(simul.g, "layer")
-#>         1         2 
-#> 0.4867254 0.5132746
+#>     cohesion1 cohesion2
+#> 1/2 0.4996947 0.5003053
 ```
 
 Compare with the second artificial graph:
@@ -291,8 +296,8 @@ Compare with the second artificial graph:
 ```r
 simul2.g <- frag.edges.weighting(simul2.g, "layer")
 frag.layers.cohesion(simul2.g, "layer")
-#>         1         2 
-#> 0.4387750 0.4936421
+#>     cohesion1 cohesion2
+#> 1/2 0.3759514 0.5941254
 ```
 These values tell how much each layer is cohesive (self-adhesive).
 
@@ -302,9 +307,11 @@ In complement, the `frag.layers.admixture` function returns a value quantifying 
 
 ```r
 frag.layers.admixture(simul.g, "layer")
-#> [1] 0
+#> admixture 
+#>         0
 frag.layers.admixture(simul2.g, "layer")
-#> [1] 0.0675829
+#>  admixture 
+#> 0.02992326
 ```
 
 
@@ -331,14 +338,14 @@ Let's compare the cycles found in two layers of the artificial graph:
 ```r
 frag.cycles(simul.l1.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        2        1        0
+#>        3        1        0
 ```
 
 
 ```r
 frag.cycles(simul.l2.g, kmax=5)
 #> 3-cycles 4-cycles 5-cycles 
-#>        2        1        0
+#>        6        1        0
 ```
 
 
@@ -350,9 +357,9 @@ If the `cumulative` parameter is set to `TRUE`, the function returns the cumulat
 
 ```r
 frag.path.lengths(simul.l1.g)
-#> [1] 13  2
+#> [1] 14  2
 frag.path.lengths(simul.l2.g, cumulative=T)
-#> [1] 1.0000000 0.2666667
+#> [1] 1.00 0.05
 ```
 
 In a graph, the shortest path between two vertices is the path including the less number of edges. The diameter of a graph is its longest shortest path.
@@ -361,11 +368,11 @@ The `frag.diameters` function calculates the diameter of each component of the g
 
 ```r
 frag.diameters(simul.l1.g)
-#>  1  2 
-#> 11  2
-frag.diameters(simul.l2.g)
 #> 1 2 
-#> 9 4
+#> 9 2
+frag.diameters(simul.l2.g)
+#>  1  2 
+#> 12  1
 ```
 
 ## More on artificial graphs
@@ -410,13 +417,14 @@ frag.simul.process(initial.layers = 1,
                    components.balance = .4,
                    aggreg.factor = 0,
                    planar = T)
-#> IGRAPH 5afb49e UN-- 50 40 -- 
-#> + attr: frag_type (g/c), name (v/n), object.id (v/n), layer (v/c)
-#> + edges from 5afb49e (vertex names):
+#> IGRAPH e7df8a9 UNW- 50 40 -- 
+#> + attr: frag_type (g/c), name (v/n), object.id (v/n), layer (v/c),
+#> | morphometry (v/n), id (e/n), weight (e/n), scope (e/c)
+#> + edges from e7df8a9 (vertex names):
 #>  [1]  1-- 2  3-- 4  5-- 6  7-- 8  9--10 11--12 13--14 15--16 17--18 19--20
 #> [11] 21--22 23--24 25--26 27--28 29--30 31--32 33--34 35--36 37--38 39--40
-#> [21] 13--41  6--42 40--43 24--44 41--45 16--46 44--47 32--48 10--49  7--50
-#> [31]  5--42  8--50  9--49 14--41 23--47 14--45 13--45 24--47 15--46 23--44
+#> [21] 30--41 36--42 15--43 24--44  1--45 20--46 40--47 17--48  8--49 32--50
+#> [31] 16--43 18--48 19--46  2--45 31--50 29--41 39--47  7--49 23--44 35--42
 ```
 
 ### Hypotheses testing

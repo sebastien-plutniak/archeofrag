@@ -11,7 +11,11 @@
   \item{...}{Optional arguments sent to \code{plot.igraph}.}
 }
 \details{
-    This function is a wrapper for the \code{plot.igraph} method for igraph objects, using the fruchterman-reingold algorithm. The layout of the graph is modified in function of the value of the "frag_type" graph attribute: for "connection and similarity relations" value, \code{igraph}' \code{component_wise} layout modifier is used.
+This function is a wrapper for the \code{plot.igraph} method for igraph objects. The layout is computed using the fruchterman-reingold algorithm, with some change in function of the value of the "frag_type" graph attribute.
+For graphs including similarity relations, \code{igraph}' \code{component_wise} layout modifier is applied.
+For graphs with connection and similarity relations, the edges for connection relations are colored in green.
+For graphs with connection relations only and two layers, the nodes from the two layers are located based on their layer in the upper and the lower part of the plot.
+
 }
 \value{
     Returns \code{NULL} and plot the graph.
@@ -19,7 +23,7 @@
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
 \seealso{
-  \link[igraph]{plot.igraph}, \link[igraph]{component_wise}
+  \link[igraph]{plot.igraph}, \link[igraph]{component_wise}, \link[igraph]{layout_with_fr}
 }
 \examples{
 g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)

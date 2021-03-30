@@ -90,7 +90,7 @@ The `make_cr_graph` is then used to build an igraph graph object representing th
 
 ```{r make-empirical-graph}
 data(LiangAbu)
-abu.g <- make_frag_object(df.cr, fragments = fragments.info)
+abu.g <- make_frag_object(cr=df.cr, fragments = fragments.info)
 abu.g <- make_cr_graph(abu.g)
 ```
 
@@ -101,7 +101,7 @@ The next command generates a situation in which 20 initial objects (correspondin
 The `frag.simul.process` function has many options but, at this step, we use it in its simplest form.
 
 ```{r make-simulatd-graph, message=FALSE}
-simul.g <-frag.simul.process(n.components = 20, vertices = 50)
+simul.g <- frag.simul.process(n.components = 20, vertices = 50)
 ```
 
 ## Manipulating fragmentation graphs

@@ -1,9 +1,10 @@
-
-#'	@export
 frag.relations.by.layers <- function(graph, layer.attr){
   if(! is.igraph(graph)) stop("Not an igraph object")
-  if(! is.character(layer.attr))  stop("'layer.attr' invalid")
-  if(is.null(vertex_attr(graph, layer.attr))) stop("'layer.attr' invalid")
+  if(is.null(vertex_attr(graph, layer.attr))) stop("The parameter 'layer.attr' is required.")
+  if( ! is.character(layer.attr))  stop("The parameter 'layer.attr' requires a character value.")
+  if( ! layer.attr %in% names(vertex_attr(graph)) ){
+    stop(paste("No '", layer.attr, "' vertices attribute", sep=""))
+  }
   layers <- vertex_attr(graph, layer.attr)
   
   if(is.null(V(graph)$name)){

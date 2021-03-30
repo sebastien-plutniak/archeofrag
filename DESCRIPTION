@@ -1,12 +1,12 @@
 Package: archeofrag
 Type: Package
-Title: Refitting and Stratigraphic Analysis in Archeology
-Version: 0.6.4
-Date: 2021-03-25
+Title: Refitting and Spatial Analysis in Archeology
+Version: 0.6.6
+Date: 2021-03-30
 Authors@R: person("Sebastien", "Plutniak", email = "sebastien.plutniak@posteo.net", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6674-3806"))
 Author: Sebastien Plutniak [aut, cre] (<https://orcid.org/0000-0002-6674-3806>)
 Maintainer: Sebastien Plutniak <sebastien.plutniak@posteo.net>
-Description: Methods for the stratigraphic analysis of fragmented objects in archeology using "refitting" relationships between fragments scattered in stratigraphic layers. Graphs and graph theory are used to model archaeological observations. The package is mainly based on the 'igraph' package for graph analysis. Functions enable to 1) create, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of stratigraphic layers, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.
+Description: Methods for the analysis of fragmented objects in archeology using "refitting" relationships between fragments scattered in archeological spatial units (e.g. stratigraphic layers). Graphs and graph theory are used to model archeological observations. The package is mainly based on the 'igraph' package for graph analysis. Functions enable to 1) create, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.
 License: GPL-2
 Depends: RBGL, igraph
 Imports: 

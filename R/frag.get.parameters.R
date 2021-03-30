@@ -1,5 +1,4 @@
 
-#'	@export
 
 frag.get.parameters <- function(graph, layer.attr){
   # initial tests:
@@ -7,8 +6,11 @@ frag.get.parameters <- function(graph, layer.attr){
   if(is_directed(graph)) stop("The 'graph' parameter requires an undirected igraph object.")
   
   # retrieve and format 'the layer' attribute:
-  if(! is.character(layer.attr) ) stop("The 'layer.attr' parameter is invalid.")
-  if(is.null(vertex_attr(graph, layer.attr))) stop("The 'layer.attr' parameter is invalid.")
+  if(is.null(vertex_attr(graph, layer.attr)))   stop("The parameter 'layer.attr' is required.")
+  if( ! is.character(layer.attr))  stop("The parameter 'layer.attr' requires a character value.")
+  if( ! layer.attr %in% names(vertex_attr(graph)) ){
+    stop(paste("No '", layer.attr, "' vertices attribute", sep=""))
+  }
   V(graph)$layer <- vertex_attr(graph, layer.attr)
   # test of there are two layers:
   if(length(unique(V(graph)$layer)) != 2) warning("The graph does not have two layers, disturbance and balance values will be meaningless.")

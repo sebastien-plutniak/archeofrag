@@ -2,12 +2,20 @@
 #'	@export
 frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mixed.components.only=FALSE)
 {
-  if(! is.igraph(graph))  stop("Not a graph object")
-  if(is.null(vertex_attr(graph, layer.attr)))   stop("'layer.attr' invalid")
-  if(! is.character(layer.attr))  stop("'layer.attr' invalid")
+  if( ! is.igraph(graph))  stop("Not a graph object")
+  if(is.null(vertex_attr(graph, layer.attr)))   stop("The parameter 'layer.attr' is required.")
+  if( ! is.character(layer.attr))  stop("The parameter 'layer.attr' requires a character value.")
+  if( ! layer.attr %in% names(vertex_attr(graph)) ){
+    stop(paste("No '", layer.attr, "' vertices attribute", sep=""))
+  }
+  if(! is.logical(mixed.components.only)) stop("The 'mixed.components.only' parameter requires a logical value.")
+  if(! is.numeric(size.mini)) stop("The 'size.mini' parameter requires a numerical value.")
   V(graph)$tmp <- vertex_attr(graph, layer.attr)
   
-  if(sum(sel.layers %in% V(graph)$tmp) != 2 ) stop("The two 'selected layers' must exist in the 'layer' attribute.")
+  if(sum(sel.layers %in% V(graph)$tmp) != 2 ){
+    stop(paste(c("The values '", sel.layers[1], "' and/or '", sel.layers[2], "' are missing in the '",  layer.attr, "' vertices attribute."),
+               sep=" ", collapse = ""))
+  }
   
   subgraph <- induced_subgraph(graph, V(graph)[ V(graph)$tmp %in% sel.layers ])
   

@@ -146,7 +146,7 @@
 frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE, from.observed.graph=NULL, observed.layer.attr=NULL){
   
   #  If requested input parameters from observed graph (except the number of edges):
-  if(! is.null(from.observed.graph) & ! is.null(observed.layer.attr)){
+  if( ! is.null(from.observed.graph) & ! is.null(observed.layer.attr)){
     # run the get.parameters function:
     params <- frag.get.parameters(from.observed.graph, observed.layer.attr)
     # input the observed parameters:
@@ -159,15 +159,37 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     planar <- params$planar
   }
   
-  # Tests:
-  if(! planar %in% c(T,F)) stop("Planar must be True or False.")
-  if(is.null(n.components)) stop("No 'n.components' parameter.")
-  if(balance <= 0 | balance >= 1) stop("'Balance' must range in ]0;1[")
-  if(disturbance < 0 | disturbance > 1) stop("Disturbance must range in [0;1].")
+  # BEING Tests:
+  if(! is.logical(planar)) stop("The 'planar' argument must be logical.")
+  if(is.null(n.components)) stop("The 'n.components' parameter is required.")
+  
+  if(! is.numeric(balance)){
+    stop("The 'balance' argument requires a numerical value.")
+  } else if(balance <= 0 | balance >= 1){
+    stop("'balance' values must range in ]0;1[")
+  }
+  
+  if(! is.numeric(disturbance)){
+    stop("The 'disturbance' argument requires a numerical value.")
+  } else if(disturbance < 0 | disturbance > 1){
+    stop("'disturbance' values must range in [0;1].")
+  }
+  
   if(is.infinite(vertices) & is.infinite(edges)){
-    stop("At least one of the parameters 'vertices' or 'edges' must be set.")}
-  if(! initial.layers %in% c(1,2)){stop("'initial.layers' must be either 1 or 2.")}
-  if(aggreg.factor > 1 | aggreg.factor < 0){stop("aggreg.factor must range in [0;1]")}
+    stop("At least one of the parameters 'vertices' or 'edges' is required.")
+  }
+  if(! initial.layers %in% c(1, 2)){
+    stop("The 'initial.layers' parameter requires a numerical value of 1 or 2.")
+  }
+  
+  if(! is.numeric(aggreg.factor)){
+    stop("The 'disturbance' argument requires a numerical value.")
+  } else if(aggreg.factor > 1 | aggreg.factor < 0 ){
+    stop("The 'aggreg.factor' parameter must range in [0;1].")
+  }
+  # END tests.
+  
+  # BEGIN main body of the function:
   
   if(initial.layers == 1){
     g <- .main(n.components, vertices, edges, balance, disturbance, aggreg.factor, planar)

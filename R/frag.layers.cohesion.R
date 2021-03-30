@@ -18,8 +18,11 @@
 frag.layers.cohesion <- function(graph, layer.attr){
   # output : value [0;1].
   if(! is.igraph(graph)) stop("Not a graph object")
-  if(is.null(vertex_attr(graph, layer.attr)))   stop("'layer.attr' invalid")
-  if(! is.character(layer.attr) )  stop("'layer.attr' invalid")
+  if(is.null(vertex_attr(graph, layer.attr)))   stop("The parameter 'layer.attr' is required.")
+  if( ! is.character(layer.attr))  stop("The parameter 'layer.attr' requires a character value.")
+  if( ! layer.attr %in% names(vertex_attr(graph)) ){
+    stop(paste("No '", layer.attr, "' vertices attribute", sep=""))
+  }
   
   # delete singletons:
   graph <- delete_vertices(graph, degree(graph) == 0)

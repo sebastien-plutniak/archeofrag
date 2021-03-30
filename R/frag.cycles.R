@@ -21,11 +21,16 @@
 
 #'	@export
 frag.cycles <- function(graph, kmax, max.cycles.only=FALSE) {
-  if (! is.igraph(graph))   stop("Not an igraph object")
+  if (! is.igraph(graph)) stop("Not an igraph object")
   if(graph_attr(graph, "frag_type") == "connection and similarity" ){
     warning("Cycle detection in a 'connection and similarity' fragmentation graph is meaningless.")
   }
-  if(kmax < 3) stop("k must be >= 3")
+  if( ! is.numeric(kmax)){
+    stop("The 'k' parameter must be numerical.")
+  } else  if(kmax < 3) {
+    stop("k must be >= 3")
+  }
+  if( ! is.logical(max.cycles.only)) stop("The 'max.cycles.only' parameter must be logical.")
   
   results <- lapply(kmax:3, function(x) .detect.cycle(graph, x))
   if(max.cycles.only){

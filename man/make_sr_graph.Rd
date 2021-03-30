@@ -18,7 +18,7 @@ make_sr_graph(object)
 }
 \details{Returns an undirected graph of "\code{igraph}" class. The "fragments" data frame of the frag.object is used to set the vertices attributes.}
 \value{
-An undirected "\code{igraph}" class graph. The "frag_type" graph attribute is set with a "similarity" value.
+An undirected \code{igraph} class graph. The "frag_type" graph attribute is set with the "similarity" character value.
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
