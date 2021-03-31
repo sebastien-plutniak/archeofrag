@@ -1,12 +1,3 @@
----
-output: github_document
-editor_options: 
-chunk_output_type: console
----
-
-
-
-
 
 # Archeofrag 
 an R package for refitting and stratigraphic analysis in archeology
