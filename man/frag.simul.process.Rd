@@ -10,6 +10,7 @@ Simulate the fragmentation of archaeological objects scattered in two stratigrap
 frag.simul.process(initial.layers=2, n.components, vertices=Inf,
                    edges=Inf, balance=.5, components.balance=.5,
                    disturbance=0, aggreg.factor=0, planar=TRUE,
+                   asymetric.transport.from=NULL, 
                    from.observed.graph=NULL, observed.layer.attr=NULL)
 }
 
@@ -23,6 +24,7 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
   \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from a layer to the other.}
   \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
   \item{planar}{Logical. If TRUE, generates a planar graph.}
+  \item{asymetric.transport.from}{Numeric or character value in "1" or "2". If not NULL, the disturbance process will be applied only to the fragments from this layer.}
   \item{from.observed.graph}{igraph object. If not NULL, the parameters observed in this fragmentation graph are used instead of the previous parameters.}
   \item{observed.layer.attr}{character. Required if the \code{from.observed.graph} option is used. Name of the layer attribute in the observed graph.}
 }

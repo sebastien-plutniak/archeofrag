@@ -31,7 +31,6 @@ frag.graph.plot  <- function(graph, layer.attr,  ...){
                                      miny = coords$miny, maxy = coords$maxy  )
     }
     
-    
     plot(graph, 
          vertex.color = as.character(factor(V(graph)$layers, labels = colors[1:nLayers] )),  
          vertex.label = NA, 

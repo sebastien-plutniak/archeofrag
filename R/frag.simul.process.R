@@ -142,11 +142,36 @@
 }
 
 
+.add.disturbance <- function(g, v.to.disturb, asymetric.transport.from){
+  # default behaviour:
+  v.to.disturb <- sample(seq(1, gorder(g)), v.to.disturb)
+  # if asymetric.transport.from is set:
+  if( ! is.null(asymetric.transport.from)){
+    if(length(v.to.disturb) <= length(V(g)[V(g)$layer == asymetric.transport.from])   ){
+      v.to.disturb <- sample(V(g)[V(g)$layer == asymetric.transport.from], v.to.disturb)
+    } else{
+      stop("The number of fragments for asymetric transport exceeds the number of fragments in this layer. Reduce the 'disturbance' value.")
+    }
+  } 
+  V(g)[v.to.disturb]$layer <- as.character(factor(V(g)[v.to.disturb]$layer,
+                                                  levels = c(1,2), labels = c(2,1)))
+  g
+}
+
+
+
 #'	@export
-frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE, from.observed.graph=NULL, observed.layer.attr=NULL){
+frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE, asymetric.transport.from=NULL, from.observed.graph=NULL, observed.layer.attr=NULL){
   
   #  If requested input parameters from observed graph (except the number of edges):
   if( ! is.null(from.observed.graph) & ! is.null(observed.layer.attr)){
+    if( ! is.character(observed.layer.attr))  stop("The parameter 'observed.layer.attr' requires a character value.")
+    if( ! observed.layer.attr %in% names(vertex_attr(from.observed.graph)) ){
+      stop(paste("No '", observed.layer.attr, "' vertices attribute", sep=""))
+    }
+    if(length(unique(vertex_attr(from.observed.graph, observed.layer.attr))) != 2){
+      stop("The layer attribute of the observed graph must contain two layers.")
+    }
     # run the get.parameters function:
     params <- frag.get.parameters(from.observed.graph, observed.layer.attr)
     # input the observed parameters:
@@ -159,7 +184,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     planar <- params$planar
   }
   
-  # BEING Tests:
+  # BEGIN Tests:
   if(! is.logical(planar)) stop("The 'planar' argument must be logical.")
   if(is.null(n.components)) stop("The 'n.components' parameter is required.")
   
@@ -187,6 +212,13 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
   } else if(aggreg.factor > 1 | aggreg.factor < 0 ){
     stop("The 'aggreg.factor' parameter must range in [0;1].")
   }
+  
+  if( ! is.null(asymetric.transport.from) ){
+    if(! asymetric.transport.from %in% c(1, 2, "1", "2")){
+      stop("The 'asymetric.transport.from' parameter must have a value in 1 or 2.")
+    } 
+  }
+  
   # END tests.
   
   # BEGIN main body of the function:
@@ -210,9 +242,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     # ADD DISTURBANCE:
     v.to.disturb <- round(gorder(g) * disturbance)
     if(v.to.disturb != 0){
-      v.to.disturb <- sample(1:gorder(g), v.to.disturb)
-      V(g)[v.to.disturb]$layer <- as.character(factor(V(g)[v.to.disturb]$layer,
-                                                      levels=c(1,2), labels=c(2,1)))
+      g <- .add.disturbance(g, v.to.disturb, asymetric.transport.from)
     }
   }
   
@@ -244,9 +274,9 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     g <- g.layer1 %du% g.layer2
     # ADD DISTURBANCE:
     v.to.disturb <- round(gorder(g) * disturbance)
-    v.to.disturb <- sample(1:gorder(g), v.to.disturb)
-    V(g)[v.to.disturb]$layer <- as.character(factor(V(g)[v.to.disturb]$layer,
-                                                    levels = c(1,2), labels = c(2,1)))
+    if(v.to.disturb != 0){
+      g <- .add.disturbance(g, v.to.disturb, asymetric.transport.from)
+    }
   }
   g <- frag.edges.weighting(g, layer.attr="layer")
   g <- delete_vertex_attr(g, "which")

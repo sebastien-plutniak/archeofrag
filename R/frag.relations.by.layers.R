@@ -17,7 +17,8 @@ frag.relations.by.layers <- function(graph, layer.attr){
   e.list <- merge(e.list, v.list, by.x = "X1", by.y = "v")
   
   res <- table(e.list$layer.x, e.list$layer.y)
-  res[lower.tri(res)] <- res[upper.tri(res)] + res[lower.tri(res)]
-  res[upper.tri(res)] <- res[lower.tri(res)]
+  diag <- diag(res)
+  res <- res + matrix(res, nrow(res), byrow=TRUE)
+  diag(res) <- diag
   res
 }

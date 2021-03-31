@@ -10,6 +10,7 @@ frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mi
   }
   if(! is.logical(mixed.components.only)) stop("The 'mixed.components.only' parameter requires a logical value.")
   if(! is.numeric(size.mini)) stop("The 'size.mini' parameter requires a numerical value.")
+  
   V(graph)$tmp <- vertex_attr(graph, layer.attr)
   
   if(sum(sel.layers %in% V(graph)$tmp) != 2 ){

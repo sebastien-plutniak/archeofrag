@@ -12,6 +12,12 @@ frag.get.parameters <- function(graph, layer.attr){
     stop(paste("No '", layer.attr, "' vertices attribute", sep=""))
   }
   V(graph)$layer <- vertex_attr(graph, layer.attr)
+  
+  # add edge weight attribute is absent (to avoid an issue with the as_graphnel function):
+  if(is.null(edge_attr(graph, "weight"))){
+    E(graph)$weight <- 1
+  }
+  
   # test of there are two layers:
   if(length(unique(V(graph)$layer)) != 2) warning("The graph does not have two layers, disturbance and balance values will be meaningless.")
   
