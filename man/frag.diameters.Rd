@@ -2,7 +2,7 @@
 \alias{frag.diameters}
 \title{Diameter distribution for unconnected graph}
 \description{
-Returns the distribution of the diameter values of an unconnected graph.
+Returns the distribution of the diameter values of a fragmentation graph.
 }
 \usage{
 frag.diameters(graph, cumulative = FALSE)
@@ -32,4 +32,4 @@ frag.diameters(g, cumulative=TRUE)
 
 }
 
-\keyword{graphs}
+\keyword{measurement}

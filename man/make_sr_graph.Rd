@@ -30,5 +30,5 @@ fragments.df <- data.frame(1:13, letters[1:13])
 crsr_g <- make_frag_object(sr=sr.df, fragments=fragments.df)
 make_sr_graph(crsr_g)
 }
-\keyword{graphs}
+\keyword{build data}
 

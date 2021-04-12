@@ -25,4 +25,4 @@ A list with the values for the parameters.
 g <- frag.simul.process(n.components=20, vertices=50)
 frag.get.parameters(g, "layer")
 }
-\keyword{graphs}
+\keyword{summary}

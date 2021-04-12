@@ -31,4 +31,4 @@ g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)
 frag.observer.failure(graph=g, likelihood=c(0.05, 0.1))
 }
  
-\keyword{graphs}
+\keyword{simulation}

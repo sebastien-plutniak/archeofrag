@@ -30,4 +30,4 @@ g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)
 frag.graph.plot(g, "layer")
 }
  
-\keyword{graphs}
+\keyword{summary}

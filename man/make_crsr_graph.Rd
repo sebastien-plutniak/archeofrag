@@ -4,7 +4,7 @@
     Makes a "connection" relations graph including the "similarity" relations.
 }
 \description{
-    Takes a \code{\link[=Frag.object-class]{frag.object}} in argument and returns an undirected graph representing the relations between archaeological fragments. "Connection" and "similiarity" relations are combined. A "connection" relation refers to a physical connection between two fragments which were part of a same object. A "similarity" relation between fragments is defined if there is an acceptable likelihood that those fragments were part of a same object.
+    Takes a \code{\link[=Frag.object-class]{frag.object}} in argument and returns an undirected graph representing the relations between archaeological fragments. "Connection" and "similiarity" relations are combined. A "connection" relation refers to a physical connection between two fragments that were part of the same object. A "similarity" relation between fragments is defined if there is an acceptable likelihood that those fragments were part of the same object.
 }
 \usage{
     make_crsr_graph(object)
@@ -13,7 +13,7 @@
   \item{object}{A \code{\link[=Frag.object-class]{frag.object}}.}
 
 }
-\details{A complementary function to the \code{\link{make_cr_graph}} function. This function is devoted to take into account the "similarity" relations as well. This additional features is motivated by the fact that "similarity" relations  more frequently documented in the archaeological datasets than the "connection" relations. 
+\details{A complementary function to the \code{\link{make_cr_graph}} function. This function handles both the "connection" and "similarity" relations.  This can be useful, given that "similarity" relations are more frequently documented in the archaeological datasets than the "connection" relations. 
 
 The function returns an undirected graph of "\code{igraph}" class, using the "fragments" data frame of the frag.object to set the vertices attributes. 
 
@@ -37,5 +37,5 @@ crsr_g <- make_frag_object(cr=cr.df, sr=sr.df, fragments=fragments.df)
 make_cr_graph(cr_g)
 make_cr_graph(crsr_g)
 }
-\keyword{graphs}
+\keyword{build data}
 

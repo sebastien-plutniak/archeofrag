@@ -28,4 +28,4 @@ g <- frag.simul.process(n.components=20, vertices=50, disturbance = .15)
 V(g)$layers <- c(rep("layer1", 20), rep("layer2", 20), rep("layer3", 10))
 frag.get.layers(g, layer.attr="layers", sel.layers=c("layer1", "layer2"))
 }
-\keyword{graphs}
+\keyword{extraction}

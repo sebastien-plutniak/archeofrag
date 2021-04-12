@@ -17,8 +17,8 @@
 \author{Sebastien Plutniak
 Maintainer: Sebastien Plutniak <sebastien.plutniak at posteo.net>
 }
-\keyword{ package }
+\keyword{package}
 \seealso{
-\code{\link[igraph:igraph-package]{igraph}} 
+\code{\link[igraph:igraph-package]{igraph}},
 \code{\link[RBGL:RBGL.overview]{RBGL}} 
 }

@@ -194,6 +194,12 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     stop("'balance' values must range in ]0;1[")
   }
   
+  if(! is.numeric(components.balance)){
+    stop("The 'components.balance' argument requires a numerical value.")
+  } else if(components.balance <= 0 | components.balance >= 1){
+    stop("'components.balance' values must range in ]0;1[")
+  }
+  
   if(! is.numeric(disturbance)){
     stop("The 'disturbance' argument requires a numerical value.")
   } else if(disturbance < 0 | disturbance > 1){
@@ -248,7 +254,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
   
   if(initial.layers == 2){
     if(! is.infinite(edges)){message("The 'edge' parameter is not used if two 'initial layers' are used.")}
-    n.components.l1 <- round(n.components * components.balance)
+    n.components.l1 <- ceiling(n.components * components.balance)
     n.components.l2 <- n.components - n.components.l1
     vertices.l1 <- round(vertices * balance)
     vertices.l2 <- vertices - vertices.l1

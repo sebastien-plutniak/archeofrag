@@ -20,5 +20,6 @@ frag.relations.by.layers <- function(graph, layer.attr){
   diag <- diag(res)
   res <- res + matrix(res, nrow(res), byrow=TRUE)
   diag(res) <- diag
+  res[upper.tri(res)] <- NA
   res
 }

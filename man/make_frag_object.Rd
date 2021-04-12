@@ -18,11 +18,11 @@ make_frag_object(cr, sr, fragments)
     Optional. A matrix or a data frame with two columns: the first gives the fragment id, the second gives the "similarity group" id. Optional if \code{mode} is "cr".
 }
   \item{fragments}{
-    A matrix or a data frame providing informations about each fragment. The first column must contain the fragments id. 
+    A matrix or a data frame with information about each fragment. The first column must contain the fragments id. 
 }
 
 }
-\details{This function controls the data set construction before to make the graph properly with \code{\link{make_cr_graph}} or \code{\link{make_crsr_graph}}.}
+\details{This function checks the data-set and returns a "frag.object" which can be turned into a fragmentation graph using the \code{\link{make_cr_graph}}, \code{\link{make_sr_graph}}, or \code{\link{make_crsr_graph}} functions.}
 \value{
     An object of "\code{\link[=Frag.object-class]{frag.object}}" class.
 }
@@ -35,5 +35,5 @@ fragments.df <- data.frame(1:13, letters[1:13])
 make_frag_object(cr=cr.df, fragments=fragments.df)
 make_frag_object(cr=cr.df, sr=sr.df, fragments=fragments.df)
 }
-\keyword{graphs}
+\keyword{build data}
 

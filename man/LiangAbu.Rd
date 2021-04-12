@@ -10,9 +10,9 @@
 
 \title{Dataset: Archeological relationships between pottery fragments in Liang Abu}
 \description{
-    Liang Abu is an archaeological site in East Kalimantan, Indonesia. This data set describes the relations between pottery fragments founded during the excavations (2009-2012). Two types of relations are defined.
+    Liang Abu is an archaeological site in East Kalimantan, Indonesia. This data set describes the relations between pottery fragments found during the excavations (2009-2012). Two types of relations are defined.
     \itemize{
-        \item A connection relation refers to a physical connection between two fragments which were part of a same object. 
+        \item A connection relation refers to a physical connection between two fragments that were part of the same object. 
         \item A similarity relation between fragments is defined if there is an acceptable likelihood that those fragments were part of the same object.
     }
     
@@ -27,7 +27,7 @@
 \format{
     \itemize{
         \item\code{cr.df} is a 56x2 matrix. Each line describes a connection relationship between two fragments. There respective unique identifiers are given in column "frg_id1" and in column "frg_id2". 
-        \item\code{sr.df} is a 147x2 matrix. Column "frg_id" gives a fragment unique identifier, column "su_id" gives an unique identifier for the group of similar fragments it belongs (similarity unit).
+        \item\code{sr.df} is a 147x2 matrix. Column "frg_id" gives a fragment unique identifier, column "su_id" gives a unique identifier for the group of similar fragments it belongs (similarity unit).
         \item\code{fragments.info} is 177x8 data frame:
         \itemize{
             \item frg_id: fragment unique identifier 
@@ -49,3 +49,4 @@
 data(LiangAbu)
 head(fragments.info)
 }
+

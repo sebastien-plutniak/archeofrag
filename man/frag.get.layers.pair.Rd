@@ -35,4 +35,4 @@ frag.get.layers.pair(g, "layers", sel.layers=c("layer2","layer3"),
 frag.get.layers.pair(g, "layers", sel.layers=c("layer2","layer3"),  
                      size.mini=2, mixed.components.only=TRUE)
 }
-\keyword{graphs}
+\keyword{extraction}

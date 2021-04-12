@@ -24,8 +24,8 @@ The basic use of this function is intended for a graph with two layers, whose ed
 However, the function can also be used for a graph with more two layers. In this case, a subgraph is generated for each pair of layers (using the \code{frag.get.layers.pair} function), the \code{frag.edges.weighting} function is applied to weigth their edges (a warning message is displayed), and the cohesion is computed.
 }
 \value{
-If the graph has only two layers, the function returns a numeric vector with a cohesion value ([0;1]) for each layer.
-If the graph has more than two layers, the function returns a matrix with a cohesion value for each pair of layer.
+If the graph has only two layers, the function returns a numeric vector with a cohesion value ([0;1]) for each layer (sorted in alphanumerical order).
+If the graph has more than two layers, the function returns a matrix with a cohesion value for each pair of layers.
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
@@ -38,4 +38,4 @@ g <- frag.simul.process(n.components=20, vertices=50, disturbance=.1)
 frag.layers.cohesion(g, layer.attr="layer")
 }
  
-\keyword{graphs}
+\keyword{measurement}

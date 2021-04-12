@@ -24,4 +24,4 @@ A symmetrical matrix with the number of relations within and between the layers.
 g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)
 frag.relations.by.layers(g, "layer")
 }
-\keyword{graphs}
+\keyword{summary}

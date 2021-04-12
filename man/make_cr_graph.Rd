@@ -5,7 +5,7 @@
     Make a "connection" relations graph.
 }
 \description{
-    Takes a \code{\link[=Frag.object-class]{frag.object}} and returns an undirected graph representing the "connection" relations between archaeological fragments. A "connection" relation refers to a physical connection between two fragments which were part of a same object.
+    Takes a \code{\link[=Frag.object-class]{frag.object}} and returns an undirected graph representing the "connection" relations between archaeological fragments. A "connection" relation refers to a physical connection between two fragments that were part of the same object.
 }
 \usage{
 make_cr_graph(object)
@@ -34,5 +34,5 @@ crsr_g <- make_frag_object(cr=cr.df, sr=sr.df, fragments=fragments.df)
 make_cr_graph(cr_g)
 make_cr_graph(crsr_g)
 }
-\keyword{graphs}
+\keyword{build data}
 

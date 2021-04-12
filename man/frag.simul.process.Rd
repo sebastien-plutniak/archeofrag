@@ -16,7 +16,7 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
 
 \arguments{
   \item{initial.layers}{Integer (1 or 2). Number of hypothetical stratigraphic layers to use as initial condition.}
-  \item{n.components}{Integer. Number of objets to fragment (connected components).}
+  \item{n.components}{Integer. Number of objects to fragment (connected components).}
   \item{vertices}{Integer. Number of fragments (vertices).}
   \item{edges}{Integer. Number of connection relationships between fragments (edges).}
   \item{balance}{Numeric ]0;1[. Proportion of fragments in the first layer.}
@@ -46,8 +46,8 @@ An igraph object with a "frag_type" graph attribute (with the value "cr", for "c
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 \seealso{
-    \code{\link[RBGL]{boyerMyrvoldPlanarityTest}}
-    \code{\link[archeofrag]{frag.get.parameters}}
+    \code{\link[RBGL]{boyerMyrvoldPlanarityTest}},
+    \code{\link[archeofrag]{frag.get.parameters}},
     \code{\link[archeofrag]{frag.edges.weighting}}
 }
 
@@ -66,4 +66,4 @@ plot(g, vertex.color=factor(V(g)$layer),
      vertex.size=4, vertex.label=NA)
 
 }
-\keyword{graphs}
+\keyword{simulation}

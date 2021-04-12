@@ -48,4 +48,4 @@
 \examples{
 showClass("Frag.object")
 }
-\keyword{classes}
+\keyword{build data}

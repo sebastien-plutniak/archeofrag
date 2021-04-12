@@ -21,7 +21,7 @@ As it appears, this function calls the \code{frag.layers.cohesion} function.
 
 The basic use of this function is intended for a graph with two layers, whose edges have been previously weighted using the \code{frag.edges.weighting} function (an error message is displayed if the vertice attribute "layer" contains less than two layers, and if the graph has not edge attribute "weight").
 
-However, the function can also be used for a graph with more two layers. In this case, a subgrap is generated for each pair of layers (using the \code{frag.get.layers.pair} function), the \code{frag.edges.weighting} function is applied to weigth their edges (a warning message is displayed), and the admixture is computed.
+However, the function can also be used for a graph with more two layers. In this case, a subgraph is generated for each pair of layers (using the \code{frag.get.layers.pair} function), the \code{frag.edges.weighting} function is applied to weigth their edges (a warning message is displayed), and the admixture is computed.
 
 An error message is displayed if the vertex "layer" attribute has less than two layers.
 }
@@ -31,8 +31,8 @@ A numeric vector with the admixture of each pair of layers.
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
 \seealso{
-\code{\link[archeofrag]{frag.edges.weighting}}
-\code{\link[archeofrag]{frag.layers.cohesion}},
+\code{\link[archeofrag]{frag.edges.weighting}},
+\code{\link[archeofrag]{frag.layers.cohesion}}
 }
 \examples{
 g <- frag.simul.process(n.components=20, vertices=50, disturbance = .15)
@@ -40,4 +40,4 @@ g <- frag.edges.weighting(g, layer.attr="layer")
 frag.layers.admixture(g, "layer")
 }
  
-\keyword{graphs}
+\keyword{measurement}

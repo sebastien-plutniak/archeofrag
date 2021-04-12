@@ -1,4 +1,3 @@
-
 .euclidean.distance <- function(graph, x, y, z){
   coords <- cbind(name = V(graph)$name,
                   x = get.vertex.attribute(graph, x),
@@ -154,36 +153,39 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry="", x="", y="", 
   prop.max <- max(params$proportion)
   dist.max <- max(params$distance)
   
-  # get the morphometric/spatial parameters of the edges of each subgraphs:
-  params1  <- .get.morpho.spatial.params(g1, x, y, z)
-  params2  <- .get.morpho.spatial.params(g2, x, y, z)
-  params12 <- NULL  
-  if(gsize(g12) > 0){
-    params12 <- .get.morpho.spatial.params(g12, x, y, z)
+  # get the morphometric/spatial parameters of the edges compute the 
+  # morphometric/spatial factor for the edges  of each subgraphs:
+  morpho.spatial.factor.g1 <- 0
+  if(gsize(g1) > 0){
+    params1  <- .get.morpho.spatial.params(g1, x, y, z)
+    morpho.spatial.factor.g1 <- apply(params1, 1, function(x){
+      .morpho.spatial.factor(morpho1 = x[1],
+                             morpho2 = x[2],
+                             proportion = x[3],
+                             distance = x[4],
+                             morpho.max = morph.max,
+                             proportion.max = prop.max,
+                             distance.max = dist.max)
+    })
   }
   
-  # compute the morphometric/spatial factor for the edges of each subgraphs:
-  morpho.spatial.factor.g1 <- apply(params1, 1, function(x){
-    .morpho.spatial.factor(morpho1 = x[1],
-                           morpho2 = x[2],
-                           proportion = x[3],
-                           distance = x[4],
-                           morpho.max = morph.max,
-                           proportion.max = prop.max,
-                           distance.max = dist.max)
-  })
-  morpho.spatial.factor.g2 <- apply(params2, 1, function(x){
-    .morpho.spatial.factor(morpho1 = x[1],
-                           morpho2 = x[2],
-                           proportion = x[3],
-                           distance = x[4],
-                           morpho.max = morph.max,
-                           proportion.max = prop.max,
-                           distance.max = dist.max)
-  })
+  morpho.spatial.factor.g2 <- 0
+  if(gsize(g2) > 0){
+    params2  <- .get.morpho.spatial.params(g2, x, y, z)
+    morpho.spatial.factor.g2 <- apply(params2, 1, function(x){
+      .morpho.spatial.factor(morpho1 = x[1],
+                             morpho2 = x[2],
+                             proportion = x[3],
+                             distance = x[4],
+                             morpho.max = morph.max,
+                             proportion.max = prop.max,
+                             distance.max = dist.max)
+    })
+  }
   
   morpho.spatial.factor.g12 <- 0
-  if( ! is.null(params12)){
+  if(gsize(g12) > 0){
+    params12 <- .get.morpho.spatial.params(g12, x, y, z)
     morpho.spatial.factor.g12 <- apply(params12, 1, function(x){
       .morpho.spatial.factor(morpho1 = x[1],
                              morpho2 = x[2],

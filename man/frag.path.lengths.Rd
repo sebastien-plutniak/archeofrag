@@ -27,4 +27,4 @@ frag.path.lengths(g)
 frag.path.lengths(g, cumulative=TRUE)
 }
  
-\keyword{graphs}
+\keyword{measurement}

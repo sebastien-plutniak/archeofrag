@@ -62,4 +62,4 @@ V(g)$z <- sample(1:100, 50, replace=TRUE)
 frag.edges.weighting(g , "layer", "morpho", "x", "y", "z")
 }
  
-\keyword{graphs}
+\keyword{build data}
