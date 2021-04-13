@@ -142,15 +142,15 @@
 }
 
 
-.add.disturbance <- function(g, v.to.disturb, asymetric.transport.from){
+.add.disturbance <- function(g, v.to.disturb, asymmetric.transport.from){
   # default behaviour:
   v.to.disturb <- sample(seq(1, gorder(g)), v.to.disturb)
-  # if asymetric.transport.from is set:
-  if( ! is.null(asymetric.transport.from)){
-    if(length(v.to.disturb) <= length(V(g)[V(g)$layer == asymetric.transport.from])   ){
-      v.to.disturb <- sample(V(g)[V(g)$layer == asymetric.transport.from], v.to.disturb)
+  # if asymmetric.transport.from is set:
+  if( ! is.null(asymmetric.transport.from)){
+    if(length(v.to.disturb) <= length(V(g)[V(g)$layer == asymmetric.transport.from])   ){
+      v.to.disturb <- sample(V(g)[V(g)$layer == asymmetric.transport.from], v.to.disturb)
     } else{
-      stop("The number of fragments for asymetric transport exceeds the number of fragments in this layer. Reduce the 'disturbance' value.")
+      stop("The number of fragments for asymmetric transport exceeds the number of fragments in this layer. Reduce the 'disturbance' value.")
     }
   } 
   V(g)[v.to.disturb]$layer <- as.character(factor(V(g)[v.to.disturb]$layer,
@@ -160,8 +160,7 @@
 
 
 
-#'	@export
-frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE, asymetric.transport.from=NULL, from.observed.graph=NULL, observed.layer.attr=NULL){
+frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE, asymmetric.transport.from=NULL, from.observed.graph=NULL, observed.layer.attr=NULL){
   
   #  If requested input parameters from observed graph (except the number of edges):
   if( ! is.null(from.observed.graph) & ! is.null(observed.layer.attr)){
@@ -219,9 +218,9 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     stop("The 'aggreg.factor' parameter must range in [0;1].")
   }
   
-  if( ! is.null(asymetric.transport.from) ){
-    if(! asymetric.transport.from %in% c(1, 2, "1", "2")){
-      stop("The 'asymetric.transport.from' parameter must have a value in 1 or 2.")
+  if( ! is.null(asymmetric.transport.from) ){
+    if(! asymmetric.transport.from %in% c(1, 2, "1", "2")){
+      stop("The 'asymmetric.transport.from' parameter must have a value in 1 or 2.")
     } 
   }
   
@@ -233,7 +232,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     g <- .main(n.components, vertices, edges, balance, disturbance, aggreg.factor, planar)
     
     # BALANCE. Determine layer size:
-    v.layer1 <- floor(gorder(g) * balance)
+    v.layer1 <- round(gorder(g) * balance)
     
     # search possible combinations of components and use the first one:
     sel.clusters <- clusters(g)$csize
@@ -248,14 +247,19 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     # ADD DISTURBANCE:
     v.to.disturb <- round(gorder(g) * disturbance)
     if(v.to.disturb != 0){
-      g <- .add.disturbance(g, v.to.disturb, asymetric.transport.from)
+      g <- .add.disturbance(g, v.to.disturb, asymmetric.transport.from)
     }
   }
   
   if(initial.layers == 2){
-    if(! is.infinite(edges)){message("The 'edge' parameter is not used if two 'initial layers' are used.")}
-    n.components.l1 <- ceiling(n.components * components.balance)
+    if(! is.infinite(edges)){
+      message("The 'edge' parameter is not used if two 'initial layers' are used.")
+    }
+    n.components.l1 <- round(n.components * components.balance)
     n.components.l2 <- n.components - n.components.l1
+    if(n.components.l1 == 0 | n.components.l2 == 0){
+      stop("The 'components.balance' is too low or too high.")
+    }
     vertices.l1 <- round(vertices * balance)
     vertices.l2 <- vertices - vertices.l1
     
@@ -281,7 +285,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     # ADD DISTURBANCE:
     v.to.disturb <- round(gorder(g) * disturbance)
     if(v.to.disturb != 0){
-      g <- .add.disturbance(g, v.to.disturb, asymetric.transport.from)
+      g <- .add.disturbance(g, v.to.disturb, asymmetric.transport.from)
     }
   }
   g <- frag.edges.weighting(g, layer.attr="layer")

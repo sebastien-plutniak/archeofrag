@@ -6,16 +6,18 @@
 \usage{frag.simul.compare(graph, layer.attr, iter, summarise=TRUE)}
 
 \arguments{
-  \item{graph}{An undirected \code{igraph} object. The graph to compare with simulated graphs.} 
+  \item{graph}{An undirected \code{igraph} object. The 'observed' graph to compare to simulated graphs.} 
   \item{layer.attr}{Character. The name of the vertices attribute giving the layer of the fragments.}
-  \item{iter}{Numeric. The number of iterations for the simulated graphs.}
+  \item{iter}{Numerical. The number of simulated graphs to generate for each hypothesis (minimal value: 30).}
   \item{summarise}{Logical. Whether to report a comparative summary of the results.}
 }
 \details{
-This function is a convenient wrapper integrating several functions of the \code{archeofrag} package to compare an observed fragmentation graph to similar simulated graphs. The \code{frag.simul.process} is used to generate two series of graphs from the properties of the observed graph: the first series with the formation hypothesis H1 (one initial spatial unit) and the second series for the hypothesis H2 (two initial spatial units). 
+This function is a convenient wrapper integrating several functions of the \code{archeofrag} package to compare an observed fragmentation graph to similar simulated graphs. The \code{frag.simul.process} is used to generate two series of graphs from the properties of the observed graph: the first series is generated under the formation hypothesis H1 (one initial spatial unit) and the second series is generated under the hypothesis H2 (two initial spatial units). 
 The edge count, edge weights sum, balance, disturbance, admixture, and cohesion values of the generated graphs are measured.
 
 By default, the results are post-processed with the \code{frag.simul.summarise} function and a summary data frame is printed and included in the list of results which is silently returned. If the \code{summarise} parameter is set to FALSE, then the function returns normally a list of two data frames containing the numeric values measured for H1 and H2.
+
+
 }
 \value{
 A named list with three items: 
