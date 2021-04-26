@@ -2,10 +2,10 @@
 \alias{make_sr_graph}
 \alias{make_sr_graph-methods}
 \title{
-    Make a "similarity" relation graph.
+    Make a "similarity" relationships graph.
 }
 \description{
-    Takes a \code{\link[=Frag.object-class]{frag.object}} and returns an undirected graph representing the "similarity" relations between archaeological fragments. A "similarity" relation  between fragments is defined if there is an acceptable likelihood that those fragments were part of the same object.
+    Takes a \code{\link[=Frag.object-class]{frag.object}} and returns an undirected graph representing the "similarity" relationships between archaeological fragments. A "similarity" relationship  between fragments is defined if there is an acceptable likelihood that those fragments were part of the same object.
 }
 \usage{
 make_sr_graph(object)

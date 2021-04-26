@@ -2,15 +2,15 @@
 \alias{archeofrag-package}
 \alias{archeofrag}
 \docType{package}
-\title{Archeofrag: tools to analyse the fragmentation of archeological objects}
-\description{The Archeofrag package implements a comprehensive method to analyse fragmentation processes in archeology, based on the fragments of archeological objects scattered in stratigraphic layers and connected by physical "refittings" relationships. Graphs are used to model these situations. The package is mainly based on the igraph package for graph analysis. It offers functions to manipulate fragment datasets, to measure the properties of the graphs, and to generate artificial cases to compare with archaeological observations. An empirical dataset is also provided as an example.
+\title{Archeofrag: Refitting and Spatial Analysis in Archaeology}
+\description{Methods to analyse fragmented objects in archeology using refitting relationships between fragments scattered in archeological spatial units (e.g. stratigraphic layers). Graphs and graph theory are used to model archeological observations. The package is mainly based on the 'igraph' package for graph analysis. Functions can: 1) create, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.
 }
 \details{
     \tabular{ll}{
         Package: \tab archeofrag\cr
         Type: \tab Package\cr
-        Version: \tab 0.5.4\cr
-        Date: \tab 2020-09-30\cr
+        Version: \tab 0.7\cr
+        Date: \tab 2021-04-26\cr
         License: \tab GPL-2\cr
     }
 }

@@ -31,17 +31,19 @@ frag.layers.cohesion <- function(graph, layer.attr){
   layers <- vertex_attr(graph, name = layer.attr)
   V(graph)$layers <- layers
   layers <- sort(unique(layers))
-  pairs <- combn(layers, 2) 
-  
   # Conditionnal tests in function of the number of layers:
-  if(length(layers) < 2) stop("At least two different layers are required.")
+  if(length(layers) < 2){
+    warning("At least two different layers are required.")
+    return(c(NA, NA))
+  }
+  pairs <- combn(layers, 2) 
   
   if(length(layers) == 2){
     if(is.null(E(graph)$weight)) stop("The edges must be weighted (using the 'frag.edges.weighting' function).")
     results <- .cohesion.for.two.layers(graph, layers)
     results <- matrix(results)
   } else{ # if length(layers) > 2
-    warning("More than 2 layers: the 'frag.edges.weighting' function has been applied to each pair of layers.")
+    warning("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
     results <- sapply(1:ncol(pairs), function(x){
       gsub <- frag.get.layers.pair(graph, layer.attr, c(pairs[1, x], pairs[2, x]))
       gsub <- frag.edges.weighting(gsub, layer.attr)

@@ -2,10 +2,10 @@
 \alias{make_cr_graph}
 \alias{make_cr_graph-methods}
 \title{
-    Make a "connection" relations graph.
+    Make a "connection" relationships graph.
 }
 \description{
-    Takes a \code{\link[=Frag.object-class]{frag.object}} and returns an undirected graph representing the "connection" relations between archaeological fragments. A "connection" relation refers to a physical connection between two fragments that were part of the same object.
+    Takes a \code{\link[=Frag.object-class]{frag.object}} and returns an undirected graph representing the "connection" relationships between archaeological fragments. A "connection" relationship refers to a physical connection between two fragments that were part of the same object.
 }
 \usage{
 make_cr_graph(object)

@@ -15,7 +15,7 @@ frag.cycles(graph, kmax, max.cycles.only=FALSE)
   \item{max.cycles.only}{Logical. If TRUE, the fragments are only reported as parts of their longer cycle.}
 }
 \details{
-A cycle can be part of larger cycles: if \code{max.cycles.only} all the cycles are reported but, if this parameter is True only the larger cycles are reported.
+A cycle can be part of larger cycle: if \code{max.cycles.only} all the cycles are reported but, if this parameter is True only the larger cycles are reported.
 A warning recalls that for cycles k > 4 the fragments of a cycle are not necessarily all connected to each other (a fragment, due to its location in the original object, can only be connected to a limited number of adjacent fragments).
 }
 \value{

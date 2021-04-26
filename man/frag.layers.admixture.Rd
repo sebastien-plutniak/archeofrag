@@ -2,7 +2,8 @@
 \alias{frag.layers.admixture}
 
 \title{Admixture of two stratigraphic layers}
-\description{Evaluate how reliable is the distinction between two layers (or any other kind of archaeological spatial unit).}
+
+\description{Evaluate how reliable the distinction is between the two layers (or any other type of archaeological spatial units).}
 \usage{frag.layers.admixture(graph, layer.attr)}
 
 \arguments{
@@ -19,9 +20,9 @@ The admixture of two layers is equal to the cohesion of a virtual third layer, w
 Results range in [0;1] with 0 for two completely independent layers and values towards 1 as the robustness of the boundary between the two layers is lower.
 As it appears, this function calls the \code{frag.layers.cohesion} function.
 
-The basic use of this function is intended for a graph with two layers, whose edges have been previously weighted using the \code{frag.edges.weighting} function (an error message is displayed if the vertice attribute "layer" contains less than two layers, and if the graph has not edge attribute "weight").
+The basic use of this function is intended for a graph with two layers, whose edges have been previously weighted using the \code{frag.edges.weighting} function (an error message is displayed if the vertice attribute "layer" contains less than two layers, and if the graph does not have an edge attribute "weight").
 
-However, the function can also be used for a graph with more two layers. In this case, a subgraph is generated for each pair of layers (using the \code{frag.get.layers.pair} function), the \code{frag.edges.weighting} function is applied to weigth their edges (a warning message is displayed), and the admixture is computed.
+However, the function can also be used for a graph with more than two layers. In this case, a subgraph is generated for each pair of layers (using the \code{frag.get.layers.pair} function), the \code{frag.edges.weighting} function is applied to weight their edges (a warning message is displayed), and the admixture is computed.
 
 An error message is displayed if the vertex "layer" attribute has less than two layers.
 }

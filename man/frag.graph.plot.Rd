@@ -11,10 +11,10 @@
   \item{...}{Optional arguments sent to \code{plot.igraph}.}
 }
 \details{
-This function is a wrapper for the \code{plot.igraph} method for igraph objects. The layout is computed using the fruchterman-reingold algorithm, with some change in function of the value of the "frag_type" graph attribute.
+This function is a wrapper for the \code{plot.igraph} method for igraph objects. The layout is computed using the fruchterman-reingold algorithm, with some changes as a function of the value of the "frag_type" graph attribute.
 For graphs including similarity relations, \code{igraph}' \code{component_wise} layout modifier is applied.
-For graphs with connection and similarity relations, the edges for connection relations are colored in green.
-For graphs with connection relations only and two layers, the nodes from the two layers are located based on their layer in the upper and the lower part of the plot.
+For graphs with connection and similarity relationships, the edges for connection relations are coloured in green.
+For graphs with connection relationships only and two layers, the nodes from the two layers are located based on their layer in the upper and the lower part of the plot.
 
 }
 \value{

@@ -20,8 +20,8 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
   \item{vertices}{Integer. Number of fragments (vertices).}
   \item{edges}{Integer. Number of connection relationships between fragments (edges).}
   \item{balance}{Numeric ]0;1[. Proportion of fragments in the first layer.}
-  \item{components.balance}{Numeric ]0;1[. Proportion of components in the first layer (used only when initial.layers=2).}
-  \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from a layer to the other.}
+  \item{components.balance}{Numeric ]0;1[. Proportion of components in the first layer (only used when initial.layers=2).}
+  \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from one layer to another.}
   \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
   \item{planar}{Logical. If TRUE, generates a planar graph.}
   \item{asymmetric.transport.from}{Numeric or character value in "1" or "2". If not NULL, the disturbance process will be applied only to the fragments from this layer.}
@@ -32,10 +32,10 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
 This function simulates the fragmentation of archeological objects within and between two adjacent stratigraphic layers.
 Fragments are represented by vertices and the "connection" relationships ("refittings") between them are represented by edges.
 
-Some parameters are optional or depend on other parameters (messages are displayed accordingly). Namely, if two \code{initial.layers} are set, then only one of the \code{vertices} and \code{edges} parameters can be used. Using only one layer as initial condition enables to constraint the graph with both vertices and edges number. 
-The \code{disturbance} determines the proportion of fragments to "move" from a layer to the other one. Consequently, it generates inter-layers relationships.
+Some parameters are optional or depend on other parameters (messages are displayed accordingly). Namely, if two \code{initial.layers} are set, then only one of the \code{vertices} and \code{edges} parameters can be used. Using only one layer as the initial condition constraints the graph with both the number of vertices and edges. 
+The \code{disturbance} determines the proportion of fragments to "move" from one layer to another. Consequently, it generates inter-layer relationships.
 Note that the \code{balance} parameter determines the proportion of fragments in the first layer before the application of the disturbance process.
-If a graph is given to the \code{from.observed.graph} parameter, the properties of this graph are internally retrieved with the \code{frag.get.parameters} function. If some others parameters of the \code{frag.simul.process} function are set, the values retrieved from the observed graph are used in replacement.
+If a graph is given to the \code{from.observed.graph} parameter, the properties of this graph are internally retrieved with the \code{frag.get.parameters} function. If some other parameters of the \code{frag.simul.process} function are set, the values retrieved from the observed graph are used in replacement.
 The \code{frag.edges.weighting} is internally applied to weight the graph edges.
 
 Note that the simulator is faster with 2 \code{initial.layers} and when not using the planarity constraint.

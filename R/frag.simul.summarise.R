@@ -6,6 +6,8 @@
   # difference between H1 and H2
   wilcox.res <- wilcox.test(h1.values, h2.values, exact=FALSE)$p.value
   
+  if(is.nan(wilcox.res)) return(c(NA,NA,NA,NA))
+  
   # result for the wilcoxon test:
   ccl0 <- F
   if(wilcox.res < 0.05){
@@ -31,10 +33,9 @@
     "Obs. value/H1" = ccl1, "Obs. value/H2" = ccl2)
 }
 
-
 frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2){
   if(! is.igraph(graph)) stop("Not a graph object")
-  if(is.null(vertex_attr(graph, layer.attr)))   stop("The parameter 'layer.attr' is required.")
+  if(is.null(vertex_attr(graph, layer.attr)))   stop("'layer.attr' is missing or does not correspond to a vertex attribute of the graph.")
   if( ! is.character(layer.attr))  stop("The parameter 'layer.attr' requires a character value.")
   if( ! layer.attr %in% names(vertex_attr(graph)) ){
     stop(paste("No '", layer.attr, "' vertices attribute.", sep=""))
@@ -48,7 +49,7 @@ frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2){
   if(! (is.data.frame(res.h1) | is.data.frame(res.h2)) ){
     stop("Data frames are required for the res.h1 and res.h2 parameters.")
   }
-
+  
   # retrieve parameters of the observed graph:  
   obs.params <- c(frag.get.parameters(graph, layer.attr),
                   frag.layers.admixture(graph, layer.attr),
@@ -56,13 +57,15 @@ frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2){
                   "weightsum" = sum(E(graph)$weight))
   
   if(sum(! colnames(res.h1) %in% names(obs.params)) != 0){
-    stop("Some simulated parameters are missing in the observed graph.")
+    warning("Some simulated parameters are missing in the observed graph.")
   }
-  obs.params <- obs.params[ colnames(res.h1) ]
+  # parameters in the observed graph and the simulated results:
+  params <- intersect(colnames(res.h1), names(obs.params))
   
   # compare the observed and simulated parameters:
-  res <- sapply(names(obs.params), function(param)
+  res <- sapply(params, function(param)
     .compare.values(res.h1[param], res.h2[param], obs.params[param]))
   # results:
   as.data.frame(t(res))
 }
+

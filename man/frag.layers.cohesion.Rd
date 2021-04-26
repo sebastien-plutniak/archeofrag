@@ -2,7 +2,7 @@
 \alias{frag.layers.cohesion}
 
 \title{Cohesion measure of layers}
-\description{Returns the cohesion value of stratigraphic layers or other archeological spatial unit. Must be used after weighting the edges with \code{frag.edges.weighting}.}
+\description{Returns the cohesion value of two stratigraphic layers (or any other type of archeological spatial units). Must be used after weighting the edges with \code{frag.edges.weighting}.}
 \usage{frag.layers.cohesion(graph, layer.attr)}
 
 \arguments{
@@ -16,12 +16,12 @@ The cohesion value of a layer is computed as:
 
 with W_inLayer for the weights of the internal edges of the layer under consideration, W_in for the weights of all the internal edges, and W_ex for the weights of the external edges. 
 
-The measure take into account the balance between the information about each layer.
-Results range in [0;1], with 0 for two layers only with inter-layers connection relationships, and 1 if there is no inter-layers relationships and a  significant unbalance of information about the two layers.
+The measure takes into account the balance between the information about each layer.
+Results range in [0;1], with 0 for two layers with only inter-layer connection relationships, and 1 if there are not inter-layer relationships and a  significant imbalance of information on the two layers.
 
-The basic use of this function is intended for a graph with two layers, whose edges have been previously weighted using the \code{frag.edges.weighting} function (an error message is displayed if the vertice attribute "layer" contains less than two layers, and if the graph has not edge attribute "weight").
+The basic use of this function is intended for a graph with two layers, whose edges have been previously weighted using the \code{frag.edges.weighting} function (an error message is displayed if the vertice attribute "layer" contains less than two layers, and if the graph does not have an edge attribute "weight").
 
-However, the function can also be used for a graph with more two layers. In this case, a subgraph is generated for each pair of layers (using the \code{frag.get.layers.pair} function), the \code{frag.edges.weighting} function is applied to weigth their edges (a warning message is displayed), and the cohesion is computed.
+However, this function can also be used for a graph with more than two layers. In this case, a subgraph is generated for each pair of layers (using the \code{frag.get.layers.pair} function), the \code{frag.edges.weighting} function is applied to weight their edges (a warning message is displayed), and the cohesion is computed.
 }
 \value{
 If the graph has only two layers, the function returns a numeric vector with a cohesion value ([0;1]) for each layer (sorted in alphanumerical order).
