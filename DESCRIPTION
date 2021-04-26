@@ -17,7 +17,8 @@ Imports:
     utils
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    markdown
 VignetteBuilder: knitr
 URL: https://github.com/sebastien-plutniak/archeofrag
 BugReports: https://github.com/sebastien-plutniak/archeofrag/issues
