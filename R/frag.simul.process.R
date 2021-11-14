@@ -229,7 +229,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
   # BEGIN main body of the function:
   
   if(initial.layers == 1){
-    g <- .main(n.components, vertices, edges, balance, disturbance, aggreg.factor, planar)
+    g <- .main(n.components, vertices, edges, balance, disturbance, aggreg.factor, planar) 
     
     # BALANCE. Determine layer size:
     v.layer1 <- round(gorder(g) * balance)

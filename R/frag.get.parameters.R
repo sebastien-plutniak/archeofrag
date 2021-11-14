@@ -26,6 +26,7 @@ frag.get.parameters <- function(graph, layer.attr){
   v2 <- V(graph)[V(graph)$layer == unique(V(graph)$layer)[2]]
   subgraph <- subgraph.edges(graph, E(graph)[ ! v1 %--% v2 ])
   balance <- (table(V(subgraph)$layer) / sum(table(V(subgraph)$layer)) )[1]
+  balance <- round(balance, 2)
   
   # components balance:
   compo.balance <- sapply(decompose(subgraph), function(x) V(x)$layer[1])
@@ -38,12 +39,16 @@ frag.get.parameters <- function(graph, layer.attr){
     g.list <- decompose(g.list)
     g.list <- sapply(g.list, function(x)
       table(factor(V(x)$layer, levels = unique(V(graph)$layer))) )
+    # replace the count of the more represented layer in each component by NA:
     g.list <- apply(g.list, 2, function(x){ x[order(x)][2] <- NA ; x })
+    # sum of the count for the less represented layer in each component:
     disturbance <- sum(g.list, na.rm = TRUE) / gorder(graph)
+    disturbance <- round(disturbance, 2)
   } 
   
   # degree of aggregation of the edges on the components:
   aggreg.factor <- 1 - 1/(1 + sd(sapply(decompose(graph), gsize)))
+  aggreg.factor <- round(aggreg.factor, 2)
   
   res <- list(n.components = clusters(graph)$no,
               vertices =  gorder(graph),

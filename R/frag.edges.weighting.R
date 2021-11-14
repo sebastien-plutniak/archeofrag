@@ -11,8 +11,7 @@
   e.list <- e.list[, order(colnames(e.list))]
   e.list <- e.list[, -c(1, 2)] 
   e.list <- apply(e.list, 2, as.numeric)
-  e.list <- data.frame(matrix(e.list,
-                              ncol= (ncol(coords)-1)*2, byrow=T))
+  e.list <- matrix(e.list, ncol = (ncol(coords)-1)*2, byrow=T)
   
   if(sum(is.na(e.list)) > 0){
     stop("Cannot compute distances, missing coordinates values.")
@@ -27,17 +26,20 @@
 
 .get.morpho.spatial.params <- function(graph, x, y, z){
   # input: a graph and the names for x y z attributes
-  # output: a data frame with the distance and morpho parameters for each edge of the graph
+  # output: a data frame with the distance and morpho parameters for the graph edges
   e.list <- get.edgelist(graph)
-  colnames(e.list) <- c("name1", "name2")
+  e.list <- data.frame(e.list) 
+  e.list$id <- 1:nrow(e.list) # a an it to sort the row later
+  colnames(e.list) <- c("name1", "name2", "id")
   morpho.df <- cbind(name = V(graph)$name, 
                      morphometry = V(graph)$morphometry)
   e.list <- merge(e.list, morpho.df, by.x="name1", by.y="name", sort=FALSE)
   e.list <- merge(e.list, morpho.df, by.x="name2", by.y="name",
                   suffixes=c("1", "2"), sort=FALSE)
-  e.list <- e.list[, -c(1,2)]
+  e.list <- e.list[order(e.list$id), ] # sort the rows
+  e.list <- e.list[, 4:5]
   e.list <- apply(e.list, 2, as.numeric)
-  e.list <- data.frame(matrix(e.list, ncol=2, byrow=T))
+  e.list <- data.frame(matrix(e.list, ncol=2))
   colnames(e.list) <- c("morphometry1", "morphometry2")
   
   e.list$proportion <- apply(e.list, 1, function(x){
@@ -45,7 +47,7 @@
     v[1] / v[2]
   })
   
-  # compute spatial distances (in this function to avoid repeating 3 times the command)
+  # compute spatial distances (this is done in this function to avoid repeating 3 times the command)
   e.list$distance <- 1 # default value
   coords <- c(x, y, z)[ c(x, y, z) %in% vertex_attr_names(graph) ]
   if( length(coords) > 1) {   # if at least two coordinates
@@ -83,7 +85,6 @@
   size.factor <- (1 - (1 / ( sqrt(gorder(g) + gsize(g)) ) ))^2
   e.list$SumDegree * e.list$trans.factor * size.factor
 }
-
 
 frag.edges.weighting <- function(graph, layer.attr, morphometry="", x="", y="", z="") 
 {
@@ -137,6 +138,18 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry="", x="", y="", 
   v2 <- layers == layers.u[2]
   E(graph)$id <- 1:gsize(graph)
   
+  # get the max morphometric/spatial values observed in the data set:
+  params  <- .get.morpho.spatial.params(graph, x, y, z)
+  
+  morph.max <- max(params$morphometry1 + params$morphometry2)
+  prop.max <- max(params$proportion)
+  dist.max <- max(params$distance)
+  
+  # add a "distance" edge attribute if necessary:
+  if(! is.null(params$distance)){
+    E(graph)$distance <- params$distance
+  }
+  
   # generate subgraphs
   g1  <- subgraph.edges(graph, E(graph)[ V(graph)[v1] %--% V(graph)[v1] ])
   g2  <- subgraph.edges(graph, E(graph)[ V(graph)[v2] %--% V(graph)[v2] ])
@@ -146,12 +159,6 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry="", x="", y="", 
   e1  <- E(graph)$id %in% E(g1)$id
   e2  <- E(graph)$id %in% E(g2)$id
   e12 <- E(graph)$id %in% E(g12)$id
-  
-  # get the max morphometric/spatial values of the data set:
-  params  <- .get.morpho.spatial.params(graph, x, y, z)
-  morph.max <- max(params$morphometry1 + params$morphometry2)
-  prop.max <- max(params$proportion)
-  dist.max <- max(params$distance)
   
   # get the morphometric/spatial parameters of the edges compute the 
   # morphometric/spatial factor for the edges  of each subgraphs:
@@ -211,6 +218,6 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry="", x="", y="", 
   # add tags to the edges:
   E(graph)$scope <- "intra"
   E(graph)[e12]$scope <- "extra"
+  
   graph
 }
-

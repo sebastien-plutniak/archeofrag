@@ -33,7 +33,11 @@
     "Obs. value/H1" = ccl1, "Obs. value/H2" = ccl2)
 }
 
-frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2){
+frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2,
+                                 cohesion1.attr = "cohesion1",
+                                 cohesion2.attr = "cohesion2",
+                                 admixture.attr = "admixture"){
+  # todo: add params:  
   if(! is.igraph(graph)) stop("Not a graph object")
   if(is.null(vertex_attr(graph, layer.attr)))   stop("'layer.attr' is missing or does not correspond to a vertex attribute of the graph.")
   if( ! is.character(layer.attr))  stop("The parameter 'layer.attr' requires a character value.")
@@ -49,8 +53,20 @@ frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2){
   if(! (is.data.frame(res.h1) | is.data.frame(res.h2)) ){
     stop("Data frames are required for the res.h1 and res.h2 parameters.")
   }
+  if( ! (is.character(cohesion1.attr) | is.character(cohesion2.attr) | is.character(admixture.attr))){
+    stop("Character strings are required for the cohesion1.attr, cohesion2.attr, and admixture parameters.")
+  }
+  if( sum(c(cohesion1.attr, cohesion2.attr, admixture.attr) %in% colnames(res.h1))  != 3 ){
+    stop(paste("No column named '", cohesion1.attr, "', '", cohesion2.attr, "' or '", admixture.attr, "' in the data frames.", sep=""))
+  }
+  colnames(res.h1)[which(colnames(res.h1) == cohesion1.attr)] <- "cohesion1"
+  colnames(res.h1)[which(colnames(res.h1) == cohesion2.attr)] <- "cohesion2"
+  colnames(res.h1)[which(colnames(res.h1) == admixture.attr)] <- "admixture"
+  colnames(res.h2)[which(colnames(res.h2) == cohesion1.attr)] <- "cohesion1"
+  colnames(res.h2)[which(colnames(res.h2) == cohesion2.attr)] <- "cohesion2"
+  colnames(res.h2)[which(colnames(res.h2) == admixture.attr)] <- "admixture"
   
-  # retrieve parameters of the observed graph:  
+  # retrieve the parameters of the observed graph:  
   obs.params <- c(frag.get.parameters(graph, layer.attr),
                   frag.layers.admixture(graph, layer.attr),
                   "cohesion" = frag.layers.cohesion(graph, layer.attr),

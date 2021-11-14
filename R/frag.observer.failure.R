@@ -1,5 +1,5 @@
 .randomly.delete.edges <- function(graph, value){ 
-  set.seed(10)  # reset the random value to ensure the same serie of edges is remove
+  set.seed(10)  # reset the random value to ensure that the same series of edges is remove
   n.edges <- round(gsize(graph) * value)
   delete_edges(graph, sample(E(graph), n.edges))
 }

@@ -1,3 +1,16 @@
+
+# archeofrag 0.7.1
+Released: 2021-11-??
+
+* when using `frag.weight.edges()` with xyz coordinates, the function now returns a graph with an edge attribute with the spatial distance between fragments
+* `frag.layers.summarise()` has three new parameters with default values to define the names of the colums with the cohesion and admixture values
+* the balance, disturbance, and aggreg.factor values returned by `frag.get.parameters()` are now rounded with two digits.
+
+# archeofrag 0.7
+Released: 2021-04-26
+
+Second major release, after complete revision of the documentation.
+
 # archeofrag 0.6.7
 Released: 2021-04-12
 

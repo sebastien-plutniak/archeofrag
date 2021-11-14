@@ -171,7 +171,7 @@ The `frag.relations.by.layers`  function enables a first appreciation by returni
 frag.relations.by.layers(simul.g, "layer")
 ```
 
-The diagonal of the matrix contain the number of intra-layers relationships and the other values refer to inter-layers relationships. Note that our simulated graph does not has connection relationships between layers 1 and 2.
+The diagonal of the matrix gives the number of intra-layers relationships and the other values refer to inter-layers relationships. Note that our simulated graph does not has connection relationships between layers 1 and 2.
 It is time to introduce a new parameter of the `frag.simul.process`, namely its `disturbance` argument. It determines the proportion of fragments which will be randomly displaced from a layer to the other one. The default value of this parameter is 0, what explains why our `simul.g` graph has no inter-layers relationships.
 Let's create a new artificial graph:
 
