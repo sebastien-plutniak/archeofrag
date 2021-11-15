@@ -41,8 +41,7 @@ jobs:
         if: matrix.config.os == 'macOS-latest'           
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
-          remotes::install_github("igraph/rigraph@master")
+          install.packages(c("remotes", "rcmdcheck", "igraph"))
           remotes::install_cran("BiocManager")
           BiocManager::install("RBGL")
           remotes::install_deps(dependencies = TRUE)
