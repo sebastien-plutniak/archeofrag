@@ -30,6 +30,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
+      - name: Install Dependencies (Windows)
+        shell: powershell
+        run: Install-Module pdflatex -Force -Verbose    
+        if: matrix.config.os == 'windows-latest'          
       - name: Install Dependencies (Linux)
         run: sudo apt-get install  libglpk-dev libglpk40 libc6 pandoc
         if: matrix.config.os == 'ubuntu-20.04'  
