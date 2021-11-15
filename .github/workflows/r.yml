@@ -37,15 +37,9 @@ jobs:
         if: matrix.config.os == 'windows-latest'    
         shell: bash
         run: |
-          echo $GITHUB_WORKSPACE >> $GITHUB_PATH
-          curl -owinglpk-4.65.zip -L --insecure https://jaist.dl.sourceforge.net/project/winglpk/winglpk/GLPK-4.65/winglpk-4.65.zip
-          7z x winglpk-4.65.zip
-          cp glpk-4.65/w64/glpk_4_65.lib glpk-4.65/w64/glpk.lib
-          echo ${GITHUB_WORKSPACE}\\glpk-4.65\\w64 >> $GITHUB_PATH
-          echo GLPK_LIB_DIR=${GITHUB_WORKSPACE}\\glpk-4.65\\w64 >> $GITHUB_ENV
-          echo GLPK_INCLUDE_DIR=${GITHUB_WORKSPACE}\\glpk-4.65\\src >> $GITHUB_ENV   
+          echo "PKG_CPPFLAGS=-g -D_R_=1 -DUSE_R=1 -I${C:\ProgramData\chocolatey\lib\glpk\tools}\include -DCHECK_GLPK_ARGS PKG_LIBS=-L${C:\ProgramData\chocolatey\lib\glpk\tools}\lib -lglpk -lgmp" >> glpk-4.65/src/Makewars.win
       - name: Install Dependencies (Linux)
-        run: sudo apt-get install  libglpk-dev libglpk40 libc6 pandoc
+        run: sudo apt-get install  libglpk-dev libglpk40 libc6 pandoc libcurl4-openssl-dev
         if: matrix.config.os == 'ubuntu-20.04'  
       - name: Install Dependencies (macOS)
         run: brew install pandoc
