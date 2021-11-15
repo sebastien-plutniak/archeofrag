@@ -31,8 +31,19 @@ jobs:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - name: Install Dependencies (Windows)
-        run: choco install --verbose glpk
-        if: matrix.config.os == 'windows-latest'          
+        run: choco install glpk
+        if: matrix.config.os == 'windows-latest'    
+      - name: Install glpk (Windows)
+        if: matrix.config.os == 'windows-latest'    
+        shell: bash
+        run: |
+          echo $GITHUB_WORKSPACE >> $GITHUB_PATH
+          curl -owinglpk-4.65.zip -L --insecure https://jaist.dl.sourceforge.net/project/winglpk/winglpk/GLPK-4.65/winglpk-4.65.zip
+          7z x winglpk-4.65.zip
+          cp glpk-4.65/w${{ matrix.windows-latest }}/glpk_4_65.lib glpk-4.65/w${{ matrix.windows-latest }}/glpk.lib
+          echo ${GITHUB_WORKSPACE}\\glpk-4.65\\w${{ matrix.windows-latest }} >> $GITHUB_PATH
+          echo GLPK_LIB_DIR=${GITHUB_WORKSPACE}\\glpk-4.65\\w${{ matrix.windows-latest }} >> $GITHUB_ENV
+          echo GLPK_INCLUDE_DIR=${GITHUB_WORKSPACE}\\glpk-4.65\\src >> $GITHUB_ENV   
       - name: Install Dependencies (Linux)
         run: sudo apt-get install  libglpk-dev libglpk40 libc6 pandoc
         if: matrix.config.os == 'ubuntu-20.04'  
@@ -41,7 +52,8 @@ jobs:
         if: matrix.config.os == 'macOS-latest'           
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck", "igraph"))
+          install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_github("igraph/rigraph@master")
           remotes::install_cran("BiocManager")
           BiocManager::install("RBGL")
           remotes::install_deps(dependencies = TRUE)
