@@ -37,7 +37,7 @@ jobs:
         if: matrix.config.os == 'windows-latest'    
         shell: bash
         run: |
-          echo "PKG_CPPFLAGS=-g -D_R_=1 -DUSE_R=1 -I${C:\ProgramData\chocolatey\lib\glpk}\include -DCHECK_GLPK_ARGS PKG_LIBS=-L${C:\ProgramData\chocolatey\lib\glpk}\lib -lglpk -lgmp" >> glpk-4.65/src/Makewars.win
+          echo "PKG_CPPFLAGS=-g -D_R_=1 -DUSE_R=1 -I${C:\ProgramData\chocolatey\lib\glpk}\include -DCHECK_GLPK_ARGS PKG_LIBS=-L${C:\ProgramData\chocolatey\lib\glpk}\lib -lglpk -lgmp" >> C:\ProgramData\chocolatey\lib\glpk\src\Makewars.win
       - name: Install Dependencies (Linux)
         run: sudo apt-get install  libglpk-dev libglpk40 libc6 pandoc libcurl4-openssl-dev
         if: matrix.config.os == 'ubuntu-20.04'  
