@@ -43,6 +43,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_github("igraph/rigraph@master")
           remotes::install_cran("BiocManager")
           BiocManager::install("RBGL")
           remotes::install_deps(dependencies = TRUE)
