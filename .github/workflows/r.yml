@@ -32,6 +32,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install Dependencies (Windows)
         shell: powershell
+        run: pacman -S mingw-w64-i686-glpk
         run: Install-Module pdflatex -Force -Verbose    
         if: matrix.config.os == 'windows-latest'          
       - name: Install Dependencies (Linux)
