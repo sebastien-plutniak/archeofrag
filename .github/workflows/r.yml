@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
+          - {os: windows-latest, r: 'release', windows_32_or_64: '64'}
           - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
@@ -26,6 +26,8 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
+      # Windows binary paths to allow linking
+      CIBW_ENVIRONMENT_WINDOWS: LIB="c://glpk//w64;c://lpsolve" INCLUDE="c://glpk//src;c://"
     
     steps:
       - uses: actions/checkout@v2
@@ -39,11 +41,15 @@ jobs:
         env:
           WINGLPK_URL: "https://sourceforge.net/projects/winglpk/files/winglpk/GLPK-4.65/winglpk-4.65.zip/download"
         run: |
+          echo $GITHUB_WORKSPACE >> $GITHUB_PATH
           curl -L $WINGLPK_URL --output glpk.zip
           7z x glpk.zip -o/c/
           mv /c/glpk-4.65 /c/glpk
           cp /c/glpk/w64/glpk_4_65.lib /c/glpk/w64/glpk.lib
           cp /c/glpk/w64/glpk_4_65.dll /c/glpk/w64/glpk.dll
+          echo ${GITHUB_WORKSPACE}\\glpk-4.65\\w${{ matrix.windows_32_or_64 }} >> $GITHUB_PATH
+          echo GLPK_LIB_DIR=${GITHUB_WORKSPACE}\\glpk-4.65\\w${{ matrix.windows_32_or_64 }} >> $GITHUB_ENV
+          echo GLPK_INCLUDE_DIR=${GITHUB_WORKSPACE}\\glpk-4.65\\src >> $GITHUB_ENV
       - name: Install Dependencies (Linux)
         run: sudo apt-get install  libglpk-dev libglpk40 libc6 pandoc libcurl4-openssl-dev
         if: matrix.config.os == 'ubuntu-20.04'  
