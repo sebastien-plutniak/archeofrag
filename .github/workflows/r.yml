@@ -34,11 +34,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install Dependencies (Windows)
         run: choco install glpk
-        if: matrix.config.os == 'windows-latest'
-      - name: Install igraph (Windows)
-        run:  install.packages("igraph", type="win.binary", verbose=TRUE)
-        if: matrix.config.os == 'windows-latest'   
-        shell: Rscript {0}         
+        if: matrix.config.os == 'windows-latest'  
       - name: Install Dependencies (Linux)
         run: sudo apt-get install  libglpk-dev libglpk40 libc6 pandoc libcurl4-openssl-dev
         if: matrix.config.os == 'ubuntu-20.04'  
@@ -47,14 +43,25 @@ jobs:
         if: matrix.config.os == 'macOS-latest'          
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
-          remotes::install_github("igraph/rigraph@master")
+          install.packages(c("remotes", "rcmdcheck"))          
           remotes::install_cran("BiocManager")
           BiocManager::install("RBGL")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("lcolladotor/biocthis")
           biocthis::use_bioc_github_action()
-        shell: Rscript {0}              
+        shell: Rscript {0}     
+      - name: Install igraph (macOS)
+        remotes::install_github("igraph/rigraph@master")
+        if: matrix.config.os == 'macOS-latest'  
+        shell: Rscript {0}   
+      - name: Install igraph (Linux)
+        remotes::install_github("igraph/rigraph@master")
+        if: matrix.config.os == 'ubuntu-20.04'  
+        shell: Rscript {0}          
+      - name: Install igraph (Windows)
+        run:  install.packages("igraph", type="win.binary", verbose=TRUE)
+        if: matrix.config.os == 'windows-latest'   
+        shell: Rscript {0}               
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
         shell: Rscript {0}
