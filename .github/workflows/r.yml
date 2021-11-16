@@ -60,6 +60,7 @@ jobs:
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_github("igraph/rigraph@master")
+          install.packages("igraph", type="win.binary")
           remotes::install_cran("BiocManager")
           BiocManager::install("RBGL")
           remotes::install_deps(dependencies = TRUE)
