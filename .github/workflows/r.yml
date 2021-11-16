@@ -41,7 +41,7 @@ jobs:
       - name: Install Dependencies (macOS)
         run: brew install pandoc
         if: matrix.config.os == 'macOS-latest'          
-      - name: Install dependencies
+      - name: Install R dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))          
           remotes::install_cran("BiocManager")
@@ -51,11 +51,11 @@ jobs:
           biocthis::use_bioc_github_action()
         shell: Rscript {0}     
       - name: Install igraph (macOS)
-        remotes::install_github("igraph/rigraph@master")
+        run: remotes::install_github("igraph/rigraph@master")
         if: matrix.config.os == 'macOS-latest'  
         shell: Rscript {0}   
       - name: Install igraph (Linux)
-        remotes::install_github("igraph/rigraph@master")
+        run: remotes::install_github("igraph/rigraph@master")
         if: matrix.config.os == 'ubuntu-20.04'  
         shell: Rscript {0}          
       - name: Install igraph (Windows)
