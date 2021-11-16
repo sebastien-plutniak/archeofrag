@@ -60,13 +60,16 @@ jobs:
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_github("igraph/rigraph@master")
-          install.packages("igraph", type="win.binary")
           remotes::install_cran("BiocManager")
           BiocManager::install("RBGL")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("lcolladotor/biocthis")
           biocthis::use_bioc_github_action()
-        shell: Rscript {0}             
+        shell: Rscript {0}  
+      - name: Install igraph (Windows)
+        run: |
+          install.packages("igraph", type="win.binary", verbose=TRUE)
+        shell: Rscript {0}              
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
         shell: Rscript {0}
