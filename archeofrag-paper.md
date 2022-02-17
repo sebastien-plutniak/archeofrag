@@ -16,7 +16,7 @@ authors:
 affiliations:
  - name: TRACES Laboratory, Toulouse, France
    index: 1
-date: 3 February 2022 
+date: 17 February 2022 
 bibliography: archeofrag-paper.bib
 output: 
   pdf_document: 
