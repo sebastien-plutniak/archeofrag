@@ -10,11 +10,11 @@
   \item{layer.attr}{Character. The name of the vertices attribute giving the layer of the fragments.}
 }
 \details{
-The cohesion value of a layer is computed as: 
+The cohesion value of a spatial unit  is computed as: 
 
-    \code{sum(W_inLayer) / (sum(W_in) + sum(W_ex))}
-
-with W_inLayer for the weights of the internal edges of the layer under consideration, W_in for the weights of all the internal edges, and W_ex for the weights of the external edges. 
+	\deqn{\frac{V_{unit_i} + W_{unit_i}}{ \sum_{j=1}^{2} V_{unit_j} + W_{unit_j}} }
+	
+with V the number of vertices in the unit and W the sum of the edge weights within the unit.
 
 The measure takes into account the balance between the information about each layer.
 Results range in [0;1], with 0 for two layers with only inter-layer connection relationships, and 1 if there are not inter-layer relationships and a  significant imbalance of information on the two layers.

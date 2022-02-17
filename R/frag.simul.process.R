@@ -10,7 +10,7 @@
 }
 
 .select.component <- function(g, aggreg.factor){
-  # high aggreg.factor favors biggest components:
+  # high aggreg.factor favors bigger components:
   proba <- 1/ (1 + (1:clusters(g)$no * aggreg.factor))
   sample(order(clusters(g)$csize, decreasing = T), 1, prob = proba)
 }
@@ -142,23 +142,22 @@
 }
 
 
-.add.disturbance <- function(g, v.to.disturb, asymmetric.transport.from){
+.add.disturbance <- function(g, nr.v.to.disturb, asymmetric.transport.from){
   # default behaviour:
-  v.to.disturb <- sample(seq(1, gorder(g)), v.to.disturb)
+  v.to.disturb <- sample(seq(1, gorder(g)), nr.v.to.disturb)
   # if asymmetric.transport.from is set:
   if( ! is.null(asymmetric.transport.from)){
-    if(length(v.to.disturb) <= length(V(g)[V(g)$layer == asymmetric.transport.from])   ){
-      v.to.disturb <- sample(V(g)[V(g)$layer == asymmetric.transport.from], v.to.disturb)
+    if(nr.v.to.disturb <= length(V(g)[V(g)$layer == asymmetric.transport.from]) ){
+      v.to.disturb <- sample(V(g)[V(g)$layer == asymmetric.transport.from], nr.v.to.disturb)
     } else{
       stop("The number of fragments for asymmetric transport exceeds the number of fragments in this layer. Reduce the 'disturbance' value.")
     }
   } 
+  # reverse layer values of the selected vertices:
   V(g)[v.to.disturb]$layer <- as.character(factor(V(g)[v.to.disturb]$layer,
                                                   levels = c(1,2), labels = c(2,1)))
   g
 }
-
-
 
 frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=TRUE, asymmetric.transport.from=NULL, from.observed.graph=NULL, observed.layer.attr=NULL){
   
@@ -245,9 +244,9 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     V(g)[ V(g)$object.id %in% sel.clusters ]$layer <- 1
     
     # ADD DISTURBANCE:
-    v.to.disturb <- round(gorder(g) * disturbance)
-    if(v.to.disturb != 0){
-      g <- .add.disturbance(g, v.to.disturb, asymmetric.transport.from)
+    nr.v.to.disturb <- round(gorder(g) * disturbance)
+    if(nr.v.to.disturb > 0){
+      g <- .add.disturbance(g, nr.v.to.disturb, asymmetric.transport.from)
     }
   }
   
@@ -283,9 +282,9 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     V(g.layer2)$name <- paste(V(g.layer2)$name, ".2", sep="")
     g <- g.layer1 %du% g.layer2
     # ADD DISTURBANCE:
-    v.to.disturb <- round(gorder(g) * disturbance)
-    if(v.to.disturb != 0){
-      g <- .add.disturbance(g, v.to.disturb, asymmetric.transport.from)
+    nr.v.to.disturb <- round(gorder(g) * disturbance)
+    if(nr.v.to.disturb > 0){
+      g <- .add.disturbance(g, nr.v.to.disturb, asymmetric.transport.from)
     }
   }
   g <- frag.edges.weighting(g, layer.attr="layer")

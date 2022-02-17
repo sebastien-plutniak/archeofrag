@@ -36,13 +36,19 @@
   
   
   
-  @Manual{Plutniak2020archeofrag,
-  Title                    = {Archeofrag: an R package for refitting and stratigraphic analysis in archaeology},
+@Manual{Plutniak2021archeofrag,
+  Title                    = {Archeofrag: an R package for Refitting and Spatial Analysis in Archaeology},
   Author                   = {Plutniak, Sébastien},
-    note = {R package version 0.6},
-  Year                     = {2020},
-  doi  = {10.5281/zenodo.4271900},
+  Year                     = {2021},
+  Doi                      = {10.5281/zenodo.4720392},
+  Note                     = {R package version 0.7},
+  Url                      = {https://CRAN.R-project.org/package=archeofrag},
+
+  Abstract                 = {Methods to analyse fragmented objects in archaeology using refitting relationships between fragments scattered in archaeological spatial units (e.g. stratigraphic layers). Graphs and graph theory are used to model archaeological observations. The package is mainly based on the 'igraph' package for graph analysis. Functions can: 1) create, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archaeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.},
+  Keywords                 = {plutniak,software, hceres-ap-software},
+  Langid                   = {american}
 }
+
 
 
 @Article{Frerebeau2019,
@@ -105,4 +111,58 @@
   Pages                    = {228--242},
   Volume                   = {416},
   Journal                  = {Quaternary International},
+}
+
+
+@Incollection{CaroEtal2022,
+  Title                    = {Les productions céramiques du Néolithique ancien et moyen: approches céramo-stratigraphique, technologique et morpho-stylistique},
+  Author                   = {Caro, Joséphine and Manen, Claire and Baux, Agathe and Plutniak, Sébastien},
+  Booktitle                = {Le Taï (Remoulins – Gard). Premières sociétés agropastorales du Languedoc méditerranéen (6\textsuperscript{e}--3\textsuperscript{e} millénaire avant notre ère},
+  Editor                   = {Manen, Claire},
+  Publisher                = {Archives d'Écologie Préhistorique},
+  Pubstate                 = {forthcoming},
+  year = {2022},
+  Address                  = {Toulouse},
+  Keywords                 = {plutniak, archeo, hceres-cha},
+  Langid                   = {french}
+}
+
+@Article{Plutniak2021jas,
+  Title                    = {The Strength of Parthood Ties. Modelling Spatial Units and Fragmented Objects with the TSAR Method -- Topological Study of Archaeological Refitting},
+  Author                   = {Plutniak, Sébastien},
+  Year                     = {2021},
+  Doi                      = {10.1016/j.jas.2021.105501},
+  ISSN                     = {0305-4403},
+  Pages                    = {105501},
+  Volume                   = {136},
+
+  Abstract                 = {Refitting and conjoinable pieces have long been used in archaeology to assess the consistency of discrete spatial units, such as layers, and to evaluate disturbance and post-depositional processes. The majority of current methods, despite their differences, rely on the count and proportion of refits within and between spatial units. Little attention is paid to the distribution and topology of the relationships between fragments, although this is now known to have significant effects on archaeological interpretation. This paper presents a new methodological approach for refitting studies. The TSAR approach (Topological Study of Archaeological Refitting) draws on concepts and methods from graph theory to model the network of connections observed between refitting fragments. Measures of cohesion and admixture of spatial units are defined using the structural properties of the sets of refitting relationships. To ensure reproducibility and reusability, the TSAR method is implemented as an R package, which also includes a simulator generating refitting fragments scattered in two spatial units. The advantages of the topological approach are discussed by comparing it to: (1) the results of a survey in which archaeologists were asked to rank examples of stratigraphic admixture; and (2) other computational methods. The approach is applied to simulated data, and empirical data from the Liang Abu rock shelter (East Borneo) are presented. Finally, the use of the TSAR simulation approach to test different scenarios of site formation processes is demonstrated.},
+  Journal                  = {Journal of Archaeological Science},
+  Keywords                 = {plutniak, archeo, publi, hceres-acl},
+  Langid                   = {american}
+}
+
+
+@Misc{Plutniak2021aburefits,
+  Title                    = {Refitting Pottery Fragments from the Liang Abu Rockshelter, Borneo},
+  Author                   = {Plutniak, Sébastien},
+  Year                     = {2021},
+  Doi                      = {10.5281/zenodo.4719577},
+  Organization             = {Zenodo},
+  Keywords                 = {plutniak, dataset, hceres-ap-dataset},
+  Langid                   = {american}
+}
+
+
+@article{Plutniak2022bspf,
+  Title                    = {L'analyse topologique des remontages archéologiques: la méthode TSAR et le package R \emph{archeofrag}},
+  Author                   = {Plutniak, Sébastien},
+  Year                     = {2022},
+  number                      = {},
+  pages                      = {},
+  volume                      = {},
+  pubstate                      = {submitted},
+  Journal                  = {Bulletin de la Société préhistorique française},
+  Keywords                 = {plutniak, notyet},
+  Langid                   = {french}
 }

@@ -27,17 +27,18 @@ Three subgraphs are first generated, one for each layer and only one for the ext
 
 The weight of an intra-layer edge (E) is equal to the sum of the degrees (d) of the vertices (i and j) it connects: 
 
-    W_intra(E_ij)= di + dj  
+  \deqn{W_{intra(E_{ij})} = d_i + d_j}{W_intra(E_ij)= di + dj}
 
 For an inter-layer edge, the same calculation is made but with a modifier to account for the balance of information available for each layer:  
-
-    W_inter(E_ij)= (di + dj) * (3 - (2 / (1 +  (trans_i+trans_j)/2)) * (1 - 1/(sqrt(V_sub + E_sub)))^2
+    
+  \deqn{W(E_inter{ij}) = (d_i + d_j) \times \left(3 - \frac{2}{ 1 + (tr_i + tr_j)/2}\right) \times \left(1 - \frac{1}{\sqrt{(V_{sub} + E_{sub}) }}\right)^2}{W_inter(E_ij)= (di + dj) * (3 - (2 / (1 + (trans_i+trans_j)/2)) * (1 - 1/(sqrt(V_sub + E_sub)))^2}
 
 with \code{trans_i} and \code{trans_i} the local transitivity of the vertices i and j, and \code{sqrt(V_sub + E_sub)} the square root of the sum of the vertices count and edge count of the sub-graph.
 
 If the \code{morphometry} and/or coordinates (\code{x}, \code{y}, \code{z}) parameters are provided, the previous formula is modified using a factor which is computed as:
 
-   f = 1 - sqrt( ((size_i+size_j)/max(sizes)) * sqrt((size_i/size_j)/max(prop)) * (distance_ij/max(distances)) ) 
+   \deqn{f(E_{ij}) =  1 - \left(\sqrt{  \frac{size_i + size_j}{max(sizes)} \times \sqrt{\frac{\frac{size_i}{size_j}}{max(prop)}} \times \frac{distance_{ij}}{max(distances)}}\ \right) }{f = 1 - sqrt( ((size_i+size_j)/max(sizes)) * sqrt((size_i/size_j)/max(prop)) * (distance_ij/max(distances)) ) }
+
 
 with \code{size_i} the morphometric value of the smaller fragment, \code{max(sizes)} the maximum sum of morphometric values observed for the pairs of connected fragments in the dataset under study; \code{max(prop)} the maximum proportion between the size values of connected fragments observed in the dataset under study; distance ij the spatial distance between fragments i and j; \code{max(distances)} the maximum euclidean distance observed for the pairs of connected fragments in the dataset under study.
 Results of the morphometric-spatial factor range in ]0,1].
