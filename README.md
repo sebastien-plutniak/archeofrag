@@ -17,7 +17,9 @@ an R package for refitting and stratigraphic analysis in archeology
 - [**Installation**](#installation)
 - [**Building fragmentation graphs**](#building-the-fragmentation-graph)
 - [**Edge weighting, cohesion and admixture computation**](#edge-weighting-cohesion-and-admixture-computation)
-- [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated-data): [Generating artificial fragmentation graphs](#generating-artificial-fragmentation-graphs), [Testing hypotheses](#testing-hypotheses)
+- [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated-data): 
+	- [Generating artificial fragmentation graphs](#generating-artificial-fragmentation-graphs)
+	- [Testing hypotheses](#testing-hypotheses)
 - [**Assessing spatial unit boundaries using similarity relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
 - [**Characterising spatial units from their fragmentation**](#characterising-spatial-units-from-their-fragmentation)
  
