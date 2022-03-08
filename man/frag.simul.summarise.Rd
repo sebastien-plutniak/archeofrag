@@ -3,7 +3,8 @@
 
 \title{Summarise the comparison between an observed fragmentation graph and simulated graphs for two deposition hypotheses.}
 \description{Compare the parameters measured on simulated graphs generated for two deposition hypotheses with Wilcoxon tests, and the corresponding values measured on an empirical graph, and returns a summary data frame.}
-\usage{frag.simul.summarise(graph, layer.attr, res.h1, res.h2, cohesion1.attr="cohesion1", cohesion2.attr="cohesion2", admixture.attr="admixture")}
+\usage{frag.simul.summarise(graph, layer.attr, res.h1, res.h2, cohesion1.attr="cohesion1",
+                            cohesion2.attr="cohesion2", admixture.attr="admixture")}
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object. The graph to compare with simulated graphs.} 
