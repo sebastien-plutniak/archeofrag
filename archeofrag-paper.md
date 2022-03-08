@@ -44,7 +44,7 @@ These methods have relied on the comparison between the number of refits between
 However, it has been demonstrated that considering the number of refits without considering their topology can lead to misleading interpretations.
 A method, coined TSAR “Topological Study of Archaeological Refitting”, was developed to overcome this issue using  graph theory to model the topology of the relations between fragments (@Plutniak2021jas, @Plutniak2022bspf). 
 This renewed approach distinguishes between ambiguous cases (\autoref{fig:scheme}), and is much more robust and less sensitive to the lack of information than count-based methods, thus resulting in a more accurate evaluation of the reliability of the boundaries between spatial units.
-`Archeofrag` is an R package [@Rcoreteam2020] implementing the TSAR method.
+`Archeofrag` is an R package [@Rcoreteam2021] implementing the TSAR method [@Plutniak2022archeofrag].
 
 ![**Three examples (a-c) of two layers with internal refitting (n=6) and inter-layer refitting (n=2).** Although the numbers of relationships are equal in all examples, their archaeological interpretation are very different: relevant distinction between the two layers in (a); relevant distinction with higher confidence about the fragmented objects’ initial location in (b); doubtful distinction between layers in (c).\label{fig:scheme}](archeofrag-paper.png)
 
