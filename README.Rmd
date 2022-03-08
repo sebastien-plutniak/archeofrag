@@ -29,6 +29,15 @@ an R package for refitting and stratigraphic analysis in archeology
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4294066.svg)](https://doi.org/10.5281/zenodo.4294066)
 
 
+- [**Installation**](#installation)
+- [**Building fragmentation graphs**](#building-the-fragmentation-graph)
+- [**Edge weighting, cohesion and admixture computation**](#edge-weighting-cohesion-and-admixture-computation)
+- [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated data): 
+  - [Generating artificial fragmentation graphs](#generating-artificial-fragmentation-graphs)
+  - [Testing hypotheses](#testing-hypotheses)
+- [**Assessing spatial unit boundaries using similarity relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
+- [**Characterising spatial units from their fragmentation**](#characterising-spatial-units-from-their-fragmentation)
+ 
 
 # Installation
 The development version can be installed from GitHub with:
@@ -48,17 +57,6 @@ BiocManager::install("RBGL")
 ```
 
 For an interactive demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
-
-
-- [**Building fragmentation graphs**](#building-the-fragmentation-graph)
-- [**Edge weighting, cohesion and admixture computation**](#edge-weighting-cohesion-and-admixture-computation)
-- [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated data): 
-  - [Generating artificial fragmentation graphs](#generating-artificial-fragmentation-graphs)
-  - [Testing hypotheses](#testing-hypotheses)
-- [**Assessing spatial unit boundaries using similarity relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
-
-- [**Characterising spatial units from their fragmentation**](#characterising-spatial-units-from-their-fragmentation)
- 
 
 
 # Building the fragmentation graph
@@ -295,7 +293,7 @@ This shows, for example, that the empirical admixture value is slightly lower th
 par(mar=c(5, 4, 4, 2))
 ```
 
-```{r simulator-test2-edges, message=FALSE, fig.align="center", fig.width=4, fig.height=3}
+```{r simulator-test2-edges, message=FALSE, fig.align="center", fig.height=5}
 edges.res <- sapply(test2.results,
                     function(g) frag.get.parameters(g, "layer")$edges)
 plot(density(edges.res), main="Edges")
@@ -304,7 +302,7 @@ abline(v=params$edges, col="red")
 
 Similarly, the empirical admixture value is lower than the simulated admixture values:
 
-```{r simulator-test2-admix, message=FALSE, fig.align="center", fig.width=4, fig.height=3}
+```{r simulator-test2-admix, message=FALSE, fig.align="center", fig.height=5}
 admix.res <- sapply(test2.results,
                     function(g) frag.layers.admixture(g, "layer"))
 plot(density(admix.res), main="Admixture")
@@ -380,7 +378,7 @@ simil.dist <- as.dist(simil.dist)
 clust.res <- hclust(simil.dist, method="ward.D2")
 ```
 
-```{r similarity-dendr-fig, fig.width = 3, fig.height = 3, fig.align="center", fig.cap="Hierarchical clustering of the pottery layers in Liang Abu (distance: based on the number of similarity relationships; clustering method: Ward).", eval=T, message=F}
+```{r similarity-dendr-fig, fig.align="center", fig.height=5, fig.cap="Hierarchical clustering of the pottery layers in Liang Abu (distance: based on the number of similarity relationships; clustering method: Ward).", eval=T, message=F}
 clust.res$labels <- as.character(factor(clust.res$labels, 
                      levels=c("0", "1", "2"),
                      labels=c("layer 0", "layer 1", "layer 2")))
