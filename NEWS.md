@@ -1,4 +1,13 @@
 
+
+# archeofrag 0.8
+Released: 2022-03-08
+
+Third major release.
+
+* add license.
+* complete update of the vignette.
+
 # archeofrag 0.7.1
 Released: 2022-02-17
 
