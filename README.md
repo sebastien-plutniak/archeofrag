@@ -1,7 +1,7 @@
 
 
 # Archeofrag 
-an R package for refitting and stratigraphic analysis in archeology
+an R package for refitting and spatial analysis in archeology
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -10,14 +10,14 @@ an R package for refitting and stratigraphic analysis in archeology
 [![CRAN Version](http://www.r-pkg.org/badges/version/archeofrag)](https://cran.r-project.org/package=archeofrag)
 [![CRAN checks](https://cranchecks.info/badges/worst/archeofrag)](https://cran.r-project.org/web/checks/check_results_archeofrag.html)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/archeofrag)](https://cran.r-project.org/package=archeofrag)
-[![license](https://img.shields.io/badge/license-GPL%202-B50B82.svg)](https://www.r-project.org/Licenses/GPL-2)
+[![license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.r-project.org/Licenses/GPL-3)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4294066.svg)](https://doi.org/10.5281/zenodo.4294066)
 
 
 - [**Installation**](#installation)
 - [**Building fragmentation graphs**](#building-the-fragmentation-graph)
 - [**Edge weighting, cohesion and admixture computation**](#edge-weighting-cohesion-and-admixture-computation)
-- [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated-data): 
+- [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated-data)
 	- [Generating artificial fragmentation graphs](#generating-artificial-fragmentation-graphs)
 	- [Testing hypotheses](#testing-hypotheses)
 - [**Assessing spatial unit boundaries using similarity relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
