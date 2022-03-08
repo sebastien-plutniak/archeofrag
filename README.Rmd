@@ -21,7 +21,7 @@ an R package for refitting and spatial analysis in archeology
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
-[![Travis-CI Build Status](https://travis-ci.org/sebastien-plutniak/archeofrag.svg?branch=master)](https://travis-ci.org/sebastien-plutniak/archeofrag)
+[![Travis-CI Build Status](https://travis-ci.com/sebastien-plutniak/archeofrag.svg?branch=master)](https://travis-ci.com/sebastien-plutniak/archeofrag)
 [![CRAN Version](http://www.r-pkg.org/badges/version/archeofrag)](https://cran.r-project.org/package=archeofrag)
 [![CRAN checks](https://cranchecks.info/badges/worst/archeofrag)](https://cran.r-project.org/web/checks/check_results_archeofrag.html)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/archeofrag)](https://cran.r-project.org/package=archeofrag)
