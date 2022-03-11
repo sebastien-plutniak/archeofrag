@@ -1,3 +1,11 @@
+---
+output: github_document
+editor_options: 
+chunk_output_type: console
+---
+
+
+
 
 
 # Archeofrag 
@@ -14,6 +22,10 @@ an R package for refitting and spatial analysis in archeology
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4294066.svg)](https://doi.org/10.5281/zenodo.4294066)
 
 - [**Installation**](#installation)
+
+- [**Community guidelines**](#community-guidelines)
+  - [Reporting bugs](#reporting-bugs)
+  - [Suggesting changes](#suggesting-changes)
 - [**Building fragmentation graphs**](#building-the-fragmentation-graph)
 - [**Edge weighting, cohesion and admixture computation**](#edge-weighting-cohesion-and-admixture-computation)
 - [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated-data)
@@ -129,11 +141,11 @@ The `frag.get.layers.pair` function has additional parameters to set the minimum
 ```r
 frag.get.layers.pair(abu.g, layer.attr="layer", sel.layers=c("1", "2"),
                      size.mini=2, mixed.components.only=TRUE)
-#> IGRAPH 38f8210 UN-- 19 22 -- 
+#> IGRAPH dd872e8 UN-- 19 22 -- 
 #> + attr: frag_type (g/c), name (v/c), layer (v/c), zmin (v/n), zmax
 #> | (v/n), square (v/c), sherd.type (v/c), thickness (v/n), length (v/n),
 #> | membership (v/n), type_relation (e/c)
-#> + edges from 38f8210 (vertex names):
+#> + edges from dd872e8 (vertex names):
 #>  [1] 187--188 165--195 195--196 195--197 196--198 195--204 196--204 197--204
 #>  [9] 198--204 195--25  188--250 27 --28  27 --366 27 --367 28 --367 366--367
 #> [17] 27 --371 332--371 366--371 25 --8   28 --835 835--836
@@ -145,11 +157,11 @@ Additionally, the `frag.get.layers` function can  extract a set of specified spa
 ```r
 frag.get.layers(abu.g, layer.attr="layer", sel.layers="1")
 #> $`1`
-#> IGRAPH fbabfbf UN-- 23 18 -- 
+#> IGRAPH 0167b51 UN-- 23 18 -- 
 #> + attr: frag_type (g/c), name (v/c), layer (v/c), zmin (v/n), zmax
 #> | (v/n), square (v/c), sherd.type (v/c), thickness (v/n), length (v/n),
 #> | type_relation (e/c)
-#> + edges from fbabfbf (vertex names):
+#> + edges from 0167b51 (vertex names):
 #>  [1] 123--124  187--188  195--196  195--197  196--198  195--204  196--204 
 #>  [8] 197--204  198--204  195--25   301--302  313--314  392--408  435--441 
 #> [15] 477--478  25 --8    435--9999 441--9999
@@ -371,12 +383,12 @@ compare.res <- frag.simul.compare(abu.g12, layer.attr="layer",
                                   iter=30, summarise=FALSE)
 head(compare.res$h1.data)
 #>   edges weightsum   balance disturbance   admixture cohesion1 cohesion2
-#> 1    54  230.6982 0.2916667  0.09259259 0.024153166 0.1613814 0.8144654
-#> 2    54  226.6407 0.3611111  0.07407407 0.016336900 0.3343392 0.6493239
-#> 3    55  216.1251 0.3611111  0.12727273 0.051774593 0.3203684 0.6278570
-#> 4    56  244.6575 0.3055556  0.07142857 0.028070991 0.2790250 0.6929041
-#> 5    52  205.1168 0.3194444  0.05769231 0.009622899 0.3047193 0.6856578
-#> 6    53  211.1024 0.3055556  0.07547170 0.017233568 0.3316336 0.6511328
+#> 1    59  344.8793 0.3194444  0.06779661 0.011703301 0.1267001 0.8615966
+#> 2    50  187.0585 0.2916667  0.08000000 0.018833056 0.2100268 0.7711401
+#> 3    55  240.1008 0.3055556  0.14545455 0.057077728 0.1533132 0.7896091
+#> 4    55  268.7331 0.2916667  0.05454545 0.007826262 0.1982092 0.7939646
+#> 5    53  189.6573 0.3055556  0.11320755 0.042060269 0.4362644 0.5216753
+#> 6    56  271.7916 0.3611111  0.08928571 0.021266140 0.2205412 0.7581926
 ```
 
 For each of these parameters, the `frag.simul.summarise` function facilitates the comparison between empirical observed values and simulated values generated for H1 and H2.
@@ -388,11 +400,11 @@ frag.simul.summarise(abu.g12, layer.attr="layer",
                      compare.res$h1.data,
                      compare.res$h2.data)
 #>             H1 != H2? p.value Obs. value/H1 Obs. value/H2
-#> edges           FALSE    0.88         lower         lower
-#> weightsum       FALSE    0.67         lower         lower
-#> balance         FALSE    0.36        within        within
-#> disturbance      TRUE       0         lower         lower
-#> admixture        TRUE    0.01         lower        within
+#> edges           FALSE    0.12         lower        within
+#> weightsum        TRUE    0.02         lower        within
+#> balance         FALSE    0.23        within        within
+#> disturbance     FALSE     0.9         lower         lower
+#> admixture       FALSE    0.97         lower         lower
 #> cohesion1        TRUE       0        higher        within
 #> cohesion2        TRUE       0         lower        within
 ```
@@ -500,8 +512,8 @@ rbind(
   "unit1" = frag.cycles(simul.g1, kmax=5),
   "unit2" = frag.cycles(simul.g2, kmax=5))
 #>       3-cycles 4-cycles 5-cycles
-#> unit1        7        2        1
-#> unit2       17        7        2
+#> unit1       12       10        6
+#> unit2       15        4        1
 ```
 
  
@@ -512,11 +524,11 @@ If the `cumulative` parameter is set to `TRUE`, the function returns the cumulat
 
 ```r
 frag.path.lengths(simul.g1)
-#> [1] 29 11  1
+#> [1] 31 13  1
 frag.path.lengths(simul.g2)
-#> [1] 42 18  1
+#> [1] 42 18  2
 frag.path.lengths(simul.g2, cumulative=T)
-#> [1] 1.00000000 0.42857143 0.02380952
+#> [1] 1.00000000 0.42857143 0.04761905
 ```
 
 In a graph, the shortest path between two vertices is the path including the least number of edges. The diameter of a graph is its longest shortest path.
