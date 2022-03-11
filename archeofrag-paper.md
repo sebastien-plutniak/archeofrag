@@ -76,8 +76,18 @@ It comes with an example data set [@Plutniak2021aburefits] containing refitting 
 `Archeofrag` is intended to be used with two sources of data, namely the user’s empirical data and artificially generated data using its simulation function. User’s data must be split into different tables:
 
 * **Fragment table**: each line contains the unique identifier of a fragment, its spatial unit, and optionally additional information.
-* **Connection table**: an edge list with the identifiers of two connected fragments by line.
+* **Connection table**: an edge list with the identifiers of two connected fragments by line (e.g., \autoref{tab:record}).
 * **Similarity table** (optionally): each line includes the unique identifier of a fragment and the identifier of a set of similar fragments it belongs to.
+
+
+| id | fragment 1 | fragment 2 |
+|----|------------|------------|
+| 1  | A          | B          |
+| 2  | C          | D          |
+| 3  | D          | E          |
+| 4  | E          | C          |
+
+: Recording of connection relationships between fragments (illustrated by the examples given in  \autoref{fig:scheme}).\label{tab:record}
 
 The package includes functions to generate summary statistics about the fragmentation graph and extract specific sub-graphs (by layer, by component size, etc.).
 
@@ -98,19 +108,38 @@ Results for cohesion measurements range between [0;1], with values towards 0 for
 
 ## Spatial unit-related statistics: fragmentation patterns, technology, human behaviour
 The second aim of the TSAR method implemented in `Archeofrag` is to characterise spatial units based on the topological properties of the connection relationships between the fragments they contain.
- Several functions are provided for this purpose, selected for their relevance in the archaeological context, namely cycle count, path length, and component diameter (a component is related to an initial object).
+Several functions are provided for this purpose, selected for their relevance in the archaeological context, namely cycle count, path length, and component diameter (a component is related to an initial object).
 
 The archaeological interpretation of the numerical values depends on the type of object (lithic, pottery, etc.) and their completeness or incompleteness. These values can suggest specific behaviours related to the production or use of the objects (intentional breaking), and post-depositional processes (natural breaking, scattering). This aspect of the TSAR method will be further developed in the future.
  
 ## Simulation of fragmentation graphs
-The simulation function generates connected fragments scattered within one or two spatial units (see @Plutniak2021jas for details). It can be set with multiple parameters (number of initial objects/fragments, number of fragments, number of relationships, number of fragments and relationships, the balance between layers, etc.). It can also be constrained to generate only planar graphs since this corresponds to the fragmentation in some specific archaeological contexts (e.g., pottery with simple shapes, small sets of refits). However, the run time of this function is doubled when this constraint is used.
+The simulation function generates connected fragments scattered within one or two spatial units (see @Plutniak2021jas for details). It can be set with multiple parameters:
+
+* Number of initial objects or fragments.
+* Final number of fragments.
+* Final number of connection relationships.
+* Proportion of fragments in each spatial unit, before post-depositional processes.
+* Proportion of components in each spatial unit.
+* Proportion of fragments likely to move from a spatial unit to the other one.
+* Whether to only disturb the fragments from spatial unit 1 or spatial unit 2.
+* When applying fragmentation, increase the likelihood for objects with more fragments being selected.
+* Number of initial hypothetical spatial unit.
+* Whether generating only planar graphs.
+
+Generating only planar graphs is interesting since this corresponds to the fragmentation observed in some specific archaeological contexts (e.g., pottery with simple shapes, small sets of refits). However, the run time of this function is doubled when this constraint is used.
+
+# Resources and examples
+`Archeofrag` is available on [CRAN](https://cran.r-project.org/package=archeofrag) and the code of the development version is available on [Github](https://github.com/sebastien-plutniak/archeofrag/). 
+A [Vignette](https://cran.r-project.org/web/packages/archeofrag/vignettes/archeofrag-vignette.html) and a [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/) demonstrate the package.
+
+At the time of this submission, `Archeofrag` has been applied to two archaeological sites:
+
+* Liang Abu, Indonesia (@Plutniak2021jas, @PlutniakEtal2022jica)
+* Taï cave, France (@CaroEtal2022)
 
 
 # Acknowledgements
 I thank Luce Prignano, Claire Manen, Joséphine Caro, and Oliver Nakoinz for their valuable comments during the development of this package, which was finalised at the *Institut für Ur- und Frühgeschichte of Kiel*, with the support of a “Short-term research grant” from the *Deutscher Akademischer Austausch Dienst* (DAAD).
-
-# Resources
-`Archeofrag` is available on [CRAN](https://cran.r-project.org/package=archeofrag) and the code of the development version is available on  [Github](https://github.com/sebastien-plutniak/archeofrag/). A [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/)  demonstrates the package.
 
 
 # References

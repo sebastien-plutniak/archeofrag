@@ -57,6 +57,17 @@ BiocManager::install("RBGL")
 
 For an interactive demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
 
+# Community guidelines
+
+## Reporting bugs
+If you encounter a bug, please fill an [issue](https://github.com/sebastien-plutniak/archeofrag/issues) with all the details needed to reproduce it.
+
+## Suggesting changes
+Suggestions of changes to `Archeofrag` are very welcome.
+These requests may concern additional functions, changes to documentation, additional examples, new features, etc.
+They can be made by filling an [issue](https://github.com/sebastien-plutniak/archeofrag/issues) and, even better, using pull requests and the [GitHub Fork and Pull model](https://help.github.com/articles/about-pull-requests).
+
+ 
 
 # Building the fragmentation graph
 

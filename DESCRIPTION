@@ -7,7 +7,7 @@ Authors@R: person("Sebastien", "Plutniak", email = "sebastien.plutniak@posteo.ne
 Author: Sebastien Plutniak [aut, cre] (<https://orcid.org/0000-0002-6674-3806>)
 Maintainer: Sebastien Plutniak <sebastien.plutniak@posteo.net>
 Description: Methods to analyse fragmented objects in archaeology using refitting relationships between fragments scattered in archaeological spatial units (e.g. stratigraphic layers). Graphs and graph theory are used to model archaeological observations. The package is mainly based on the 'igraph' package for graph analysis. Functions can: 1) create, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archaeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.
-License: GPL-3 + file LICENSE
+License: GPL-3
 Repository: CRAN
 Encoding: UTF-8
 Depends: igraph, RBGL
