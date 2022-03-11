@@ -16,13 +16,19 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+- [**Installation**](#installation)
+- [**Building fragmentation graphs**](#building-the-fragmentation-graph)
+- [**Edge weighting, cohesion and admixture computation**](#edge-weighting-cohesion-and-admixture-computation)
+- [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated data): 
+  - [Generating artificial fragmentation graphs](#generating-artificial-fragmentation-graphs)
+  - [Testing hypotheses](#testing-hypotheses)
+- [**Assessing spatial unit boundaries using similarity relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
+- [**Characterising spatial units from their fragmentation**](#characterising-spatial-units-from-their-fragmentation)
  
-
-
 
 # Installation
 The development version can be installed from GitHub with:
-
 
 ```r
 # install.packages("devtools")
@@ -38,18 +44,6 @@ BiocManager::install("RBGL")
 ```
 
 For an interactive demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
-
-
-- [**Building fragmentation graphs**](#building-the-fragmentation-graph)
-- [**Edge weighting, cohesion and admixture computation**](#edge-weighting-cohesion-and-admixture-computation)
-- [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated data): 
-  - [Generating artificial fragmentation graphs](#generating-artificial-fragmentation-graphs)
-  - [Testing hypotheses](#testing-hypotheses)
-- [**Assessing spatial unit boundaries using similarity relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
-
-- [**Characterising spatial units from their fragmentation**](#characterising-spatial-units-from-their-fragmentation)
- 
-
 
 # Building the fragmentation graph
 
