@@ -1,12 +1,3 @@
----
-output: github_document
-editor_options: 
-chunk_output_type: console
----
-
-
-
-
 
 # Archeofrag 
 an R package for refitting and spatial analysis in archeology
@@ -22,7 +13,6 @@ an R package for refitting and spatial analysis in archeology
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4294066.svg)](https://doi.org/10.5281/zenodo.4294066)
 
 - [**Installation**](#installation)
-
 - [**Community guidelines**](#community-guidelines)
   - [Reporting bugs](#reporting-bugs)
   - [Suggesting changes](#suggesting-changes)
