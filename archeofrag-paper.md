@@ -33,7 +33,7 @@ Distinguishing between spatial entities is fundamental in archaeology since arch
 Refitting fragments belonged to the same object at some moment in the past. 
 More precisely, archaeologists deduce former connection relationships from the symmetry and the possibility of contact of significantly large surface areas from two fragments, which can be physically adjusted (the fragments “refit”).
 Here, “connection” is used as a shorthand to refer to the connection relationship that existed in the past between two areas of an object before they were broken into fragments.
-Archaeological refitting analysis has several aims: 
+Archaeological refitting analysis has several aims:  
 
 1. to reconstruct objects, 
 2. to determine technical sequences (e.g., stone tool manufacture), and 
