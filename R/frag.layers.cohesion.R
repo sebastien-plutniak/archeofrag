@@ -1,45 +1,42 @@
 .cohesion.for.two.layers <- function(g, layers){
-  v1 <- V(g)$layers == layers[1]
-  v2 <- V(g)$layers == layers[2]
+  v1 <- igraph::V(g)$layers == layers[1]
+  v2 <- igraph::V(g)$layers == layers[2]
   
   # extract three subgraphs:
-  g1 <-  subgraph.edges(g, E(g)[ V(g)[v1] %--% V(g)[v1] ])
-  g2 <-  subgraph.edges(g, E(g)[ V(g)[v2] %--% V(g)[v2] ])
-  g12 <- subgraph.edges(g, E(g)[ V(g)[v1] %--% V(g)[v2] ])
+  g1 <-  igraph::subgraph.edges(g, igraph::E(g)[ igraph::V(g)[v1] %--% igraph::V(g)[v1] ])
+  g2 <-  igraph::subgraph.edges(g, igraph::E(g)[ igraph::V(g)[v2] %--% igraph::V(g)[v2] ])
+  g12 <- igraph::subgraph.edges(g, igraph::E(g)[ igraph::V(g)[v1] %--% igraph::V(g)[v2] ])
   
   # compute the cohesion values:
-  res1 <-  sum(v1, E(g1)$weight) / sum(gorder(g), E(g)$weight)
-  res2 <-  sum(v2, E(g2)$weight) / sum(gorder(g), E(g)$weight)
+  res1 <-  sum(v1, igraph::E(g1)$weight) / sum(igraph::gorder(g), igraph::E(g)$weight)
+  res2 <-  sum(v2, igraph::E(g2)$weight) / sum(igraph::gorder(g), igraph::E(g)$weight)
   
-  # format and return the results:
+  # format and return results:
   c(res1, res2)
 }
 
 frag.layers.cohesion <- function(graph, layer.attr){
   # output : value [0;1].
-  if(! is.igraph(graph)) stop("Not a graph object")
-  if(is.null(vertex_attr(graph, layer.attr)))   stop("The parameter 'layer.attr' is required.")
-  if( ! is.character(layer.attr))  stop("The parameter 'layer.attr' requires a character value.")
-  if( ! layer.attr %in% names(vertex_attr(graph)) ){
-    stop(paste("No '", layer.attr, "' vertices attribute.", sep=""))
-  }
+  # tests:
+  .check.frag.graph(graph)
+  .check.layer.argument(graph, layer.attr)
   
   # delete singletons:
-  graph <- delete_vertices(graph, degree(graph) == 0)
+  graph <- igraph::delete_vertices(graph, degree(graph) == 0)
   
   # extract the user-defined layer attribute and reintegrate it as a vertices attribute named "layer":
-  layers <- vertex_attr(graph, name = layer.attr)
-  V(graph)$layers <- layers
+  layers <- igraph::vertex_attr(graph, name = layer.attr)
+  igraph::V(graph)$layers <- layers
   layers <- sort(unique(layers))
   # Conditionnal tests in function of the number of layers:
   if(length(layers) < 2){
     warning("At least two different layers are required.")
     return(c(NA, NA))
   }
-  pairs <- combn(layers, 2) 
+  pairs <- utils::combn(layers, 2) 
   
   if(length(layers) == 2){
-    if(is.null(E(graph)$weight)) stop("The edges must be weighted (using the 'frag.edges.weighting' function).")
+    if(is.null(igraph::E(graph)$weight)) stop("The edges must be weighted (using the 'frag.edges.weighting' function).")
     results <- .cohesion.for.two.layers(graph, layers)
     results <- matrix(results)
   } else{ # if length(layers) > 2
@@ -47,7 +44,7 @@ frag.layers.cohesion <- function(graph, layer.attr){
     results <- sapply(1:ncol(pairs), function(x){
       gsub <- frag.get.layers.pair(graph, layer.attr, c(pairs[1, x], pairs[2, x]))
       gsub <- frag.edges.weighting(gsub, layer.attr)
-      .cohesion.for.two.layers(gsub, unique(V(gsub)$layers))
+      .cohesion.for.two.layers(gsub, unique(igraph::V(gsub)$layers))
     })
   }
   rownames(results) <- c("cohesion1", "cohesion2")

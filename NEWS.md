@@ -1,4 +1,11 @@
 
+# archeofrag 0.8.1
+Released: 2022-07-13
+
+* all functions from other packages are tagged with their package.
+* the RBGL is moved to the 'suggested' packages list, the functionalities related to planarity are now optional.
+* igraph functions' names are updated.
+* creation of a utils.R file, including internal functions to check the fragmentation graph and their "layer" argument.
 
 # archeofrag 0.8
 Released: 2022-03-08

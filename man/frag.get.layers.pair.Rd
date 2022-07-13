@@ -28,7 +28,7 @@ An undirected graph object.
 
 \examples{
 g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)
-V(g)$layers <- c(rep("layer1", 20), rep("layer2", 20), rep("layer3", 10))
+igraph::V(g)$layers <- c(rep("layer1", 20), rep("layer2", 20), rep("layer3", 10))
 
 frag.get.layers.pair(g, "layers", sel.layers=c("layer2","layer3"),
                      size.mini=2, mixed.components.only=FALSE)

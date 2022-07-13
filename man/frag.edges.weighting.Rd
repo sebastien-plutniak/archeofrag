@@ -56,6 +56,7 @@ The graph, with an additional "weight" edge attribute and, if the distance has b
 g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)
 frag.edges.weighting(g , "layer")
 # with morphometric and spatial parameters:
+library(igraph)
 V(g)$morpho <- sample(1:20, 50, replace=TRUE)
 V(g)$x <- sample(1:100, 50, replace=TRUE)
 V(g)$y <- sample(1:100, 50, replace=TRUE)

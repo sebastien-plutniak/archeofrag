@@ -1,6 +1,17 @@
+---
+output: github_document
+editor_options: 
+chunk_output_type: console
+---
+
+
+
+
 
 # Archeofrag 
-an R package for refitting and spatial analysis in archeology
+An R package for refitting and spatial analysis in archeology.
+Archeofrag includes methods to analyse fragmented objects in archaeology using refitting relationships between fragments scattered in archaeological spatial units (e.g. stratigraphic layers). Graphs and graph theory are used to model archaeological observations. The package is mainly based on the 'igraph' package for graph analysis. Functions can: 1) create, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archaeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.
+
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -27,15 +38,20 @@ an R package for refitting and spatial analysis in archeology
  
 
 # Installation
-The development version can be installed from GitHub with:
+The package can be installed from CRAN with:
 
+```r
+install.packages("archeofrag")
+```
+
+The development version is available on GitHub and can be installed with:
 
 ```r
 # install.packages("devtools")
 devtools::install_github("sebastien-plutniak/archeofrag")
 ```
 
-Note that *Archeofrag* requires the *RBGL* package available through *Bioconductor*:
+Some optional functionalities of *Archeofrag* requires the *RBGL* package available through *Bioconductor*:
 
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -132,11 +148,11 @@ The `frag.get.layers.pair` function has additional parameters to set the minimum
 ```r
 frag.get.layers.pair(abu.g, layer.attr="layer", sel.layers=c("1", "2"),
                      size.mini=2, mixed.components.only=TRUE)
-#> IGRAPH dd872e8 UN-- 19 22 -- 
+#> IGRAPH 1082003 UN-- 19 22 -- 
 #> + attr: frag_type (g/c), name (v/c), layer (v/c), zmin (v/n), zmax
 #> | (v/n), square (v/c), sherd.type (v/c), thickness (v/n), length (v/n),
 #> | membership (v/n), type_relation (e/c)
-#> + edges from dd872e8 (vertex names):
+#> + edges from 1082003 (vertex names):
 #>  [1] 187--188 165--195 195--196 195--197 196--198 195--204 196--204 197--204
 #>  [9] 198--204 195--25  188--250 27 --28  27 --366 27 --367 28 --367 366--367
 #> [17] 27 --371 332--371 366--371 25 --8   28 --835 835--836
@@ -148,11 +164,11 @@ Additionally, the `frag.get.layers` function can  extract a set of specified spa
 ```r
 frag.get.layers(abu.g, layer.attr="layer", sel.layers="1")
 #> $`1`
-#> IGRAPH 0167b51 UN-- 23 18 -- 
+#> IGRAPH 0cc84c3 UN-- 23 18 -- 
 #> + attr: frag_type (g/c), name (v/c), layer (v/c), zmin (v/n), zmax
 #> | (v/n), square (v/c), sherd.type (v/c), thickness (v/n), length (v/n),
 #> | type_relation (e/c)
-#> + edges from 0167b51 (vertex names):
+#> + edges from 0cc84c3 (vertex names):
 #>  [1] 123--124  187--188  195--196  195--197  196--198  195--204  196--204 
 #>  [8] 197--204  198--204  195--25   301--302  313--314  392--408  435--441 
 #> [15] 477--478  25 --8    435--9999 441--9999
@@ -256,7 +272,7 @@ The `aggreg.factor` parameter affects the distribution of the sizes of the compo
 
 By default, fragments from two spatial units can be disturbed and moved to another other spatial unit. However, the `asymmetric.transport.from` can be used to move fragments from only one given spatial unit.
 
-Finally, the `planar` argument determines if the generated graph has to be planar or not (a graph is planar when it can be drawn on a plane, without edges crossing).
+Finally, the `planar` argument determines if the generated graph has to be planar or not (a graph is planar when it can be drawn on a plane, without edges crossing). Note that the use of this argument requires the RBGL package to be installed.
 
 An example of a complete configuration of the function is:
 
@@ -270,7 +286,7 @@ frag.simul.process(initial.layers=1,
                    components.balance=.4,
                    disturbance=.1,
                    aggreg.factor=0,
-                   planar=T,
+                   planar=TRUE,
                    asymmetric.transport.from="1")
 ```
 
@@ -295,6 +311,30 @@ Setting the  simulator is made easier by using the  `frag.get.parameters` functi
 
 ```r
 params <- frag.get.parameters(abu.g12, layer.attr="layer")
+params
+#> $n.components
+#> [1] 28
+#> 
+#> $vertices
+#> [1] 72
+#> 
+#> $edges
+#> [1] 52
+#> 
+#> $balance
+#> [1] 0.32
+#> 
+#> $components.balance
+#> [1] 0.29
+#> 
+#> $disturbance
+#> [1] 0.04
+#> 
+#> $aggreg.factor
+#> [1] 0.7
+#> 
+#> $planar
+#> [1] FALSE
 ```
 
 
@@ -373,13 +413,13 @@ The `frag.simul.compare` function takes an observed fragmentation graph, generat
 compare.res <- frag.simul.compare(abu.g12, layer.attr="layer",
                                   iter=30, summarise=FALSE)
 head(compare.res$h1.data)
-#>   edges weightsum   balance disturbance   admixture cohesion1 cohesion2
-#> 1    59  344.8793 0.3194444  0.06779661 0.011703301 0.1267001 0.8615966
-#> 2    50  187.0585 0.2916667  0.08000000 0.018833056 0.2100268 0.7711401
-#> 3    55  240.1008 0.3055556  0.14545455 0.057077728 0.1533132 0.7896091
-#> 4    55  268.7331 0.2916667  0.05454545 0.007826262 0.1982092 0.7939646
-#> 5    53  189.6573 0.3055556  0.11320755 0.042060269 0.4362644 0.5216753
-#> 6    56  271.7916 0.3611111  0.08928571 0.021266140 0.2205412 0.7581926
+#>   edges weightsum   balance disturbance  admixture cohesion1 cohesion2
+#> 1    51  173.6126 0.2777778  0.07843137 0.01986406 0.1340509 0.8460851
+#> 2    50  101.8502 0.4444444  0.20000000 0.13116497 0.4130365 0.4557985
+#> 3    50  118.9266 0.1388889  0.14000000 0.05598172 0.1547508 0.7892674
+#> 4    54  176.4861 0.4166667  0.11111111 0.04074675 0.4814336 0.4778196
+#> 5    53  131.0783 0.3472222  0.15094340 0.07717442 0.2598889 0.6629367
+#> 6    51  133.0984 0.3750000  0.11764706 0.04936655 0.2913429 0.6592906
 ```
 
 For each of these parameters, the `frag.simul.summarise` function facilitates the comparison between empirical observed values and simulated values generated for H1 and H2.
@@ -391,13 +431,13 @@ frag.simul.summarise(abu.g12, layer.attr="layer",
                      compare.res$h1.data,
                      compare.res$h2.data)
 #>             H1 != H2? p.value Obs. value/H1 Obs. value/H2
-#> edges           FALSE    0.12         lower        within
-#> weightsum        TRUE    0.02         lower        within
-#> balance         FALSE    0.23        within        within
-#> disturbance     FALSE     0.9         lower         lower
-#> admixture       FALSE    0.97         lower         lower
-#> cohesion1        TRUE       0        higher        within
-#> cohesion2        TRUE       0         lower        within
+#> edges           FALSE    0.67        within        within
+#> weightsum       FALSE    0.11        higher        higher
+#> balance          TRUE       0         lower         lower
+#> disturbance      TRUE       0         lower         lower
+#> admixture        TRUE       0         lower         lower
+#> cohesion1        TRUE       0        higher        higher
+#> cohesion2       FALSE    0.06         lower         lower
 ```
 
 This function returns a data frame with four columns, containing, for each parameter studied:
@@ -503,8 +543,8 @@ rbind(
   "unit1" = frag.cycles(simul.g1, kmax=5),
   "unit2" = frag.cycles(simul.g2, kmax=5))
 #>       3-cycles 4-cycles 5-cycles
-#> unit1       12       10        6
-#> unit2       15        4        1
+#> unit1        0        0        2
+#> unit2        0        1        0
 ```
 
  
@@ -515,11 +555,12 @@ If the `cumulative` parameter is set to `TRUE`, the function returns the cumulat
 
 ```r
 frag.path.lengths(simul.g1)
-#> [1] 31 13  1
+#> [1] 29 50 52 53 30  9
 frag.path.lengths(simul.g2)
-#> [1] 42 18  2
+#> [1]  39  71 102  83  62  32  17   5   1
 frag.path.lengths(simul.g2, cumulative=T)
-#> [1] 1.00000000 0.42857143 0.04761905
+#> [1] 0.382352941 0.696078431 1.000000000 0.813725490 0.607843137 0.313725490
+#> [7] 0.166666667 0.049019608 0.009803922
 ```
 
 In a graph, the shortest path between two vertices is the path including the least number of edges. The diameter of a graph is its longest shortest path.
@@ -528,11 +569,11 @@ The `frag.diameters` function calculates the diameter of each component of the g
 
 ```r
 frag.diameters(simul.g1)
-#> 1 2 3 
-#> 5 4 1
+#> 1 2 3 4 5 6 
+#> 3 0 1 0 0 1
 frag.diameters(simul.g2)
-#> 1 2 3 
-#> 4 5 1
+#> 1 2 3 4 5 6 7 8 9 
+#> 3 1 0 0 0 0 0 0 1
 ```
 
 

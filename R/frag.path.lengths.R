@@ -1,8 +1,10 @@
 frag.path.lengths <- function(graph, cumulative=FALSE){
-  if(! is.igraph(graph)) stop("Not a graph object")
+  # tests:
+  .check.frag.graph(graph)
+  # main function:  
   if(! is.logical(cumulative)) stop("The 'cumulative' parameter requires a logical value.")
   
-  path.vector <- distance_table(graph, directed = FALSE)$res
+  path.vector <- igraph::distance_table(graph, directed = FALSE)$res
   
   if(cumulative){
     path.vector <- path.vector / max(path.vector)

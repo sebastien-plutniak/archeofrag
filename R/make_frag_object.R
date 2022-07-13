@@ -18,24 +18,24 @@ setGeneric(
 
 make_frag_set_validation <- function(object)
 {
-  if( ncol(object@cr.df) == 1 & ncol(object@sr.df) == 1 ){
+  if( ncol(object@df.cr) == 1 & ncol(object@df.sr) == 1 ){
     stop("At least one of the 'cr' and 'sr' arguments is required.")
   }
   
   if(  object@frag_type %in% c("sr", "crsr")) {
-    if( ! ncol(object@sr.df) > 1){
+    if( ! ncol(object@df.sr) > 1){
       stop("The data frame for the 'sr' argument must have at least two columns.")
     }
-    if( sum( ! object@sr.df[,1] %in% object@fragments.df[, 1]) != 0){
+    if( sum( ! object@df.sr[,1] %in% object@fragments.df[, 1]) != 0){
       stop("Some objects in 'sr' are not documented in the 'fragments' data frame.")
     }
   }  
 
   if( object@frag_type %in% c("cr", "crsr") ) {
-    if( ! ncol(object@cr.df) > 1){
+    if( ! ncol(object@df.cr) > 1){
       stop("The data frame for the 'cr' argument must have at least two columns.")
     }
-    if( sum( ! c(object@cr.df[,1], object@cr.df[,2]) %in% object@fragments.df[, 1]) != 0){
+    if( sum( ! c(object@df.cr[,1], object@df.cr[,2]) %in% object@fragments.df[, 1]) != 0){
       stop("Some objects in 'cr' are not documented in the 'fragments' data frame.")
     }
   } 
@@ -49,8 +49,8 @@ make_frag_set_validation <- function(object)
 setClass(
   Class="Frag.object", 
   representation=representation(
-    cr.df="matrix",
-    sr.df="matrix",
+    df.cr="matrix",
+    df.sr="matrix",
     fragments.df="data.frame",
     frag_type="character"
   ),
@@ -66,9 +66,9 @@ setMethod(
       "------ Frag.object ------",
       "\n*   Frag_type = ", object@frag_type,
       "\n*   N fragments = ",
-      length(unique( na.omit(c(object@cr.df[,1],
-                               object@cr.df[,2],
-                               object@sr.df[,1]))) ),
+      length(unique( stats::na.omit(c(object@df.cr[,1],
+                                      object@df.cr[,2],
+                                      object@df.sr[,1]))) ),
       "\n-------------------------",
       sep=""))
   }
@@ -82,10 +82,12 @@ setMethod(
     if( object@frag_type == "sr" ){
       stop("No available data for the connection relationships.")
     }
-    cr.net <- graph_from_data_frame(object@cr.df, directed=FALSE, vertices=object@fragments.df)
-    cr.net <- delete_vertices(cr.net, degree(cr.net, mode="total") == 0)
-    E(cr.net)$type_relation <- "cr"
-    cr.net <- set_graph_attr(cr.net, "frag_type", "connection relations")
+    cr.net <- igraph::graph_from_data_frame(object@df.cr, directed=FALSE,
+                                            vertices=object@fragments.df)
+    cr.net <- igraph::delete_vertices(cr.net, 
+                                      igraph::degree(cr.net, mode="total") == 0)
+    igraph::E(cr.net)$type_relation <- "cr"
+    cr.net <- igraph::set_graph_attr(cr.net, "frag_type", "connection relations")
     return(cr.net)
   }
 )
@@ -99,24 +101,26 @@ setMethod(
       stop("No available data for the similarity relationships.")
     }
     #  'similarity units' ids are recoded to avoid confusion with the fragments ids:
-    object@sr.df[,2] <- as.character(factor(
-      object@sr.df[,2], labels=paste("su", c(1:(0 + length(unique((object@sr.df[,2]))) )))
+    object@df.sr[,2] <- as.character(factor(
+      object@df.sr[,2], labels=paste("su", c(1:(0 + length(unique((object@df.sr[,2]))) )))
     ) )
-    vertices.list <- unique( c(object@sr.df[, 1], object@sr.df[, 2]) ) 
-    sr.net <- simplify(graph_from_data_frame(object@sr.df[, 1:2], directed=TRUE, vertices=vertices.list ))
-    sr.net <- graph_from_adjacency_matrix(bibcoupling(sr.net), diag=FALSE, mode="undirected" )
-    sr.net <- delete_vertices(sr.net, degree(sr.net, mode="total") == 0)
+    vertices.list <- unique( c(object@df.sr[, 1], object@df.sr[, 2]) ) 
+    sr.net <- igraph::simplify(igraph::graph_from_data_frame(object@df.sr[, 1:2], 
+                                                 directed=TRUE, vertices=vertices.list ))
+    sr.net <- igraph::graph_from_adjacency_matrix(igraph::bibcoupling(sr.net),
+                                                  diag=FALSE, mode="undirected" )
+    sr.net <- igraph::delete_vertices(sr.net, igraph::degree(sr.net, mode="total") == 0)
     # vertices attributes:
     fragments.df <- object@fragments.df
     names(fragments.df)[1] <- "name"
     
-    attributes <- merge(                 #retrieve the  graph attributes
-      cbind(name = V(sr.net)$name),
+    attributes <- merge(       #retrieve the  graph attributes
+      cbind("name" = igraph::V(sr.net)$name),
       cbind(fragments.df),
       by="name", sort=FALSE)
-    vertex_attr(sr.net) <- lapply(attributes, as.character) #add vertex attributes
+    igraph::vertex_attr(sr.net) <- lapply(attributes, as.character) #add vertex attributes
     # edge attribute:
-    E(sr.net)$type_relation <- "sr"
+    igraph::E(sr.net)$type_relation <- "sr"
     return(sr.net)
   }
 )
@@ -132,13 +136,14 @@ setMethod(
     cr.net <- make_cr_graph(object)
     sr.net <- make_sr_graph(object)
     
-    crsr.net <- cr.net %u% sr.net
-    crsr.list <- decompose(crsr.net) # get one graph for each component
+    crsr.net <- igraph::union(cr.net, sr.net)
+    crsr.list <- igraph::decompose(crsr.net) # get one graph for each component
     # union of each graph (ie: connection graph) with its complement graph (ie: similarity graph)
     crsr.list <- lapply(crsr.list,
-                            function(x) x %u% complementer(x) )
+                            function(x) igraph::union(x, igraph::complementer(x)) )
     crsr.list <- lapply(crsr.list,
-                            function(x){ set_vertex_attr(x, "name_save", V(x),  V(x)$name )} )
+                            function(x){ igraph::set_vertex_attr(x, "name_save", 
+                                                         igraph::V(x),  igraph::V(x)$name )} )
     # merge all the graphs in the list:
     crsr.net <- Reduce("union", crsr.list)
     
@@ -147,30 +152,30 @@ setMethod(
     fragments.df <- object@fragments.df
     names(fragments.df)[1] <- "name"
     attributes <- merge(                 # retrieve the crsr.net graph attributes
-      cbind(name = V(crsr.net)$name),
+      cbind("name" = igraph::V(crsr.net)$name),
       cbind(fragments.df),
       by="name", sort=FALSE)
-    vertex_attr(crsr.net) <- lapply(attributes, as.character) #add vertex attributes
+    igraph::vertex_attr(crsr.net) <- lapply(attributes, as.character) #add vertex attributes
     
     # 2. edge attributes ####
-    edge.attributes(crsr.net) <- list()  # removing all edges attributes
+    igraph::edge_attr(crsr.net) <- list()  # removing all edges attributes
     # we compare the edges in cr.net and crsr.net and only keep the "connection" edges
     # we got a list of the crsr.net edges also present in cr.net
     rename.edges <- function(edge.list){
       chain <- paste(edge.list[[1]], edge.list[[2]], sep="-")
       return(chain)
     }
-    crsr.net.edgelist <- as_edgelist(crsr.net)
+    crsr.net.edgelist <- igraph::as_edgelist(crsr.net)
     crsr.net.edgelist <- apply(crsr.net.edgelist, 1, rename.edges)
-    cr.net.edgelist <- as_edgelist(cr.net)
+    cr.net.edgelist <- igraph::as_edgelist(cr.net)
     cr.net.edgelist <- apply(cr.net.edgelist, 1, rename.edges)
     
     # setting the "type_relation" edge attribute to "cr"
-    E(crsr.net)$type_relation <- NA
-    E(crsr.net)[ which(crsr.net.edgelist %in% cr.net.edgelist) ]$type_relation <- "cr"
-    E(crsr.net)[ is.na( E(crsr.net)$type_relation ) ]$type_relation <- "sr"
-    graph_attr(crsr.net) <- list()
-    crsr.net <- set_graph_attr(crsr.net, "frag_type", "connection and similarity relations")
+    igraph::E(crsr.net)$type_relation <- NA
+    igraph::E(crsr.net)[ which(crsr.net.edgelist %in% cr.net.edgelist) ]$type_relation <- "cr"
+    igraph::E(crsr.net)[ is.na( igraph::E(crsr.net)$type_relation ) ]$type_relation <- "sr"
+    igraph::graph_attr(crsr.net) <- list()
+    crsr.net <- igraph::set_graph_attr(crsr.net, "frag_type", "connection and similarity relations")
     
     return(crsr.net) 
   }
@@ -198,6 +203,6 @@ make_frag_object <- function(cr, sr, fragments)
     frag_type <- "sr"
   }   
   
-  new(Class="Frag.object", cr.df=cr, sr.df=sr, fragments.df=fragments, frag_type=frag_type)
+  new(Class="Frag.object", df.cr=cr, df.sr=sr, fragments.df=fragments, frag_type=frag_type)
 }
 

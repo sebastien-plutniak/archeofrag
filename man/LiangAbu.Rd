@@ -14,18 +14,18 @@
         \item A similarity relationship between fragments is defined if there is an acceptable likelihood that those fragments were part of the same object.
     }
     
-    The dataset is composed of three tables, \code{cr.df}, \code{sr.df}, \code{fragments.info}.
+    The dataset is composed of three tables, \code{df.cr}, \code{df.sr}, \code{fragments.info}.
     \itemize{
-        \item\code{cr.df}: "connection" relationships between fragments.
-        \item\code{sr.df}: "similarity" relationships between fragments.
+        \item\code{df.cr}: "connection" relationships between fragments.
+        \item\code{df.sr}: "similarity" relationships between fragments.
         \item\code{fragments.info}: contextual information concerning each fragment.
     }
 }
 \usage{data(LiangAbu)}
 \format{
     \itemize{
-        \item\code{cr.df} is a 56x2 matrix. Each line describes a connection relationship between two fragments. There respective unique identifiers are given in column "frg_id1" and in column "frg_id2". 
-        \item\code{sr.df} is a 147x2 matrix. Column "frg_id" gives a fragment unique identifier, column "su_id" gives a unique identifier for the group of similar fragments it belongs to (similarity unit).
+        \item\code{df.cr} is a 56x2 matrix. Each line describes a connection relationship between two fragments. There respective unique identifiers are given in column "frg_id1" and in column "frg_id2". 
+        \item\code{df.sr} is a 147x2 matrix. Column "frg_id" gives a fragment unique identifier, column "su_id" gives a unique identifier for the group of similar fragments it belongs to (similarity unit).
         \item\code{fragments.info} is 177x8 data frame:
         \itemize{
             \item frg_id: unique fragment identifier 

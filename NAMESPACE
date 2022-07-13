@@ -18,11 +18,52 @@ export(make_sr_graph)
 export(make_crsr_graph)
 export(make_frag_object)
 exportClasses(Frag.object)
-import(igraph)
-importFrom(grDevices, rainbow, rgb)
+importFrom(grDevices, rgb)
 importFrom(graphics, plot, hist)
 importFrom(methods, new)
 importFrom(utils, combn)
-importFrom(stats, na.omit, sd)
-importFrom(stats, wilcox.test)
-importFrom(RBGL, boyerMyrvoldPlanarityTest)
+importFrom(stats, na.omit, sd, wilcox.test)
+importFrom(igraph, 
+	add_edges, 
+	add_layout_, 
+	add_vertices, 
+	as_edgelist, 
+	as_graphnel, 
+	bibcoupling, 
+	components, 
+	component_wise, 
+	complementer,
+	"%--%",
+	decompose, 
+	degree, 
+	delete_vertex_attr, 
+	delete_vertices, 
+	diameter, 
+	distance_table, 
+	E, 
+	edge_attr, 
+	ego,
+	gorder, 
+	graph_attr, 
+	graph_from_adjacency_matrix, 
+	graph_from_data_frame, 
+	gsize, 
+	induced_subgraph, 
+	is_igraph, 
+	is_directed,
+	layout_with_fr, 
+	make_ring, 
+	make_graph,
+	plot.igraph, 
+	set_graph_attr, 
+	set_vertex_attr, 
+	simplify, 
+	subgraph.edges, 
+	subgraph_isomorphisms, 
+	transitivity, 
+	union,
+	V, 
+	vertex_attr, 
+	vertex_attr_names, 
+	with_fr) 
+

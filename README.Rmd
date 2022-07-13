@@ -16,7 +16,9 @@ knitr::opts_chunk$set(
 ```
 
 # Archeofrag 
-an R package for refitting and spatial analysis in archeology
+An R package for refitting and spatial analysis in archeology.
+Archeofrag includes methods to analyse fragmented objects in archaeology using refitting relationships between fragments scattered in archaeological spatial units (e.g. stratigraphic layers). Graphs and graph theory are used to model archaeological observations. The package is mainly based on the 'igraph' package for graph analysis. Functions can: 1) create, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archaeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.
+
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -43,15 +45,20 @@ an R package for refitting and spatial analysis in archeology
  
 
 # Installation
-The development version can be installed from GitHub with:
+The package can be installed from CRAN with:
 
+```r
+install.packages("archeofrag")
+```
+
+The development version is available on GitHub and can be installed with:
 
 ```r
 # install.packages("devtools")
 devtools::install_github("sebastien-plutniak/archeofrag")
 ```
 
-Note that *Archeofrag* requires the *RBGL* package available through *Bioconductor*:
+Some optional functionalities of *Archeofrag* requires the *RBGL* package available through *Bioconductor*:
 
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -225,7 +232,7 @@ The `aggreg.factor` parameter affects the distribution of the sizes of the compo
 
 By default, fragments from two spatial units can be disturbed and moved to another other spatial unit. However, the `asymmetric.transport.from` can be used to move fragments from only one given spatial unit.
 
-Finally, the `planar` argument determines if the generated graph has to be planar or not (a graph is planar when it can be drawn on a plane, without edges crossing).
+Finally, the `planar` argument determines if the generated graph has to be planar or not (a graph is planar when it can be drawn on a plane, without edges crossing). Note that the use of this argument requires the RBGL package to be installed.
 
 An example of a complete configuration of the function is:
 
@@ -238,7 +245,7 @@ frag.simul.process(initial.layers=1,
                    components.balance=.4,
                    disturbance=.1,
                    aggreg.factor=0,
-                   planar=T,
+                   planar=TRUE,
                    asymmetric.transport.from="1")
 ```
 
@@ -261,6 +268,7 @@ Setting the  simulator is made easier by using the  `frag.get.parameters` functi
 
 ```{r params}
 params <- frag.get.parameters(abu.g12, layer.attr="layer")
+params
 ```
 
 ```{r simulator-test}

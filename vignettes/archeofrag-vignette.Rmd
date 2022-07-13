@@ -197,7 +197,7 @@ The `aggreg.factor` parameter affects the distribution of the sizes of the compo
 
 By default, fragments from two spatial units can be disturbed and moved to another other spatial unit. However, the `asymmetric.transport.from` can be used to move fragments from only one given spatial unit.
 
-Finally, the `planar` argument determines if the generated graph has to be planar or not (a graph is planar when it can be drawn on a plane, without edges crossing).
+Finally, the `planar` argument determines if the generated graph has to be planar or not (a graph is planar when it can be drawn on a plane, without edges crossing). This function requires to install the optional `RBGL` package.
 
 An example of a complete configuration of the function is:
 
@@ -210,7 +210,7 @@ frag.simul.process(initial.layers=1,
                    components.balance=.4,
                    disturbance=.1,
                    aggreg.factor=0,
-                   planar=T,
+                   planar=FALSE,
                    asymmetric.transport.from="1")
 ```
 
@@ -233,6 +233,7 @@ Setting the  simulator is made easier by using the  `frag.get.parameters` functi
 
 ```{r params}
 params <- frag.get.parameters(abu.g12, layer.attr="layer")
+params
 ```
 
 ```{r simulator-test}
@@ -282,7 +283,7 @@ par(mar=c(5, 4, 4, 2))
 ```{r simulator-test2-edges, message=FALSE, fig.align="center", fig.width=4, fig.height=3}
 edges.res <- sapply(test2.results,
                     function(g) frag.get.parameters(g, "layer")$edges)
-plot(density(edges.res), main="Edges")
+plot(stats::density(edges.res), main="Edges")
 abline(v=params$edges, col="red")
 ```
 
@@ -291,12 +292,12 @@ Similarly, the empirical admixture value is lower than the simulated admixture v
 ```{r simulator-test2-admix, message=FALSE, fig.align="center", fig.width=4, fig.height=3}
 admix.res <- sapply(test2.results,
                     function(g) frag.layers.admixture(g, "layer"))
-plot(density(admix.res), main="Admixture")
+plot(stats::density(admix.res), main="Admixture")
 abline(v=frag.layers.admixture(abu.g12, "layer"), col="red")
 ```
  
 Two functions (`frag.simul.compare` and `frag.simul.summarise`) facilitate the  execution of the analytical process described above on the initial number of spatial units.
-The `frag.simul.compare` function takes an observed fragmentation graph, generates two series of simulated graphs corresponding to two hypotheses on the number of initial spatial units (H1 for 1 initial spatial unit and H2 for two initial spatial units), and returns a data frame of measurements made on each series (including the edge count, weights sum, balance value, disturbance value, admixture value, and cohesion values of the two spatial units).
+The `frag.simul.compare` function takes an observed fragmentation graph, generates two series of simulated graphs corresponding to two hypotheses on the number of initial spatial units (H1 for one initial spatial unit and H2 for two initial spatial units), and returns a data frame of measurements made on each series (including the edge count, weights sum, balance value, disturbance value, admixture value, and cohesion values of the two spatial units).
 
 
 ```{r simul-compare, message=FALSE}
@@ -304,6 +305,7 @@ compare.res <- frag.simul.compare(abu.g12, layer.attr="layer",
                                   iter=30, summarise=FALSE)
 head(compare.res$h1.data)
 ```
+
 
 For each of these parameters, the `frag.simul.summarise` function facilitates the comparison between empirical observed values and simulated values generated for H1 and H2.
 
@@ -315,7 +317,7 @@ frag.simul.summarise(abu.g12, layer.attr="layer",
 ```
 
 This function returns a data frame with four columns, containing, for each parameter studied:
-
+  
 1. whether the series of H1 values are statistically different to the H2 series (Boolean), 
 2. the p-value of the Wilcoxon test (numerical), 
 3. whether the observed value is "within", "higher", or "lower" to the interquartile range of values for H1, 
@@ -339,7 +341,7 @@ abu.sr <- make_sr_graph(abu.frag)
 ```
 
 The `frag.relations.by.layers` function returns a table with the number of similarity relationships in and between spatial units, e.g., in the top three layers at Liang Abu:
-
+  
 ```{r count-similarity}
 # count of similarity relationships in and between layers:
 simil.by.layers.df <- frag.relations.by.layers(abu.sr, "layer")
@@ -347,7 +349,7 @@ simil.by.layers.df
 ```
 
 These values can be observed as percentages:
-
+  
 ```{r similarity-perc-tab}
 # percentage of similarity relationships in and between layers:
 round(simil.by.layers.df / sum(simil.by.layers.df, na.rm=T) * 100, 0)
@@ -361,13 +363,13 @@ The expected result is observed for Liang Abu surface and the first two layers, 
 simil.dist <- max(c(simil.by.layers.df), na.rm=T) - simil.by.layers.df
 simil.dist <- as.dist(simil.dist)
 # hierarchical clustering:
-clust.res <- hclust(simil.dist, method="ward.D2")
+clust.res <- stats::hclust(simil.dist, method="ward.D2")
 ```
 
 ```{r similarity-dendr-fig, fig.width = 3, fig.height = 3, fig.align="center", fig.cap="Hierarchical clustering of the pottery layers in Liang Abu (distance: based on the number of similarity relationships; clustering method: Ward).", eval=T, message=F}
 clust.res$labels <- as.character(factor(clust.res$labels, 
-                     levels=c("0", "1", "2"),
-                     labels=c("layer 0", "layer 1", "layer 2")))
+                                        levels=c("0", "1", "2"),
+                                        labels=c("layer 0", "layer 1", "layer 2")))
 plot(clust.res, hang=-1, axes=F, ann=F)
 ```
 
@@ -392,14 +394,14 @@ In a graph, a cycle is a path in which only the first and last vertices are repe
 The `frag.cycles` function searches for cycles in a graph and returns the number of cycles found for different cycle lengths. 
 The `kmax` parameter determines the maximal length of the cycles to search for.
 Let us compare the cycles found in the two spatial units of the artificial graph:
-
+  
 ```{r cycles-simul1}
 rbind(
   "unit1" = frag.cycles(simul.g1, kmax=5),
   "unit2" = frag.cycles(simul.g2, kmax=5))
 ```
 
- 
+
 The `frag.path.lengths` function returns the distribution of the path lengths in the graph (i.e., the number of edges between each pair of vertices). 
 This function returns a vector whose first element is the frequency of the paths of length 1, the second element is the frequency of the paths of length 2, etc. 
 If the `cumulative` parameter is set to `TRUE`, the function returns the cumulative relative frequency of the path lengths.
@@ -419,4 +421,3 @@ frag.diameters(simul.g2)
 ```
 
 
- 

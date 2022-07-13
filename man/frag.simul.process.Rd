@@ -9,7 +9,7 @@ Simulate the fragmentation of archaeological objects scattered in two stratigrap
 \usage{
 frag.simul.process(initial.layers=2, n.components, vertices=Inf,
                    edges=Inf, balance=.5, components.balance=.5,
-                   disturbance=0, aggreg.factor=0, planar=TRUE,
+                   disturbance=0, aggreg.factor=0, planar=FALSE,
                    asymmetric.transport.from=NULL, 
                    from.observed.graph=NULL, observed.layer.attr=NULL)
 }
@@ -34,6 +34,8 @@ Fragments are represented by vertices and the "connection" relationships ("refit
 
 Some parameters are optional or depend on other parameters (messages are displayed accordingly). Namely, if two \code{initial.layers} are set, then only one of the \code{vertices} and \code{edges} parameters can be used. Using only one layer as the initial condition enables to constraint the graph with the number of vertices only, the number of edges only, or both. 
 
+Note that using the \code{planar} argument requires to install the optional RBGL package.
+
 The \code{disturbance} determines the proportion of fragments to "move" from one layer to another. Consequently, it generates inter-layer relationships.
 Note that the \code{balance} parameter determines the proportion of fragments in the first layer before the application of the disturbance process.
 
@@ -48,9 +50,9 @@ An igraph object with a "frag_type" graph attribute (with the value "cr", for "c
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 \seealso{
-    \code{\link[RBGL]{boyerMyrvoldPlanarityTest}},
     \code{\link[archeofrag]{frag.get.parameters}},
-    \code{\link[archeofrag]{frag.edges.weighting}}
+    \code{\link[archeofrag]{frag.edges.weighting}},
+    \code{\link[RBGL]{boyerMyrvoldPlanarityTest}}
 }
 
 \examples{
@@ -63,8 +65,8 @@ g <- frag.simul.process(initial.layers=1,
                             balance=.5,
                             components.balance=.5,
                             disturbance=.1,
-                            planar=TRUE)
-plot(g, vertex.color=factor(V(g)$layer), 
+                            planar=FALSE)
+plot(g, vertex.color=factor(igraph::V(g)$layer), 
      vertex.size=4, vertex.label=NA)
 
 }

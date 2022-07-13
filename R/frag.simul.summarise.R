@@ -4,7 +4,7 @@
   h1.values <- unlist(h1.values)
   h2.values <- unlist(h2.values)
   # difference between H1 and H2
-  wilcox.res <- wilcox.test(h1.values, h2.values, exact=FALSE)$p.value
+  wilcox.res <- stats::wilcox.test(h1.values, h2.values, exact=FALSE)$p.value
   
   if(is.nan(wilcox.res)) return(c(NA,NA,NA,NA))
   
@@ -38,12 +38,10 @@ frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2,
                                  cohesion2.attr = "cohesion2",
                                  admixture.attr = "admixture"){
   # todo: add params:  
-  if(! is.igraph(graph)) stop("Not a graph object")
-  if(is.null(vertex_attr(graph, layer.attr)))   stop("'layer.attr' is missing or does not correspond to a vertex attribute of the graph.")
-  if( ! is.character(layer.attr))  stop("The parameter 'layer.attr' requires a character value.")
-  if( ! layer.attr %in% names(vertex_attr(graph)) ){
-    stop(paste("No '", layer.attr, "' vertices attribute.", sep=""))
-  }
+  # tests:
+  .check.frag.graph(graph)
+  .check.layer.argument(graph, layer.attr)
+  
   if(is.null(res.h1) | is.null(res.h2)){
     stop("res.h1 and res.h2 are mandatory.")
   }
@@ -70,7 +68,7 @@ frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2,
   obs.params <- c(frag.get.parameters(graph, layer.attr),
                   frag.layers.admixture(graph, layer.attr),
                   "cohesion" = frag.layers.cohesion(graph, layer.attr),
-                  "weightsum" = sum(E(graph)$weight))
+                  "weightsum" = sum(igraph::E(graph)$weight))
   
   if(sum(! colnames(res.h1) %in% names(obs.params)) != 0){
     warning("Some simulated parameters are missing in the observed graph.")

@@ -1,8 +1,8 @@
 
 
 .detect.cycle <- function(graph, x){
-  pattern <- make_ring(x) # create the pattern to detect:
-  cycles.list <- subgraph_isomorphisms(pattern, graph)
+  pattern <- igraph::make_ring(x) # create the pattern to detect:
+  cycles.list <- igraph::subgraph_isomorphisms(pattern, graph)
   res <- data.frame()
   if(length(cycles.list) != 0){ 
     res <- do.call(rbind, cycles.list) # convert the list to a data frame
@@ -19,10 +19,12 @@
   .max.cycles.only(x-1, res) # recursive call
 }
 
-#'	@export
+# 
 frag.cycles <- function(graph, kmax, max.cycles.only=FALSE) {
-  if (! is.igraph(graph)) stop("Not an igraph object")
-  if(graph_attr(graph, "frag_type") == "connection and similarity" ){
+  # tests:
+  .check.frag.graph(graph)  
+  
+  if(igraph::graph_attr(graph, "frag_type") == "connection and similarity" ){
     warning("Cycle detection in a 'connection and similarity' fragmentation graph is meaningless.")
   }
   if( ! is.numeric(kmax)){

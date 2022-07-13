@@ -20,8 +20,8 @@
 }
 \section{Slots}{
   \describe{
-    \item{\code{cr.df}:}{Object of class \code{"matrix"} (\code{"data.frame"} are allowed and automatically converted)}
-    \item{\code{sr.df}:}{Object of class \code{"matrix"}  (\code{"data.frame"} are allowed and automatically converted) }
+    \item{\code{df.cr}:}{Object of class \code{"matrix"} (\code{"data.frame"} are allowed and automatically converted)}
+    \item{\code{df.sr}:}{Object of class \code{"matrix"}  (\code{"data.frame"} are allowed and automatically converted)}
     \item{\code{fragments.df}:}{Object of class \code{"data.frame"}}
     \item{\code{frag_type}:}{Object of class \code{"character"} }
   }
@@ -31,14 +31,12 @@
     \item{make_cr_graph}{\code{signature(object = "Frag.object")}:  Makes an undirected graph representing the "connection" relationships between archaeological fragments.}
     \item{make_sr_graph}{\code{signature(object = "Frag.object")}:  Makes an undirected graph representing the "similarity" relationships between archaeological fragments.}
     \item{make_crsr_graph}{\code{signature(object = "Frag.object")}: Makes an undirected graph combining the "connection" and "similarity" relations between archaeological fragments.}
-    \item{show}{\code{signature(object = "Frag.object")}:   \code{show} method for Frag.object }
+    \item{show}{\code{signature(object = "Frag.object")}: \code{show} method for Frag.object }
   }
 }
 
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
- 
 \seealso{
     \code{\link[archeofrag]{make_frag_object}},
     \code{\link[archeofrag]{make_cr_graph}},
