@@ -7,6 +7,7 @@ Archeofrag includes methods to analyse fragmented objects in archaeology using r
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
+[![codecov](https://codecov.io/gh/sebastien-plutniak/archeofrag/branch/master/graph/badge.svg)](https://app.codecov.io/gh/sebastien-plutniak/archeofrag)
 [![Travis-CI Build Status](https://travis-ci.com/sebastien-plutniak/archeofrag.svg?branch=master)](https://app.travis-ci.com/github/sebastien-plutniak/archeofrag)
 [![CRAN Version](http://www.r-pkg.org/badges/version/archeofrag)](https://cran.r-project.org/package=archeofrag)
 [![CRAN checks](https://cranchecks.info/badges/worst/archeofrag)](https://cran.r-project.org/web/checks/check_results_archeofrag.html)
