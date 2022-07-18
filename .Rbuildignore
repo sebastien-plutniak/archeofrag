@@ -10,5 +10,6 @@ README.md
 man/figures
 cran-comments.md
 .travis.yml
+codecov.yaml
 ^Meta$
 ^doc$
