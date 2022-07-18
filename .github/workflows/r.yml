@@ -59,7 +59,7 @@ jobs:
         if: matrix.config.os == 'ubuntu-20.04'  
         shell: Rscript {0}          
       - name: Install igraph (Windows)
-        run:  install.packages("igraph")
+        run:  install.packages("igraph", type="win.binary", verbose=TRUE)
         if: matrix.config.os == 'windows-latest'   
         shell: Rscript {0}               
       - name: Check
