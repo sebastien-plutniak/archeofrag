@@ -12,4 +12,3 @@ cran-comments.md
 .travis.yml
 ^Meta$
 ^doc$
-^Meta$
