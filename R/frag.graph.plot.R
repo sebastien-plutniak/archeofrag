@@ -37,6 +37,5 @@ frag.graph.plot  <- function(graph, layer.attr,  ...){
          edge.width = 2,
          edge.color = igraph::E(graph)$color,
          ...)
-    invisible(NULL)
 }
  
