@@ -89,5 +89,4 @@ test_that("the optional from.observed.graph parameter works", {
   g2 <- frag.simul.process(from.observed.graph=g1, observed.layer.attr="layer")
   expect_equal(class(g2), "igraph")
   expect_equal(igraph::gorder(g1), igraph::gorder(g2))
-  
 })
