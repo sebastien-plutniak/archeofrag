@@ -64,6 +64,7 @@
 
 
 .main <- function(n.components, vertices, edges, balance, disturbance, aggreg.factor, planar){
+  stop.msg <- "No solution with these parameters, decrease the number of 'edges', increase the number of 'vertices', or remove one of these constraints."
   # Initialize graph:  
   g <- n.components * igraph::make_graph(c(1, 2), directed = FALSE)
   igraph::V(g)$name <- 1:igraph::gorder(g)
@@ -71,7 +72,7 @@
   # Build graph:
   if(is.infinite(vertices)){ # only edge count constraint
     if(vertices/2 < n.components){
-      stop("Increase 'vertices' or decrease 'n.components'.")}
+      stop(stop.msg)}
     while(igraph::gsize(g) < edges){
       g <- .add.fragment(g, n.components, edges, connect.neighbors=T, planar, aggreg.factor)
     }
@@ -83,14 +84,14 @@
     }
   } else if(! is.infinite(vertices) & ! is.infinite(edges) ){ # vertices & edges constraints
     if(edges < n.components + (vertices - 2 * n.components) ){
-      stop("Irrelevant parameters, decrease 'vertices' or increase 'edges'.") 
+      stop(stop.msg) 
     }   # if not enough edges to add vertices:
     if(vertices - n.components * 2 >  edges - n.components ){
-      stop("Irrelevant parameters, decrease 'vertices' or increase 'edges'.")
+      stop(stop.msg)
     }
     # if(edges > 3 * (vertices - (n.components - 1)*2) - 7 + n.components){ # uncorrect, don't work for graphs only made of dyads
     if(edges > 3 * (vertices - (n.components - 1)*2) - 6 + n.components){ # adapted version, but probably uncorrect
-      stop("Irrelevant parameters, decrease 'edges' or increase 'vertices'.")
+      stop(stop.msg)
     }  
     
     while(igraph::gorder(g) < vertices & igraph::gsize(g) < edges ){
@@ -110,9 +111,9 @@
     }
     
     if(edges - igraph::gsize(g) > e.max){
-      stop("No solution for these parameters, given the current random result. Consider removing the edge or vertex constraint.")
+      stop(stop.msg)
     }
-    while(gsize(g) < edges){
+    while(igraph::gsize(g) < edges){
       # select a component:
       selected.component <- .select.component(g, aggreg.factor)
       v.to.connect <- igraph::V(g)[ igraph::V(g)$object.id == selected.component]$name
@@ -145,11 +146,11 @@
     if(nr.v.to.disturb <= length(igraph::V(g)[ igraph::V(g)$layer == asymmetric.transport.from]) ){
       v.to.disturb <- sample(igraph::V(g)[ igraph::V(g)$layer == asymmetric.transport.from], nr.v.to.disturb)
     } else{
-      stop("The number of fragments for asymmetric transport exceeds the number of fragments in this layer. Reduce the 'disturbance' value.")
+      stop("The number of fragments for asymmetric transport exceeds the number of fragments in this layer. Decrease the 'disturbance' value.")
     }
   } 
   # reverse layer values of the selected vertices:
-  igraph::V(g)[v.to.disturb]$layer <- as.character(factor(V(g)[v.to.disturb]$layer,
+  igraph::V(g)[v.to.disturb]$layer <- as.character(factor(igraph::V(g)[v.to.disturb]$layer,
                                                   levels = c(1,2), labels = c(2,1)))
   g
 }
@@ -170,7 +171,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     if( ! observed.layer.attr %in% names(igraph::vertex_attr(from.observed.graph)) ){
       stop(paste("No '", observed.layer.attr, "' vertices attribute.", sep=""))
     }
-    if(length(unique(vertex_attr(from.observed.graph, observed.layer.attr))) != 2){
+    if(length(unique(igraph::vertex_attr(from.observed.graph, observed.layer.attr))) != 2){
       stop("The `layer` attribute of the observed graph must contain two layers.")
     }
     # retrieve the observed graph's values:
@@ -209,6 +210,10 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
   if(is.infinite(vertices) & is.infinite(edges)){
     stop("At least one of the parameters 'vertices' or 'edges' is required.")
   }
+  if(is.infinite(vertices) & initial.layers == 2 ){
+    stop("With 2 initial layers, the vertices parameter is required.")
+  }
+  
   if(! initial.layers %in% c(1, 2)){
     stop("The 'initial.layers' parameter requires a numerical value of 1 or 2.")
   }
@@ -253,7 +258,7 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
   
   if(initial.layers == 2){
     if(! is.infinite(edges)){
-      message("The 'edge' parameter is not used if two 'initial layers' are used.")
+      warning("With two initial layers, the 'edge' parameter is not used.")
     }
     n.components.l1 <- round(n.components * components.balance)
     n.components.l2 <- n.components - n.components.l1

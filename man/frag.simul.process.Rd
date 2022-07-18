@@ -23,7 +23,7 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
   \item{components.balance}{Numeric ]0;1[. Proportion of components in the first layer (only used when initial.layers=2).}
   \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from one layer to another.}
   \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
-  \item{planar}{Logical. If TRUE, generates a planar graph.}
+  \item{planar}{Logical. If TRUE, generates a planar graph (if FALSE, the graph can be planar or not).}
   \item{asymmetric.transport.from}{Numeric or character value in "1" or "2". If not NULL, the disturbance process will be applied only to the fragments from this layer.}
   \item{from.observed.graph}{igraph object. If not NULL, the parameters observed in this fragmentation graph are used instead of the previous parameters. See details.}
   \item{observed.layer.attr}{character. Required if the \code{from.observed.graph} option is used. Name of the layer attribute in the observed graph.}
@@ -32,8 +32,9 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
 This function simulates the fragmentation of archeological objects within and between two adjacent stratigraphic layers.
 Fragments are represented by vertices and the "connection" relationships ("refittings") between them are represented by edges.
 
-Some parameters are optional or depend on other parameters (messages are displayed accordingly). Namely, if two \code{initial.layers} are set, then only one of the \code{vertices} and \code{edges} parameters can be used. Using only one layer as the initial condition enables to constraint the graph with the number of vertices only, the number of edges only, or both. 
+Some parameters are optional or depend on other parameters (messages are displayed accordingly). Namely, if two \code{initial.layers} are set, then the \code{vertices} parameter can be used (the \code{edges} parameter is not supported). Using only one layer as the initial condition enables to constraint the graph with the number of vertices only, the number of edges only, or both. 
 
+Setting the \code{planar} argument to TRUE constraints the graph to be planar (if this parameter is FALSE, the graph can be planar or not). 
 Note that using the \code{planar} argument requires to install the optional RBGL package.
 
 The \code{disturbance} determines the proportion of fragments to "move" from one layer to another. Consequently, it generates inter-layer relationships.

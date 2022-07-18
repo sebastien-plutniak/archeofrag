@@ -29,7 +29,7 @@ frag.get.parameters <- function(graph, layer.attr){
   compo.balance <- round(table(compo.balance)[1] / sum(table(compo.balance)), 2) 
   
   # disturbance: number of pieces which might have move:
-  g.list <- frag.get.layers.pair(graph, "layer", unique(V(graph)$layer), mixed.components.only = TRUE)
+  g.list <- frag.get.layers.pair(graph, "layer", unique(igraph::V(graph)$layer), mixed.components.only = TRUE)
   disturbance <- 0
   if(! is.null(g.list)){
     g.list <- igraph::decompose(g.list)
@@ -37,7 +37,7 @@ frag.get.parameters <- function(graph, layer.attr){
       table(factor(igraph::V(x)$layer, levels = unique(igraph::V(graph)$layer))) )
     # replace the count of the more represented layer in each component by NA:
     g.list <- apply(g.list, 2, function(x){ x[order(x)][2] <- NA ; x })
-    # sum of the count for the less represented layer in each component:
+    # sum of the count of vertices for the less represented layer in each component:
     disturbance <- sum(g.list, na.rm = TRUE) / igraph::gorder(graph)
     disturbance <- round(disturbance, 2)
   } 
