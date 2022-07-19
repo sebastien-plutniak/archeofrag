@@ -33,6 +33,7 @@ Archeofrag includes methods to analyse fragmented objects in archaeology using r
 [![status](https://joss.theoj.org/papers/ff2007d87bd4c8460b265c69dc403316/status.svg)](https://joss.theoj.org/papers/ff2007d87bd4c8460b265c69dc403316)
 
 
+- [**References**](#references)
 - [**Installation**](#installation)
 - [**Community guidelines**](#community-guidelines)
   - [Reporting bugs](#reporting-bugs)
@@ -45,6 +46,11 @@ Archeofrag includes methods to analyse fragmented objects in archaeology using r
 - [**Assessing spatial unit boundaries using similarity relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
 - [**Characterising spatial units from their fragmentation**](#characterising-spatial-units-from-their-fragmentation)
  
+# References
+Details about the *archeofrag* / TSAR method were published in:
+
+*  Plutniak, S. 2022. “[L'analyse topologique des remontages archéologiques : la méthode TSAR et le package R archeofrag](http://www.prehistoire.org/offres/doc_inline_src/515/0-BSPF_2022_1_2e_partie_Correspondance_PLUTNIAK.pdf)”, *Bulletin de la Société préhistorique française*,  119 (1), p. 110–113.
+*  Plutniak, S. 2021. “[The Strength of Parthood Ties. Modelling Spatial Units and Fragmented Objects with the TSAR Method – Topological Study of Archaeological Refitting](https://hal.archives-ouvertes.fr/hal-03419952)” *Journal of Archaeological Science*, 136, p. 105501. DOI: [10.1016/j.jas.2021.105501](https://doi.org/10.1016/j.jas.2021.105501).
 
 # Installation
 The package can be installed from CRAN with:
