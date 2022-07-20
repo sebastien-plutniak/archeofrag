@@ -19,6 +19,7 @@ test_that("weighting  based only on the structure of the graph", {
 
 
 test_that("weighting with morphometric and spatial parameters", {
+  set.seed(1)
   fragments.df <- data.frame(matrix(c(1,1, 2,1, 3,1, 4,1, 5,1, 6,1, 7,2, 8,2,
                                       9,1, 10,1, 11,2, 12,2, 13,1, 14,1, 15,1,
                                       16,1, 17,2, 18,1, 19,1, 20,1, 21,1, 22,1,
@@ -39,6 +40,5 @@ test_that("weighting with morphometric and spatial parameters", {
   igraph::V(g)$y <- sample(1:100, 32, replace=TRUE)
   igraph::V(g)$z <- sample(1:100, 32, replace=TRUE)
   g <- frag.edges.weighting(g, "layer", "morpho", "x", "y", "z")
-  expect_equal(sum(igraph::E(g)$weight), 66.01613,  tolerance=.00001)
-  
+  expect_equal(sum(igraph::E(g)$weight), 65.01355,  tolerance=.00001)
 })
