@@ -1,8 +1,10 @@
-test_that("weighting  based only on the structure of the graph", {
+
+
+test_that("path length is correct", {
   fragments.df <- data.frame(matrix(c(1,1, 2,1, 3,1, 4,1, 5,1, 6,1, 7,2, 8,2,
-                                      9,1, 10,1, 11,2, 12,2, 13,1, 14,1, 15,1,
+                                      9,1, 10,1, 11,2, 12,2, 13,1, 14,3, 15,1,
                                       16,1, 17,2, 18,1, 19,1, 20,1, 21,1, 22,1,
-                                      23,1, 24,2, 25,2, 26,2, 27,2, 28,2, 29,2,
+                                      23,3, 24,3, 25,2, 26,2, 27,2, 28,2, 29,2,
                                       30,2, 31,2, 32,2), ncol=2, byrow=T))
   colnames(fragments.df) <- c("node", "layer")
   edges <- data.frame(matrix(c(1,2, 3,4, 4,5, 6,7, 7,8, 8,6, 9,10,
@@ -13,16 +15,15 @@ test_that("weighting  based only on the structure of the graph", {
                              ncol=2, byrow=T))
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
-  g <- frag.edges.weighting(g , "layer")
-  expect_equal(sum(igraph::E(g)$weight), 113.3322,  tolerance=.00001)
+  
+  expect_equal(frag.path.lengths(g), c(31, 20, 5))
 })
 
-
-test_that("weighting with morphometric and spatial parameters", {
+test_that("path length (cumulative) is correct", {
   fragments.df <- data.frame(matrix(c(1,1, 2,1, 3,1, 4,1, 5,1, 6,1, 7,2, 8,2,
-                                      9,1, 10,1, 11,2, 12,2, 13,1, 14,1, 15,1,
+                                      9,1, 10,1, 11,2, 12,2, 13,1, 14,3, 15,1,
                                       16,1, 17,2, 18,1, 19,1, 20,1, 21,1, 22,1,
-                                      23,1, 24,2, 25,2, 26,2, 27,2, 28,2, 29,2,
+                                      23,3, 24,3, 25,2, 26,2, 27,2, 28,2, 29,2,
                                       30,2, 31,2, 32,2), ncol=2, byrow=T))
   colnames(fragments.df) <- c("node", "layer")
   edges <- data.frame(matrix(c(1,2, 3,4, 4,5, 6,7, 7,8, 8,6, 9,10,
@@ -33,12 +34,6 @@ test_that("weighting with morphometric and spatial parameters", {
                              ncol=2, byrow=T))
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
-
-  igraph::V(g)$morpho <- sample(1:20, 32, replace=TRUE)
-  igraph::V(g)$x <- sample(1:100, 32, replace=TRUE)
-  igraph::V(g)$y <- sample(1:100, 32, replace=TRUE)
-  igraph::V(g)$z <- sample(1:100, 32, replace=TRUE)
-  g <- frag.edges.weighting(g, "layer", "morpho", "x", "y", "z")
-  expect_equal(sum(igraph::E(g)$weight), 66.01613,  tolerance=.00001)
   
+  expect_equal(frag.path.lengths(g, cumulative = T), c(1, 0.6451613, 0.1612903), tolerance = 0.00001)
 })

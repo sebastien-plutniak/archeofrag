@@ -1,10 +1,8 @@
-
-
-test_that("the count of edges by layer is correct", {
+test_that("admixture works", {
   fragments.df <- data.frame(matrix(c(1,1, 2,1, 3,1, 4,1, 5,1, 6,1, 7,2, 8,2,
-                                      9,1, 10,1, 11,2, 12,2, 13,1, 14,3, 15,1,
+                                      9,1, 10,1, 11,2, 12,2, 13,1, 14,1, 15,1,
                                       16,1, 17,2, 18,1, 19,1, 20,1, 21,1, 22,1,
-                                      23,3, 24,3, 25,2, 26,2, 27,2, 28,2, 29,2,
+                                      23,1, 24,2, 25,2, 26,2, 27,2, 28,2, 29,2,
                                       30,2, 31,2, 32,2), ncol=2, byrow=T))
   colnames(fragments.df) <- c("node", "layer")
   edges <- data.frame(matrix(c(1,2, 3,4, 4,5, 6,7, 7,8, 8,6, 9,10,
@@ -15,7 +13,6 @@ test_that("the count of edges by layer is correct", {
                              ncol=2, byrow=T))
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
-  
-  expect_equal(c(frag.relations.by.layers(g, "layer")), c(10, 4, 3, NA, 11, 2, NA, NA, 1))
+  g <- frag.edges.weighting(g, "layer")
+  expect_equal(as.numeric(frag.layers.admixture(g, "layer")), 0.05527014, tolerance = 0.00001)
 })
-
