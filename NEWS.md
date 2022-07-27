@@ -1,9 +1,9 @@
 
-# archeofrag 0.8.1
-Released: 2022-07-18
+# archeofrag 0.8.2
+Released: 2022-07-27
 
-* adding unit tests with testthat
-* fix in the `frag.simul.process()` function
+* adding unit tests with testthat and test coverage analysis with covr.
+* fix the `frag.simul.process()` function.
 
 # archeofrag 0.8.1
 Released: 2022-07-13
