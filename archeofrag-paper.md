@@ -1,5 +1,5 @@
 ---
-title: 'Archeofrag: an R package for refitting and spatial analysis in archaeology'
+title: 'Archeofrag: an R package for Refitting and Spatial Analysis in Archaeology'
 tags:
   - R
   - archaeology
@@ -9,14 +9,15 @@ tags:
   - stratigraphy
   - stratigraphic analysis
   - spatial analysis
+  - site formation
 authors:
   - name: Sébastien Plutniak
     orcid: 0000-0002-6674-3806
     affiliation: 1
 affiliations:
- - name: TRACES Laboratory, Toulouse, France
+ - name: Université Toulouse Jean Jaurès, TRACES Laboratory, Toulouse, France
    index: 1
-date: 8 March 2022 
+date: 30 July 2022 
 bibliography: archeofrag-paper.bib
 output: 
   pdf_document: 
