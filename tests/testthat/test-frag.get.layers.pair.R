@@ -15,8 +15,7 @@ test_that("get layers pair", {
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
   
-  gsub <- frag.get.layers.pair(g, "layer", sel.layers=c("1", "2"))
-  expect_equal(igraph::gorder(gsub), 26)
+  expect_equal(igraph::gorder(frag.get.layers.pair(g, "layer", sel.layers=c("1", "2"))), 26)
 })  
 
 test_that("get layers pair (use size.mini)", {
@@ -35,8 +34,7 @@ test_that("get layers pair (use size.mini)", {
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
   
-  gsub <- frag.get.layers.pair(g, "layer", sel.layers=c("1", "2"), size.mini=3)
-  expect_equal(igraph::gorder(gsub), 24)
+  expect_equal(igraph::gorder(frag.get.layers.pair(g, "layer", sel.layers=c("1", "2"), size.mini=3)), 24)
 })  
 
 test_that("get layers pair (use mixed.components.only)", {
@@ -55,7 +53,6 @@ test_that("get layers pair (use mixed.components.only)", {
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
   
-  gsub <- frag.get.layers.pair(g, "layer", sel.layers=c("2", "3"), mixed.components.only=T)
-  expect_equal(igraph::gorder(gsub), 5)
+  expect_equal(igraph::gorder(frag.get.layers.pair(g, "layer", sel.layers=c("2", "3"), mixed.components.only=T)), 5)
 })  
 

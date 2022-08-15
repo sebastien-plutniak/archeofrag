@@ -14,5 +14,5 @@ test_that("admixture works", {
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
   g <- frag.edges.weighting(g, "layer")
-  expect_equal(as.numeric(frag.layers.admixture(g, "layer")), 0.05527014, tolerance = 0.00001)
+  expect_equal(round(as.numeric(frag.layers.admixture(g, "layer")), 6), 0.05527)
 })

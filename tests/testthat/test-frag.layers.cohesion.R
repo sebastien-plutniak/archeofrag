@@ -14,5 +14,5 @@ test_that("cohesion works", {
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
   g <- frag.edges.weighting(g, "layer")
-  expect_equal(as.numeric(frag.layers.cohesion(g, "layer")), c(0.465393, 0.4793369), tolerance = 0.00001)
+  expect_equal(round(as.numeric(frag.layers.cohesion(g, "layer")), 6), c(0.465393, 0.479337))
 })
