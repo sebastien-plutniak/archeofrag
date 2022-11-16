@@ -33,9 +33,10 @@ Archeofrag includes methods to analyse fragmented objects in archaeology using r
 # References
 Details about the *archeofrag* / TSAR method were published in:
 
-*  Plutniak, S. 2022. “Archeofrag: an R package for Refitting and Spatial Analysis in Archaeology”, *Journal of Open Source Software*,  7 (75), p. 4335. DOI: [10.21105/joss.04335](https://doi.org/10.21105/joss.04335).
-*  Plutniak, S. 2022. “[L'analyse topologique des remontages archéologiques : la méthode TSAR et le package R archeofrag](http://www.prehistoire.org/offres/doc_inline_src/515/0-BSPF_2022_1_2e_partie_Correspondance_PLUTNIAK.pdf)”, *Bulletin de la Société préhistorique française*,  119 (1), p. 110–113.
-*  Plutniak, S. 2021. “[The Strength of Parthood Ties. Modelling Spatial Units and Fragmented Objects with the TSAR Method – Topological Study of Archaeological Refitting](https://hal.archives-ouvertes.fr/hal-03419952)” *Journal of Archaeological Science*, 136, p. 105501. DOI: [10.1016/j.jas.2021.105501](https://doi.org/10.1016/j.jas.2021.105501).
+* Plutniak, S. 2022. “Archeofrag: an R package for Refitting and Spatial Analysis in Archaeology”, *Journal of Open Source Software*,  7 (75), p. 4335. DOI: [10.21105/joss.04335](https://doi.org/10.21105/joss.04335).
+* Plutniak, S. 2022. “Archeofrag: un package R pour les remontages et l'analyse spatiale en archéologie”, *Rzine*, DOI: [link](https://rzine.fr/publication/20220811_archeofrag_joss).
+* Plutniak, S. 2022. “[L'analyse topologique des remontages archéologiques : la méthode TSAR et le package R archeofrag](http://www.prehistoire.org/offres/doc_inline_src/515/0-BSPF_2022_1_2e_partie_Correspondance_PLUTNIAK.pdf)”, *Bulletin de la Société préhistorique française*,  119 (1), p. 110–113.
+* Plutniak, S. 2021. “[The Strength of Parthood Ties. Modelling Spatial Units and Fragmented Objects with the TSAR Method – Topological Study of Archaeological Refitting](https://hal.archives-ouvertes.fr/hal-03419952)” *Journal of Archaeological Science*, 136, p. 105501. DOI: [10.1016/j.jas.2021.105501](https://doi.org/10.1016/j.jas.2021.105501).
 
 # Installation
 The package can be installed from CRAN with:
@@ -493,7 +494,7 @@ round(simil.by.layers.df / sum(simil.by.layers.df, na.rm=T) * 100, 0)
 ```
 
 Considering a stratigraphic sequence, adjacent and close layers in the sequence must have lower statistical distances than distant layers. Consequently, it is expected that the result of a hierarchical clustering computed on this distance table would reflect the order of the layers.
-The expected result is observed for Liang Abu surface and the first two layers, suggesting an absence of significant disturbance and admixture (\autoref{fig:similarity-dendr-fig}).
+The expected result is observed for Liang Abu surface and the first two layers, suggesting an absence of significant disturbance and admixture.
 
 
 ```r
