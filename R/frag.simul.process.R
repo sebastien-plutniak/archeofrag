@@ -229,6 +229,10 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
       stop("The 'asymmetric.transport.from' parameter must have a value in 1 or 2.")
     }
   }
+  
+  if(n.components > vertices / 2){
+      stop("'n.components' must be <= 'vertices' / 2.")
+  }  
   # END tests
   
   # BEGIN main body of the function:

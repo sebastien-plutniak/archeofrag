@@ -1,4 +1,9 @@
 
+# archeofrag 0.8.3
+Released: 2022-0?-??
+
+* add an option to remove the vertices in the `frag.observer.failure()` function.
+
 # archeofrag 0.8.2
 Released: 2022-07-27
 

@@ -31,6 +31,7 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
 \details{
 This function simulates the fragmentation of archeological objects within and between two adjacent stratigraphic layers.
 Fragments are represented by vertices and the "connection" relationships ("refittings") between them are represented by edges.
+All fragments have at least one relation ("single" fragments are not generated).
 
 Some parameters are optional or depend on other parameters (messages are displayed accordingly). 
 Namely, setting \code{initial.layers}=1 enables to constraint the graph with the number of vertices only, the number of edges only, or both. 
