@@ -1,6 +1,6 @@
 
 # archeofrag 0.8.3
-Released: 2022-0?-??
+Released: 2022-11-16
 
 * add an option to remove the vertices in the `frag.observer.failure()` function.
 
