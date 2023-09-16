@@ -15,5 +15,3 @@
     stop(paste("There is no '", layer.attr, "' vertices attribute.", sep=""))
   }
 }
-
-

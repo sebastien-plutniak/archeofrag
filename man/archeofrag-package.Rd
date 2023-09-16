@@ -5,15 +5,6 @@
 \title{Archeofrag: Refitting and Spatial Analysis in Archaeology}
 \description{Methods to analyse fragmented objects in archeology using refitting relationships between fragments scattered in archeological spatial units (e.g. stratigraphic layers). Graphs and graph theory are used to model archeological observations. The package is mainly based on the 'igraph' package for graph analysis. Functions can: 1) create, manipulate, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. An empirical dataset is also provided as an example.
 }
-\details{
-    \tabular{ll}{
-        Package: \tab archeofrag\cr
-        Type: \tab Package\cr
-        Version: \tab 0.7\cr
-        Date: \tab 2021-04-26\cr
-        License: \tab GPL-2\cr
-    }
-}
 \author{Sebastien Plutniak
 Maintainer: Sebastien Plutniak <sebastien.plutniak at posteo.net>
 }

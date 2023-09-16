@@ -101,7 +101,6 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry="", x="", y="", 
   if(is.null(V(graph)$name)){
     igraph::V(graph)$name <- seq(1:gorder(graph))
   }
-  
   missing.coords <- c(x, y, z)[ ! c(x, y, z) %in% c("", igraph::vertex_attr_names(graph)) ]
   if(length(missing.coords) > 0){
     warning(paste("Missing coordinates:", paste(missing.coords, collapse = ", ")  ))

@@ -20,5 +20,8 @@ frag.relations.by.layers <- function(graph, layer.attr){
   res <- res + matrix(res, nrow(res), byrow=TRUE)
   diag(res) <- diag
   res[upper.tri(res)] <- NA
+  if(sum(rownames(res) != colnames(res)) > 0){
+      warning("Layers names are different in rows and columns, non-square matrix.")
+  }
   res
 }

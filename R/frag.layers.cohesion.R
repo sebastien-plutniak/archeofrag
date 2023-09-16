@@ -15,7 +15,7 @@
   c(res1, res2)
 }
 
-frag.layers.cohesion <- function(graph, layer.attr){
+frag.layers.cohesion <- function(graph, layer.attr, morphometry="", x="", y="", z=""){
   # output : value [0;1].
   # tests:
   .check.frag.graph(graph)
@@ -28,7 +28,7 @@ frag.layers.cohesion <- function(graph, layer.attr){
   layers <- igraph::vertex_attr(graph, name = layer.attr)
   igraph::V(graph)$layers <- layers
   layers <- sort(unique(layers))
-  # Conditionnal tests in function of the number of layers:
+  # Conditional tests in function of the number of layers:
   if(length(layers) < 2){
     warning("At least two different layers are required.")
     return(c(NA, NA))
@@ -41,10 +41,15 @@ frag.layers.cohesion <- function(graph, layer.attr){
     results <- matrix(results)
   } else{ # if length(layers) > 2
     warning("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
-    results <- sapply(1:ncol(pairs), function(x){
-      gsub <- frag.get.layers.pair(graph, layer.attr, c(pairs[1, x], pairs[2, x]))
-      gsub <- frag.edges.weighting(gsub, layer.attr)
-      .cohesion.for.two.layers(gsub, unique(igraph::V(gsub)$layers))
+    results <- sapply(1:ncol(pairs), function(id){
+      gsub <- frag.get.layers.pair(graph, layer.attr, c(pairs[1, id], pairs[2, id]))
+      if(length(unique(V(gsub)$layer)) == 2){
+        gsub <- frag.edges.weighting(gsub, layer.attr, morphometry, x, y, z)
+        # .cohesion.for.two.layers(gsub, unique(igraph::V(gsub)$layers))
+        .cohesion.for.two.layers(gsub, c(pairs[1, id], pairs[2, id]))
+      } else{
+        c(NA, NA)
+      }
     })
   }
   rownames(results) <- c("cohesion1", "cohesion2")

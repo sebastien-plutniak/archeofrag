@@ -3,11 +3,15 @@
 
 \title{Cohesion measure of layers}
 \description{Returns the cohesion value of two stratigraphic layers (or any other type of archeological spatial units). Must be used after weighting the edges with \code{frag.edges.weighting}.}
-\usage{frag.layers.cohesion(graph, layer.attr)}
+\usage{frag.layers.cohesion(graph, layer.attr, morphometry, x, y, z)}
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object.} 
   \item{layer.attr}{Character. The name of the vertices attribute giving the layer of the fragments.}
+  \item{morphometry}{Character. Optional, to pass to the `frag.edges.weighting` function: name of the vertex attribute with the morphometric value of the fragments.}
+  \item{x}{Character. Optional, to pass to the `frag.edges.weighting` function: name of the vertex attribute with the "x" coordinate of the fragments.}
+  \item{y}{Character. Optional, to pass to the `frag.edges.weighting` function: name of the vertex attribute with the "y" coordinate of the fragments.}
+  \item{z}{Character. Optional, to pass to the `frag.edges.weighting` function:  name of the vertex attribute with the "z" coordinate of the fragments.}
 }
 \details{
 The cohesion value of a spatial unit  is computed as: 
@@ -25,7 +29,7 @@ However, this function can also be used for a graph with more than two layers. I
 }
 \value{
 If the graph has only two layers, the function returns a numeric vector with a cohesion value ([0;1]) for each layer (sorted in alphanumerical order).
-If the graph has more than two layers, the function returns a matrix with a cohesion value for each pair of layers.
+If the graph has more than two layers, the function returns a matrix with cohesion values for each pair of layers.
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 

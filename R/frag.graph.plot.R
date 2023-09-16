@@ -19,7 +19,8 @@ frag.graph.plot  <- function(graph, layer.attr,  ...){
         graph <- igraph::add_layout_(graph, igraph::with_fr(), igraph::component_wise())
         igraph::E(graph)$color <- as.character(factor(igraph::E(graph)$type_relation, labels = c("green", "gray")))
     } else if(igraph::graph_attr(graph, "frag_type") == "similarity relations"){
-      graph <- igraph::add_layout_(graph, igraph::with_fr(), igraph::component_wise())
+      graph <- igraph::add_layout_(graph, igraph::with_fr())
+      igraph::E(graph)$color <- "green"
     } else if(length(layers) == 2){ 
       # prepare coordinates if the graph has two layers:
       coords <- data.frame(layer = igraph::V(graph)$layers, miny = 0, maxy = 100) 

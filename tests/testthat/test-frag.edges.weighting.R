@@ -40,5 +40,5 @@ test_that("weighting with morphometric and spatial parameters", {
   igraph::V(g)$y <- sample(1:100, 32, replace=TRUE)
   igraph::V(g)$z <- sample(1:100, 32, replace=TRUE)
   g <- frag.edges.weighting(g, "layer", "morpho", "x", "y", "z")
-  expect_equal(sum(igraph::E(g)$weight), 65.01355,  tolerance=.00001)
+  expect_equal(sum(igraph::E(g)$weight), 64.95129,  tolerance=.00001)
 })

@@ -1,3 +1,10 @@
+# archeofrag 0.9.0
+Released: 2023-08-XX
+
+* Fix in the `frag.layers.admixture()` and `frag.layers.cohesion()` functions to handle pair of layers with only one layer having data.
+* In the `frag.layers.cohesion()` and `frag.layers.admixture()` functions, addition of optionnal parameters ("morphometry", "x", "y", "z") to pass to the `frag.edges.weighting()` function when applied to multiple pairs of layers.
+* TODO : add R Shiny application.
+
 
 # archeofrag 0.8.3
 Released: 2022-11-16

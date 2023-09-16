@@ -36,5 +36,5 @@ test_that("cohesion for 3 layers", {
   g <- frag.edges.weighting(g, "layer")
   igraph::V(g)$layer[c(1, 4, 8, 14, 22)] <- 3
   expect_equal(round(as.numeric(frag.layers.cohesion(g, "layer")), 6), 
-               expected = c(0.324759, 0.0967, 0.950718, 0.635427, 0.696586, 0.028984))
+               expected = c(0.324759, 0.696586, 0.950718, 0.635427, 0.0967, 0.028984))
 })

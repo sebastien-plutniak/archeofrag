@@ -21,7 +21,6 @@ make_frag_set_validation <- function(object)
   if( ncol(object@df.cr) == 1 & ncol(object@df.sr) == 1 ){
     stop("At least one of the 'cr' and 'sr' arguments is required.")
   }
-  
   if(  object@frag_type %in% c("sr", "crsr")) {
     if( ! ncol(object@df.sr) > 1){
       stop("The data frame for the 'sr' argument must have at least two columns.")
@@ -58,7 +57,7 @@ setClass(
   validity = make_frag_set_validation
 )
 
-setMethod(
+setMethod( # show  ----
   f="show",
   signature = "Frag.object",
   definition = function (object){
@@ -67,42 +66,44 @@ setMethod(
       "\n*   Frag_type = ", object@frag_type,
       "\n*   N fragments = ",
       length(unique( stats::na.omit(c(object@df.cr[,1],
-                                      object@df.cr[,2],
+                                      try(object@df.cr[,2], silent=TRUE),
                                       object@df.sr[,1]))) ),
       "\n-------------------------",
       sep=""))
   }
 )
 
-setMethod(
+setMethod(  # make_cr_graph ----
   f = "make_cr_graph",
   signature = "Frag.object",
   definition = function(object)
   {
     if( object@frag_type == "sr" ){
-      stop("No available data for the connection relationships.")
+      stop("No data available for connection relationships.")
     }
     cr.net <- igraph::graph_from_data_frame(object@df.cr, directed=FALSE,
                                             vertices=object@fragments.df)
     cr.net <- igraph::delete_vertices(cr.net, 
                                       igraph::degree(cr.net, mode="total") == 0)
+    cr.net <- simplify(cr.net, remove.multiple = TRUE)
     igraph::E(cr.net)$type_relation <- "cr"
     cr.net <- igraph::set_graph_attr(cr.net, "frag_type", "connection relations")
     return(cr.net)
   }
 )
 
-setMethod(
-  f = "make_sr_graph",
+setMethod(  # make_sr_graph ----
+  f = "make_sr_graph", 
   signature = "Frag.object",
   definition = function(object)
   {
+    
     if( object@frag_type == "cr" ){
-      stop("No available data for the similarity relationships.")
+      stop("No data available for similarity relationships.")
     }
     #  'similarity units' ids are recoded to avoid confusion with the fragments ids:
-    object@df.sr[,2] <- as.character(factor(
-      object@df.sr[,2], labels=paste("su", c(1:(0 + length(unique((object@df.sr[,2]))) )))
+    object@df.sr[,2] <- as.character(factor(object@df.sr[,2], 
+      labels = paste("su", c(1:(0 + length(unique((object@df.sr[,2]))) )))
     ) )
     vertices.list <- unique( c(object@df.sr[, 1], object@df.sr[, 2]) ) 
     sr.net <- igraph::simplify(igraph::graph_from_data_frame(object@df.sr[, 1:2], 
@@ -119,20 +120,25 @@ setMethod(
       cbind(fragments.df),
       by="name", sort=FALSE)
     igraph::vertex_attr(sr.net) <- lapply(attributes, as.character) #add vertex attributes
-    # edge attribute:
+    
+    # clean graph:
+    sr.net <- igraph::delete_vertices(sr.net, igraph::degree(sr.net) == 0)
+    # Set attributes:
     igraph::E(sr.net)$type_relation <- "sr"
+    sr.net <- igraph::set_graph_attr(sr.net, "frag_type", "similarity relations")
     return(sr.net)
   }
 )
 
-setMethod(
+setMethod( # make_crsr_graph ----
   f = "make_crsr_graph",
   signature = "Frag.object",
   definition = function(object)
   {
     if(object@frag_type != "crsr"){
-      stop("The 'cr' and 'sr' arguments are required for this function")
+      stop("Connection and similarity relationships are required for this function ('cr' and 'sr' arguments).")
     }
+    
     cr.net <- make_cr_graph(object)
     sr.net <- make_sr_graph(object)
     
@@ -145,9 +151,9 @@ setMethod(
                             function(x){ igraph::set_vertex_attr(x, "name_save", 
                                                          igraph::V(x),  igraph::V(x)$name )} )
     # merge all the graphs in the list:
-    crsr.net <- Reduce("union", crsr.list)
+    crsr.net <- Reduce(igraph::union, crsr.list)
     
-    # ATTRIBUTES ####  
+    # ATTRIBUTES ----
     # 1. vertices attributes ####
     fragments.df <- object@fragments.df
     names(fragments.df)[1] <- "name"
