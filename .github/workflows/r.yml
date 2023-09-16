@@ -51,11 +51,11 @@ jobs:
           biocthis::use_bioc_github_action()
         shell: Rscript {0}     
       - name: Install igraph (macOS)
-        run: remotes::install_github("igraph/rigraph@master")
+        run: remotes::install_github("igraph/rigraph")
         if: matrix.config.os == 'macOS-latest'  
         shell: Rscript {0}   
       - name: Install igraph (Linux)
-        run: remotes::install_github("igraph/rigraph@master")
+        run: remotes::install_github("igraph/rigraph")
         if: matrix.config.os == 'ubuntu-20.04'  
         shell: Rscript {0}          
       - name: Install igraph (Windows)
