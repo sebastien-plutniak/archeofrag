@@ -24,7 +24,7 @@ frag.simul.process(initial.layers=2, n.components, vertices=Inf,
   \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from one layer to another.}
   \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
   \item{planar}{Logical. If TRUE, generates a planar graph (if FALSE, the graph can be planar or not).}
-  \item{asymmetric.transport.from}{Numeric or character value in "1" or "2". If not NULL, the disturbance process will be applied only to the fragments from this layer.}
+  \item{asymmetric.transport.from}{Numeric or character value in "1" or "2" (refering to the first and second spatial unit). If not NULL, the disturbance process will be applied only to the fragments from this layer.}
   \item{from.observed.graph}{igraph object. If not NULL, the parameters observed in this fragmentation graph are used instead of the previous parameters. See details.}
   \item{observed.layer.attr}{character. Required if the \code{from.observed.graph} option is used. Name of the layer attribute in the observed graph.}
 }

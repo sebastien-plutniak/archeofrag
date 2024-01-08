@@ -20,7 +20,7 @@ To generate a series of comparable graphs with different likelihoods, the functi
 An error message is displayed if at least one of the \code{likelihood} values is < 0 or > 1.
 }
 \value{
-A list of graphs.
+A list of fragmentation graphs (igraph objects).
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
