@@ -1,9 +1,13 @@
-# archeofrag 0.9.0
-Released: 2023-08-XX
+# archeofrag 0.9.1
+Released: 2024-01-XX
+
+Fourth major release.
 
 * Fix in the `frag.layers.admixture()` and `frag.layers.cohesion()` functions to handle pair of layers with only one layer having data.
-* In the `frag.layers.cohesion()` and `frag.layers.admixture()` functions, addition of optionnal parameters ("morphometry", "x", "y", "z") to pass to the `frag.edges.weighting()` function when applied to multiple pairs of layers.
-* TODO : add R Shiny application.
+* In the `frag.layers.cohesion()` and `frag.layers.admixture()` functions, new optionnal parameters ("morphometry", "x", "y", "z") to pass to the `frag.edges.weighting()` function when applied to multiple pairs of layers.
+* New `frag.graph.reduction()` function to reduce the number of fragments of a fragmentation graph.
+* TODO : add a function to handle similarity relationships, generate 
+* TODO : integrate the R Shiny application.
 
 
 # archeofrag 0.8.3
@@ -25,7 +29,7 @@ Released: 2022-07-13
 * igraph functions' names are updated.
 * creation of a utils.R file, including internal functions to check the fragmentation graph and the "layer" argument.
 
-# archeofrag 0.8
+# archeofrag 0.8.0
 Released: 2022-03-08
 
 Third major release.
@@ -41,7 +45,7 @@ Released: 2022-02-17
 * the balance, disturbance, and aggreg.factor values returned by `frag.get.parameters()` are now rounded with two digits.
 * an error has been corrected in the `asymetric.transport.from` parameter of the `frag.simul.process()` function.
 
-# archeofrag 0.7
+# archeofrag 0.7.0
 Released: 2021-04-26
 
 Second major release, after complete revision of the documentation.
@@ -64,7 +68,7 @@ Released: 2021-03-30
 * The edges of the graphs generated with `frag.simul.process()` are now internally weighted with the `frag.edges.weighting()` function.
 * `frag.observer.failure()`: new function to simulate the inaccuracy of an observer in determining the relationships between fragments.
 
-# archeofrag 0.6
+# archeofrag 0.6.0
 Released: 2020-11-27
 
 This is the first public release of the archeofrag package.
