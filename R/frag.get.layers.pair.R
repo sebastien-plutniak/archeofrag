@@ -1,17 +1,17 @@
 
 
-frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mixed.components.only=FALSE)
+frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mixed.components.only=FALSE, verbose=TRUE)
 {
   # tests:
   .check.frag.graph(graph)
   .check.layer.argument(graph, layer.attr)
   
-  if(! is.logical(mixed.components.only)) stop("The 'mixed.components.only' parameter requires a logical value.")
-  if(! is.numeric(size.mini)) stop("The 'size.mini' parameter requires a numerical value.")
+  if(verbose & ! is.logical(mixed.components.only)) stop("The 'mixed.components.only' parameter requires a logical value.")
+  if(verbose & ! is.numeric(size.mini)) stop("The 'size.mini' parameter requires a numerical value.")
   
   igraph::V(graph)$tmp <- igraph::vertex_attr(graph, layer.attr)
   
-  if(sum(sel.layers %in% igraph::V(graph)$tmp) != 2 ){
+  if(verbose & (sum(sel.layers %in% igraph::V(graph)$tmp) != 2)){
     stop(paste(c("The values '", sel.layers[1], "' and/or '", sel.layers[2], "' are missing in the '",  layer.attr, "' vertices attribute."),
                sep=" ", collapse = ""))
   }
@@ -33,7 +33,7 @@ frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mi
   
   g <- igraph::induced_subgraph(subgraph, 
              igraph::V(subgraph)[igraph::V(subgraph)$membership %in% which(sel.components)])
-  if(igraph::gorder(g) == 0){
+  if(verbose & igraph::gorder(g) == 0){
     warning("There is no mixed component between these layers.")
     return(NULL)
   }

@@ -17,7 +17,7 @@ frag.relations.by.layers(graph, layer.attr)
 This function is a useful method to summarise the distribution of connection relationships within and between spatial units (e.g., layers).
 }
 \value{
-A symmetrical matrix with the number of connection  relationships within and between the spatial units. 
+A square matrix with the number of connection relationships within and between spatial units. 
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 \examples{

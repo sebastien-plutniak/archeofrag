@@ -197,17 +197,23 @@ make_frag_object <- function(cr, sr, fragments)
      
   if( ! missing(cr) & ! missing(sr) ){
     cr <- as.matrix(cr)
+    cr <- apply(cr, 2, as.character)
     sr <- as.matrix(sr)
+    sr <- apply(sr, 2, as.character)
     frag_type <- "crsr"
   } else if( ! missing(cr) ){
     cr <- as.matrix(cr)
+    cr <- apply(cr, 2, as.character)
     sr <- matrix()
     frag_type <- "cr"
   } else if( ! missing(sr) ){
     sr <- as.matrix(sr)
+    sr <- apply(sr, 2, as.character)
     cr <- matrix()
     frag_type <- "sr"
   }   
+  
+  fragments[, 1] <- as.character(fragments[, 1])
   
   new(Class="Frag.object", df.cr=cr, df.sr=sr, fragments.df=fragments, frag_type=frag_type)
 }

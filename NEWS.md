@@ -1,14 +1,18 @@
-# archeofrag 0.9.1
-Released: 2024-01-XX
+# archeofrag 0.9.3
+Released: 2024-12-XX
 
 Fourth major release.
 
-* Fix in the `frag.layers.admixture()` and `frag.layers.cohesion()` functions to handle pair of layers with only one layer having data.
+* Fix in the `frag.layers.admixture()` and `frag.layers.cohesion()` functions to handle pair of layers when only one layer includes fragments.
 * In the `frag.layers.cohesion()` and `frag.layers.admixture()` functions, new optionnal parameters ("morphometry", "x", "y", "z") to pass to the `frag.edges.weighting()` function when applied to multiple pairs of layers.
-* New `frag.graph.reduction()` function to reduce the number of fragments of a fragmentation graph.
-* TODO : add a function to handle similarity relationships, generate 
-* TODO : integrate the R Shiny application.
-
+* New `frag.graph.reduce()` function to reduce the number of fragments of a fragmentation graph.
+* Fix the `frag.relations.by.layers()` to return a square matrix.
+* Values returned by `frag.layers.admixture()` and `frag.layers.cohesion()` are now rounded to four digits (to avoid negative admixture values).
+* Fix the sorting of the the pairs of layers returned by `frag.layers.admixture()` to correspond to the same order returned by `frag.layers.cohesion()`.
+* Revising and optimising `frag.edges.weighting()`.
+* Add verbose parameter to `frag.edges.weighting()` and `frag.get.layers.pair()`, frag.layers.admixture(), frag.layers.cohesion().
+* TODO : link the R Shiny application.
+* TODO : add a function (or parameter in `frag.layers.admixture()`) to handle similarity relationships, return result as a distance object
 
 # archeofrag 0.8.3
 Released: 2022-11-16

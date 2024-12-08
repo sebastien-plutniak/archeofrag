@@ -16,23 +16,23 @@ frag.graph.plot  <- function(graph, layer.attr,  ...){
     layers <- sort(unique(igraph::V(graph)$layers))
     
     if(igraph::graph_attr(graph, "frag_type") == "connection and similarity relations"){
-        graph <- igraph::add_layout_(graph, igraph::with_fr(), igraph::component_wise())
+        graph <- igraph::add_layout_(graph, igraph::with_fr(weights = NULL), igraph::component_wise())
         igraph::E(graph)$color <- as.character(factor(igraph::E(graph)$type_relation, labels = c("green", "gray")))
     } else if(igraph::graph_attr(graph, "frag_type") == "similarity relations"){
-      graph <- igraph::add_layout_(graph, igraph::with_fr())
+      graph <- igraph::add_layout_(graph, igraph::with_fr(weights = NULL))
       igraph::E(graph)$color <- "green"
     } else if(length(layers) == 2){ 
       # prepare coordinates if the graph has two layers:
       coords <- data.frame(layer = igraph::V(graph)$layers, miny = 0, maxy = 100) 
       coords[coords$layer == layers[1],]$miny <- 51 
       coords[coords$layer == layers[2],]$maxy <- 49 
-      graph$layout <- igraph::layout_with_fr(graph,  niter= 1000, weights =  NULL,
+      graph$layout <- igraph::layout_with_fr(graph,  niter = 1000, weights =  NULL,
                                      miny = coords$miny, maxy = coords$maxy  )
     }
     
     igraph::plot.igraph(graph, 
          vertex.color = as.character(factor(igraph::V(graph)$layers,
-                                            labels = colors[1:nLayers] )),  
+                                            labels = colors[seq_len(nLayers)] )),  
          vertex.label = NA, 
          vertex.size = 4.5,
          edge.width = 2,
