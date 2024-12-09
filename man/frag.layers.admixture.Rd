@@ -4,7 +4,7 @@
 \title{Admixture of two stratigraphic layers}
 
 \description{Evaluate how reliable the distinction is between the two layers (or any other type of archaeological spatial units).}
-\usage{frag.layers.admixture(graph, layer.attr, morphometry, x, y, z)}
+\usage{frag.layers.admixture(graph, layer.attr, morphometry, x, y, z, verbose=TRUE)}
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object.} 
@@ -13,6 +13,7 @@
   \item{x}{Character. Optional, to pass to the `frag.edges.weighting` function: name of the vertex attribute with the "x" coordinate of the fragments.}
   \item{y}{Character. Optional, to pass to the `frag.edges.weighting` function: name of the vertex attribute with the "y" coordinate of the fragments.}
   \item{z}{Character. Optional, to pass to the `frag.edges.weighting` function:  name of the vertex attribute with the "z" coordinate of the fragments.}  
+  \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{
 This function returns a value reflecting the robustness of the distinction between two layers (or any other relevant archaeological spatial unit).

@@ -3,11 +3,12 @@
 
 \title{Returns a series of descriptive statistics for a fragmentation graph}
 \description{Returns a series of descriptive statistics for a fragmentation graph.}
-\usage{frag.get.parameters(graph, layer.attr)}
+\usage{frag.get.parameters(graph, layer.attr, verbose=TRUE)}
 
 \arguments{
   \item{graph}{An \code{igraph} undirected graph.}
   \item{layer.attr}{Character. The name of the vertices attribute giving the layer of each fragment.}
+  \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{
 This function is a convenient function to obtain general information about a fragmentation graph. It is particularly useful for setting the parameters of the \code{frag.simul.process} function.

@@ -3,7 +3,7 @@
 
 \title{Weighting the edges of a fragmentation graph}
 \description{Weighting of the edges of an archeofrag fragmentation graph.}
-\usage{frag.edges.weighting(graph, layer.attr, morphometry, x, y, z)}
+\usage{frag.edges.weighting(graph, layer.attr, morphometry, x, y, z, verbose=TRUE)}
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object.} 
@@ -12,6 +12,7 @@
   \item{x}{Character. Optional, the name of the vertex attribute with the "x" coordinate of the fragments.}
   \item{y}{Character. Optional, the name of the vertex attribute with the "y" coordinate of the fragments.}
   \item{z}{Character. Optional, the name of the vertex attribute with the "z" coordinate of the fragments.}
+  \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{
 In the framework of the TSAR method, this function weights the edges of a fragmentation graph, before computing the cohesion and admixture values.

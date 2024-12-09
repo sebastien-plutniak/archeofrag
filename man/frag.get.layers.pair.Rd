@@ -8,7 +8,7 @@ Extracts the subraph corresponding to a pair of stratigraphic layers (or any oth
 }
 \usage{
 frag.get.layers.pair(graph, layer.attr, sel.layers, size.mini=2,
-                     mixed.components.only=FALSE)
+                     mixed.components.only=FALSE, verbose=TRUE)
 }
 
 \arguments{
@@ -17,6 +17,7 @@ frag.get.layers.pair(graph, layer.attr, sel.layers, size.mini=2,
   \item{sel.layers}{A numeric vector of length 2 with the name of the stratigraphic layer selected for extraction.}
   \item{size.mini}{A minimal number of vertices for the components to include in the resulting graph.}
   \item{mixed.components.only}{Logical. If TRUE, only the components with fragments from the two selected layers are returned. If FALSE, all the components of the two layers are extracted.}
+  \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{
 The default setting of the \code{mixed.components.only} argument is FALSE, for convenience for other measurements.

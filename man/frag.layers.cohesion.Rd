@@ -3,7 +3,7 @@
 
 \title{Cohesion measure of layers}
 \description{Returns the cohesion value of two stratigraphic layers (or any other type of archeological spatial units). Must be used after weighting the edges with \code{frag.edges.weighting}.}
-\usage{frag.layers.cohesion(graph, layer.attr, morphometry, x, y, z)}
+\usage{frag.layers.cohesion(graph, layer.attr, morphometry, x, y, z, verbose=TRUE)}
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object.} 
@@ -12,6 +12,7 @@
   \item{x}{Character. Optional, to pass to the `frag.edges.weighting` function: name of the vertex attribute with the "x" coordinate of the fragments.}
   \item{y}{Character. Optional, to pass to the `frag.edges.weighting` function: name of the vertex attribute with the "y" coordinate of the fragments.}
   \item{z}{Character. Optional, to pass to the `frag.edges.weighting` function:  name of the vertex attribute with the "z" coordinate of the fragments.}
+  \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{
 The cohesion value of a spatial unit  is computed as: 
