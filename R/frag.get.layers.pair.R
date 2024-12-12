@@ -33,8 +33,8 @@ frag.get.layers.pair  <- function(graph, layer.attr, sel.layers, size.mini=2, mi
   
   g <- igraph::induced_subgraph(subgraph, 
              igraph::V(subgraph)[igraph::V(subgraph)$membership %in% which(sel.components)])
-  if(verbose & igraph::gorder(g) == 0){
-    warning("There is no mixed component between these layers.")
+  if(igraph::gorder(g) == 0){
+    if(verbose) {warning("There is no mixed component between these layers.")}
     return(NULL)
   }
   # remove vertex attribute and return result:

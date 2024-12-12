@@ -40,7 +40,7 @@ frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
     results <- .cohesion.for.two.layers(graph, layers)
     results <- matrix(results)
   } else{ # if length(layers) > 2
-    warning("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
+    message("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
     results <- sapply(seq_len(ncol(pairs)), function(id){
       
       gsub <- frag.get.layers.pair(graph, layer.attr, c(pairs[1, id], pairs[2, id]), verbose = verbose)

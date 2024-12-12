@@ -1,6 +1,6 @@
 
 
-frag.get.parameters <- function(graph, layer.attr){
+frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
   # tests:
   .check.frag.graph(graph)
   .check.layer.argument(graph, layer.attr)
@@ -13,13 +13,15 @@ frag.get.parameters <- function(graph, layer.attr){
     igraph::E(graph)$weight <- 1
   }
   
-  # test of there are two layers:
-  if(length(unique(igraph::V(graph)$layer)) != 2) warning("The graph does not have two layers, disturbance and balance values will be meaningless.")
+  # test if there are two layers:
+  if(verbose & length(unique(igraph::V(graph)$layer)) != 2) {
+    warning("The graph does not have two layers, disturbance and balance values will be meaningless.")
+  }
   
-  # balance: proportion of non-disturbed pieces in the two layers:
+  # balance: proportion of non-disturbed fragments in the two layers:
   v1 <- igraph::V(graph)[igraph::V(graph)$layer == unique(igraph::V(graph)$layer)[1]]
   v2 <- igraph::V(graph)[igraph::V(graph)$layer == unique(igraph::V(graph)$layer)[2]]
-  subgraph <- igraph::subgraph.edges(graph, igraph::E(graph)[ ! v1 %--% v2 ])
+  subgraph <- igraph::subgraph_from_edges(graph, igraph::E(graph)[ ! v1 %--% v2 ])
   balance <- (table(igraph::V(subgraph)$layer) / sum(table(igraph::V(subgraph)$layer)) )[1]
   balance <- round(balance, 2)
   
@@ -29,7 +31,7 @@ frag.get.parameters <- function(graph, layer.attr){
   compo.balance <- round(table(compo.balance)[1] / sum(table(compo.balance)), 2) 
   
   # disturbance: number of pieces which might have move:
-  g.list <- frag.get.layers.pair(graph, "layer", unique(igraph::V(graph)$layer), mixed.components.only = TRUE)
+  g.list <- frag.get.layers.pair(graph, "layer", unique(igraph::V(graph)$layer), mixed.components.only = TRUE, verbose = verbose)
   disturbance <- 0
   if(! is.null(g.list)){
     g.list <- igraph::decompose(g.list)
@@ -49,7 +51,7 @@ frag.get.parameters <- function(graph, layer.attr){
   # planarity (if the RBGL package is installed)
   if (requireNamespace("RBGL", quietly = TRUE)) {
     is.planar <- RBGL::boyerMyrvoldPlanarityTest(igraph::as_graphnel(graph))
-  }else{
+  } else if(verbose) {
     warning("The RBGL package is not installed, the `planarity` value is indeterminated and set to FALSE.")
     is.planar <- FALSE
   }
