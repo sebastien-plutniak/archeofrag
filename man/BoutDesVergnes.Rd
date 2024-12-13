@@ -23,10 +23,6 @@
         \itemize{
             \item id:  fragment unique identifier 
             \item layer: stratigraphic layer where the fragment was found
-            \item volume: estimated volume of the fragment computed as width by thickness by length
-            \item width: width of the fragment (in millimeter)
-            \item thickness: thickness  of the fragment (in millimeter)
-            \item length: length of the fragment (in millimeter)
             \item x: x coordinate of the location where the lithic fragment was found (in metre)
             \item y: y coordinate of the location where the lithic fragment was found (in metre)
             \item z: z coordinate of the location where the lithic fragment was found (in metre)
