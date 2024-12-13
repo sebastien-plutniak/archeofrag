@@ -22,7 +22,7 @@
         \item\code{bdv.fragments} is 3666x9 data frame:
         \itemize{
             \item id:  fragment unique identifier 
-            \item layer: stratigraphic layer where the fragment was found
+            \item layer: chronocultural unit associated to the fragment was found. Values are numbered in expected chrono-stratigraphic order
             \item x: x coordinate of the location where the lithic fragment was found (in metre)
             \item y: y coordinate of the location where the lithic fragment was found (in metre)
             \item z: z coordinate of the location where the lithic fragment was found (in metre)

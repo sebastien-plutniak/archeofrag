@@ -22,7 +22,7 @@
         \item\code{chauzeys.fragments} is a 2167x9 data frame:
         \itemize{
             \item id:  fragment unique identifier 
-            \item layer: stratigraphic layer where the fragment was found
+            \item layer:  chronocultural unit associated to the fragment was found. Values are numbered in expected chrono-stratigraphic order
             \item volume: estimated volume of the fragment computed as width by thickness by length
             \item width: width of the fragment (in millimeter)
             \item thickness: thickness  of the fragment (in millimeter)
