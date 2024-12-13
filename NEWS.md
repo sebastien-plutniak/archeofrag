@@ -10,9 +10,8 @@ Fourth major release.
 * Values returned by `frag.layers.admixture()` and `frag.layers.cohesion()` are now rounded to four digits (to avoid negative admixture values).
 * Fix the sorting of the the pairs of layers returned by `frag.layers.admixture()` to correspond to the same order returned by `frag.layers.cohesion()`.
 * Revising and optimising `frag.edges.weighting()`.
-* Add verbose parameter to `frag.edges.weighting()` and `frag.get.layers.pair()`, frag.layers.admixture(), frag.layers.cohesion().
-* TODO : link the R Shiny application.
-* TODO : add a function (or parameter in `frag.layers.admixture()`) to handle similarity relationships, return result as a distance object
+* Add verbose parameter to `frag.edges.weighting()`, `frag.get.layers.pair()`, `frag.get.parameters()`, `frag.layers.admixture()`, `frag.layers.cohesion()`.
+* Add dependency to R (>= 3.5.0) to use serialized datasets 
 
 # archeofrag 0.8.3
 Released: 2022-11-16

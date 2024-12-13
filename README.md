@@ -20,70 +20,71 @@ stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.t
 [![R build
 status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
 [![codecov](https://codecov.io/gh/sebastien-plutniak/archeofrag/branch/master/graph/badge.svg)](https://app.codecov.io/gh/sebastien-plutniak/archeofrag)
-[![CRAN Version](http://www.r-pkg.org/badges/version/archeofrag)](https://cran.r-project.org/package=archeofrag)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/archeofrag)](https://cran.r-project.org/package=archeofrag)
+[![CRAN
+Version](http://www.r-pkg.org/badges/version/archeofrag)](https://cran.r-project.org/package=archeofrag)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/archeofrag?color=brightgreen&.svg)](https://cran.r-project.org/package=archeofrag)
 [![r-universe](https://sebastien-plutniak.r-universe.dev/badges/archeofrag)](https://sebastien-plutniak.r-universe.dev/ui#package:archeofrag)
+[![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/cran/archeofrag/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/cran/archeofrag)
 [![license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.r-project.org/Licenses/GPL-3)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4271900.svg)](https://doi.org/10.5281/zenodo.4271900)
 [![status](https://joss.theoj.org/papers/ff2007d87bd4c8460b265c69dc403316/status.svg)](https://joss.theoj.org/papers/ff2007d87bd4c8460b265c69dc403316)
 
-  - [**References**](#references)
-  - [**Installation**](#installation)
-  - [**Community guidelines**](#community-guidelines)
-      - [Reporting bugs](#reporting-bugs)
-      - [Suggesting changes](#suggesting-changes)
-  - [**Building fragmentation
-    graphs**](#building-the-fragmentation-graph)
-  - [**Edge weighting, cohesion and admixture
-    computation**](#edge-weighting-cohesion-and-admixture-computation)
-  - [**Testing layer formation hypotheses using simulated
-    data**](#testing-layer-formation-hypotheses-using-simulated-data)
-      - [Generating artificial fragmentation
-        graphs](#generating-artificial-fragmentation-graphs)
-      - [Testing hypotheses](#testing-hypotheses)
-  - [**Assessing spatial unit boundaries using similarity
-    relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
-  - [**Characterising spatial units from their
-    fragmentation**](#characterising-spatial-units-from-their-fragmentation)
+- [**References**](#references)
+- [**Installation**](#installation)
+- [**Community guidelines**](#community-guidelines)
+  - [Reporting bugs](#reporting-bugs)
+  - [Suggesting changes](#suggesting-changes)
+- [**Building fragmentation graphs**](#building-the-fragmentation-graph)
+- [**Edge weighting, cohesion and admixture
+  computation**](#edge-weighting-cohesion-and-admixture-computation)
+- [**Testing layer formation hypotheses using simulated
+  data**](#testing-layer-formation-hypotheses-using-simulated-data)
+  - [Generating artificial fragmentation
+    graphs](#generating-artificial-fragmentation-graphs)
+  - [Testing hypotheses](#testing-hypotheses)
+- [**Assessing spatial unit boundaries using similarity
+  relationships**](#assessing-spatial-unit-boundaries-using-similarity-relationships)
+- [**Characterising spatial units from their
+  fragmentation**](#characterising-spatial-units-from-their-fragmentation)
 
 # References
 
 Details about the *archeofrag* / TSAR method were published in:
 
-  - Plutniak, S. 2022. “Archeofrag: an R package for Refitting and
-    Spatial Analysis in Archaeology”, *Journal of Open Source Software*,
-    7 (75), p. 4335. DOI:
-    [10.21105/joss.04335](https://doi.org/10.21105/joss.04335).
-  - Plutniak, S. 2022. “[Archeofrag: un package R pour les remontages et
-    l’analyse spatiale en
-    archéologie](https://rzine.fr/publication/20220811_archeofrag_joss)”,
-    *Rzine*.
-  - Plutniak, S. 2022. “[L’analyse topologique des remontages
-    archéologiques : la méthode TSAR et le package R
-    archeofrag](http://www.prehistoire.org/offres/doc_inline_src/515/0-BSPF_2022_1_2e_partie_Correspondance_PLUTNIAK.pdf)”,
-    *Bulletin de la Société préhistorique française*, 119 (1),
-    p. 110–113.
-  - Plutniak, S. 2021. “[The Strength of Parthood Ties. Modelling
-    Spatial Units and Fragmented Objects with the TSAR Method –
-    Topological Study of Archaeological
-    Refitting](https://hal.archives-ouvertes.fr/hal-03419952)” *Journal
-    of Archaeological Science*, 136, p. 105501. DOI:
-    [10.1016/j.jas.2021.105501](https://doi.org/10.1016/j.jas.2021.105501).
+- Plutniak, S. 2022. “Archeofrag: an R package for Refitting and Spatial
+  Analysis in Archaeology”, *Journal of Open Source Software*, 7 (75),
+  p. 4335. DOI:
+  [10.21105/joss.04335](https://doi.org/10.21105/joss.04335).
+- Plutniak, S. 2022. “[Archeofrag: un package R pour les remontages et
+  l’analyse spatiale en
+  archéologie](https://rzine.fr/publication/20220811_archeofrag_joss)”,
+  *Rzine*.
+- Plutniak, S. 2022. “[L’analyse topologique des remontages
+  archéologiques : la méthode TSAR et le package R
+  archeofrag](http://www.prehistoire.org/offres/doc_inline_src/515/0-BSPF_2022_1_2e_partie_Correspondance_PLUTNIAK.pdf)”,
+  *Bulletin de la Société préhistorique française*, 119 (1), p. 110–113.
+- Plutniak, S. 2021. “[The Strength of Parthood Ties. Modelling Spatial
+  Units and Fragmented Objects with the TSAR Method – Topological Study
+  of Archaeological
+  Refitting](https://hal.archives-ouvertes.fr/hal-03419952)” *Journal of
+  Archaeological Science*, 136, p. 105501. DOI:
+  [10.1016/j.jas.2021.105501](https://doi.org/10.1016/j.jas.2021.105501).
 
 Use cases were published in:
 
-  - Plutniak, S., J. Caro, C. Manen 2023. “Four Problems for
-    Archaeological Fragmentation Studies. Discussion and Application to
-    the Taï Cave’s Neolithic Pottery Material (France)”, in A. Sörman et
-    al., *Broken Bodies, Places and Objects. New Perspectives on
-    Fragmentation in Archaeology*, London: Routledge, DOI:
-    [10.4324/9781003350026-10](https://doi.org/10.4324/9781003350026-10).
-  - Plutniak, S. 2021. “[The Strength of Parthood Ties. Modelling
-    Spatial Units and Fragmented Objects with the TSAR Method –
-    Topological Study of Archaeological
-    Refitting](https://hal.archives-ouvertes.fr/hal-03419952)” *Journal
-    of Archaeological Science*, 136, p. 105501. DOI:
-    [10.1016/j.jas.2021.105501](https://doi.org/10.1016/j.jas.2021.105501).
+- Plutniak, S., J. Caro, C. Manen 2023. “Four Problems for
+  Archaeological Fragmentation Studies. Discussion and Application to
+  the Taï Cave’s Neolithic Pottery Material (France)”, in A. Sörman et
+  al., *Broken Bodies, Places and Objects. New Perspectives on
+  Fragmentation in Archaeology*, London: Routledge, DOI:
+  [10.4324/9781003350026-10](https://doi.org/10.4324/9781003350026-10).
+- Plutniak, S. 2021. “[The Strength of Parthood Ties. Modelling Spatial
+  Units and Fragmented Objects with the TSAR Method – Topological Study
+  of Archaeological
+  Refitting](https://hal.archives-ouvertes.fr/hal-03419952)” *Journal of
+  Archaeological Science*, 136, p. 105501. DOI:
+  [10.1016/j.jas.2021.105501](https://doi.org/10.1016/j.jas.2021.105501).
 
 # Installation
 
@@ -137,14 +138,13 @@ The `Archeofrag` package comes with a small example data set called
 in the first two layers of the Liang Abu rock shelter. The data set
 contains three data frames:
 
-  - a table with information about the fragments (a unique identifier,
-    the layer, their length and width, etc.),
-  - a table with the connection relationships between these fragments
-    (each row contains the unique identifiers of two refitting
-    fragments),
-  - a table with the similarity relationships between these fragments
-    (two fragments are termed “similar” if they seem to come from the
-    same object but do not have connecting edges.
+- a table with information about the fragments (a unique identifier, the
+  layer, their length and width, etc.),
+- a table with the connection relationships between these fragments
+  (each row contains the unique identifiers of two refitting fragments),
+- a table with the similarity relationships between these fragments (two
+  fragments are termed “similar” if they seem to come from the same
+  object but do not have connecting edges.
 
 The `make_frag_object` function builds objects with the class “frag”.
 Frag objects are not required by the other `Archeofrag` functions,
@@ -155,8 +155,7 @@ relationships.
 
 ``` r
 library(archeofrag)
-data(LiangAbu)
-abu.frag <- make_frag_object(cr=df.cr, fragments=fragments.info)
+abu.frag <- make_frag_object(cr=liangabu.connection, fragments=liangabu.fragments)
 abu.g <- make_cr_graph(abu.frag)
 ```
 
@@ -226,13 +225,12 @@ between the two spatial units (`mixed.components.only`).
 ``` r
 frag.get.layers.pair(abu.g, layer.attr="layer", sel.layers=c("1", "2"),
                      size.mini=2, mixed.components.only=TRUE)
-#> IGRAPH 85f408e UN-- 19 22 -- 
-#> + attr: frag_type (g/c), name (v/c), layer (v/c), zmin (v/n), zmax (v/n), square (v/c),
-#> | sherd.type (v/c), thickness (v/n), length (v/n), membership (v/n), type_relation (e/c)
-#> + edges from 85f408e (vertex names):
-#>  [1] 187--188 165--195 195--196 195--197 196--198 195--204 196--204 197--204 198--204 195--25 
-#> [11] 188--250 27 --28  27 --366 27 --367 28 --367 366--367 27 --371 332--371 366--371 25 --8  
-#> [21] 28 --835 835--836
+#> IGRAPH 5e78f68 UN-- 19 22 -- 
+#> + attr: frag_type (g/c), name (v/c), layer (v/n), zmin (v/n), zmax (v/n), square (v/c), square.x (v/n), square.y (v/n), thickness
+#> | (v/n), length (v/n), thickness.by.length (v/n), sherd.type (v/c), membership (v/n), type_relation (e/c)
+#> + edges from 5e78f68 (vertex names):
+#>  [1] 27 --28  28 --835 835--836 25 --8   27 --366 27 --367 28 --367 366--367 27 --371 332--371 366--371 187--188 165--195 25 --195 195--196
+#> [16] 195--197 196--198 195--204 196--204 197--204 198--204 188--250
 ```
 
 Additionally, the `frag.get.layers` function can extract a set of
@@ -242,12 +240,12 @@ Liang Abu:
 ``` r
 frag.get.layers(abu.g, layer.attr="layer", sel.layers="1")
 #> $`1`
-#> IGRAPH 925f743 UN-- 23 18 -- 
-#> + attr: frag_type (g/c), name (v/c), layer (v/c), zmin (v/n), zmax (v/n), square (v/c),
-#> | sherd.type (v/c), thickness (v/n), length (v/n), type_relation (e/c)
-#> + edges from 925f743 (vertex names):
-#>  [1] 123--124  187--188  195--196  195--197  196--198  195--204  196--204  197--204  198--204 
-#> [10] 195--25   301--302  313--314  392--408  435--441  477--478  25 --8    435--9999 441--9999
+#> IGRAPH 5c98e9e UN-- 23 18 -- 
+#> + attr: frag_type (g/c), name (v/c), layer (v/n), zmin (v/n), zmax (v/n), square (v/c), square.x (v/n), square.y (v/n), thickness
+#> | (v/n), length (v/n), thickness.by.length (v/n), sherd.type (v/c), type_relation (e/c)
+#> + edges from 5c98e9e (vertex names):
+#>  [1] 392--408  123--124  301--302  313--314  435--441  477--478  25 --8    435--9999 441--9999 187--188  25 --195  195--196  195--197  196--198 
+#> [15] 195--204  196--204  197--204  198--204
 ```
 
 # Edge weighting, cohesion and admixture computation
@@ -268,7 +266,7 @@ cohesion value of each layer.
 ``` r
 frag.layers.cohesion(abu.g12, layer.attr="layer")
 #>     cohesion1 cohesion2
-#> 1/2 0.3977727 0.5927749
+#> 1/2    0.3978    0.5928
 ```
 
 These values determine the cohesion (self-adherence) of the spatial
@@ -295,7 +293,7 @@ layer 1:
 ``` r
 frag.layers.cohesion(abu.g12morpho, layer.attr="layer")
 #>     cohesion1 cohesion2
-#> 1/2 0.3239539 0.6692219
+#> 1/2    0.3285    0.6646
 ```
 
 In addition, the `frag.layers.admixture` function returns a value
@@ -305,12 +303,12 @@ results obtained when the morphometry is used or not:
 ``` r
 # topology-based weighting:
 frag.layers.admixture(abu.g12, layer.attr="layer")
-#>   admixture 
-#> 0.009452435
+#> admixture 
+#>    0.0094
 # topology + morphometry weighting:
 frag.layers.admixture(abu.g12morpho, layer.attr="layer")
-#>   admixture 
-#> 0.006824162
+#> admixture 
+#>    0.0069
 ```
 
 In this case, using the morphometry in the computation lowers the
@@ -541,13 +539,13 @@ value, admixture value, and cohesion values of the two spatial units).
 compare.res <- frag.simul.compare(abu.g12, layer.attr="layer",
                                   iter=30, summarise=FALSE)
 head(compare.res$h1.data)
-#>   edges weightsum   balance disturbance   admixture cohesion1 cohesion2
-#> 1    53  221.5225 0.3333333  0.07547170 0.016621769 0.3353562 0.6480220
-#> 2    56  288.4951 0.3333333  0.07142857 0.013533787 0.5279206 0.4585456
-#> 3    54  238.2927 0.3055556  0.05555556 0.008594036 0.3126081 0.6787979
-#> 4    54  216.4440 0.3055556  0.11111111 0.038154290 0.2342695 0.7275762
-#> 5    55  258.7559 0.3333333  0.09090909 0.022104277 0.1306692 0.8472265
-#> 6    53  208.7569 0.3472222  0.07547170 0.017377540 0.4163176 0.5663049
+#>   edges weightsum   balance disturbance admixture cohesion1 cohesion2
+#> 1    57  295.5019 0.3194444  0.05263158    0.0072    0.3404    0.6524
+#> 2    61  336.9079 0.3472222  0.08196721    0.0179    0.4800    0.5021
+#> 3    54  249.5993 0.3055556  0.05555556    0.0083    0.1647    0.8270
+#> 4    55  262.8870 0.3611111  0.01818182    0.0011    0.4109    0.5880
+#> 5    54  220.5114 0.3194444  0.09259259    0.0286    0.5369    0.4345
+#> 6    49  135.5314 0.3611111  0.10204082    0.0352    0.3550    0.6098
 ```
 
 For each of these parameters, the `frag.simul.summarise` function
@@ -559,13 +557,13 @@ frag.simul.summarise(abu.g12, layer.attr="layer",
                      compare.res$h1.data,
                      compare.res$h2.data)
 #>             H1 != H2? p.value Obs. value/H1 Obs. value/H2
-#> edges            TRUE    0.05         lower         lower
-#> weightsum        TRUE    0.01         lower        within
-#> balance          TRUE    0.02        within         lower
-#> disturbance     FALSE    0.52         lower         lower
-#> admixture       FALSE    0.52         lower         lower
-#> cohesion1        TRUE    0.03        within        within
-#> cohesion2        TRUE    0.03        within        within
+#> edges           FALSE     0.7         lower         lower
+#> weightsum       FALSE    0.23         lower         lower
+#> balance         FALSE     0.2        within         lower
+#> disturbance     FALSE    0.17         lower         lower
+#> admixture       FALSE    0.18         lower         lower
+#> cohesion1       FALSE    0.11        higher        within
+#> cohesion2       FALSE    0.08         lower        within
 ```
 
 This function returns a data frame with four columns, containing, for
@@ -596,7 +594,7 @@ The `make_sr_graph` function takes a “frag” object and generates an
 
 ``` r
 # make a frag object and generate a similarity graph:
-abu.frag <- make_frag_object(sr=df.sr, fragments=fragments.info)
+abu.frag <- make_frag_object(sr=liangabu.similarity, fragments=liangabu.fragments)
 abu.sr <- make_sr_graph(abu.frag)
 ```
 
@@ -653,13 +651,10 @@ plot(clust.res, hang=-1, axes=F, ann=F)
 <div class="figure" style="text-align: center">
 
 <img src="man/figures/README-similarity-dendr-fig-1.png" alt="Hierarchical clustering of the pottery layers in Liang Abu (distance: based on the number of similarity relationships; clustering method: Ward)."  />
-
 <p class="caption">
-
 Hierarchical clustering of the pottery layers in Liang Abu (distance:
 based on the number of similarity relationships; clustering method:
 Ward).
-
 </p>
 
 </div>
@@ -698,8 +693,8 @@ rbind(
   "unit1" = frag.cycles(simul.g1, kmax=5),
   "unit2" = frag.cycles(simul.g2, kmax=5))
 #>       3-cycles 4-cycles 5-cycles
-#> unit1        6        1        0
-#> unit2       16        7        1
+#> unit1        7        1        0
+#> unit2        8        1        0
 ```
 
 The `frag.path.lengths` function returns the distribution of the path
@@ -712,11 +707,11 @@ path lengths.
 
 ``` r
 frag.path.lengths(simul.g1)
-#> [1] 28 10  2
+#> [1] 29 10
 frag.path.lengths(simul.g2)
-#> [1] 42 15  1
+#> [1] 36 24  3
 frag.path.lengths(simul.g2, cumulative=T)
-#> [1] 1.00000000 0.35714286 0.02380952
+#> [1] 1.00000000 0.66666667 0.08333333
 ```
 
 In a graph, the shortest path between two vertices is the path including
@@ -728,9 +723,9 @@ cumulative relative frequency of the diameters.
 
 ``` r
 frag.diameters(simul.g1)
-#> 1 2 3 
-#> 4 5 1
+#> 1 2 
+#> 4 6
 frag.diameters(simul.g2)
 #> 1 2 3 
-#> 1 8 1
+#> 3 5 2
 ```

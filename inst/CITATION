@@ -1,7 +1,7 @@
 citHeader("To cite archeofrag in publications use:")
 
-citEntry(
-   entry="article",
+bibentry(
+   bibtype="article",
    author = "Plutniak, Sébastien",
    title = "The Strength of Parthood Ties. Modelling Spatial Units and Fragmented Objects with the TSAR Method -- Topological Study of Archaeological Refitting",
    journal = "Journal of Archaeological Science",

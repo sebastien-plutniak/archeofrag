@@ -30,9 +30,9 @@ test_that("cohesion values of a graph with 1 initial layer are correct", {
                           vertices=55,
                           edges=45,
                           disturbance=0.1)
-  expect_equal(frag.layers.cohesion(g, "layer")[1], 0.5123021, tolerance=.00001)
-  expect_equal(frag.layers.cohesion(g, "layer")[2], 0.4180882, tolerance=.00001)
-  expect_equal(as.numeric(frag.layers.admixture(g, "layer")), 0.0696097)
+  expect_equal(frag.layers.cohesion(g, "layer")[1], 0.5123, tolerance=.00001)
+  expect_equal(frag.layers.cohesion(g, "layer")[2], 0.4181, tolerance=.00001)
+  expect_equal(as.numeric(frag.layers.admixture(g, "layer")), 0.0696)
 })
 
 
@@ -58,8 +58,8 @@ test_that("admixture and cohesion values of a graph with 2 initial layers are co
                           vertices=55,
                           disturbance=0.15)
   expect_equal(frag.layers.cohesion(g, "layer")[1], 0.4910982, tolerance=.00001)
-  expect_equal(frag.layers.cohesion(g, "layer")[2], 0.4151224, tolerance=.00001)
-  expect_equal(as.numeric(frag.layers.admixture(g, "layer")), 0.09377934, tolerance=.00001)
+  expect_equal(frag.layers.cohesion(g, "layer")[2], 0.4151, tolerance=.00001)
+  expect_equal(as.numeric(frag.layers.admixture(g, "layer")), 0.0938, tolerance=.00001)
 })
 
 test_that("the optional asymmetric.transport.from parameter works", {
@@ -90,3 +90,4 @@ test_that("the optional from.observed.graph parameter works", {
   expect_equal(class(g2), "igraph")
   expect_equal(igraph::gorder(g1), igraph::gorder(g2))
 })
+

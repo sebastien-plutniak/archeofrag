@@ -25,12 +25,12 @@ An R package for refitting and spatial analysis in archeology.
 [![R build status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
 [![codecov](https://codecov.io/gh/sebastien-plutniak/archeofrag/branch/master/graph/badge.svg)](https://app.codecov.io/gh/sebastien-plutniak/archeofrag)
 [![CRAN Version](http://www.r-pkg.org/badges/version/archeofrag)](https://cran.r-project.org/package=archeofrag)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/archeofrag)](https://cran.r-project.org/package=archeofrag)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/archeofrag?color=brightgreen&.svg)](https://cran.r-project.org/package=archeofrag)
 [![r-universe](https://sebastien-plutniak.r-universe.dev/badges/archeofrag)](https://sebastien-plutniak.r-universe.dev/ui#package:archeofrag)
+[![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/cran/archeofrag/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/cran/archeofrag)
 [![license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.r-project.org/Licenses/GPL-3)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4271900.svg)](https://doi.org/10.5281/zenodo.4271900)
 [![status](https://joss.theoj.org/papers/ff2007d87bd4c8460b265c69dc403316/status.svg)](https://joss.theoj.org/papers/ff2007d87bd4c8460b265c69dc403316)
-
 
 
 - [**References**](#references)
@@ -70,8 +70,8 @@ install.packages("archeofrag")
 The development version is available on GitHub and can be installed with:
 
 ```r
-# install.packages("devtools")
-devtools::install_github("sebastien-plutniak/archeofrag")
+# install.packages("remotes")
+remotes::install_github("sebastien-plutniak/archeofrag")
 ```
 
 Some optional functionalities of *Archeofrag* requires the *RBGL* package available through *Bioconductor*:
@@ -110,8 +110,7 @@ The `make_cr_graph` function takes a frag object and generates an `igraph` graph
 
 ```{r make-empirical-graph,  message=F}
 library(archeofrag)
-data(LiangAbu)
-abu.frag <- make_frag_object(cr=df.cr, fragments=fragments.info)
+abu.frag <- make_frag_object(cr=liangabu.connection, fragments=liangabu.fragments)
 abu.g <- make_cr_graph(abu.frag)
 ```
 
@@ -386,7 +385,7 @@ The `make_sr_graph` function takes a “frag” object and  generates an `igraph
 
 ```{r make-similarity}
 # make a frag object and generate a similarity graph:
-abu.frag <- make_frag_object(sr=df.sr, fragments=fragments.info)
+abu.frag <- make_frag_object(sr=liangabu.similarity, fragments=liangabu.fragments)
 abu.sr <- make_sr_graph(abu.frag)
 ```
 

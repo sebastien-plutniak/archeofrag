@@ -60,7 +60,7 @@ The `make_cr_graph` function takes a frag object and generates an `igraph` graph
 ```{r make-empirical-graph,  message=F}
 library(archeofrag)
 data(LiangAbu)
-abu.frag <- make_frag_object(cr=df.cr, fragments=fragments.info)
+abu.frag <- make_frag_object(cr=liangabu.connection, fragments=liangabu.fragments)
 abu.g <- make_cr_graph(abu.frag)
 ```
 
@@ -336,7 +336,7 @@ The `make_sr_graph` function takes a “frag” object and  generates an `igraph
 
 ```{r make-similarity}
 # make a frag object and generate a similarity graph:
-abu.frag <- make_frag_object(sr=df.sr, fragments=fragments.info)
+abu.frag <- make_frag_object(sr=liangabu.similarity, fragments=liangabu.fragments)
 abu.sr <- make_sr_graph(abu.frag)
 ```
 
