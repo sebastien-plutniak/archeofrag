@@ -7,7 +7,7 @@ Simulate the fragmentation of archaeological objects scattered in two stratigrap
 Simulate the fragmentation of archaeological objects scattered in two stratigraphic layers (or any other kind of spatial unit).
 }
 \usage{
-frag.simul.process(initial.layers=2, n.components, vertices=Inf,
+frag.simul.process(initial.layers=2, n.components=NULL, vertices=Inf,
                    edges=Inf, balance=.5, components.balance=.5,
                    disturbance=0, aggreg.factor=0, planar=FALSE,
                    asymmetric.transport.from=NULL, 

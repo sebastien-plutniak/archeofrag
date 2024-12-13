@@ -158,7 +158,7 @@
 
  
 
-frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=FALSE, asymmetric.transport.from=NULL, from.observed.graph=NULL, observed.layer.attr=NULL){
+frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=FALSE, asymmetric.transport.from=NULL, from.observed.graph=NULL, observed.layer.attr=NULL){
   
   if(! is.logical(planar)) stop("The 'planar' argument must be logical.")
   if(planar==TRUE & (! requireNamespace("RBGL", quietly=TRUE))){
@@ -166,7 +166,8 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
   }
   
   #  If required by the user, use parameters from the observed graph (except the number of edges):
-  if( ! is.null(from.observed.graph) & ! is.null(observed.layer.attr)){
+  if( ! is.null(from.observed.graph)){
+    if ( is.null(observed.layer.attr) ) stop("The 'observed.layer.attr' parameter is missing.")
     if( ! is.character(observed.layer.attr))  stop("The parameter 'observed.layer.attr' requires a character value.")
     if( ! observed.layer.attr %in% names(igraph::vertex_attr(from.observed.graph)) ){
       stop(paste("No '", observed.layer.attr, "' vertices attribute.", sep=""))
@@ -184,6 +185,10 @@ frag.simul.process <- function(initial.layers=2, n.components, vertices=Inf, edg
     if(missing(disturbance)) disturbance <- params$disturbance
     if(missing(aggreg.factor)) aggreg.factor <- params$aggreg.factor
     if(missing(planar))  planar <- params$planar
+    if(is.na(planar)) {
+      planar <- FALSE
+      warning("The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.")
+    }
   }
   
   # BEGIN Tests:
