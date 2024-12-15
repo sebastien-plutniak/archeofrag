@@ -18,17 +18,18 @@ frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
     warning("The graph does not have two layers, disturbance and balance values will be meaningless.")
   }
   
-  # balance: proportion of non-disturbed fragments in the two layers:
+  # balance: considering the subgraph including only fragments connected to fragments from the same spatial unit, proportion of fragments in the spatial unit including less fragments
   v1 <- igraph::V(graph)[igraph::V(graph)$layer == unique(igraph::V(graph)$layer)[1]]
   v2 <- igraph::V(graph)[igraph::V(graph)$layer == unique(igraph::V(graph)$layer)[2]]
   subgraph <- igraph::subgraph_from_edges(graph, igraph::E(graph)[ ! v1 %--% v2 ])
-  balance <- (table(igraph::V(subgraph)$layer) / sum(table(igraph::V(subgraph)$layer)) )[1]
-  balance <- round(balance, 2)
+  balance <- sort(table(igraph::V(subgraph)$layer))
+  balance <- round(balance[1] / sum(balance), 2)
   
-  # components balance:
+  # components balance: considering the subgraph including only fragments connected to fragments from the same spatial unit, proportion of components in the spatial unit including less fragments
   compo.balance <- sapply(igraph::decompose(subgraph), 
                           function(x) igraph::V(x)$layer[1])
-  compo.balance <- round(table(compo.balance)[1] / sum(table(compo.balance)), 2) 
+  compo.balance <- sort(table(compo.balance))
+  compo.balance <- round(compo.balance[1] / sum(compo.balance), 2) 
   
   # disturbance: number of pieces which might have move:
   g.list <- frag.get.layers.pair(graph, "layer", unique(igraph::V(graph)$layer), mixed.components.only = TRUE, verbose = verbose)
