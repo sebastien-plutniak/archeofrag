@@ -1,10 +1,10 @@
 \name{frag.simul.process}
 \alias{frag.simul.process}
 \title{
-Simulate the fragmentation of archaeological objects scattered in two stratigraphic layers
+Simulate the fragmentation of archaeological objects scattered in two spatial units
 }
 \description{
-Simulate the fragmentation of archaeological objects scattered in two stratigraphic layers (or any other kind of spatial unit).
+Simulate the fragmentation of archaeological objects scattered in two spatial units.
 }
 \usage{
 frag.simul.process(initial.layers=2, n.components=NULL, vertices=Inf,
@@ -15,18 +15,18 @@ frag.simul.process(initial.layers=2, n.components=NULL, vertices=Inf,
 }
 
 \arguments{
-  \item{initial.layers}{Integer (1 or 2). Number of hypothetical stratigraphic layers to use as initial condition.}
+  \item{initial.layers}{Integer (1 or 2). Number of hypothetical stratigraphic of spatial units (e.g. layers) to use as initial condition.}
   \item{n.components}{Integer. Number of objects to fragment (connected components).}
   \item{vertices}{Integer. Number of fragments (vertices).}
   \item{edges}{Integer. Number of connection relationships between fragments (edges).}
-  \item{balance}{Numeric ]0;1[. Proportion of fragments to generate in the first layer before applying disturbances.}
-  \item{components.balance}{Numeric ]0;1[. Proportion of components in the first layer before applying fragmentation (only used when initial.layers=2).}
-  \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from one layer to another.}
+  \item{balance}{Numeric ]0;1[. Proportion of fragments to generate in the first spatial unit before applying disturbances.}
+  \item{components.balance}{Numeric ]0;1[. Proportion of components in the first spatial units before applying fragmentation (only used when initial.layers=2).}
+  \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from one spatial unit to another.}
   \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
   \item{planar}{Logical. If TRUE, generates a planar graph (if FALSE, the graph can be planar or not).}
-  \item{asymmetric.transport.from}{Numeric or character value in "1" or "2" (refering to the first and second spatial unit). If not NULL, the disturbance process will be applied only to the fragments from this layer.}
+  \item{asymmetric.transport.from}{Numeric or character value in "1" or "2" (refering to the first and second spatial unit). If not NULL, the disturbance process will be applied only to the fragments from this spatial unit.}
   \item{from.observed.graph}{igraph object. If not NULL, the parameters observed in this fragmentation graph are used instead of the previous parameters. See details.}
-  \item{observed.layer.attr}{character. Required if the \code{from.observed.graph} option is used. Name of the layer attribute in the observed graph.}
+  \item{observed.layer.attr}{character. Required if the \code{from.observed.graph} option is used. Name of the spatial unit attribute in the observed graph.}
 }
 \details{
 This function simulates the fragmentation of archeological objects within and between two adjacent stratigraphic layers.
@@ -37,10 +37,10 @@ Some parameters are optional or depend on other parameters (messages are display
 Namely, setting \code{initial.layers}=1 enables to constraint the graph with the number of vertices only, the number of edges only, or both. 
 With \code{initial.layers}=2, the \code{components.balance} can be used, and the \code{edges} parameter is not supported (only the \code{vertices} parameter can be used).
 
-The \code{components.balance} parameter determines the proportion of components (i.e. objects) in the first layer before the application of the fragmentation process;
-the \code{balance} parameter determines the proportion of fragments in the first layer before the application of the disturbance process.
-The \code{disturbance} parameter determines the proportion of fragments to "move" from one layer to another. Consequently, it generates inter-layer relationships.
-If \code{asymmetric.transport.from} is set to 1 or 2, the disturbance process is only applied to the fragments from layer 1 or layer 2, respectively.s
+The \code{components.balance} parameter determines the proportion of components (i.e. objects) in the first spatial unit before the application of the fragmentation process;
+the \code{balance} parameter determines the proportion of fragments in the first spatial unit before the application of the disturbance process.
+The \code{disturbance} parameter determines the proportion of fragments to "move" from one spatial unit to another. Consequently, it generates inter-spatial units relationships.
+If \code{asymmetric.transport.from} is set to 1 or 2, the disturbance process is only applied to the fragments from spatial unit 1 or spatial unit 2, respectively.
 
 If a graph is given to the \code{from.observed.graph} parameter, the properties of this graph are internally retrieved with the \code{frag.get.parameters} function (including:  the number of components, number of vertices, balance, the components.balance, the disturbance, the aggregation factor, and whether the graph is planar or not; note that the number of edges is not included as a parameter). If some other parameters of the \code{frag.simul.process} function are set, the values retrieved from the observed graph are used in replacement.
 The \code{frag.edges.weighting} is internally applied to weight the graph edges.

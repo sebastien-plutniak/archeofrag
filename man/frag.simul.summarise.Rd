@@ -8,7 +8,7 @@
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object. The graph to compare with simulated graphs.} 
-  \item{layer.attr}{Character. The name of the vertices attribute giving the layer of the fragments.}
+  \item{layer.attr}{Character. The name of the vertices attribute giving the spatial unit of the fragments (layer or other).}
   \item{res.h1}{data frame. A data frame with the parameters observed on the simulated graphs for H1.}
   \item{res.h2}{data frame. A data frame with the parameters observed on the simulated graphs for H2.}
   \item{cohesion1.attr}{character. The name of the column in the data frames res.h1 and res.h2 with the cohesion values of the spatial unit 1.}

@@ -1,10 +1,10 @@
 \name{frag.get.layers.pair}
 \alias{frag.get.layers.pair}
 \title{
-Extracts the subgraph corresponding to a pair of stratigraphic layers.
+Extracts the subgraph corresponding to a pair of archaeological spatial units.
 }
 \description{
-Extracts the subraph corresponding to a pair of stratigraphic layers (or any other type of archaeological spatial unit).
+Extracts the subraph corresponding to a pair of archaeological spatial units (stratigraphic layers or any other type of spatial unit).
 }
 \usage{
 frag.get.layers.pair(graph, layer.attr, sel.layers, size.mini=2,
@@ -13,10 +13,10 @@ frag.get.layers.pair(graph, layer.attr, sel.layers, size.mini=2,
 
 \arguments{
   \item{graph}{An \code{igraph} object.}
-  \item{layer.attr}{Character. The name of the vertices attribute giving the layer of each fragment.}
-  \item{sel.layers}{A numeric vector of length 2 with the name of the stratigraphic layer selected for extraction.}
+  \item{layer.attr}{Character. The name of the vertices attribute giving the spatial unit of each fragment.}
+  \item{sel.layers}{A numeric vector of length 2 with the name of the spatial unit selected for extraction.}
   \item{size.mini}{A minimal number of vertices for the components to include in the resulting graph.}
-  \item{mixed.components.only}{Logical. If TRUE, only the components with fragments from the two selected layers are returned. If FALSE, all the components of the two layers are extracted.}
+  \item{mixed.components.only}{Logical. If TRUE, only the components with fragments from the two selected spatial units are returned. If FALSE, all the components of the two spatial units are extracted.}
   \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{

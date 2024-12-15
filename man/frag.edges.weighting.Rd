@@ -22,15 +22,15 @@ The weights are computed from the topological properties  of the connection netw
   2. morphometry, the length, length by width, surface, volume, etc.
   3. spatial distance, expressed using the metric (or other) system, or an ad hoc relative system.
 
-The function must be applied to a fragmentation graph with two layers.
-Internal connection relationships (within a layer) and external relationships (between the two layers) are distinguished, and their respective edge weights are computed in different ways.
-Three subgraphs are first generated, one for each layer and only one for the external relations.
+The function must be applied to a fragmentation graph with two spatial units.
+Internal connection relationships (within a spatial unit) and external relationships (between the two spatial units) are distinguished, and their respective edge weights are computed in different ways.
+Three subgraphs are first generated, one for each spatial unit and only one for the external relations.
 
-The weight of an intra-layer edge (E) is equal to the sum of the degrees (d) of the vertices (i and j) it connects: 
+The weight of an intra-spatial units edge (E) is equal to the sum of the degrees (d) of the vertices (i and j) it connects: 
 
   \deqn{W_{intra(E_{ij})} = d_i + d_j}{W_intra(E_ij)= di + dj}
 
-For an inter-layer edge, the same calculation is made but with a modifier to account for the balance of information available for each layer:  
+For an inter-spatial unit edge, the same calculation is made but with a modifier to account for the balance of information available for each spatial unit:  
     
   \deqn{W(E_inter{ij}) = (d_i + d_j) \times \left(3 - \frac{2}{ 1 + (tr_i + tr_j)/2}\right) \times \left(1 - \frac{1}{\sqrt{(V_{sub} + E_{sub}) }}\right)^2}{W_inter(E_ij)= (di + dj) * (3 - (2 / (1 + (trans_i+trans_j)/2)) * (1 - 1/(sqrt(V_sub + E_sub)))^2}
 

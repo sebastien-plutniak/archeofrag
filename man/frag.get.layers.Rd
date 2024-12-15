@@ -1,21 +1,21 @@
 \name{frag.get.layers}
 \alias{frag.get.layers}
 \title{
-Extracts the subgraph of each selected stratigraphic layer.
+Extracts the subgraph of each selected archaeological spatial unit.
 }
 \description{
-Extracts the subgraph of each selected stratigraphic layer (or any other type of archaeological spatial unit).
+Extracts the subgraph of each selected archaeological spatial unit (stratigraphic layer or any other type of spatial unit).
 }
 \usage{
 frag.get.layers(graph, layer.attr, sel.layers)
 }
 \arguments{
   \item{graph}{An undirected \code{igraph} object.}
-  \item{layer.attr}{Character. The name of the vertices attribute giving the layer of each fragment.}
-  \item{sel.layers}{Character. The identifier(s) of the stratigraphic layers to retrieve.}
+  \item{layer.attr}{Character. The name of the vertices attribute giving the spatial unit of each fragment.}
+  \item{sel.layers}{Character. The identifier(s) of the stratigraphic spatial units to retrieve.}
 }
 \details{
-This function is only a convenient function to extract the subgraphs of selected stratigraphic layers (or any other type of archaeological spatial unit). 
+This function is only a convenient function to extract the subgraphs of selected  archaeological spatial unit (stratigraphic layer or any other type of spatial unit).
 A graph is created for each layer in the vertex attribute given by the \code{layer.attr} argument.
 }
 \value{
