@@ -15,13 +15,13 @@ frag.simul.process(initial.layers=2, n.components=NULL, vertices=Inf,
 }
 
 \arguments{
-  \item{initial.layers}{Integer (1 or 2). Number of hypothetical stratigraphic of spatial units (e.g. layers) to use as initial condition.}
-  \item{n.components}{Integer. Number of objects to fragment (connected components).}
-  \item{vertices}{Integer. Number of fragments (vertices).}
-  \item{edges}{Integer. Number of connection relationships between fragments (edges).}
-  \item{balance}{Numeric ]0;1[. Proportion of fragments to generate in the first spatial unit before applying disturbances.}
-  \item{components.balance}{Numeric ]0;1[. Proportion of components in the first spatial units before applying fragmentation (only used when initial.layers=2).}
-  \item{disturbance}{Numeric [0;1]. Proportion of fragments to randomly move from one spatial unit to another.}
+  \item{initial.layers}{Integer (1 or 2). Number of hypothetical spatial units (e.g. layers) to use as initial condition.}
+  \item{n.components}{Integer. Innitial number of objects (connected components).}
+  \item{vertices}{Integer. Final number of fragments (vertices).}
+  \item{edges}{Integer. Final number of connection relationships between fragments (edges).}
+  \item{balance}{Numeric ]0;1[. Proportion of fragments to generate in the first spatial unit before applying disturbance.}
+  \item{components.balance}{Numeric ]0;1[. Proportion of objects (connected components) in the first spatial unit before applying fragmentation (only used when initial.layers=2).}
+  \item{disturbance}{Numeric [0;1]. Final proportion of fragments moved from one spatial unit to the other.}
   \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
   \item{planar}{Logical. If TRUE, generates a planar graph (if FALSE, the graph can be planar or not).}
   \item{asymmetric.transport.from}{Numeric or character value in "1" or "2" (refering to the first and second spatial unit). If not NULL, the disturbance process will be applied only to the fragments from this spatial unit.}

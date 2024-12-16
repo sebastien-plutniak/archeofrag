@@ -23,15 +23,15 @@ A fragmentation graph (igraph object) with less fragments (vertices).
 \examples{
 g <- frag.simul.process(n.components=15, vertices=50, disturbance = .15) 
 igraph::gorder(g)
-igraph::clusters(g)$no
+igraph::components(g)$no
 # reduce the number of framents and conserve the number of connected components:
 g1 <- frag.graph.reduce(g,  n.frag.to.remove = 40, conserve.objects.nr = TRUE)
 igraph::gorder(g1)
-igraph::clusters(g1)$no
+igraph::components(g1)$no
 # reduce the number of framents and do not conserve the number of connected components:
 g2 <- frag.graph.reduce(g,  n.frag.to.remove = 40, conserve.objects.nr = FALSE)
 igraph::gorder(g2)
-igraph::clusters(g2)$no
+igraph::components(g2)$no
 }
  
 \keyword{simulation}

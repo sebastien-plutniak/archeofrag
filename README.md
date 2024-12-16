@@ -32,10 +32,14 @@ Downloads](https://cranlogs.r-pkg.org/badges/grand-total/archeofrag?color=bright
 
 - [**References**](#references)
 - [**Installation**](#installation)
+  - [R package](#r-package)
+  - [GUI version](#gui-version)
 - [**Community guidelines**](#community-guidelines)
   - [Reporting bugs](#reporting-bugs)
   - [Suggesting changes](#suggesting-changes)
 - [**Building fragmentation graphs**](#building-the-fragmentation-graph)
+- [**Alterating fragmentation
+  graphs**](##alterating-fragmentation-graphs)
 - [**Edge weighting, cohesion and admixture
   computation**](#edge-weighting-cohesion-and-admixture-computation)
 - [**Testing layer formation hypotheses using simulated
@@ -88,6 +92,8 @@ Use cases were published in:
 
 # Installation
 
+## R package
+
 The package can be installed from CRAN with:
 
 ``` r
@@ -98,8 +104,8 @@ The development version is available on GitHub and can be installed
 with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("sebastien-plutniak/archeofrag")
+# install.packages("remotes")
+remotes::install_github("sebastien-plutniak/archeofrag")
 ```
 
 Some optional functionalities of *Archeofrag* requires the *RBGL*
@@ -111,8 +117,15 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install("RBGL")
 ```
 
-For an interactive demonstration, see also the [Shiny
-application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
+## GUI version
+
+The `archeofrag` package is complemented by a graphic-user interface
+version, `archeofrag.gui` (also distributed as an R package). See a
+[live demo
+here](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
+This GUI version, focusing on connection relationships only
+(i.e. “proper refits”), make it easy to explore quickly and efficiently
+a refitting dataset.
 
 # Community guidelines
 
@@ -133,10 +146,10 @@ model](https://help.github.com/articles/about-pull-requests).
 
 # Building the fragmentation graph
 
-The `Archeofrag` package comes with a small example data set called
-“Liang Abu”, related to the pottery fragments found on the surface and
-in the first two layers of the Liang Abu rock shelter. The data set
-contains three data frames:
+The `Archeofrag` package comes with several example data sets. One of
+them, called “Liang Abu”, related to the pottery fragments found on the
+surface and in the first two layers of the Liang Abu rock shelter,
+Borneo, Indonesia. The data set contains three data frames:
 
 - a table with information about the fragments (a unique identifier, the
   layer, their length and width, etc.),
@@ -161,9 +174,9 @@ abu.g <- make_cr_graph(abu.frag)
 
 # Visualisation and subgraph extraction
 
-Several `Archeofrag` functions ensure that the first examination of the
-data is easy. The `frag.relations.by.layers` function returns a matrix
-with the number of relationships within and between spatial units (e.g.,
+Several `Archeofrag` functions aims at making easy first examination of
+the data. The `frag.relations.by.layers` function returns a matrix with
+the number of relationships within and between spatial units (e.g.,
 stratigraphic layer).
 
 ``` r
@@ -177,9 +190,9 @@ frag.relations.by.layers(abu.g, "layer")
 
 The diagonal of the matrix gives the number of intra-layer
 relationships, and the other values refer to inter-layer relationships.
-Here, for example, there are 31 connection relationships within layer 2,
-and 3 connection relationships between layers 1 and 2. No connection
-relationship was found between the surface (“0”) and layer 2.
+Here, for example, there are 31 connection relationships within Layer 2,
+and 3 connection relationships between Layers 1 and 2. No connection
+relationship was found between the surface (“0”) and Layer 2.
 
 The `frag.graph.plot` function generates a visual representation of the
 graph:
@@ -225,10 +238,10 @@ between the two spatial units (`mixed.components.only`).
 ``` r
 frag.get.layers.pair(abu.g, layer.attr="layer", sel.layers=c("1", "2"),
                      size.mini=2, mixed.components.only=TRUE)
-#> IGRAPH 5e78f68 UN-- 19 22 -- 
+#> IGRAPH d4e2221 UN-- 19 22 -- 
 #> + attr: frag_type (g/c), name (v/c), layer (v/n), zmin (v/n), zmax (v/n), square (v/c), square.x (v/n), square.y (v/n), thickness
 #> | (v/n), length (v/n), thickness.by.length (v/n), sherd.type (v/c), membership (v/n), type_relation (e/c)
-#> + edges from 5e78f68 (vertex names):
+#> + edges from d4e2221 (vertex names):
 #>  [1] 27 --28  28 --835 835--836 25 --8   27 --366 27 --367 28 --367 366--367 27 --371 332--371 366--371 187--188 165--195 25 --195 195--196
 #> [16] 195--197 196--198 195--204 196--204 197--204 198--204 188--250
 ```
@@ -240,12 +253,41 @@ Liang Abu:
 ``` r
 frag.get.layers(abu.g, layer.attr="layer", sel.layers="1")
 #> $`1`
-#> IGRAPH 5c98e9e UN-- 23 18 -- 
+#> IGRAPH 38b572f UN-- 23 18 -- 
 #> + attr: frag_type (g/c), name (v/c), layer (v/n), zmin (v/n), zmax (v/n), square (v/c), square.x (v/n), square.y (v/n), thickness
 #> | (v/n), length (v/n), thickness.by.length (v/n), sherd.type (v/c), type_relation (e/c)
-#> + edges from 5c98e9e (vertex names):
+#> + edges from 38b572f (vertex names):
 #>  [1] 392--408  123--124  301--302  313--314  435--441  477--478  25 --8    435--9999 441--9999 187--188  25 --195  195--196  195--197  196--198 
 #> [15] 195--204  196--204  197--204  198--204
+```
+
+# Alterating fragmentation graphs
+
+Two functions aimed at modifying a fragmentation graph, under
+constraints specific to the analysis of archaeological fragmentation
+graphs: \* `frag.observer.failure`, to remove relationships (edges) \*
+`frag.graph.reduce` to remove fragments (nodes)
+
+The `frag.observer.failure` function takes a fragmentation graph and
+randomly removes a given proportion of edges. As suggested by its name,
+the main purpose of this function is to simulate the failure of an
+observer to determine relationships between fragments (a common
+situation, considering the difficulty and time-consuming aspect of the
+search for refits).
+
+``` r
+frag.observer.failure(abu.g12, likelihood=0.2)
+```
+
+The `frag.graph.reduce` function randomly removes a given number of
+fragments (nodes) from a fragmentation graph. The `conserve.objects.nr`
+parameter, if TRUE, ensures that the number of objects (i.e. connected
+components) is the same in the resulting graph.
+
+``` r
+c(fragments = igraph::gorder(abu.g12), objects = igraph::components(abu.g12)$no)
+abu.g12.red <- frag.graph.reduce(abu.g12, n.frag.to.remove = 5, conserve.objects.nr = TRUE)
+c(fragments = igraph::gorder(abu.g12.red), objects = igraph::components(abu.g12.red)$no)
 ```
 
 # Edge weighting, cohesion and admixture computation
@@ -287,8 +329,8 @@ abu.g12morpho <- frag.edges.weighting(abu.g12,
                                       morphometry="length")
 ```
 
-Using the morphometry parameter results, layer 2 is more cohesive than
-layer 1:
+Using the morphometry parameter results, Layer 2 is more cohesive than
+Layer 1:
 
 ``` r
 frag.layers.cohesion(abu.g12morpho, layer.attr="layer")
@@ -399,15 +441,6 @@ frag.simul.process(initial.layers=1,
                    aggreg.factor=0,
                    planar=TRUE,
                    asymmetric.transport.from="1")
-```
-
-An additional function is intended to simulate the failure of an
-observer to determine the relationships between fragments. The
-`frag.observer.failure` function takes a fragmentation graph and
-randomly removes a given proportion of edges.
-
-``` r
-frag.observer.failure(abu.g12, likelihood=0.2)
 ```
 
 ## Testing hypotheses
@@ -540,12 +573,12 @@ compare.res <- frag.simul.compare(abu.g12, layer.attr="layer",
                                   iter=30, summarise=FALSE)
 head(compare.res$h1.data)
 #>   edges weightsum   balance disturbance admixture cohesion1 cohesion2
-#> 1    57  295.5019 0.3194444  0.05263158    0.0072    0.3404    0.6524
-#> 2    61  336.9079 0.3472222  0.08196721    0.0179    0.4800    0.5021
-#> 3    54  249.5993 0.3055556  0.05555556    0.0083    0.1647    0.8270
-#> 4    55  262.8870 0.3611111  0.01818182    0.0011    0.4109    0.5880
-#> 5    54  220.5114 0.3194444  0.09259259    0.0286    0.5369    0.4345
-#> 6    49  135.5314 0.3611111  0.10204082    0.0352    0.3550    0.6098
+#> 1    55  242.8552 0.3194444  0.07272727    0.0155    0.3839    0.6006
+#> 2    54  252.2087 0.3472222  0.05555556    0.0082    0.3442    0.6476
+#> 3    54  246.7130 0.3472222  0.07407407    0.0153    0.2581    0.7266
+#> 4    53  234.7979 0.2638889  0.01886792    0.0011    0.2133    0.7856
+#> 5    58  313.6850 0.2916667  0.06896552    0.0127    0.1237    0.8636
+#> 6    50  172.7563 0.3611111  0.06000000    0.0109    0.4349    0.5542
 ```
 
 For each of these parameters, the `frag.simul.summarise` function
@@ -557,13 +590,13 @@ frag.simul.summarise(abu.g12, layer.attr="layer",
                      compare.res$h1.data,
                      compare.res$h2.data)
 #>             H1 != H2? p.value Obs. value/H1 Obs. value/H2
-#> edges           FALSE     0.7         lower         lower
-#> weightsum       FALSE    0.23         lower         lower
-#> balance         FALSE     0.2        within         lower
-#> disturbance     FALSE    0.17         lower         lower
-#> admixture       FALSE    0.18         lower         lower
-#> cohesion1       FALSE    0.11        higher        within
-#> cohesion2       FALSE    0.08         lower        within
+#> edges           FALSE    0.26         lower        within
+#> weightsum       FALSE    0.15        within        within
+#> balance         FALSE    0.26        within        within
+#> disturbance     FALSE    0.42         lower         lower
+#> admixture       FALSE    0.38         lower         lower
+#> cohesion1        TRUE       0        higher        within
+#> cohesion2        TRUE       0         lower        within
 ```
 
 This function returns a data frame with four columns, containing, for
@@ -600,7 +633,7 @@ abu.sr <- make_sr_graph(abu.frag)
 
 The `frag.relations.by.layers` function returns a table with the number
 of similarity relationships in and between spatial units, e.g., in the
-top three layers at Liang Abu:
+three top layers at Liang Abu:
 
 ``` r
 # count of similarity relationships in and between layers:
@@ -625,13 +658,28 @@ round(simil.by.layers.df / sum(simil.by.layers.df, na.rm=T) * 100, 0)
 #>   2  0 13 36
 ```
 
-Considering a stratigraphic sequence, adjacent and close layers in the
-sequence must have lower statistical distances than distant layers.
-Consequently, it is expected that the result of a hierarchical
-clustering computed on this distance table would reflect the order of
-the layers. The expected result is observed for Liang Abu surface and
-the first two layers, suggesting an absence of significant disturbance
-and admixture.
+The count of similarity relationships can be converted into a measure of
+dissimilarity: the dissimilarity between spatial units A and B is
+calculated as 1 - admixture(A, B).
+
+The higher the dissimilarity value, the more likely it is that these two
+archaeological units correspond to different depositional units.
+Theoretically, a spatial unit is expected to be more similar to those
+near it.
+
+In the case of stratigraphic layers, a layer is expected to be more
+related to the layers directly above and below it. Considering a
+stratigraphic sequence, adjacent and close layers in the sequence must
+have lower statistical distances than distant layers. Consequently, it
+is expected that the result of a hierarchical clustering computed on
+this dissimilarity table would reflect the order of the layers. The
+branches of the dendrogram are ordered alphanumerically according to
+their label (following the stratigraphic order of the layers). Anomalies
+are revealed when, despite this ordering constraint, the expected order
+of superposition is not observed in the result.
+
+This expected result is observed for Liang Abu surface and the first two
+layers, suggesting an absence of significant disturbance and admixture.
 
 ``` r
 # turn similarity into distance:
@@ -693,8 +741,8 @@ rbind(
   "unit1" = frag.cycles(simul.g1, kmax=5),
   "unit2" = frag.cycles(simul.g2, kmax=5))
 #>       3-cycles 4-cycles 5-cycles
-#> unit1        7        1        0
-#> unit2        8        1        0
+#> unit1        8        2        0
+#> unit2       24       14        5
 ```
 
 The `frag.path.lengths` function returns the distribution of the path
@@ -707,11 +755,11 @@ path lengths.
 
 ``` r
 frag.path.lengths(simul.g1)
-#> [1] 29 10
+#> [1] 30  9
 frag.path.lengths(simul.g2)
-#> [1] 36 24  3
+#> [1] 46 14  2
 frag.path.lengths(simul.g2, cumulative=T)
-#> [1] 1.00000000 0.66666667 0.08333333
+#> [1] 1.00000000 0.30434783 0.04347826
 ```
 
 In a graph, the shortest path between two vertices is the path including
@@ -724,8 +772,8 @@ cumulative relative frequency of the diameters.
 ``` r
 frag.diameters(simul.g1)
 #> 1 2 
-#> 4 6
+#> 5 5
 frag.diameters(simul.g2)
 #> 1 2 3 
-#> 3 5 2
+#> 4 4 2
 ```

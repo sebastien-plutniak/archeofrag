@@ -35,10 +35,13 @@ An R package for refitting and spatial analysis in archeology.
 
 - [**References**](#references)
 - [**Installation**](#installation)
+  - [R package](#r-package)
+  - [GUI version](#gui-version)
 - [**Community guidelines**](#community-guidelines)
   - [Reporting bugs](#reporting-bugs)
   - [Suggesting changes](#suggesting-changes)
 - [**Building fragmentation graphs**](#building-the-fragmentation-graph)
+- [**Alterating fragmentation graphs**](##alterating-fragmentation-graphs)
 - [**Edge weighting, cohesion and admixture computation**](#edge-weighting-cohesion-and-admixture-computation)
 - [**Testing layer formation hypotheses using simulated data**](#testing-layer-formation-hypotheses-using-simulated-data)
   - [Generating artificial fragmentation graphs](#generating-artificial-fragmentation-graphs)
@@ -61,6 +64,8 @@ Use cases were published in:
 
 
 # Installation
+
+## R package
 The package can be installed from CRAN with:
 
 ```r
@@ -81,8 +86,10 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install("RBGL")
 ```
+## GUI version
 
-For an interactive demonstration, see also the [Shiny application](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
+The `archeofrag` package is complemented by a graphic-user interface version, `archeofrag.gui` (also distributed as an R package). See a [live demo here](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
+This GUI version, focusing on connection relationships only (i.e. “proper refits”), make it easy to explore quickly and efficiently a refitting dataset.
 
 # Community guidelines
 
@@ -98,7 +105,7 @@ They can be made by filling an [issue](https://github.com/sebastien-plutniak/arc
 
 # Building the fragmentation graph
 
-The `Archeofrag` package comes with a small example data set called “Liang Abu”, related to the pottery fragments found on the surface and in the first two layers of the Liang Abu rock shelter. The data set contains three data frames:
+The `Archeofrag` package comes with several  example data sets. One of them, called “Liang Abu”, related to the pottery fragments found on the surface and in the first two layers of the Liang Abu rock shelter, Borneo, Indonesia. The data set contains three data frames:
 
 * a table with information about the fragments (a unique identifier, the layer, their length and width, etc.),
 * a table with the connection relationships between these fragments (each row contains the unique identifiers of two refitting fragments),
@@ -116,14 +123,14 @@ abu.g <- make_cr_graph(abu.frag)
 
 # Visualisation and subgraph extraction
 
-Several `Archeofrag` functions ensure that the first examination of the data is easy. 
+Several `Archeofrag` functions aims at making easy first examination of the data. 
 The `frag.relations.by.layers` function returns a matrix with the number of relationships within and between spatial units (e.g., stratigraphic layer).
  
 ```{r frag.relations.by.layers}
 frag.relations.by.layers(abu.g, "layer")
 ```
 The diagonal of the matrix gives the number of intra-layer relationships, and the other values refer to inter-layer relationships. 
-Here, for example, there are 31 connection relationships  within layer 2, and 3 connection relationships between layers 1 and 2. No connection relationship was found between the surface (“0”) and layer 2.
+Here, for example, there are 31 connection relationships  within Layer 2, and 3 connection relationships between Layers 1 and 2. No connection relationship was found between the surface (“0”) and Layer 2.
 
 The `frag.graph.plot` function generates a visual representation of the graph:
 
@@ -163,6 +170,33 @@ Additionally, the `frag.get.layers` function can  extract a set of specified spa
 frag.get.layers(abu.g, layer.attr="layer", sel.layers="1")
 ```
 
+
+
+# Alterating fragmentation graphs
+
+Two functions aimed at modifying a fragmentation graph, under constraints specific to the analysis of archaeological fragmentation graphs: 
+* `frag.observer.failure`, to remove relationships (edges)
+* `frag.graph.reduce` to remove fragments (nodes)
+
+
+The `frag.observer.failure` function takes a fragmentation graph and randomly removes a given proportion of edges.
+As suggested by its name, the main purpose of this function is to simulate the failure of an observer to determine relationships between fragments (a common situation, considering the difficulty and time-consuming aspect of the search for refits).  
+ 
+```{r frag.observer.failure, eval=FALSE}
+frag.observer.failure(abu.g12, likelihood=0.2)
+```
+
+ 
+The `frag.graph.reduce` function randomly removes a given number of fragments (nodes) from a fragmentation graph. The `conserve.objects.nr` parameter, if TRUE, ensures that the number of objects (i.e. connected components) is the same in the resulting graph.
+
+```{r frag.graph.reduce, eval=FALSE}
+c(fragments = igraph::gorder(abu.g12), objects = igraph::components(abu.g12)$no)
+abu.g12.red <- frag.graph.reduce(abu.g12, n.frag.to.remove = 5, conserve.objects.nr = TRUE)
+c(fragments = igraph::gorder(abu.g12.red), objects = igraph::components(abu.g12.red)$no)
+```
+
+
+
 # Edge weighting, cohesion and admixture computation
 
 Weighting the edges is a crucial step in the TSAR / `Archeofrag` approach because it integrates the topological properties of the fragmentation graph.
@@ -190,7 +224,7 @@ abu.g12morpho <- frag.edges.weighting(abu.g12,
                                       morphometry="length")
 ```
 
-Using the morphometry parameter results, layer 2 is more cohesive than layer 1:
+Using the morphometry parameter results, Layer 2 is more cohesive than Layer 1:
 
 ```{r cohesion-g12morpho}
 frag.layers.cohesion(abu.g12morpho, layer.attr="layer")
@@ -262,12 +296,6 @@ frag.simul.process(initial.layers=1,
                    aggreg.factor=0,
                    planar=TRUE,
                    asymmetric.transport.from="1")
-```
-
-An additional function is intended to simulate the failure of an observer to determine the relationships between fragments. The `frag.observer.failure` function takes a fragmentation graph and randomly removes a given proportion of edges.
-
-```{r frag.observer.failure, eval=FALSE}
-frag.observer.failure(abu.g12, likelihood=0.2)
 ```
 
 ## Testing hypotheses 
@@ -389,7 +417,7 @@ abu.frag <- make_frag_object(sr=liangabu.similarity, fragments=liangabu.fragment
 abu.sr <- make_sr_graph(abu.frag)
 ```
 
-The `frag.relations.by.layers` function returns a table with the number of similarity relationships in and between spatial units, e.g., in the top three layers at Liang Abu:
+The `frag.relations.by.layers` function returns a table with the number of similarity relationships in and between spatial units, e.g., in the three top layers at Liang Abu:
 
 ```{r count-similarity}
 # count of similarity relationships in and between layers:
@@ -404,8 +432,14 @@ These values can be observed as percentages:
 round(simil.by.layers.df / sum(simil.by.layers.df, na.rm=T) * 100, 0)
 ```
 
-Considering a stratigraphic sequence, adjacent and close layers in the sequence must have lower statistical distances than distant layers. Consequently, it is expected that the result of a hierarchical clustering computed on this distance table would reflect the order of the layers.
-The expected result is observed for Liang Abu surface and the first two layers, suggesting an absence of significant disturbance and admixture.
+The count of similarity relationships can be converted into a measure  of dissimilarity: the dissimilarity between spatial units A and B is calculated as 1 - admixture(A, B). 
+
+The higher the dissimilarity value, the more likely it is that these two archaeological units correspond to different depositional units. Theoretically, a spatial unit is expected to be more similar to those near it.
+
+In the case of stratigraphic layers, a layer is expected to be more related to the layers directly above and below it.
+Considering a stratigraphic sequence, adjacent and close layers in the sequence must have lower statistical distances than distant layers. Consequently, it is expected that the result of a hierarchical clustering computed on this dissimilarity table would reflect the order of the layers. The branches of the dendrogram are ordered alphanumerically according to their label (following the stratigraphic order of the layers). Anomalies are revealed when, despite this ordering constraint, the expected order of superposition is not observed in the result. 
+
+This expected result is observed for Liang Abu surface and the first two layers, suggesting an absence of significant disturbance and admixture.
 
 ```{r similarity-dendr,  eval=T}
 # turn similarity into distance:

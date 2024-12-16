@@ -22,7 +22,7 @@
         \item\code{grande.rivoire.fragments} is a 91x3 data frame:
         \itemize{
             \item id:  fragment unique identifier 
-            \item layer: sedimentary unit where the fragment was found.  Values are approximately numbered in expected chrono-stratigraphic order
+            \item layer: sedimentary unit where the fragment was found.  Values are numbered following the approximately expected chrono-stratigraphic order (i.e. some units have no strict above/below relationships valid for everywhere in the site)
             \item spit: excavation spit where the fragment was found
         }
     }
