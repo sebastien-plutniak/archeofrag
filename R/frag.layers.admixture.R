@@ -18,7 +18,7 @@ frag.layers.admixture <- function(graph, layer.attr, morphometry=NULL, x=NULL, y
     return(results)
   } else { # if length(layers) > 2
     pairs <- utils::combn(layers, 2) 
-    message("More than 2 layers: the 'frag.edges.weighting' function has been applied to each pair of layers.")
+    message("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
     results <- sapply(1:ncol(pairs), function(id){
       gsub <- frag.get.layers.pair(graph, layer.attr, c(pairs[1, id], pairs[2, id]), verbose = verbose)
       if(length(unique(V(gsub)$layer)) == 2){

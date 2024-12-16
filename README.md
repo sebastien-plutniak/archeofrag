@@ -12,18 +12,12 @@ measure the cohesion and admixture of archaeological spatial units, and
 3) characterise the topology of a specific set of refitting
 relationships. An empirical dataset is also provided as an example.
 
-[![Project Status: Active – The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![R build
-status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R build status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
 [![codecov](https://codecov.io/gh/sebastien-plutniak/archeofrag/branch/master/graph/badge.svg)](https://app.codecov.io/gh/sebastien-plutniak/archeofrag)
-[![CRAN
-Version](http://www.r-pkg.org/badges/version/archeofrag)](https://cran.r-project.org/package=archeofrag)
-[![CRAN
-Downloads](https://cranlogs.r-pkg.org/badges/grand-total/archeofrag?color=brightgreen&.svg)](https://cran.r-project.org/package=archeofrag)
+[![CRAN status](https://www.r-pkg.org/badges/version/archeofrag)](https://CRAN.R-project.org/package=archeofrag)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/archeofrag?color=brightgreen&.svg)](https://cran.r-project.org/package=archeofrag)
 [![r-universe](https://sebastien-plutniak.r-universe.dev/badges/archeofrag)](https://sebastien-plutniak.r-universe.dev/ui#package:archeofrag)
 [![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/cran/archeofrag/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/cran/archeofrag)
 [![license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.r-project.org/Licenses/GPL-3)
