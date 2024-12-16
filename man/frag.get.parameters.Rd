@@ -14,14 +14,14 @@
 This function is a convenient function to get general information about a fragmentation graph. It is particularly useful for setting the parameters of the \code{frag.simul.process} function.
 It returns:
 \itemize{
-  \item{number of components}{}
-  \item{number of fragments}{}
-  \item{number of edges}{}
-  \item{balance:}{ proportion of fragments in the first spatial unit (see details)}
-  \item{components balance:}{ proportion of components in the first spatial unit (see details)}
-  \item{disturbance: }{ an estimation of disturbance (see details)}
-  \item{aggregation factor:}{ diversity of the components' edge count (see details)}
-  \item{planar:}{ whether the graph is planar or not}
+  \item number of components
+  \item number of fragments
+  \item number of edges
+  \item balance: proportion of fragments in the first spatial unit (see details)
+  \item components balance: proportion of components in the first spatial unit (see details)
+  \item disturbance:  an estimation of disturbance (see details)
+  \item aggregation factor: diversity of the components' edge count (see details)
+  \item planar: whether the graph is planar or not
 }
 
 The balance and components balance are calculated from the subgraph including only fragments connected to fragments from the same spatial unit. This is to approximate these proportions of deposited materials regardless the effects of posterior disturbances. Results are given about the  spatial unit whose label comes first alphanumerically (because this function is  used internally by the \code{frag.simul.process} function).  
