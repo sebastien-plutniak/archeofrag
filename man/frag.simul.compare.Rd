@@ -14,7 +14,7 @@
 }
 \details{
 This function is a convenient wrapper integrating several functions of the \code{archeofrag} package to compare an observed fragmentation graph to similar simulated graphs. The \code{frag.simul.process} is used to generate two series of graphs from the properties of the observed graph: the first series is generated under the formation hypothesis H1 (one initial spatial unit) and the second series is generated under the hypothesis H2 (two initial spatial units). 
-The edge count, edge weights sum, balance, disturbance, admixture, and cohesion values of the generated graphs are measured.
+The edge count, edge weights sum, balance, components balance, disturbance, admixture, and cohesion values of the generated graphs are measured.
 
 By default, the results are post-processed with the \code{frag.simul.summarise} function and a summary data frame is printed and included in the list of results which is silently returned. If the \code{summarise} parameter is set to FALSE, then the function returns a list of two data frames containing the numeric values measured for H1 and H2.
 

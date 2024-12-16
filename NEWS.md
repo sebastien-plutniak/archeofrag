@@ -14,7 +14,7 @@ Fourth major release.
 * Add datasets: Chauzey, Le Bout des Vergnes, Grande Rivoire, Tai, Font-Juvenal.
 * Add dependency to R (>= 3.5.0) to use serialized datasets (RData format).
 * Balance and components balance computation in `frag.get.parameters()` were fixed to measure the value of the spatial unit with less fragments or components, respectively. This fix might result in values different from the value get before with this function.
-
+* Add a 'components.balance' variable in the results of `frag.simul.compare`.
 
 # archeofrag 0.8.3
 Released: 2022-11-16
