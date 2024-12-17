@@ -10,7 +10,8 @@ is mainly based on the ‘igraph’ package for graph analysis. Functions
 can: 1) create, manipulate, and simulate fragmentation graphs, 2)
 measure the cohesion and admixture of archaeological spatial units, and
 3) characterise the topology of a specific set of refitting
-relationships. An empirical dataset is also provided as an example.
+relationships.  A series of datasets are provided as examples.
+
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
