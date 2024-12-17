@@ -14,12 +14,17 @@ test_that("retrieved parameters are correct", {
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
   
-  expect_equal(frag.get.parameters(g, "layer")$n.components, 8)
-  expect_equal(frag.get.parameters(g, "layer")$vertices, 32)
-  expect_equal(frag.get.parameters(g, "layer")$edges, 31)
-  expect_equal(frag.get.parameters(g, "layer")$balance, 0.57)
-  expect_equal(frag.get.parameters(g, "layer")$components.balance, 0.6)
-  expect_equal(frag.get.parameters(g, "layer")$disturbance, 0.19)
-  expect_equal(frag.get.parameters(g, "layer")$aggreg.factor, 0.71)
-  expect_equal(frag.get.parameters(g, "layer")$planar, TRUE)
+  expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$n.components, 8)
+  expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$vertices, 32)
+  expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$edges, 31)
+  expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$balance, 0.57)
+  expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$components.balance, 0.6)
+  expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$disturbance, 0.19)
+  expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$aggreg.factor, 0.71)
+  
+  if ( requireNamespace("RBGL", quietly=TRUE)  ) { #  due to issues with RBGL on Win-build 
+    expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$planar, TRUE) 
+  } else {
+    expect_equal(frag.get.parameters(g, "layer", verbose = FALSE)$planar, NA) 
+  }
 })
