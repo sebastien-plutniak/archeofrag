@@ -36,7 +36,8 @@
 frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2,
                                  cohesion1.attr = "cohesion1",
                                  cohesion2.attr = "cohesion2",
-                                 admixture.attr = "admixture"){
+                                 admixture.attr = "admixture",
+                                 verbose = TRUE){
   # todo: add params:  
   # tests:
   .check.frag.graph(graph)
@@ -65,12 +66,12 @@ frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2,
   colnames(res.h2)[which(colnames(res.h2) == admixture.attr)] <- "admixture"
   
   # retrieve the parameters of the observed graph:  
-  obs.params <- c(frag.get.parameters(graph, layer.attr),
-                  frag.layers.admixture(graph, layer.attr),
-                  "cohesion" = frag.layers.cohesion(graph, layer.attr),
+  obs.params <- c(frag.get.parameters(graph, layer.attr, verbose = verbose),
+                  frag.layers.admixture(graph, layer.attr, verbose = verbose),
+                  "cohesion" = frag.layers.cohesion(graph, layer.attr, verbose = verbose),
                   "weightsum" = sum(igraph::E(graph)$weight))
   
-  if(sum(! colnames(res.h1) %in% names(obs.params)) != 0){
+  if(verbose & sum(! colnames(res.h1) %in% names(obs.params)) != 0){
     warning("Some simulated parameters are missing in the observed graph.")
   }
   # parameters in the observed graph and the simulated results:

@@ -3,13 +3,14 @@
 
 \title{From an observed fragmentation graph, simulates two series of graphs corresponding to two deposition hypotheses.}
 \description{Given an observed fragmentation graph, simulates two series of graphs corresponding to two deposition hypotheses, compares their properties and returns a summary table.}
-\usage{frag.simul.compare(graph, layer.attr, iter, summarise=TRUE, ...)}
+\usage{frag.simul.compare(graph, layer.attr, iter, summarise=TRUE, verbose=TRUE, ...)}
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object. The 'observed' graph to compare to simulated graphs.} 
   \item{layer.attr}{Character. The name of the vertices attribute giving the layer of the fragments.}
   \item{iter}{Numerical. The number of simulated graphs to generate for each hypothesis (minimal value: 30).}
   \item{summarise}{Logical. Whether to report a comparative summary of the results.}
+  \item{verbose}{Logical. Whether to print or not warning messages.}
   \item{...}{Further arguments passed to the `frag.simul.process` function.}
 }
 \details{

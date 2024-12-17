@@ -4,7 +4,8 @@
 \title{Summarise the comparison between an observed fragmentation graph and simulated graphs for two deposition hypotheses.}
 \description{Compare the parameters measured on simulated graphs generated for two deposition hypotheses with Wilcoxon tests, and the corresponding values measured on an empirical graph, and returns a summary data frame.}
 \usage{frag.simul.summarise(graph, layer.attr, res.h1, res.h2, cohesion1.attr="cohesion1",
-                            cohesion2.attr="cohesion2", admixture.attr="admixture")}
+                            cohesion2.attr="cohesion2", admixture.attr="admixture",
+                            verbose=TRUE)}
 
 \arguments{
   \item{graph}{An undirected \code{igraph} object. The graph to compare with simulated graphs.} 
@@ -14,6 +15,7 @@
   \item{cohesion1.attr}{character. The name of the column in the data frames res.h1 and res.h2 with the cohesion values of the spatial unit 1.}
   \item{cohesion2.attr}{character. The name of the column in the data frames res.h1 and res.h2 with the cohesion values of the spatial unit 2.}
   \item{admixture.attr}{character. The name of the column in the data frames res.h1 and res.h2 with the admixture values.}
+  \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{
 This function compares and summarises the numerical values measured on the series of graphs generated for the two deposition hypotheses (H1: one initial spatial unit, H2: two initial spatial units). It is intended to post-process the results of the \code{frag.simul.compare} function, but it can also be applied to other inputs.
