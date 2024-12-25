@@ -30,7 +30,7 @@
 }
 \references{
     \itemize{
-		\item  Angelin A., A. Bridault, J.-L. Brochier L. Chaix, L. Chesnaux, B. Marquebielle, L. Martin, P.-Y. Nicod, R. Picavet, D. Vannieuwenhuyse. 2016. 'The First Mesolithic in the French Alps: New data from La Grande Rivoire rockshelter (Vercors range, Isère, France)', Quaternary International, vol. 423, p. 193‑212, doi: 10.1016/j.quaint.2015.06.027 
+		\item  Angelin A., A. Bridault, J.-L. Brochier L. Chaix, L. Chesnaux, B. Marquebielle, L. Martin, P.-Y. Nicod, R. Picavet, D. Vannieuwenhuyse. 2016. 'The First Mesolithic in the French Alps: New data from La Grande Rivoire rockshelter (Vercors range, Isère, France)', Quaternary International, vol. 423, p. 193‑212, doi: https://doi.org/10.1016/j.quaint.2015.06.027 
         }
     }
 \keyword{datasets}

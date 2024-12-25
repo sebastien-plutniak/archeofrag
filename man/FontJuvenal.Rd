@@ -7,11 +7,7 @@
 
 \title{Dataset: Refitting relationships between pottery fragments from Font-Juvenal cave}
 \description{
-<<<<<<< HEAD
-   The Font-Juvenal cave is a Neolithic archaeological site in France. This dataset describes the refitting 'connection' relationships between pottery fragments found during excavations. Connection relationship refers to physical connection between two fragments that were part of the same object. 
-=======
    The Font-Juvenal cave is a Neolithic archaeological site in France. This dataset describes the refitting 'connection' relationships between pottery fragments found during excavations. A connection relationship refers to a physical connection between two fragments that were part of the same object. 
->>>>>>> e0614d646d838717373aaa51b18f03726fbd5732
     
     The dataset is composed of two tables:
     \itemize{
@@ -22,11 +18,7 @@
 \usage{data(FontJuvenal)}
 \format{
     \itemize{
-<<<<<<< HEAD
         \item\code{fontjuvenal.connection} is a 351x2 matrix. Each line describes a connection relationship between two fragments. Their  unique identifiers are given in column 'id1' and in column 'id2', respectively. 
-=======
-        \item\code{fontjuvenal.connection} is a 351x2 matrix. Each line describes a connection relationship between two fragments. There  unique identifiers are given in column 'id1' and in column 'id2', respectively. 
->>>>>>> e0614d646d838717373aaa51b18f03726fbd5732
         \item\code{fontjuvenal.fragments} is 354x4 data frame:
         \itemize{
             \item id:  fragment unique identifier 
@@ -39,7 +31,7 @@
 }
 \references{
     \itemize{
-		\item  Caro J. 2020. "Productions céramiques et dynamiques des sociétés au Ve millénaire avant notre ère : la transition du Néolithique ancien au Néolithique moyen dans le bassin Nord-occidental de la Méditerranée". PhD Dissertation, Toulouse University, HAL: <https://theses.hal.science/tel-03613599>
+		\item  Caro J. 2024. 'Font-Juvénal_Refiting', Zenodo, doi:  https://doi.org/10.5281/zenodo.14515444     
         }
     }
 \keyword{datasets}

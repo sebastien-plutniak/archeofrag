@@ -7,11 +7,7 @@
 
 \title{Dataset: Refitting relationships between pottery fragments from the Tai site}
 \description{
-<<<<<<< HEAD
-    The Tai is a Neolithic archaeological site in France. Three sectors were distinguished: the North entrance ('porche nord'), the South entrance ('porche sud') and the Cave ('grotte').  This dataset describes the refitting 'connection' relationships between pottery fragments found during excavations  by Claire Manen. Connection relationship refers to physical connection between two fragments that were part of the same object. 
-=======
     The Tai is a Neolithic archaeological site in France. Three sectors were distinguished: the North entrance ('porche nord'), the South entrance ('porche sud') and the Cave ('grotte').  This dataset describes the refitting 'connection' relationships between pottery fragments found during excavations  by Claire Manen. A connection relationship refers to a physical connection between two fragments that were part of the same object. 
->>>>>>> e0614d646d838717373aaa51b18f03726fbd5732
     
     The dataset is composed of two tables:
     \itemize{
@@ -30,22 +26,16 @@
             \item sector: sector of the site
             \item sherd_size: size class of the pottery sherd (nb: the numeric value is not metrical)
             \item sherd_thickness: thickness of the pottery sherd in millimeter
-<<<<<<< HEAD
             \item x: x coordinates of the location where the pottery sherd was found (in centimetres)
             \item y: y coordinates of the location where the pottery sherd was found (in centimetres)
             \item z: z coordinates of the location where the pottery sherd was found (in centimetres)
-=======
-            \item x: x coordinates of the location where the pottery sherd was found
-            \item y: y coordinates of the location where the pottery sherd was found
-            \item z: z coordinates of the location where the pottery sherd was found
->>>>>>> e0614d646d838717373aaa51b18f03726fbd5732
         }
     }
     
 }
 \references{
     \itemize{
-		\item  Caro J., Plutniak S. 2022. “Refitting and Matching Neolithic Pottery Fragments from the Taï site, France”. doi: 10.5281/zenodo.7408706
+		\item  Caro J., Plutniak S. 2022. 'Refitting and Matching Neolithic Pottery Fragments from the Taï site, France'. Zenodo, doi: https://doi.org/10.5281/zenodo.7408706
         }
         
     }

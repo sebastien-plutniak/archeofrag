@@ -9,7 +9,7 @@
 }
 
 frag.observer.failure <- function(graph, likelihood, remove.vertices=FALSE){
-  # output: a liste of altered graphs with edges (and vertices) removed
+  # output: a list of altered graphs with edges (and vertices) removed
   # tests:
   .check.frag.graph(graph)
   # main function:  

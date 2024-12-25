@@ -103,8 +103,7 @@ with:
 remotes::install_github("sebastien-plutniak/archeofrag")
 ```
 
-Some optional functionalities of *Archeofrag* requires the *RBGL*
-package available through *Bioconductor*:
+The (optional) determination of graph planarity in *Archeofrag* requires the *RBGL* package, available through *Bioconductor*:
 
 ``` r
 if (!requireNamespace("BiocManager", quietly = TRUE))

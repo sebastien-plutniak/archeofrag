@@ -21,7 +21,7 @@ frag.simul.process(initial.layers=2, n.components=NULL, vertices=Inf,
   \item{edges}{Integer. Final number of connection relationships between fragments (edges).}
   \item{balance}{Numeric ]0;1[. Proportion of fragments to generate in the first spatial unit before applying disturbance.}
   \item{components.balance}{Numeric ]0;1[. Proportion of objects (connected components) in the first spatial unit before applying fragmentation (only used when initial.layers=2).}
-  \item{disturbance}{Numeric [0;1]. Final proportion of fragments moved from one spatial unit to the other.}
+  \item{disturbance}{Numeric [0;1]. Final proportion of fragments moved from a spatial unit to the other.}
   \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
   \item{planar}{Logical. If TRUE, generates a planar graph (if FALSE, the graph can be planar or not).}
   \item{asymmetric.transport.from}{Numeric or character value in "1" or "2" (refering to the first and second spatial unit). If not NULL, the disturbance process will be applied only to the fragments from this spatial unit.}
