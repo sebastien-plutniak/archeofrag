@@ -1,4 +1,12 @@
-# archeofrag 0.1.0
+
+
+
+# archeofrag 1.0.1
+
+* Revision of `frag.graph.reduce`: to preserve the number of connected components, the use of igraph::articulation points is introduced. A bug in the while loops is fixed with a new control through the 'is.reducible' variable
+* Corrections in the documentation
+
+# archeofrag 1.0.0
 Released: 2024-12-16
 
 Fourth major release.
