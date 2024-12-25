@@ -24,14 +24,20 @@ frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
   # delete singletons:
   graph <- igraph::delete_vertices(graph, degree(graph) == 0)
   
+  # Test if empty graph:
+  if(length(graph) == 0){
+    if(verbose) warning("Empty graph.")
+    return(c("cohesion1" = NA, "cohesion2" = NA))
+  }
+  
   # extract the user-defined layer attribute and reintegrate it as a vertices attribute named "layer":
   layers <- igraph::vertex_attr(graph, name = layer.attr)
   igraph::V(graph)$layer <- layers
   layers <- sort(unique(layers))
-  # Conditional tests in function of the number of layers:
-  if(verbose & length(layers) < 2){
-    warning("At least two different layers are required.")
-    return(c(NA, NA))
+  # Test the number of layers :
+  if(length(layers) < 2){
+    if(verbose) warning("At least two different layers are required.")
+    return(c("cohesion1" = NA, "cohesion2" = NA))
   }
   pairs <- utils::combn(layers, 2) 
   
@@ -49,7 +55,7 @@ frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
         # .cohesion.for.two.layers(gsub, unique(igraph::V(gsub)$layers))
         .cohesion.for.two.layers(gsub, c(pairs[1, id], pairs[2, id]))
       } else{
-        c(NA, NA)
+        c("cohesion1" = NA, "cohesion2" = NA)
       }
     })
   }

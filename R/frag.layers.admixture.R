@@ -9,8 +9,17 @@ frag.layers.admixture <- function(graph, layer.attr, morphometry=NULL, x=NULL, y
   igraph::V(graph)$layer <- layers
   layers <- sort(unique(layers))
   
-  # Conditional tests in function of the number of layers:
-  if(verbose & length(layers) < 2) stop("At least two different layers are required.")
+  # Test if empty graph:
+  if(length(graph) == 0){
+    if(verbose) warning("Empty graph.")
+    return(NA)
+  }
+  
+  # Test the number of layers:
+  if(length(layers) < 2){
+    if(verbose) warning("At least two different layers are required.")
+    return(NA)
+  }
   
   if(length(layers) == 2){
     if(verbose & is.null(igraph::E(graph)$weight)) stop("The edges must be weighted (using the 'frag.edges.weighting' function).")
@@ -31,5 +40,5 @@ frag.layers.admixture <- function(graph, layer.attr, morphometry=NULL, x=NULL, y
     })
     names(results) <- apply(pairs, 2, function(x) paste(x, collapse = "/"))
     results
-  } 
+  }
 }
