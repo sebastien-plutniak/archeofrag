@@ -5,6 +5,7 @@
 
 * Revision of `frag.graph.reduce`: to preserve the number of connected components, the use of igraph::articulation points is introduced. A bug in the while loops is fixed with a new control through the 'is.reducible' variable
 * Corrections in the documentation
+* Parameter asymmetric.transport.from for `frag.simulprocess()` now admit value 0 (similar to NULL, disabling this feature)
 
 # archeofrag 1.0.0
 Released: 2024-12-16
