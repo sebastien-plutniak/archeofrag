@@ -22,15 +22,15 @@
         \item\code{grande.rivoire.fragments} is a 91x3 data frame:
         \itemize{
             \item id:  fragment unique identifier 
-            \item layer: sedimentary unit where the fragment was found.  Values are numbered following the approximately expected chrono-stratigraphic order (i.e. some units have no strict above/below relationships valid for everywhere in the site)
-            \item spit: excavation spit where the fragment was found
+            \item layer: archaeological layer where the fragment was found
+            \item layer.su: combination of the archaeological layer and sedimentary unit where the fragment was found
         }
     }
     
 }
 \references{
     \itemize{
-		\item  Angelin A., A. Bridault, J.-L. Brochier L. Chaix, L. Chesnaux, B. Marquebielle, L. Martin, P.-Y. Nicod, R. Picavet, D. Vannieuwenhuyse. 2016. 'The First Mesolithic in the French Alps: New data from La Grande Rivoire rockshelter (Vercors range, Isère, France)', Quaternary International, vol. 423, p. 193‑212, doi: https://doi.org/10.1016/j.quaint.2015.06.027 
+		\item  Angelin A. 2025. 'Refitting data from La Grande Rivoire prehistoric site', Zenodo, doi: https://doi.org/10.5281/zenodo.14609875
         }
     }
 \keyword{datasets}
