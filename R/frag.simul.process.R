@@ -184,14 +184,12 @@ frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf
     if(missing(components.balance)) components.balance <- params$components.balance
     if(missing(disturbance)) disturbance <- params$disturbance
     if(missing(aggreg.factor)) aggreg.factor <- params$aggreg.factor
-    if(missing(asymmetric.transport.from)) asymmetric.transport.from <- 0
     if(missing(planar))  planar <- params$planar
     if(is.na(planar)) {
       planar <- FALSE
       warning("The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.")
     }
   }
-  
   # BEGIN Tests:
   if(is.null(n.components)) stop("The 'n.components' parameter is required.")
 
@@ -230,10 +228,9 @@ frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf
     stop("The 'aggreg.factor' parameter must range in [0;1].")
   }
 
-  if( ! is.null(asymmetric.transport.from) ){
-    if(! asymmetric.transport.from %in% c(0, 1, 2, "0" ,"1", "2")){
-      stop("Values for 'asymmetric.transport.from' must be one of 1, 2 or 0.")
-    }
+  if(missing(asymmetric.transport.from)) asymmetric.transport.from <- 0
+  if(! asymmetric.transport.from %in% c(0, 1, 2, "0" ,"1", "2")){
+    stop("Values for 'asymmetric.transport.from' must be one of 1, 2 or 0.")
   }
   
   if(n.components > vertices / 2){
