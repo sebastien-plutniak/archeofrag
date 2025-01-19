@@ -1,11 +1,12 @@
 
 
 
-# archeofrag 1.0.1
+# archeofrag 1.0.2
 
-* Revision of `frag.graph.reduce`: to preserve the number of connected components, the use of igraph::articulation points is introduced. A bug in the while loops is fixed with a new control through the 'is.reducible' variable
-* Corrections in the documentation
-* Parameter asymmetric.transport.from for `frag.simulprocess()` now admit value 0 (similar to NULL, disabling this feature)
+* In `frag.get.parameters()` if the vertices 'layer' attribute of the graph do not have two values, the variables 'balance', 'components.balance', and 'disturbance' are not computed and NAs are returned.
+* Parameter asymmetric.transport.from for `frag.simulprocess()` now admit value 0 (similar to NULL, disabling this feature).
+* Revision of `frag.graph.reduce`: to preserve the number of connected components, the use of igraph::articulation points is introduced. A bug in the while loops is fixed with a new control through the 'is.reducible' variable.
+* Corrections in the documentation.
 
 # archeofrag 1.0.0
 Released: 2024-12-16
