@@ -8,8 +8,8 @@ frag.graph.plot  <- function(graph, layer.attr,  ...){
     igraph::V(graph)$layers <- igraph::vertex_attr(graph, layer.attr)
     
     nLayers <- length(unique(igraph::V(graph)$layers))
-    colors <- c("firebrick2", "darkorchid4", "chartreuse3", "darkorange3", "brown3",
-                "darkgoldenrod2","darkolivegreen3", "darksalmon")
+    colors <- c("#BBDF27FF",  "darkorchid4", "darkgoldenrod2","chartreuse3", "darkorange3", "brown3",
+                "darksalmon", "firebrick2")
     # default edge color:
     igraph::E(graph)$color <- "grey"
     
