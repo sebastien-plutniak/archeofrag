@@ -10,18 +10,23 @@ is mainly based on the ‘igraph’ package for graph analysis. Functions
 can: 1) create, manipulate, and simulate fragmentation graphs, 2)
 measure the cohesion and admixture of archaeological spatial units, and
 3) characterise the topology of a specific set of refitting
-relationships.  A series of datasets are provided as examples.
+relationships. A series of datasets are provided as examples.
 
-
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![R build status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R build
+status](https://github.com/sebastien-plutniak/archeofrag/workflows/R-CMD-check/badge.svg)](https://github.com/sebastien-plutniak/archeofrag/actions)
 [![codecov](https://codecov.io/gh/sebastien-plutniak/archeofrag/branch/master/graph/badge.svg)](https://app.codecov.io/gh/sebastien-plutniak/archeofrag)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4271900.svg)](https://doi.org/10.5281/zenodo.4271900)
 [![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/cran/archeofrag/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/cran/archeofrag)
 [![r-universe](https://sebastien-plutniak.r-universe.dev/badges/archeofrag)](https://sebastien-plutniak.r-universe.dev/ui#package:archeofrag)
-[![CRAN status](https://www.r-pkg.org/badges/version/archeofrag)](https://CRAN.R-project.org/package=archeofrag)
-[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/archeofrag?color=brightgreen&.svg)](https://cran.r-project.org/package=archeofrag)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/archeofrag)](https://CRAN.R-project.org/package=archeofrag)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/archeofrag?color=brightgreen&.svg)](https://cran.r-project.org/package=archeofrag)
 [![license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.r-project.org/Licenses/GPL-3)
 [![status](https://joss.theoj.org/papers/ff2007d87bd4c8460b265c69dc403316/status.svg)](https://joss.theoj.org/papers/ff2007d87bd4c8460b265c69dc403316)
 
@@ -103,7 +108,8 @@ with:
 remotes::install_github("sebastien-plutniak/archeofrag")
 ```
 
-The (optional) determination of graph planarity in *Archeofrag* requires the *RBGL* package, available through *Bioconductor*:
+The (optional) determination of graph planarity in *Archeofrag* requires
+the *RBGL* package, available through *Bioconductor*:
 
 ``` r
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -232,10 +238,10 @@ between the two spatial units (`mixed.components.only`).
 ``` r
 frag.get.layers.pair(abu.g, layer.attr="layer", sel.layers=c("1", "2"),
                      size.mini=2, mixed.components.only=TRUE)
-#> IGRAPH d4e2221 UN-- 19 22 -- 
+#> IGRAPH bed61b7 UN-- 19 22 -- 
 #> + attr: frag_type (g/c), name (v/c), layer (v/n), zmin (v/n), zmax (v/n), square (v/c), square.x (v/n), square.y (v/n), thickness
 #> | (v/n), length (v/n), thickness.by.length (v/n), sherd.type (v/c), membership (v/n), type_relation (e/c)
-#> + edges from d4e2221 (vertex names):
+#> + edges from bed61b7 (vertex names):
 #>  [1] 27 --28  28 --835 835--836 25 --8   27 --366 27 --367 28 --367 366--367 27 --371 332--371 366--371 187--188 165--195 25 --195 195--196
 #> [16] 195--197 196--198 195--204 196--204 197--204 198--204 188--250
 ```
@@ -247,10 +253,10 @@ Liang Abu:
 ``` r
 frag.get.layers(abu.g, layer.attr="layer", sel.layers="1")
 #> $`1`
-#> IGRAPH 38b572f UN-- 23 18 -- 
+#> IGRAPH 2e63535 UN-- 23 18 -- 
 #> + attr: frag_type (g/c), name (v/c), layer (v/n), zmin (v/n), zmax (v/n), square (v/c), square.x (v/n), square.y (v/n), thickness
 #> | (v/n), length (v/n), thickness.by.length (v/n), sherd.type (v/c), type_relation (e/c)
-#> + edges from 38b572f (vertex names):
+#> + edges from 2e63535 (vertex names):
 #>  [1] 392--408  123--124  301--302  313--314  435--441  477--478  25 --8    435--9999 441--9999 187--188  25 --195  195--196  195--197  196--198 
 #> [15] 195--204  196--204  197--204  198--204
 ```
@@ -566,13 +572,13 @@ value, admixture value, and cohesion values of the two spatial units).
 compare.res <- frag.simul.compare(abu.g12, layer.attr="layer",
                                   iter=30, summarise=FALSE)
 head(compare.res$h1.data)
-#>   edges weightsum   balance disturbance admixture cohesion1 cohesion2
-#> 1    55  242.8552 0.3194444  0.07272727    0.0155    0.3839    0.6006
-#> 2    54  252.2087 0.3472222  0.05555556    0.0082    0.3442    0.6476
-#> 3    54  246.7130 0.3472222  0.07407407    0.0153    0.2581    0.7266
-#> 4    53  234.7979 0.2638889  0.01886792    0.0011    0.2133    0.7856
-#> 5    58  313.6850 0.2916667  0.06896552    0.0127    0.1237    0.8636
-#> 6    50  172.7563 0.3611111  0.06000000    0.0109    0.4349    0.5542
+#>   edges weightsum balance components.balance disturbance admixture cohesion1 cohesion2
+#> 1    53  186.2886    0.32               0.32        0.04    0.0384    0.2964    0.6652
+#> 2    56  271.7788    0.29               0.33        0.04    0.0142    0.1958    0.7900
+#> 3    51  180.1365    0.30               0.27        0.04    0.0194    0.3071    0.6735
+#> 4    53  223.0447    0.33               0.35        0.04    0.0166    0.3015    0.6819
+#> 5    51  172.1320    0.35               0.36        0.01    0.0190    0.3476    0.6334
+#> 6    52  218.8517    0.33               0.37        0.01    0.0012    0.2466    0.7522
 ```
 
 For each of these parameters, the `frag.simul.summarise` function
@@ -583,14 +589,15 @@ simulated values generated for H1 and H2.
 frag.simul.summarise(abu.g12, layer.attr="layer",
                      compare.res$h1.data,
                      compare.res$h2.data)
-#>             H1 != H2? p.value Obs. value/H1 Obs. value/H2
-#> edges           FALSE    0.26         lower        within
-#> weightsum       FALSE    0.15        within        within
-#> balance         FALSE    0.26        within        within
-#> disturbance     FALSE    0.42         lower         lower
-#> admixture       FALSE    0.38         lower         lower
-#> cohesion1        TRUE       0        higher        within
-#> cohesion2        TRUE       0         lower        within
+#>                    H1 != H2? p.value Obs. value/H1 Obs. value/H2
+#> edges                  FALSE    0.19        within        within
+#> weightsum              FALSE    0.15        within        within
+#> balance                FALSE    0.53        within        within
+#> components.balance      TRUE       0         lower        within
+#> disturbance            FALSE    0.16        within        within
+#> admixture              FALSE    0.94         lower         lower
+#> cohesion1               TRUE       0        higher        higher
+#> cohesion2               TRUE       0         lower        within
 ```
 
 This function returns a data frame with four columns, containing, for
@@ -736,7 +743,7 @@ rbind(
   "unit2" = frag.cycles(simul.g2, kmax=5))
 #>       3-cycles 4-cycles 5-cycles
 #> unit1        8        2        0
-#> unit2       24       14        5
+#> unit2       19        8        1
 ```
 
 The `frag.path.lengths` function returns the distribution of the path
@@ -749,11 +756,11 @@ path lengths.
 
 ``` r
 frag.path.lengths(simul.g1)
-#> [1] 30  9
+#> [1] 30  6
 frag.path.lengths(simul.g2)
-#> [1] 46 14  2
+#> [1] 45 13
 frag.path.lengths(simul.g2, cumulative=T)
-#> [1] 1.00000000 0.30434783 0.04347826
+#> [1] 1.0000000 0.2888889
 ```
 
 In a graph, the shortest path between two vertices is the path including
@@ -766,8 +773,8 @@ cumulative relative frequency of the diameters.
 ``` r
 frag.diameters(simul.g1)
 #> 1 2 
-#> 5 5
+#> 4 6
 frag.diameters(simul.g2)
-#> 1 2 3 
-#> 4 4 2
+#> 1 2 
+#> 4 6
 ```

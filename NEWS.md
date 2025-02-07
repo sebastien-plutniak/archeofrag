@@ -7,6 +7,7 @@
 * Parameter asymmetric.transport.from for `frag.simulprocess()` now admit value 0 (similar to NULL, disabling this feature).
 * Revision of `frag.graph.reduce`: to preserve the number of connected components, the use of igraph::articulation points is introduced. A bug in the while loops is fixed with a new control through the 'is.reducible' variable.
 * Corrections in the documentation.
+* Change default colors in `frag.graph.plot()`
 
 # archeofrag 1.0.0
 Released: 2024-12-16

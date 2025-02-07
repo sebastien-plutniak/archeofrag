@@ -67,7 +67,7 @@ test_that("weighting with missing morpho-spatial parameters", {
   igraph::V(g)$z <- sample(1:100, 32, replace=TRUE)
   
   g1 <- frag.edges.weighting(g, "layer")
-  g2 <- frag.edges.weighting(g, "layer", "wrong.value", "wrong.value", "wrong.value", "wrong.value")
+  g2 <- frag.edges.weighting(g, "layer", "wrong.value", "wrong.value", "wrong.value", "wrong.value", verbose = FALSE)
   
   expect_identical(igraph::E(g1)$weight, igraph::E(g2)$weight)
 })
@@ -99,3 +99,4 @@ test_that("weighting with 2 coordinates", {
   
   expect_gt(sum(igraph::E(g1)$weight), sum(igraph::E(g2)$weight))
 })
+
