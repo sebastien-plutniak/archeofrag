@@ -39,7 +39,7 @@ With \code{initial.layers}=2, the \code{components.balance} can be used, and the
 
 The \code{components.balance} parameter determines the proportion of components (i.e. objects) in the first spatial unit before the application of the fragmentation process;
 the \code{balance} parameter determines the proportion of fragments in the first spatial unit before the application of the disturbance process.
-The \code{disturbance} parameter determines the proportion of fragments to "move" from one spatial unit to another. Consequently, it generates inter-spatial units relationships.
+The \code{disturbance} parameter determines the proportion of fragments to move from one spatial unit to another. Consequently, it generates inter-spatial units relationships. Highest admixture are generated with disturbance=0.5. 
 If \code{asymmetric.transport.from} is set to 1 or 2, the disturbance process is only applied to the fragments from spatial unit 1 or spatial unit 2, respectively.
 
 If a graph is given to the \code{from.observed.graph} parameter, the properties of this graph are internally retrieved with the \code{frag.get.parameters} function (including:  the number of components, number of vertices, balance, the components.balance, the disturbance, the aggregation factor, and whether the graph is planar or not; note that the number of edges is not included as a parameter). If some other parameters of the \code{frag.simul.process} function are set, the values retrieved from the observed graph are used in replacement.
