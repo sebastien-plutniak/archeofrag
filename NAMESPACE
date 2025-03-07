@@ -23,7 +23,7 @@ importFrom(grDevices, rgb)
 importFrom(graphics, plot, hist)
 importFrom(methods, new)
 importFrom(utils, combn)
-importFrom(stats, na.omit, sd, wilcox.test)
+importFrom(stats, na.omit, sd, wilcox.test, median, mad)
 importFrom(igraph,
 	add_edges, 
 	add_layout_, 
