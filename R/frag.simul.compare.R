@@ -4,17 +4,18 @@
     g <- frag.simul.process(initial.layers = initial.layer,
                             from.observed.graph = observed.graph,
                             observed.layer.attr = layer.attr,  ...)
-    g <- frag.edges.weighting(g, layer.attr, verbose = verbose)
     # measure the properties of the graph:
     params <- frag.get.parameters(g, "layer", verbose = verbose)
     c(
       "edges" = params$edges,
-      "weightsum" = sum(igraph::E(g)$weight),
       "balance" = params$balance,
       "components.balance" = params$components.balance,
       "disturbance" = params$disturbance,
       frag.layers.admixture(g, "layer", , verbose = verbose),
-      "cohesion" = rbind(frag.layers.cohesion(g, "layer", verbose = verbose))
+      "cohesion" = rbind(frag.layers.cohesion(g, "layer", verbose = verbose)),
+      "edge.weights.sum" = sum(igraph::E(g)$weight),
+      "edge.weights.median" = params$edge.weights.median,
+      "edge.weights.median.abs.dev." = params$edge.weights.median.abs.dev.
     )
   })
   res <- do.call(rbind, res)
@@ -30,7 +31,7 @@ frag.simul.compare <- function(graph, layer.attr, iter, summarise=TRUE, verbose=
   if(! is.logical(summarise)){
     stop("A logical value is required for the 'summary' parameter.")
   }
-  # main funtion:
+  # main function:
   resH1 <- .run.simul(iter, graph, layer.attr, initial.layer = 1, , verbose = verbose, ...)
   resH2 <- .run.simul(iter, graph, layer.attr, initial.layer = 2, , verbose = verbose, ...)
   

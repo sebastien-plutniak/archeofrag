@@ -36,7 +36,6 @@ A named list with three items:
 }
 \examples{
 g <- frag.simul.process(n.components=20, vertices=50, disturbance=.15)
-g <- frag.edges.weighting(g, layer.attr="layer")
 \dontrun{frag.simul.compare(g, layer.attr="layer", iter=30)}
 }
  

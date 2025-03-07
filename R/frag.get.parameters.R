@@ -15,20 +15,23 @@ frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
   
   # test if there are two layers. If true, compute balance, components.balance, disturbance. Else return NAs
   if(length(unique(igraph::V(graph)$layer)) == 2) {
-      # fragments balance: considering the subgraph including only fragments connected to fragments from the same spatial unit, proportion of fragments in the 1st spatial unit (alphanumerically)
+      # fragments balance ----
+      # considering the subgraph including only fragments connected to fragments from the same spatial unit, proportion of fragments in the 1st spatial unit (alphanumerically)
       v1 <- igraph::V(graph)[igraph::V(graph)$layer == unique(igraph::V(graph)$layer)[1]]
       v2 <- igraph::V(graph)[igraph::V(graph)$layer == unique(igraph::V(graph)$layer)[2]]
       subgraph <- igraph::subgraph_from_edges(graph, igraph::E(graph)[ ! v1 %--% v2 ])
       balance <- table(igraph::V(subgraph)$layer)
       balance <- round(balance[1] / sum(balance), 2)
       
-      # components balance: considering the subgraph including only fragments connected to fragments from the same spatial unit, proportion of components in the 1st spatial unit (alphanumerically)
+      # components balance ----
+      # considering the subgraph including only fragments connected to fragments from the same spatial unit, proportion of components in the 1st spatial unit (alphanumerically)
       compo.balance <- sapply(igraph::decompose(subgraph), 
                               function(x) igraph::V(x)$layer[1])
       compo.balance <- table(compo.balance)
       compo.balance <- round(compo.balance[1] / sum(compo.balance), 2) 
       
-      # estimated disturbance: proportion of fragments which might have move, determined from the components with fragments from 2 spatial units unequally represented:
+      # estimated disturbance ----
+      # proportion of fragments which might have move, determined from the components with fragments from 2 spatial units unequally represented:
       g.list <- frag.get.layers.pair(graph, "layer", unique(igraph::V(graph)$layer), mixed.components.only = TRUE, verbose = verbose)
       disturbance <- 0
       if(! is.null(g.list)){
@@ -40,7 +43,7 @@ frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
         # sum of the count of vertices for the less represented layer in each component:
         disturbance <- sum(g.list, na.rm = TRUE) / igraph::gorder(graph)
         disturbance <- round(disturbance, 2)
-      } 
+      } # end is.null(g.list)
   } else {
     balance <- NA
     disturbance <- NA
@@ -48,12 +51,13 @@ frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
     if(verbose) warning("The graph does not have two spatial units: disturbance, component balance, and fragment balance values are not computed.")
   }
   
-  
+  # aggregation factor ----
   # degree of aggregation of the edges on the components:
   aggreg.factor <- 1 - 1/(1 + stats::sd(sapply(igraph::decompose(graph), igraph::gsize)))
   aggreg.factor <- round(aggreg.factor, 2)
   
-  # planarity (if the RBGL package is installed)
+  # planarity  ---- 
+  # only if the RBGL package is installed
   is.planar <- NA
   if ( requireNamespace("RBGL", quietly=TRUE)  ) {
     is.planar <- RBGL::boyerMyrvoldPlanarityTest(igraph::as_graphnel(graph))
@@ -68,7 +72,11 @@ frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
               "components.balance" = compo.balance,
               "disturbance" = disturbance, 
               "aggreg.factor" = aggreg.factor,
-              "planar" = is.planar)
+              "planar" = is.planar,
+              "edge.weights.sum" = sum(igraph::E(graph)$weight),
+              "edge.weights.median" = stats::median(igraph::E(graph)$weight),
+              "edge.weights.median.abs.dev." = stats::mad(igraph::E(graph)$weight)
+              )
   # format and return results:
   lapply(res, c, use.names = FALSE)
 }

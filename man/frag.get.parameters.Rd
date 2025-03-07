@@ -22,6 +22,9 @@ It returns:
   \item disturbance: estimated disturbance, i.e. proportion of fragments which moved between spatial units (see details)
   \item aggreg.factor: aggregation factor, diversity of the components' edge count (see details)
   \item planar: whether the graph is planar or not
+  \item edge.weights.sum: sum of the edge weights
+  \item edge.weights.median: median of the edge weights
+  \item edge.weights.median.abs.dev. median absolute deviation of the edge weights
 }
 
 The balance and components balance are calculated from the subgraph including only the fragments connected to fragments from the same spatial unit. This is to approximate these proportions of deposited materials regardless the effects of posterior disturbances. Results are given about the  spatial unit whose label comes first alphanumerically (because this function is  used internally by the \code{frag.simul.process} function).  
@@ -34,7 +37,7 @@ The aggregation factor reflects the diversity of the components' edge count. The
 The optional RBGL package is required to determine the planarity of the graph. If it is not installed, the \code{planar} argument is set to FALSE by default.
 }
 \value{
-A list of parameters values (n.components, vertices, edges, balance, components.balance, disturbance, aggreg.factor, planar).
+A list of parameters values (n.components, vertices, edges, balance, components.balance, disturbance, aggreg.factor, planar, edge.weights.sum, edge.weights.median, edge.weights.median.abs.dev.).
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
@@ -42,6 +45,8 @@ A list of parameters values (n.components, vertices, edges, balance, components.
 		 \link[archeofrag]{frag.get.layers.pair}, 
 		 \link[archeofrag]{frag.simul.process}, 
 		 \link[stats]{sd}, 
+		 \link[stats]{median},
+		 \link[stats]{mad}, 
 		 \code{\link[RBGL]{boyerMyrvoldPlanarityTest}}
 		 }
 
