@@ -26,7 +26,7 @@
             \item sub.layer: stratigraphic sub-layer
             \item thickness: thickness of the fragment (in centimetre)
             \item length: length of the fragment (in centimetre)
-            \item surface: approximated surface of the fragment, product of the thickness by the length (in square centimeter)
+            \item surface: approximated surface of the fragment, product of the thickness by the length (in square centimetre)
             \item x: x coordinate of the grid square where the bone fragment was found (in centimetre)
             \item y: y coordinate of the grid square where the bone fragment was found (in centimetre)
             \item z: approximated z coordinate of the location where the bone fragment was found (in centimetre)
