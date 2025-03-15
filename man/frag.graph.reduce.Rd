@@ -10,15 +10,21 @@
   \item{graph}{An \code{igraph} object.} 
   \item{n.frag.to.remove}{Integer.  Number of fragments (i.e. vertices) to remove.}
   \item{conserve.objects.nr}{Logical. If TRUE, preserve the number of objects (i.e. connected components) in the graph.}
+  \item{conserve.frag.balance}{Logical. If TRUE, preserve the proportion of fragments in the first and second spatial unit ('balance').}
   
 }
 \details{
-This function reduces the number of fragments in a fragmentation graph, while controlling that no singleton are created, and (optionally) that the output graph and the input graph have the same number of connected components. Note that if 'conserve.objects.nr' is TRUE then the reduction process can stop before reaching the number of fragments to remove (when the graph only contains pairs of fragments).
+This function reduces the number of fragments in a fragmentation graph, while controlling that no singleton are created, and (optionally) that the output graph and the input graph have the same number of connected components. Note that if 'conserve.objects.nr' is TRUE then the reduction process might stop before reaching the number of fragments to remove (when the graph only contains pairs of fragments). 
+Similarly, if 'conserve.frag.balance' is TRUE, then the result is as close as possible from the initial proportion of fragments (i.e. the 'balance' output value of 'frag.get.parameters()'). 
 }
 \value{
 A fragmentation graph (igraph object) with less fragments (vertices).
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
+\seealso{
+    \code{\link[archeofrag]{frag.get.parameters}}
+    \code{\link[archeofrag]{frag.get.layers.pair}}
+}
 
 \examples{
 g <- frag.simul.process(n.components=15, vertices=50, disturbance = .15) 

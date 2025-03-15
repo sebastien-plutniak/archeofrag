@@ -36,7 +36,7 @@ frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
       disturbance <- 0
       if(! is.null(g.list)){
         g.list <- igraph::decompose(g.list)
-        g.list <- sapply(g.list, function(x)
+        g.list <- sapply(g.list, function(x) 
           table(factor(igraph::V(x)$layer, levels = unique(igraph::V(graph)$layer))) )
         # replace the count of the more represented layer in each component by NA:
         g.list <- apply(g.list, 2, function(x){ x[order(x)][2] <- NA ; x })

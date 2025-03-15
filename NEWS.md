@@ -1,5 +1,7 @@
 
-
+# archeofrag 1.1.0
+* Add Grotta di Fumane dataset.
+* Add comments to fragments dataset including following metadata: site name, type of material, and chronological period.
 
 # archeofrag 1.1.0
 Released: 2025-03-07

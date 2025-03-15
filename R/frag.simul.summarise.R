@@ -69,7 +69,7 @@ frag.simul.summarise <- function(graph, layer.attr, res.h1, res.h2,
   obs.params <- c(frag.get.parameters(graph, layer.attr, verbose = verbose),
                   frag.layers.admixture(graph, layer.attr, verbose = verbose),
                   "cohesion" = frag.layers.cohesion(graph, layer.attr, verbose = verbose),
-                  "weightsum" = sum(igraph::E(graph)$weight))
+                  "edge.weights.sum" = sum(igraph::E(graph)$weight))
   
   if(verbose & sum(! colnames(res.h1) %in% names(obs.params)) != 0){
     warning("Some simulated parameters are missing in the observed graph.")

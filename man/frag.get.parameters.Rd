@@ -14,7 +14,7 @@
 This function is a convenient function to get general information about a fragmentation graph. It is particularly useful for setting the parameters of the \code{frag.simul.process} function.
 It returns:
 \itemize{
-  \item n.components: number of objects (graph connected components)
+  \item n.components: number of objects (i.e. connected components)
   \item vertices: number of fragments
   \item edges: number of connection relationships between fragments
   \item balance: estimated fragments balance, i.e. proportion of fragments in the first spatial unit (see details)
@@ -24,15 +24,15 @@ It returns:
   \item planar: whether the graph is planar or not
   \item edge.weights.sum: sum of the edge weights
   \item edge.weights.median: median of the edge weights
-  \item edge.weights.median.abs.dev. median absolute deviation of the edge weights
+  \item edge.weights.median.abs.dev.: median absolute deviation of the edge weights
 }
 
-The balance and components balance are calculated from the subgraph including only the fragments connected to fragments from the same spatial unit. This is to approximate these proportions of deposited materials regardless the effects of posterior disturbances. Results are given about the  spatial unit whose label comes first alphanumerically (because this function is  used internally by the \code{frag.simul.process} function).  
+The (fragments) \bold{balance} and \bold{components balance} are calculated from the subgraph including only the fragments connected to fragments from the same spatial unit. This is to approximate these proportions of deposited materials regardless the effects of posterior disturbances. Results are given about the spatial unit whose label comes first alphanumerically.  
 
-When studying a pair of spatial units, disturbance is defined as the proportion of fragments which moved from their initial spatial unit to the other spatial unit. This definition is used in the \code{frag.process.simul} function to generate random fragmentation graphs.
+When studying a pair of spatial units, \bold{disturbance} is defined as the proportion of fragments which moved from their initial spatial unit to the other spatial unit. This definition is used in the \code{frag.process.simul} function to generate random fragmentation graphs.
 However, \code{frag.get.parameters} uses a different definition since its aim is different: considering a fragmentation graph representing the result of unknown post-depositional processes, \code{frag.get.parameters} returns an estimation of the disturbance which might happened. This estimation is computed from a subgraph including only the components with fragments from the two spatial units: disturbance is get from the number of fragments belonging to the less represented spatial unit in this subgraph over the total number of fragments in the subgraph.
 
-The aggregation factor reflects the diversity of the components' edge count. The factor is calculated by: \deqn{1 - 1/(1 + sd(components\ edge\ count))}.
+The \bold{aggregation factor} reflects the diversity of the components' edge count. The factor is calculated by: \deqn{1 - 1/(1 + sd(components\ edge\ count))}
 
 The optional RBGL package is required to determine the planarity of the graph. If it is not installed, the \code{planar} argument is set to FALSE by default.
 }

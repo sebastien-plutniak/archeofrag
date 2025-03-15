@@ -11,7 +11,7 @@
       "balance" = params$balance,
       "components.balance" = params$components.balance,
       "disturbance" = params$disturbance,
-      frag.layers.admixture(g, "layer", , verbose = verbose),
+      frag.layers.admixture(g, "layer", verbose = verbose),
       "cohesion" = rbind(frag.layers.cohesion(g, "layer", verbose = verbose)),
       "edge.weights.sum" = sum(igraph::E(g)$weight),
       "edge.weights.median" = params$edge.weights.median,
@@ -32,8 +32,8 @@ frag.simul.compare <- function(graph, layer.attr, iter, summarise=TRUE, verbose=
     stop("A logical value is required for the 'summary' parameter.")
   }
   # main function:
-  resH1 <- .run.simul(iter, graph, layer.attr, initial.layer = 1, , verbose = verbose, ...)
-  resH2 <- .run.simul(iter, graph, layer.attr, initial.layer = 2, , verbose = verbose, ...)
+  resH1 <- .run.simul(iter, graph, layer.attr, initial.layer = 1, verbose = verbose, ...)
+  resH2 <- .run.simul(iter, graph, layer.attr, initial.layer = 2, verbose = verbose, ...)
   
   if(! summarise){
     return(list("h1.data" = resH1, "h2.data" = resH2))
