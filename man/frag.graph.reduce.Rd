@@ -4,13 +4,15 @@
 \title{Reduce the size of a fragmentation graph}
 \description{Remove fragments from a fragmentation graph}
 
-\usage{frag.graph.reduce(graph=NULL, n.frag.to.remove=NULL, conserve.objects.nr=FALSE)}
+\usage{frag.graph.reduce(graph=NULL, n.frag.to.remove = NULL, conserve.objects.nr = FALSE, conserve.frag.balance = FALSE, conserve.inter.units.connection = FALSE, verbose = FALSE)}
 
 \arguments{
   \item{graph}{An \code{igraph} object.} 
-  \item{n.frag.to.remove}{Integer.  Number of fragments (i.e. vertices) to remove.}
+  \item{n.frag.to.remove}{Integer. Number of fragments (i.e. vertices) to remove.}
   \item{conserve.objects.nr}{Logical. If TRUE, preserve the number of objects (i.e. connected components) in the graph.}
-  \item{conserve.frag.balance}{Logical. If TRUE, preserve the proportion of fragments in the first and second spatial unit ('balance').}
+  \item{conserve.frag.balance}{Logical. If TRUE, try to preserve the proportion of fragments in the first and second spatial unit ('balance').}
+  \item{conserve.inter.units.connection}{Logical. If TRUE, preserve the connection between fragments from different spatial units.}
+  \item{verbose}{Logical. Whether to print or not warning messages.}
   
 }
 \details{
