@@ -22,20 +22,30 @@ test_that("reduce vertice number (conserving objects nr)", {
 test_that("reduce vertice number (not conserving objects nr)", {
   set.seed(1)
   g1 <- frag.simul.process(initial.layers=2, n.components = 10, vertices = 41, disturbance = 0.1)
-  g2 <- frag.graph.reduce(g1, 30, conserve.objects.nr = FALSE, conserve.frag.balance = FALSE)
+  g2 <- frag.graph.reduce(g1, 30, conserve.objects.nr = FALSE, conserve.frag.balance = FALSE, conserve.inter.units.connection = FALSE)
   
-  expect_identical(gorder(g2), 12)
+  expect_identical(gorder(g2), 11)
 })
-
-
 
 
 test_that("reduce vertice number (conserving objects nr, conserving fragments balance)", {
   set.seed(1)
-  g <- frag.simul.process(initial.layers=2, n.components = 10, vertices = 41, disturbance = 0.1)
-  g <- frag.graph.reduce(g1, 30, conserve.objects.nr = TRUE, conserve.frag.balance = TRUE)
+  g <- frag.simul.process(initial.layers=2, n.components = 10, vertices = 51, disturbance = 0.15)
+  g2 <- frag.graph.reduce(g1, 30, conserve.objects.nr = TRUE, conserve.frag.balance = TRUE, conserve.inter.units.connection = FALSE)
   
-  expect_equal(gorder(g), 33)
+  expect_equal(gorder(g2), 22)
+  expect_lt(frag.relations.by.layers(g2, "layer")[2, 1],
+            frag.relations.by.layers(g,  "layer")[2, 1])
 })
 
+
+test_that("reduce vertice number (conserving fragments balance and inter-units connection)", {
+  set.seed(1)
+  g <- frag.simul.process(initial.layers=2, n.components = 10, vertices = 51, disturbance = 0.15)
+  g2 <- frag.graph.reduce(g, 30, conserve.objects.nr = FALSE, conserve.frag.balance = TRUE, conserve.inter.units.connection = TRUE)
+  
+  expect_equal(gorder(g2), 25)
+  expect_equal(frag.relations.by.layers(g,  "layer")[2, 1],
+               frag.relations.by.layers(g2, "layer")[2, 1])
+})
 
