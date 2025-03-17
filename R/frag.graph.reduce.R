@@ -136,9 +136,21 @@ frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.ob
       
   } else {
     final.frag.nr <- igraph::gorder(graph) - n.frag.to.remove
-    graph <- .reduce.graph(graph, final.frag.nr, conserve.objects.nr)
+    graph.reduced <- .reduce.graph(graph, final.frag.nr, conserve.objects.nr)
+    
+    # add inter-units edges:
+    e.list <- igraph::as_edgelist(graph)[inter.units.edges, ]
+    e.list <- e.list[e.list[, 1] %in% igraph::V(graph.reduced)$name & e.list[, 2] %in% igraph::V(graph.reduced)$name, ]
+    e.list <- matrix(e.list, ncol = 2)
+    
+    if(nrow(e.list) > 0){
+      graph <- igraph::add_edges(graph.reduced, as.character(c(rbind(e.list[, 1], e.list[, 2]))))
+    } else {
+      graph <- graph.reduced
+    }
+    
   }
-  
+  graph <- igraph::simplify(graph)
   igraph::E(graph)$weight <- 1 # reset weight values
   igraph::delete_vertices(graph, igraph::V(graph)[igraph::degree(graph) == 0])
 }
