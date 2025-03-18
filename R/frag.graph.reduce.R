@@ -64,7 +64,7 @@
 }
 
 
-frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.objects.nr = FALSE, conserve.frag.balance = FALSE, conserve.inter.units.connection = FALSE, verbose = FALSE) {
+frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.objects.nr = FALSE, conserve.fragments.balance = FALSE, conserve.inter.units.connection = FALSE, verbose = FALSE) {
   .check.frag.graph(graph)
   if( ! is.logical(conserve.objects.nr)){stop("'conserve.objects.nr' must be TRUE or FALSE.")}
   if( ! is.numeric(n.frag.to.remove)){stop("'n.frag.to.remove' must be an integer value.")}
@@ -77,11 +77,14 @@ frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.ob
   
   # tag vertices with inter-unit edges to keep:
   if(conserve.inter.units.connection){
+    proportion <- (igraph::gorder(graph) - n.frag.to.remove) / igraph::gorder(graph)
+    rows <- floor(length(inter.units.edges) * proportion)
+    inter.units.edges <- inter.units.edges[sample(seq_len(length(inter.units.edges)), rows), ]
     v.to.preserve <- unique(c(igraph::as_edgelist(graph)[inter.units.edges,]))
     igraph::V(graph)[ igraph::V(graph)$name %in% v.to.preserve ]$preserve <- T
   }
   
-  if(conserve.frag.balance){
+  if(conserve.fragments.balance){
     frag.balance.unit.1 <- frag.get.parameters(graph, "layer")$balance
     frag.balance.unit.2 <- 1 - frag.balance.unit.1
     n.frag.to.remove.unit.1 <- floor(n.frag.to.remove * frag.balance.unit.1)
@@ -134,7 +137,7 @@ frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.ob
     graph$frag_type <- graph$frag_type_1
     graph <- Reduce(igraph::delete_graph_attr, c("frag_type_1", "frag_type_2"), graph)
       
-  } else {
+  } else { # conserve.fragments.balance = FALSE
     final.frag.nr <- igraph::gorder(graph) - n.frag.to.remove
     graph.reduced <- .reduce.graph(graph, final.frag.nr, conserve.objects.nr)
     

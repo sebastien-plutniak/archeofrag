@@ -1,8 +1,8 @@
 
 # archeofrag 1.1.0
 * Add Grotta di Fumane dataset.
-* Add comments to fragments dataset including following metadata: site name, type of material, and chronological period.
-* In `frag.graph.reduce()` add parameters to preserve the proportion of fragments in the first and second spatial units, to preserve connection relationships between fragments from different spatial units, and to control the verbosity of the function.
+* Add comments to fragments dataset including the following metadata: site name, type of material, and chronological period.
+* In `frag.graph.reduce()` add parameters to: preserve the proportion of fragments in the first and second spatial units, preserve a part of the connection relationships between fragments from different spatial units, and to control the verbosity of the function.
 
 # archeofrag 1.1.0
 Released: 2025-03-07
