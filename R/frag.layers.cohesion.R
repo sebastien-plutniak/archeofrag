@@ -22,7 +22,7 @@ frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
   .check.layer.argument(graph, layer.attr)
   
   # delete singletons:
-  graph <- igraph::delete_vertices(graph, degree(graph) == 0)
+  graph <- igraph::delete_vertices(graph, igraph::degree(graph) == 0)
   
   # Test if empty graph:
   if(length(graph) == 0){
@@ -46,17 +46,18 @@ frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
     results <- .cohesion.for.two.layers(graph, layers)
     results <- matrix(results)
   } else{ # if length(layers) > 2
-    message("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
+    if(verbose) message("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
+    
     results <- sapply(seq_len(ncol(pairs)), function(id){
-      
+      res <- c("cohesion1" = NA, "cohesion2" = NA)
       gsub <- frag.get.layers.pair(graph, layer.attr, c(pairs[1, id], pairs[2, id]), verbose = verbose)
+      if(is.null(gsub)) return(res)
+      
       if(length(unique(igraph::V(gsub)$layer)) == 2){
         gsub <- frag.edges.weighting(gsub, layer.attr, morphometry, x, y, z, verbose = verbose)
-        # .cohesion.for.two.layers(gsub, unique(igraph::V(gsub)$layers))
-        .cohesion.for.two.layers(gsub, c(pairs[1, id], pairs[2, id]))
-      } else{
-        c("cohesion1" = NA, "cohesion2" = NA)
+        res <- .cohesion.for.two.layers(gsub, c(pairs[1, id], pairs[2, id]))
       }
+      res
     })
   }
   rownames(results) <- c("cohesion1", "cohesion2")
