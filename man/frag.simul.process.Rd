@@ -11,7 +11,8 @@ frag.simul.process(initial.layers=2, n.components=NULL, vertices=Inf,
                    edges=Inf, balance=.5, components.balance=.5,
                    disturbance=0, aggreg.factor=0, planar=FALSE,
                    asymmetric.transport.from=NULL, 
-                   from.observed.graph=NULL, observed.layer.attr=NULL)
+                   from.observed.graph=NULL, observed.layer.attr=NULL, 
+                   verbose=TRUE)
 }
 
 \arguments{
@@ -27,6 +28,7 @@ frag.simul.process(initial.layers=2, n.components=NULL, vertices=Inf,
   \item{asymmetric.transport.from}{Numeric or character value in "1" or "2" (refering to the first and second spatial unit). If not NULL, the disturbance process will be applied only to the fragments from this spatial unit.}
   \item{from.observed.graph}{igraph object. If not NULL, the parameters observed in this fragmentation graph are used instead of the previous parameters. See details.}
   \item{observed.layer.attr}{character. Required if the \code{from.observed.graph} option is used. Name of the spatial unit attribute in the observed graph.}
+  \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{
 This function simulates the fragmentation of archeological objects within and between two adjacent stratigraphic layers.

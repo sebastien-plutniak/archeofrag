@@ -62,7 +62,7 @@ frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
   if ( requireNamespace("RBGL", quietly=TRUE)  ) {
     is.planar <- RBGL::boyerMyrvoldPlanarityTest(igraph::as_graphnel(graph))
   } else if(verbose) {
-    warning("The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA")
+    message("The RBGL package is not installed, the `planarity` value cannot be determinated and returned as NA")
   }
   # list results:
   res <- list("n.components" = igraph::components(graph)$no,

@@ -1,6 +1,6 @@
-.subsetsum <- function(x, target, i = 1){
+.subsetsum <- function(x, target, i = 1){ # TODO: add comments to this function
   while(i != length(x)){
-    s <- sum(x[1:i], na.rm = T)
+    s <- sum(x[seq_len(i)], na.rm = TRUE)
     if(s == target) break
     if(s > target) x[i] <- NA
     i <- i + 1
@@ -11,7 +11,7 @@
 
 .select.component <- function(g, aggreg.factor){
   # high aggreg.factor favors bigger components:
-  proba <- 1/ (1 + (1:igraph::components(g)$no * aggreg.factor))
+  proba <- 1/ (1 + (seq_len(igraph::components(g)$no) * aggreg.factor))
   sample(order(igraph::components(g)$csize, decreasing = T), 1, prob = proba)
 }
 
@@ -66,8 +66,9 @@
 .main <- function(n.components, vertices, edges, balance, disturbance, aggreg.factor, planar){
   stop.msg <- "No solution with these parameters, decrease the number of 'edges', increase the number of 'vertices', or remove one of these constraints."
   # Initialize graph:  
+  
   g <- n.components * igraph::make_graph(c(1, 2), directed = FALSE)
-  igraph::V(g)$name <- 1:igraph::gorder(g)
+  igraph::V(g)$name <- seq_len(igraph::gorder(g))
   igraph::V(g)$object.id <- igraph::components(g)$membership
   # Build graph:
   if(is.infinite(vertices)){ # only edge count constraint
@@ -92,7 +93,7 @@
     # if(edges > 3 * (vertices - (n.components - 1)*2) - 7 + n.components){ # uncorrect, don't work for graphs only made of dyads
     if(edges > 3 * (vertices - (n.components - 1)*2) - 6 + n.components){ # adapted version, but probably uncorrect
       stop(stop.msg)
-    }  
+    }
     
     while(igraph::gorder(g) < vertices & igraph::gsize(g) < edges ){
       g <- .add.fragment(g, n.components, edges, connect.neighbors=F, planar, aggreg.factor)
@@ -110,7 +111,7 @@
       e.max <- sum(e.max - e.existing)
     }
     
-    if(edges - igraph::gsize(g) > e.max){
+    if(edges - igraph::gsize(g) > e.max){ # stop if the graph already contains too many edges
       stop(stop.msg)
     }
     while(igraph::gsize(g) < edges){
@@ -158,7 +159,7 @@
 
  
 
-frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=FALSE, asymmetric.transport.from=NULL, from.observed.graph=NULL, observed.layer.attr=NULL){
+frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf, edges=Inf, balance=.5, components.balance=.5, disturbance=0, aggreg.factor=0, planar=FALSE, asymmetric.transport.from=NULL, from.observed.graph=NULL, observed.layer.attr=NULL, verbose=TRUE){
   
   if(! is.logical(planar)) stop("The 'planar' argument must be logical.")
   if(planar==TRUE & (! requireNamespace("RBGL", quietly=TRUE))){
@@ -176,7 +177,7 @@ frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf
       stop("The `layer` attribute of the observed graph must contain two layers.")
     }
     # retrieve the observed graph's values:
-    params <- frag.get.parameters(from.observed.graph, observed.layer.attr)
+    params <- frag.get.parameters(from.observed.graph, observed.layer.attr, verbose = verbose) 
     # set the parameters with observed values if not already set by the user:
     if(missing(n.components)) n.components <- params$n.components
     if(missing(vertices)) vertices <- params$vertices
@@ -187,7 +188,7 @@ frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf
     if(missing(planar))  planar <- params$planar
     if(is.na(planar)) {
       planar <- FALSE
-      warning("The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.")
+      if(verbose) message("The planarity of the graph value is indeterminated, simulations are executed with no planar constraint.")
     }
   }
   # BEGIN Tests:
@@ -277,7 +278,7 @@ frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf
     
     g.layer1 <- .main(n.components.l1,
                       vertices.l1,  
-                      edges = Inf,
+                      edges = Inf,  # TODO: répartir le nombre d'arêtes avec la proportion de frag.balance 
                       balance = .5,
                       disturbance = 0,
                       aggreg.factor,
@@ -289,7 +290,7 @@ frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf
                       disturbance = 0,
                       aggreg.factor,
                       planar) 
-    # mark and merge the two graphs:
+    # tag and merge the two graphs:
     igraph::V(g.layer1)$layer <- 1
     igraph::V(g.layer2)$layer <- 2
     igraph::V(g.layer2)$name <- paste(igraph::V(g.layer2)$name, ".2", sep="")

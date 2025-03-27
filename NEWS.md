@@ -1,5 +1,6 @@
 
-# archeofrag 1.1.1
+# archeofrag 1.2.0
+Released: 2025-03-27
 
 * Add 'Grotta di Fumane' and 'Eaton' datasets.
 * Add comments to fragments dataset including the following metadata: site name, type of material, and chronological period.
