@@ -1,4 +1,8 @@
 
+# archeofrag 1.2.1
+
+* Add 'Grande Rivoire 1st Meso' and 'Grande Rivoire 2nd Meso' datasets. Remove the 'Grande Rivoire' dataset.
+
 # archeofrag 1.2.0
 Released: 2025-03-27
 
