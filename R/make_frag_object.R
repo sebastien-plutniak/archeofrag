@@ -26,7 +26,7 @@ make_frag_set_validation <- function(object)
       stop("The data frame for the 'sr' argument must have at least two columns.")
     }
     if( sum( ! object@df.sr[,1] %in% object@fragments.df[, 1]) != 0){
-      stop("Some objects in 'sr' are not documented in the 'fragments' data frame.")
+      stop("Some objects in the similarity relationships data ('sr' parameter) are not documented in fragments data ('fragments' parameter)")
     }
   }  
 
@@ -35,7 +35,7 @@ make_frag_set_validation <- function(object)
       stop("The data frame for the 'cr' argument must have at least two columns.")
     }
     if( sum( ! c(object@df.cr[,1], object@df.cr[,2]) %in% object@fragments.df[, 1]) != 0){
-      stop("Some objects in 'cr' are not documented in the 'fragments' data frame.")
+      stop("Some objects in the connection relationships data ('cr' parameter) are not documented in fragments data ('fragments' parameter)")
     }
   } 
  
