@@ -69,7 +69,7 @@ frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.ob
   if( ! is.logical(conserve.objects.nr)){stop("'conserve.objects.nr' must be TRUE or FALSE.")}
   if( ! is.numeric(n.frag.to.remove)){stop("'n.frag.to.remove' must be an integer value.")}
   
-  igraph::V(graph)$preserve <- F 
+  igraph::V(graph)$preserve <- FALSE
   
   v1 <- igraph::V(graph)$layer == sort(unique(igraph::V(graph)$layer))[1] 
   v2 <- igraph::V(graph)$layer == sort(unique(igraph::V(graph)$layer))[2] 
@@ -81,12 +81,14 @@ frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.ob
     rows <- floor(length(inter.units.edges) * proportion)
     inter.units.edges <- inter.units.edges[sample(seq_len(length(inter.units.edges)), rows), ]
     v.to.preserve <- unique(c(igraph::as_edgelist(graph)[inter.units.edges,]))
-    igraph::V(graph)[ igraph::V(graph)$name %in% v.to.preserve ]$preserve <- T
+    igraph::V(graph)[ igraph::V(graph)$name %in% v.to.preserve ]$preserve <- TRUE
   }
   
   if(conserve.fragments.balance){
-    frag.balance.unit.1 <- frag.get.parameters(graph, "layer")$balance
+    # the 'fragments balance' is computed here as it is computed by the frag.get.parameters() function:
+    frag.balance.unit.1 <- .fragments.balance(graph)
     frag.balance.unit.2 <- 1 - frag.balance.unit.1
+
     n.frag.to.remove.unit.1 <- floor(n.frag.to.remove * frag.balance.unit.1)
     n.frag.to.remove.unit.2 <- floor(n.frag.to.remove * frag.balance.unit.2)
     
@@ -125,8 +127,8 @@ frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.ob
     igraph::V(graph)$morphometry <- .concatenate.attr(graph, "morphometry")
     
     graph <- Reduce(igraph::delete_vertex_attr, c("morphometry_1", "morphometry_2",
-                                                   "object.id_1", "object.id_2",
-                                                   "layer_1", "layer_2",
+                                                  "object.id_1", "object.id_2",
+                                                  "layer_1", "layer_2",
                                                   "preserve_1", "preserve_2"), 
                      graph)
     

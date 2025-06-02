@@ -1,8 +1,8 @@
 Package: archeofrag
 Type: Package
 Title: Spatial Analysis in Archaeology from Refitting Fragments
-Version: 1.2.1
-Date: 2025-04-28
+Version: 1.2.2
+Date: 2025-06-02
 Authors@R: person("Sebastien", "Plutniak", email = "sebastien.plutniak@posteo.net", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6674-3806"))
 Author: Sebastien Plutniak [aut, cre] (<https://orcid.org/0000-0002-6674-3806>)
 Maintainer: Sebastien Plutniak <sebastien.plutniak@posteo.net>

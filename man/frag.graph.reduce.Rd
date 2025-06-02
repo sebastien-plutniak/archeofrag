@@ -12,8 +12,8 @@
   \item{graph}{An \code{igraph} object.} 
   \item{n.frag.to.remove}{Integer. Number of fragments (i.e. vertices) to remove.}
   \item{conserve.objects.nr}{Logical. If TRUE, preserve the number of objects (i.e. connected components) in the graph.}
-  \item{conserve.fragments.balance}{Logical. If TRUE, try to preserve the proportion of fragments in the first and second spatial unit ('balance').}
-  \item{conserve.inter.units.connection}{Logical. If TRUE, preserve a part of the connection relationships between fragments from different spatial units (see details).}
+  \item{conserve.fragments.balance}{Logical. If TRUE, try to preserve the proportion of fragments in the first and second spatial units ('balance').}
+  \item{conserve.inter.units.connection}{Logical. If TRUE, preserve the proportion of connection relationships between fragments located in different spatial units (see details).}
   \item{verbose}{Logical. Whether to print or not warning messages.}
   
 }
@@ -35,11 +35,11 @@ A fragmentation graph (igraph object) with less fragments (vertices).
 g <- frag.simul.process(n.components=15, vertices=50, disturbance=.15) 
 igraph::gorder(g)
 igraph::components(g)$no
-# reduce the number of framents and conserve the number of connected components:
+# reduce the number of fragments and conserve the number of connected components:
 g1 <- frag.graph.reduce(g, n.frag.to.remove = 40, conserve.objects.nr = TRUE)
 igraph::gorder(g1)
 igraph::components(g1)$no
-# reduce the number of framents and do not conserve the number of connected components:
+# reduce the number of fragments and do not conserve the number of connected components:
 g2 <- frag.graph.reduce(g, n.frag.to.remove = 40, conserve.objects.nr = FALSE)
 igraph::gorder(g2)
 igraph::components(g2)$no

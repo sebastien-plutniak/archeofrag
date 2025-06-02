@@ -1,7 +1,9 @@
 
 # archeofrag 1.2.1
+Released: 
 
 * Add 'Grande Rivoire 1st Meso' and 'Grande Rivoire 2nd Meso' datasets. Remove the 'Grande Rivoire' dataset.
+* Code optimisation: add internal sub-functions `.fragments.balance()` and `.components.balance()`. The first is now used both in `frag.get.parameters()` and `frag.graph.reduce()` (in the last case, to avoid calling `frag.get.parameters()` in `frag.graph.reduce()`).
 
 # archeofrag 1.2.0
 Released: 2025-03-27

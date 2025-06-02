@@ -16,19 +16,10 @@ frag.get.parameters <- function(graph, layer.attr, verbose = TRUE){
   # test if there are two layers. If true, compute balance, components.balance, disturbance. Else return NAs
   if(length(unique(igraph::V(graph)$layer)) == 2) {
       # fragments balance ----
-      # considering the subgraph including only fragments connected to fragments from the same spatial unit, proportion of fragments in the 1st spatial unit (alphanumerically)
-      v1 <- igraph::V(graph)[igraph::V(graph)$layer == unique(igraph::V(graph)$layer)[1]]
-      v2 <- igraph::V(graph)[igraph::V(graph)$layer == unique(igraph::V(graph)$layer)[2]]
-      subgraph <- igraph::subgraph_from_edges(graph, igraph::E(graph)[ ! v1 %--% v2 ])
-      balance <- table(igraph::V(subgraph)$layer)
-      balance <- round(balance[1] / sum(balance), 2)
+      balance <- .fragments.balance(graph)
       
       # components balance ----
-      # considering the subgraph including only fragments connected to fragments from the same spatial unit, proportion of components in the 1st spatial unit (alphanumerically)
-      compo.balance <- sapply(igraph::decompose(subgraph), 
-                              function(x) igraph::V(x)$layer[1])
-      compo.balance <- table(compo.balance)
-      compo.balance <- round(compo.balance[1] / sum(compo.balance), 2) 
+      compo.balance <- .components.balance(graph)
       
       # estimated disturbance ----
       # proportion of fragments which might have move, determined from the components with fragments from 2 spatial units unequally represented:

@@ -190,8 +190,6 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
   # IF the morpho-spatial modifier is not required, return the result:
   if(is.null(morphometry) & all(c(x, y, z) == "")){ return(graph) }
   
-  # browser()
-  
   # ELSE, compute and apply the morpho-spatial modifier:
   # Morpho-spatial modifier ----
   
