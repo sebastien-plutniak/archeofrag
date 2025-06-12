@@ -18,8 +18,8 @@
 \usage{data(Chauzeys)}
 \format{
     \itemize{
-        \item\code{chauzeys.connection} is a 1879x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
-        \item\code{chauzeys.fragments} is a 2167x9 data frame:
+        \item\code{chauzeys.connection} is a 1846x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
+        \item\code{chauzeys.fragments} is a 2119x9 data frame:
         \itemize{
             \item id:  fragment unique identifier 
             \item layer:  chronocultural unit associated to the fragment was found. Values are numbered in expected chrono-stratigraphic order

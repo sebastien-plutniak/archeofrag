@@ -18,7 +18,7 @@
 \usage{data(Fumane)}
 \format{
     \itemize{
-        \item\code{fumane.connection} is a 262x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
+        \item\code{fumane.connection} is a 261x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
         \item\code{fumane.fragments} is 508x8 data frame:
         \itemize{
             \item id: fragment unique identifier 

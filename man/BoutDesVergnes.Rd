@@ -18,8 +18,8 @@
 \usage{data(BoutDesVergnes)}
 \format{
     \itemize{
-        \item\code{bdv.connection} is a 3931x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
-        \item\code{bdv.fragments} is 3666x9 data frame:
+        \item\code{bdv.connection} is a 1767x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
+        \item\code{bdv.fragments} is 2204x5 data frame:
         \itemize{
             \item id:  fragment unique identifier 
             \item layer: chronocultural unit associated to the fragment was found. Values are numbered in expected chrono-stratigraphic order
