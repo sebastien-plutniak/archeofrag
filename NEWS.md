@@ -1,7 +1,9 @@
 
 # archeofrag 1.2.2
+Released: 
 
 * Add 'St Cesaire 1987' and 'St Cesaire 2021' datasets.
+* Add the 'Grotte 16' dataset.
 
 # archeofrag 1.2.1
 Released: 
