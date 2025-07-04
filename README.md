@@ -2,15 +2,8 @@
 # Archeofrag
 
 An R package for refitting and spatial analysis in archeology.
-`Archeofrag` includes methods to analyse fragmented objects in
-archaeology using refitting relationships between fragments scattered in
-archaeological spatial units (e.g. stratigraphic layers). Graphs and
-graph theory are used to model archaeological observations. The package
-is mainly based on the ‘igraph’ package for graph analysis. Functions
-can: 1) create, manipulate, and simulate fragmentation graphs, 2)
-measure the cohesion and admixture of archaeological spatial units, and
-3) characterise the topology of a specific set of refitting
-relationships. A series of datasets are provided as examples.
+
+`Archeofrag` includes methods to analyse spatial units in archaeology from the relationships between refitting fragmented objects scattered in these units (e.g. stratigraphic layers). Graphs are used to model archaeological observations. The package is mainly based on the `igraph` package for graph analysis. Functions can: 1) create, manipulate, visualise, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archaeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. A series of published empirical datasets is included. This package is complemented by the `archeofrag.gui` R package, a companion GUI application available at <https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/>.
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -62,7 +55,7 @@ Details about the *archeofrag* / TSAR method were published in:
   [10.21105/joss.04335](https://doi.org/10.21105/joss.04335).
 - Plutniak, S. 2022. “[Archeofrag: un package R pour les remontages et
   l’analyse spatiale en
-  archéologie](https://rzine.fr/publication/20220811_archeofrag_joss)”,
+  archéologie](https://rzine.gitpages.huma-num.fr/site/ressources/20220811_archeofrag_joss/)”,
   *Rzine*.
 - Plutniak, S. 2022. “[L’analyse topologique des remontages
   archéologiques : la méthode TSAR et le package R

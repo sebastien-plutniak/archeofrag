@@ -5,7 +5,7 @@
 \alias{st.cesaire.1987.connection}
 \alias{st.cesaire.1987.fragments}
 
-\title{Dataset: Refitting relationships between bone fragments from the Saint Césaire, Palaeolithic levels}
+\title{Dataset: Refitting relationships between bone fragments from the Saint Césaire site, Palaeolithic levels}
 \description{
 La Roche a Pierrot is a Palaeolithic rock shelter located in Saint Césaire, France. This dataset describes the refitting 'connection' relationships between bone fragments found during the excavation of the Middle and Upper Palaeolithic levels led by Francois Leveque from 1976 to 1987. Connection relationship refers to physical connection between two fragments that were part of the same object. 
     
@@ -34,7 +34,7 @@ La Roche a Pierrot is a Palaeolithic rock shelter located in Saint Césaire, Fra
     }
 }
 \details{
-Refits were recorded by set of refitting fragments (and not by pair). Consequently, for the sets including more than two fragments, it is impossible to determine the exact distribution of the refitting relationships (if fragment A refits with fragments B and C, whether fragments B and C also refit together). So, in this dataset, the refits for those sets are parsimoniously modeled as chains (by consequence, the number of relationships might be underestimated).  
+Refits were recorded by set of refitting fragments (and not by pair). Consequently, for the sets including more than two fragments, it is impossible to determine the exact distribution of the refitting relationships (if fragment A refits with fragments B and C, whether fragments B and C also refits together). So, in this dataset, the refits for those sets are parsimoniously modeled as chains (by consequence, the number of relationships might be underestimated).  
 }
 
 \references{

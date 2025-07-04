@@ -18,12 +18,12 @@
   if (igraph::gorder(g2) >= final.frag.nr) {
     g <- igraph::delete_vertices(g, selected.vertice.to.delete)
     g <- igraph::delete_vertices(g, igraph::V(g)[igraph::degree(g) == 0 & ! igraph::V(g)$preserve])
-  } else{ igraph::V(g)[vertice.selection]$preserve <- TRUE } # exclude the selected vertice for the next loop
+  } else{ igraph::V(g)[vertice.selection]$preserve <- TRUE } # exclude the selected vertex in next iterations
   g
 }
 
 .remove.vertice.conserving.components.nr <- function(g) {
-  # select and delete a vertice if it does not decrease the number of connected components
+  # select and delete a vertex if it does not decrease the number of connected components
   # (exclude vertices in dyadic components, articulations points, and with edges between spatial units:
   igraph::V(g)$component.id <- igraph::components(g)$membership
   not.dyadic <- names(table(igraph::V(g)$component.id)[table(igraph::V(g)$component.id) > 2])

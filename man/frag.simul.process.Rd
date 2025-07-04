@@ -23,9 +23,9 @@ frag.simul.process(initial.layers=2, n.components=NULL, vertices=Inf,
   \item{balance}{Numeric ]0;1[. Proportion of fragments to generate in the first spatial unit before applying disturbance.}
   \item{components.balance}{Numeric ]0;1[. Proportion of objects (connected components) in the first spatial unit before applying fragmentation (only used when initial.layers=2).}
   \item{disturbance}{Numeric [0;1]. Final proportion of fragments moved from a spatial unit to the other.}
-  \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections.}
+  \item{aggreg.factor}{Numeric [0;1]. Higher values increase the likelihood that the biggest components are selected when adding fragments or connections (see details).}
   \item{planar}{Logical. If TRUE, generates a planar graph (if FALSE, the graph can be planar or not).}
-  \item{asymmetric.transport.from}{Numeric or character value in "1" or "2" (refering to the first and second spatial unit). If not NULL, the disturbance process will be applied only to the fragments from this spatial unit.}
+  \item{asymmetric.transport.from}{Numeric or character value in "0", "1", and "2". Determine the direction of fragment transport when generating disturbance. Null or "0" value is for bidirectional transport,  "1" and "2" are for asymmetric transport from the first and second spatial units, respectively.}
   \item{from.observed.graph}{igraph object. If not NULL, the parameters observed in this fragmentation graph are used instead of the previous parameters. See details.}
   \item{observed.layer.attr}{character. Required if the \code{from.observed.graph} option is used. Name of the spatial unit attribute in the observed graph.}
   \item{verbose}{Logical. Whether to print or not warning messages.}
@@ -41,7 +41,8 @@ With \code{initial.layers}=2, the \code{components.balance} can be used, and the
 
 The \code{components.balance} parameter determines the proportion of components (i.e. objects) in the first spatial unit before the application of the fragmentation process;
 the \code{balance} parameter determines the proportion of fragments in the first spatial unit before the application of the disturbance process.
-The \code{disturbance} parameter determines the proportion of fragments to move from one spatial unit to another. Consequently, it generates inter-spatial units relationships. Highest admixture are generated with disturbance=0.5. 
+The \code{disturbance} parameter determines the proportion of fragments to move from one spatial unit to another. Consequently, it generates inter-spatial units relationships. Highest admixture values are generated with disturbance=0.5; disturbance values > 0.5 revert the fragment balance between the two spatial units. 
+The \code{aggreg.factor} contraints the selection of the object (set of fragments, i.e. connected components) to be fragmented at each iteration of the simulation: with \code{aggreg.factor=0}, the probability is equal for all objects; with \code{aggreg.factor=0.01}  the probability to select the 1st largest component is 0.99 and the smallest component is 1/4; with \code{aggreg.factor=1} the probability to select the 1st largest component is 1/2, the second largest component is 1/3, the third largest is 1/4, etc.
 If \code{asymmetric.transport.from} is set to 1 or 2, the disturbance process is only applied to the fragments from spatial unit 1 or spatial unit 2, respectively.
 
 If a graph is given to the \code{from.observed.graph} parameter, the properties of this graph are internally retrieved with the \code{frag.get.parameters} function (including:  the number of components, number of vertices, balance, the components.balance, the disturbance, the aggregation factor, and whether the graph is planar or not; note that the number of edges is not included as a parameter). If some other parameters of the \code{frag.simul.process} function are set, the values retrieved from the observed graph are used in replacement.
