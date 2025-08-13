@@ -293,6 +293,7 @@ frag.simul.process <- function(initial.layers=2, n.components=NULL, vertices=Inf
     # tag and merge the two graphs:
     igraph::V(g.layer1)$layer <- 1
     igraph::V(g.layer2)$layer <- 2
+    igraph::V(g.layer1)$name <- as.character(igraph::V(g.layer1)$name)
     igraph::V(g.layer2)$name <- paste(igraph::V(g.layer2)$name, ".2", sep="")
     g <- igraph::disjoint_union(g.layer1, g.layer2)
     # ADD DISTURBANCE:
