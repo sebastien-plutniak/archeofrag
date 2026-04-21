@@ -32,7 +32,7 @@ However, this function can also be used for a graph with more than two spatial u
 }
 \value{
 If the graph has only two spatial units, the function returns a numeric vector with a cohesion value (]0;1[) for each spatial units (sorted in alphanumerical order).
-If the graph has more than two spatial units, the function returns a matrix with cohesion values for each pair of spatial units.
+If the graph has more than two spatial units, the function returns a matrix with a row corresponding to the comparison of two spatial units, two columns including the cohesion values, and row names giving the labels of the spatial units (separated by the sign '/').
 }
 \author{Sebastien Plutniak <sebastien.plutniak at posteo.net>}
 
