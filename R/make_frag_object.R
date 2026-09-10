@@ -81,11 +81,12 @@ setMethod(  # make_cr_graph ----
     if( object@frag_type == "sr" ){
       stop("No data available for connection relationships.")
     }
+    
     cr.net <- igraph::graph_from_data_frame(object@df.cr, directed=FALSE,
                                             vertices=object@fragments.df)
     cr.net <- igraph::delete_vertices(cr.net, 
                                       igraph::degree(cr.net, mode="total") == 0)
-    cr.net <- simplify(cr.net, remove.multiple = TRUE)
+    cr.net <- igraph::simplify(cr.net, remove.multiple = TRUE)
     igraph::E(cr.net)$type_relation <- "cr"
     cr.net <- igraph::set_graph_attr(cr.net, "frag_type", "connection relations")
     return(cr.net)

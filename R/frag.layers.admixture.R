@@ -17,7 +17,7 @@ frag.layers.admixture <- function(graph, layer.attr, morphometry=NULL, x=NULL, y
   
   # Test the number of layers:
   if(length(layers) < 2){
-    if(verbose) warning("At least two different layers are required.")
+    if(verbose) warning("At least two different spatial units are required.")
     return(NA)
   }
   
@@ -27,7 +27,8 @@ frag.layers.admixture <- function(graph, layer.attr, morphometry=NULL, x=NULL, y
     return(results)
   } else { # if length(layers) > 2
     pairs <- utils::combn(layers, 2) 
-    message("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
+    if(verbose) message("More than 2 spatial units: the 'frag.edges.weighting' function is applied to each pair of spatial units.")
+    
     results <- sapply(seq_len(ncol(pairs)), function(id){
       gsub <- frag.get.layers.pair(graph, layer.attr, c(pairs[1, id], pairs[2, id]), verbose = T)
       if(is.null(gsub)){

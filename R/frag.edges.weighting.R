@@ -94,14 +94,24 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
   # TESTS: ----
   .check.frag.graph(graph)
   .check.layer.argument(graph, layer.attr)
+  stop.msg <- ""
+  
+  # test spatial units ----
+  layers <- igraph::vertex_attr(graph, layer.attr)
+  layers.u <- unique(layers)
+  if(length(layers.u) != 2){
+    if(verbose) stop.msg <- "Two spatial units are required." 
+    stop(stop.msg)
+  }
   
   # test morphometry ----
   igraph::V(graph)$morphometry <- 1 # set default value
   
   if(is.null(morphometry)){
     morphometry <- NULL
-    } else if(verbose & ! is.character(morphometry)){
-      stop("A character value is expected for the 'morphometry' parameter.")
+    } else if(! is.character(morphometry)){
+      if(verbose) stop.msg <- "A character value is expected for the 'morphometry' parameter."
+      stop(stop.msg)
     } else if( any(igraph::vertex_attr_names(graph) == morphometry) ){
       igraph::V(graph)$morphometry <- igraph::vertex_attr(graph, morphometry)
       morphometry <- "morphometry"
@@ -126,16 +136,18 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
   
   if(is.null(x)){
     x <- ""
-  } else if(verbose & ! is.character(x)){
-    stop("A character value is expected for the 'x' parameter.")
+  } else if(! is.character(x)){
+    if(verbose) stop.msg <- "A character value is expected for the 'x' parameter."
+    stop(stop.msg)
   } else if( ! any(igraph::vertex_attr_names(graph) == x) ){
     x <- ""
   }
   
   if(is.null(y)){
     y <- ""
-  } else if(verbose & ! is.character(y)){
-    stop("A character value is expected for the 'y' parameter.")
+  } else if(! is.character(y)){
+    if(verbose) stop.msg <- "A character value is expected for the 'y' parameter."
+    stop(stop.msg)
   }  else if( ! any(igraph::vertex_attr_names(graph) == y) ){
     y <- ""
   }
@@ -143,19 +155,12 @@ frag.edges.weighting <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
   if(is.null(z)){
     z <- ""
   } else if(verbose & ! is.character(z)){
-    stop("A character value is expected for the 'z' parameter.")
+    if(verbose) stop.msg <- "A character value is expected for the 'z' parameter."
+    stop(stop.msg)
   }  else if( ! any(igraph::vertex_attr_names(graph) == z) ){
     z <- ""
   }
     
-  
-  # test spatial units ----
-  layers <- igraph::vertex_attr(graph, layer.attr)
-  layers.u <- unique(layers)
-  if(verbose & length(layers.u) > 2){
-    stop("There are more than two layers.")
-  }
-  
   
   # add unique identifiers:
   if(is.null(V(graph)$name)){

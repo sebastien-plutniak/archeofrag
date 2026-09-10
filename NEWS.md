@@ -1,9 +1,18 @@
 
+# archeofrag 1.3.0
+Released: 2026-XX-XX
+
+* New method to compute a cohesion value for a graph with one spatial unit, implemented in `frag.layers.cohesion()`. It uses a new internal `.frag.graph.mirror()` function.
+* Graph having only one or no spatial unit (i.e. 'layer.attr' vertex attribute) are now supported.
+* Node size in `frag.graph.plot()` can now be controlled with the 'node.size' parameter. 
+* Addition of new datasets: 'Barger Gulch', 'Bessinaudes', 'Champ Parel 3', 'Chez Thuilet', 'Peyrazet', and 'Rue Auguste Isaac 35'.
+* Datasets include additional metadata: 'observed.spatial.units' (number of documented archaeologically relevant observed spatial units), 'doi' (digital object identifier of the published dataset).
+* Correct the error in `frag.graph.plot()` when coordinates variable were 'x', 'y', 'z'.
+
 # archeofrag 1.2.4
 Released: 2025-04-22
 
 * Add `frag.cohesion.ranking()` function.
-
 
 # archeofrag 1.2.3
 Released: 2025-09-26
