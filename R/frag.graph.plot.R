@@ -1,8 +1,29 @@
-frag.graph.plot  <- function(graph, layer.attr,  ...){
-   # tests:
+frag.graph.plot  <- function(graph, layer.attr=NULL, node.size=4.5,  ...){
+   # tests ----
    .check.frag.graph(graph)
-   .check.layer.argument(graph, layer.attr)
     if(is.null(igraph::graph_attr(graph, "frag_type"))) stop("The 'frag_type' graph attribute is missing")
+   
+   # if any, rename vertex attribute = x, y, z (to avoid conflict with plot.igraph())
+   coords <- c("x", "y", "z")
+   coord.names.check <- coords %in% igraph::vertex_attr_names(graph)
+   
+   rename.vertex.attribute <- function(g, attr){
+     g <- igraph::set_vertex_attr(g, toupper(attr), value = igraph::vertex_attr(g, attr))
+     igraph::delete_vertex_attr(g, attr)
+   }
+   
+   if(any(coord.names.check)){
+     coords <- coords[coord.names.check]
+     graph <- Reduce(rename.vertex.attribute, coords, graph)
+   }
+   
+   # check layer attribute:
+   # if null, set a default 'layer' attribute:
+   if(is.null(layer.attr)){
+     graph <- igraph::set_vertex_attr(graph, "layer", value = 1)
+     layer.attr <- "layer"
+   }
+   .check.layer.argument(graph, layer.attr)
    
    # main function:
     igraph::V(graph)$layers <- igraph::vertex_attr(graph, layer.attr)
@@ -34,7 +55,7 @@ frag.graph.plot  <- function(graph, layer.attr,  ...){
          vertex.color = as.character(factor(igraph::V(graph)$layers,
                                             labels = colors[seq_len(nLayers)] )),  
          vertex.label = NA, 
-         vertex.size = 4.5,
+         vertex.size = node.size,
          edge.width = 2,
          edge.color = igraph::E(graph)$color,
          ...)
