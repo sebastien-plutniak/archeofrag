@@ -17,7 +17,7 @@
 
 frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=NULL, z=NULL, verbose=TRUE){
   # output : value [0;1].
-  # tests:
+  # tests: ----
   .check.frag.graph(graph)
   .check.layer.argument(graph, layer.attr)
   
@@ -34,19 +34,34 @@ frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
   layers <- igraph::vertex_attr(graph, name = layer.attr)
   igraph::V(graph)$layer <- layers
   layers <- sort(unique(layers))
-  # Test the number of layers :
-  if(length(layers) < 2){
-    if(verbose) warning("At least two different layers are required.")
-    return(c("cohesion1" = NA, "cohesion2" = NA))
+ 
+  # 1 spatial unit: ----
+  if(length(layers) == 1){
+    if(verbose) message("Only 1 spatial unit: cohesion is computed against a mirrored and minimized copy of the graph.")
+    
+    g.mirrored <- .frag.graph.mirror(graph, morphometry, x, y, z)
+    g.mirrored <- frag.edges.weighting(g.mirrored,
+                                       "layer",
+                                       morphometry, x, y, z,
+                                       verbose)
+    results <- .cohesion.for.two.layers(g.mirrored, unique(igraph::V(g.mirrored)$layer))
+    results <- (results[1] - .5) * 2
+    return(c("cohesion" = round(results, 4)))
+  } else { # if layers > 2
+    pairs <- utils::combn(layers, 2) 
   }
-  pairs <- utils::combn(layers, 2) 
   
+  # 2 spatial unist: ----
   if(length(layers) == 2){
-    if(verbose & is.null(igraph::E(graph)$weight)) stop("The edges must be weighted (using the 'frag.edges.weighting' function).")
+    if(is.null(igraph::E(graph)$weight)) stop("The edges must be weighted (using the 'frag.edges.weighting' function).")
     results <- .cohesion.for.two.layers(graph, layers)
     results <- matrix(results)
-  } else{ # if length(layers) > 2
-    if(verbose) message("More than 2 layers: the 'frag.edges.weighting' function is applied to each pair of layers.")
+  } 
+  
+  
+  # >2 spatial units: ----
+  if(length(layers) > 2){ 
+    if(verbose) message("More than 2 spatial units: the 'frag.edges.weighting' function is applied to each pair of spatial units.")
     
     results <- sapply(seq_len(ncol(pairs)), function(id){
       res <- c("cohesion1" = NA, "cohesion2" = NA)
@@ -65,3 +80,4 @@ frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
   results <- round(results, digits = 4)
   t(results)
 }
+
