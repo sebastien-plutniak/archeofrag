@@ -14,6 +14,7 @@
         \item\code{fumane.connection}: connection relationships between fragments.
         \item\code{fumane.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(Fumane)}
 \format{
@@ -43,5 +44,6 @@
 \examples{
 data(Fumane)
 head(fumane.fragments)
+comment(fumane.fragments)
 }
 

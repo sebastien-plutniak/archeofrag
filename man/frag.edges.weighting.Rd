@@ -15,12 +15,14 @@
   \item{verbose}{Logical. Whether to print or not warning messages.}
 }
 \details{
-In the framework of the TSAR method, this function weights the edges of a fragmentation graph, before computing the cohesion and admixture values.
-The weights are computed from the topological properties  of the connection network and can be modified using  the morphometric properties of the fragments and/or the spatial distance between them. In summary, three different parameters can be used:
+In the TSAR method, this function weights the edges of a fragmentation graph, before computing the cohesion and admixture values.
+The weights are computed from the topological properties  of the connection network and can be modified using  the morphometric properties of the fragments and/or the spatial distance between them. In summary, three parameters can be used:
 
-  1. topology, the basic weighting method;
-  2. morphometry, the length, length by width, surface, volume, etc.
-  3. spatial distance, expressed using the metric (or other) system, or an ad hoc relative system.
+* \bold{topology}: the basic weighting method;
+
+* \bold{morphometry}: the length, length by width, surface, volume, etc.
+
+* \bold{spatial distance}: expressed using the metric (or other) system, or any ad hoc relative system.
 
 The function must be applied to a fragmentation graph with two spatial units.
 Internal connection relationships (within a spatial unit) and external relationships (between the two spatial units) are distinguished, and their respective edge weights are computed in different ways.
@@ -36,7 +38,7 @@ For an inter-spatial unit edge, the same calculation is made but with a modifier
 
 with \code{trans_i} and \code{trans_i} the local transitivity of the vertices i and j, and \code{sqrt(V_sub + E_sub)} the square root of the sum of the vertices count and edge count of the sub-graph.
 
-If the \code{morphometry} and/or coordinates (\code{x}, \code{y}, \code{z}) parameters are provided, the previous formula is modified using a factor which is computed as:
+If the \code{morphometry} and/or coordinates (\code{x}, \code{y}, \code{z}) parameters are provided, the previous formula is modified by applying a multiplying factor, computed as:
 
    \deqn{f(E_{ij}) =  1 - \left(\sqrt{  \frac{size_i + size_j}{max(sizes)} \times \sqrt{\frac{\frac{size_i}{size_j}}{max(prop)}} \times \frac{distance_{ij}}{max(distances)}}\ \right) }{f = 1 - sqrt( ((size_i+size_j)/max(sizes)) * sqrt((size_i/size_j)/max(prop)) * (distance_ij/max(distances)) ) }
 
@@ -44,7 +46,7 @@ If the \code{morphometry} and/or coordinates (\code{x}, \code{y}, \code{z}) para
 with \code{size_i} the morphometric value of the smaller fragment, \code{max(sizes)} the maximum sum of morphometric values observed for the pairs of connected fragments in the dataset under study; \code{max(prop)} the maximum proportion between the size values of connected fragments observed in the dataset under study; distance ij the spatial distance between fragments i and j; \code{max(distances)} the maximum euclidean distance observed for the pairs of connected fragments in the dataset under study.
 Results of the morphometric-spatial factor range in ]0,1].
 
-Error messages are displayed if the vertex "layer" attribute has more than two layers, and a warning is displayed if one or more of the values for the x, y, z parameters do not exist in the input graph.
+An error message is displayed if the "layer" variable has not exactly two different values. Warnings are displayed if one or more of the variable names given for the "x", "y", "z" parameters do not exist in the input graph.
 }
 \value{
 The graph, with an additional "weight" edge attribute and, if the distance has been computed, a "distance" edge attribute.

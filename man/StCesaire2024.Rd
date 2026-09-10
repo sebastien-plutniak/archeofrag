@@ -14,6 +14,7 @@ La Roche a Pierrot is a Palaeolithic rock shelter located in Saint Césaire, Fra
         \item\code{st.cesaire.2024.connection}: connection relationships between fragments.
         \item\code{st.cesaire.2024.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(StCesaire2024)}
 \format{
@@ -49,6 +50,7 @@ Refits were recorded by set of refitting fragments (and not by pair). Consequent
 \examples{
 data(StCesaire2024)
 head(st.cesaire.2024.fragments)
+comment(st.cesaire.2024.fragments)
 }
 
 

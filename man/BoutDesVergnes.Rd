@@ -14,6 +14,7 @@
         \item\code{bdv.connection}: connection relationships between fragments.
         \item\code{bdv.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(BoutDesVergnes)}
 \format{
@@ -23,9 +24,9 @@
         \itemize{
             \item id:  fragment unique identifier 
             \item layer: chronocultural unit associated to the fragment was found. Values are numbered in expected chrono-stratigraphic order
-            \item x: x coordinate of the location where the lithic fragment was found (in metre)
-            \item y: y coordinate of the location where the lithic fragment was found (in metre)
-            \item z: z coordinate of the location where the lithic fragment was found (in metre)
+            \item x: x coordinate of the location where the lithic fragment was found (in metres)
+            \item y: y coordinate of the location where the lithic fragment was found (in metres)
+            \item z: z coordinate of the location where the lithic fragment was found (in metres)
         }
     }
     
@@ -40,5 +41,6 @@
 \examples{
 data(BoutDesVergnes)
 head(bdv.fragments)
+comment(bdv.fragments)
 }
 

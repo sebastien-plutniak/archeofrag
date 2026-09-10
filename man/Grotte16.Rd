@@ -14,6 +14,7 @@ Grotte 16 is a Palaeolithic site located in Cénac-et-Saint-Julien, France. This
         \item\code{grotte16.connection}: connection relationships between fragments.
         \item\code{grotte16.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(Grotte16)}
 \format{
@@ -52,6 +53,7 @@ Refits were recorded by set of refitting fragments (and not by pair). Consequent
 \examples{
 data(Grotte16)
 head(grotte16.fragments)
+comment(grotte16.fragments)
 }
 
 

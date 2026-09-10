@@ -14,6 +14,7 @@
         \item\code{fontjuvenal.connection}: connection relationships between fragments.
         \item\code{fontjuvenal.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(FontJuvenal)}
 \format{
@@ -39,5 +40,6 @@
 \examples{
 data(FontJuvenal)
 head(fontjuvenal.fragments)
+comment(fontjuvenal.fragments)
 }
 

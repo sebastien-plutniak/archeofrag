@@ -1,9 +1,9 @@
-\name{CuzoulCave}
+\name{CuzoulDeGramatCave}
 \docType{data}
 
-\alias{CuzoulCave}
-\alias{cuzoul.cave.connection}
-\alias{cuzoul.cave.fragments}
+\alias{CuzoulDeGramatCave}
+\alias{cuzoul.de.gramat.cave.connection}
+\alias{cuzoul.de.gramat.cave.fragments}
 
 \title{Dataset: Refitting relationships between fauna fragments from the Cuzoul de Gramat site}
 \description{
@@ -11,15 +11,16 @@
     
     The dataset includes two tables:
     \itemize{
-        \item\code{cuzoul.cave.connection}: connection relationships between fragments.
-        \item\code{cuzoul.cave.fragments}: information about the fragments.
+        \item\code{cuzoul.de.gramat.cave.connection}: connection relationships between fragments.
+        \item\code{cuzoul.de.gramat.cave.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
-\usage{data(CuzoulCave)}
+\usage{data(CuzoulDeGramatCave)}
 \format{
     \itemize{
-        \item\code{cuzoul.cave.connection} is a 66x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
-        \item\code{cuzoul.cave.fragments} is 125x9 data frame:
+        \item\code{cuzoul.de.gramat.cave.connection} is a 66x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
+        \item\code{cuzoul.de.gramat.cave.fragments} is 125x9 data frame:
         \itemize{
             \item id: fragment unique identifier 
             \item layer: stratigraphic layer
@@ -42,7 +43,8 @@
 \keyword{datasets}
 
 \examples{
-data(CuzoulCave)
-head(cuzoul.cave.fragments)
+data(CuzoulDeGramatCave)
+head(cuzoul.de.gramat.cave.fragments)
+comment(cuzoul.de.gramat.cave.fragments)
 }
 

@@ -7,13 +7,14 @@
 
 \title{Dataset: Refitting relationships between lithic fragments from the Chauzeys site}
 \description{
-   Chauzey is an open-air Palaeolithic site located in France. This dataset describes the refitting 'connection' relationships between lithic fragments found during excavations. Connection relationship refers to physical connection between two fragments that were part of the same object. 
+   Chauzeys is an open-air Palaeolithic site located in France. This dataset describes the refitting 'connection' relationships between lithic fragments found during excavations. Connection relationship refers to physical connection between two fragments that were part of the same object. 
     
     The dataset is composed of two tables:
     \itemize{
         \item\code{chauzeys.connection}: connection relationships between fragments.
         \item\code{chauzeys.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(Chauzeys)}
 \format{
@@ -23,13 +24,13 @@
         \itemize{
             \item id:  fragment unique identifier 
             \item layer:  chronocultural unit associated to the fragment was found. Values are numbered in expected chrono-stratigraphic order
-            \item volume: estimated volume of the fragment computed as width by thickness by length
-            \item width: width of the fragment (in millimeter)
-            \item thickness: thickness  of the fragment (in millimeter)
-            \item length: length of the fragment (in millimeter)
-            \item x: x coordinate of the location where the lithic fragment was found (in metre)
-            \item y: y coordinate of the location where the lithic fragment was found (in metre)
-            \item z: z coordinate of the location where the lithic fragment was found (in metre)
+            \item volume: estimated volume of the fragment computed as width by thickness by length (in cubic centimetres)
+            \item width: width of the fragment (in millimeters)
+            \item thickness: thickness  of the fragment (in millimeters)
+            \item length: length of the fragment (in millimeters)
+            \item x: x coordinate of the location where the lithic fragment was found (in metres)
+            \item y: y coordinate of the location where the lithic fragment was found (in metres)
+            \item z: z coordinate of the location where the lithic fragment was found (in metres)
         }
     }
     
@@ -44,5 +45,6 @@
 \examples{
 data(Chauzeys)
 head(chauzeys.fragments)
+comment(chauzeys.fragments)
 }
 

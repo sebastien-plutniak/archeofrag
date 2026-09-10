@@ -14,6 +14,7 @@
         \item\code{grande.rivoire.2m.connection}: connection relationships between fragments.
         \item\code{grande.rivoire.2m.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(GrandeRivoire2ndMeso)}
 \format{
@@ -39,5 +40,6 @@
 \examples{
 data(GrandeRivoire2ndMeso)
 head(grande.rivoire.2m.fragments)
+comment(grande.rivoire.2m.fragments)
 }
 

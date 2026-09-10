@@ -1,9 +1,9 @@
-\name{CuzoulSouth}
+\name{CuzoulDeGramatSouth}
 \docType{data}
 
-\alias{CuzoulSouth}
-\alias{cuzoul.south.connection}
-\alias{cuzoul.south.fragments}
+\alias{CuzoulDeGramatSouth}
+\alias{cuzoul.de.gramat.south.connection}
+\alias{cuzoul.de.gramat.south.fragments}
 
 \title{Dataset: Refitting relationships between fauna fragments from the Cuzoul de Gramat site}
 \description{
@@ -11,15 +11,16 @@
     
     The dataset includes two tables:
     \itemize{
-        \item\code{cuzoul.south.connection}: connection relationships between fragments.
-        \item\code{cuzoul.south.fragments}: information about the fragments.
+        \item\code{cuzoul.de.gramat.south.connection}: connection relationships between fragments.
+        \item\code{cuzoul.de.gramat.south.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
-\usage{data(CuzoulSouth)}
+\usage{data(CuzoulDeGramatSouth)}
 \format{
     \itemize{
-        \item\code{cuzoul.south.connection} is a 135x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
-        \item\code{cuzoul.south.fragments} is 233x9 data frame:
+        \item\code{cuzoul.de.gramat.south.connection} is a 135x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
+        \item\code{cuzoul.de.gramat.south.fragments} is 233x9 data frame:
         \itemize{
             \item id: fragment unique identifier 
             \item layer: stratigraphic layer
@@ -42,7 +43,8 @@
 \keyword{datasets}
 
 \examples{
-data(CuzoulSouth)
-head(cuzoul.south.fragments)
+data(CuzoulDeGramatSouth)
+head(cuzoul.de.gramat.south.fragments)
+comment(cuzoul.de.gramat.south.fragments)
 }
 

@@ -14,6 +14,7 @@
         \item\code{eaton.connection}: connection relationships between fragments.
         \item\code{eaton.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(Eaton)}
 \format{
@@ -41,5 +42,6 @@
 \examples{
 data(Eaton)
 head(eaton.fragments)
+comment(eaton.fragments)
 }
 

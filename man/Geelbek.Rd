@@ -14,6 +14,7 @@
         \item\code{geelbek.connection}: connection relationships between fragments.
         \item\code{geelbek.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(Geelbek)}
 \format{
@@ -42,5 +43,6 @@
 \examples{
 data(Geelbek)
 head(geelbek.fragments)
+comment(geelbek.fragments)
 }
 

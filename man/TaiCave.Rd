@@ -14,6 +14,7 @@
         \item\code{tai.cave.connection}: connection relationships between fragments.
         \item\code{tai.cave.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(TaiCave)}
 \format{
@@ -23,7 +24,7 @@
         \itemize{
             \item id:  fragment unique identifier 
             \item layer:   stratigraphic layer
-            \item sherd_size: size class of the pottery sherd (nb: the numeric value is not metrical)
+            \item sherd_size: size class of the pottery sherd (NB: the numeric value is not metrical)
             \item sherd_thickness: thickness of the pottery sherd in millimeter
             \item x: x coordinates of the location where the pottery sherd was found (in centimetres)
             \item y: y coordinates of the location where the pottery sherd was found (in centimetres)
@@ -43,5 +44,6 @@
 \examples{
 data(TaiCave)
 head(tai.cave.fragments)
+comment(tai.cave.fragments)
 }
 

@@ -3,11 +3,12 @@
 
 \title{Plot a fragmentation graph}
 \description{A function to plot the graph made by the \code{archeofrag} package. }
-\usage{frag.graph.plot(graph, layer.attr, ...)}
+\usage{frag.graph.plot(graph, layer.attr=NULL, node.size=4.5, ...)}
 
 \arguments{
   \item{graph}{An \code{igraph} undirected object with a "frag_type" attribute.} 
   \item{layer.attr}{Character. The name of the vertices attribute giving the spatial unit of each fragment.}
+  \item{node.size}{Double. Size of the vertex.}
   \item{...}{Optional arguments sent to \code{plot.igraph}.}
 }
 \details{

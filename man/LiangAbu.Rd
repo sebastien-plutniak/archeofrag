@@ -20,6 +20,7 @@
         \item\code{liangabu.similarity}: "similarity" relationships between fragments.
         \item\code{liangabu.fragments}: information about the fragments.
     }
+    Metadata are accessible through the \code{comment()} function.
 }
 \usage{data(LiangAbu)}
 \format{
@@ -54,5 +55,6 @@
 \examples{
 data(LiangAbu)
 head(liangabu.fragments)
+comment(liangabu.fragments)
 }
 
