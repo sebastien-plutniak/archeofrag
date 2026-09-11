@@ -3,7 +3,7 @@
 
 An R package for refitting and spatial analysis in archeology.
 
-`Archeofrag` includes methods to analyse spatial units in archaeology from the relationships between refitting fragmented objects scattered in these units (e.g. stratigraphic layers). Graphs are used to model archaeological observations. The package is mainly based on the `igraph` package for graph analysis. Functions can: 1) create, manipulate, visualise, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archaeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. A series of published empirical datasets is included. This package is complemented by the `archeofrag.gui` R package, a companion GUI application available at <https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/>.
+`Archeofrag` includes methods to analyse spatial units in archaeology from the relationships between refitting fragmented objects scattered in these units (e.g. stratigraphic layers). Graphs are used to model archaeological observations. The package is mainly based on the `igraph` package for graph analysis. Functions can: 1) create, manipulate, visualise, and simulate fragmentation graphs, 2) measure the cohesion and admixture of archaeological spatial units, and 3) characterise the topology of a specific set of refitting relationships. A series of published empirical datasets is included. This package is complemented by the `archeofrag.gui` R package, a companion GUI application available at <https://analytics.huma-num.fr/archeofrag/>.
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -115,7 +115,7 @@ BiocManager::install("RBGL")
 The `archeofrag` package is complemented by a graphic-user interface
 version, `archeofrag.gui` (also distributed as an R package). See a
 [live demo
-here](https://analytics.huma-num.fr/Sebastien.Plutniak/archeofrag/).
+here](https://analytics.huma-num.fr/archeofrag/).
 This GUI version, focusing on connection relationships only
 (i.e. “proper refits”), make it easy to explore quickly and efficiently
 a refitting dataset.
