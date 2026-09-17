@@ -37,6 +37,7 @@
 }
 \references{
     \itemize{
+		\item Chadelle J.-P. 2026. Lithic refitting data from the Bessinaudes (France) Middle Palaeolithic occupation, https://doi.org/10.5281/zenodo.22813949
 		\item Chadelle J.-P. (dir.), with M. Baillet, M. Brenet, H. Camus, E. Claud, A. Michel, N. Mercier, M. Rabanit, F. Sellami. 2018. Les Bessinaudes. Saint-Médard-de-Mussidan (Dordogne Nouvelle-Aquitaine). Rapport final d’opération archéologique. Périgueux, Conseil départemental de la Dordogne, Service départemental d'archéologie.
         }
     }
