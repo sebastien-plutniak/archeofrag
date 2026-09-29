@@ -36,7 +36,7 @@
 }
 \references{
     \itemize{
-		\item  Armando Falcucci. 2025. Refitting-The-Context: Accepted paper b (v0.1.3). Zenodo. https://doi.org/10.5281/zenodo.15017627  
+		\item  Armando Falcucci, Domenico Giusti, Marco Peresani 2025. Research compendium for 'Refitting the Context: A Reconsideration of Cultural Change among Early Homo sapiens at Fumane Cave through Blade Break Connections, Spatial Taphonomy, and Lithic Technology'. Zenodo. https://doi.org/10.5281/zenodo.10965413
         }
     }
 \keyword{datasets}
