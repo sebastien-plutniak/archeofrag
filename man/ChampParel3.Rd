@@ -38,9 +38,9 @@
 }
 \references{
     \itemize{
-  		\item   Chadelle, J.-P. 2026. Lithic refitting data from the Champ Parel 3 (France) Upper Palaeolithic occupation. https://doi.org/10.5281/zenodo.22813988.
-  		\item   Chadelle, J.-P. 2000. Le gisement de Champ-Parel 3 à Bergerac (Dordogne, France). Observations taphonomiques sur un atelier de taille aurignacien en plein-air. Paléo, 12, p. 409-412.
-        \item Anderson, L. 2019. Essai de paléosociologie aurignacienne. Gestion des équipements lithiques et transmission des savoir-faire parmi les communautés établies dans le sud de la France. PhD thesis, Université de Toulouse-Mirail.
+  		\item   Chadelle, J.-P. 2026. Archaeological data from the Champ Parel 3 (France) Upper Palaeolithic occupation (lithic material description and refits). https://doi.org/10.5281/zenodo.22813987.
+  		\item   Chadelle, J.-P. 2000. Le gisement de Champ-Parel 3 à Bergerac (Dordogne, France). Observations taphonomiques sur un atelier de taille aurignacien en plein-air. Paléo, 12, p. 409-412. https://doi.org/10.3406/pal.2000.1612.
+        \item Anderson, L. 2019. Essai de paléosociologie aurignacienne. Gestion des équipements lithiques et transmission des savoir-faire parmi les communautés établies dans le sud de la France. PhD thesis, Université de Toulouse-Mirail. https://doi.org/10.70675/9244f694zbd6cz4385zac49z458b02a759cd.
         }
     }
 \keyword{datasets}

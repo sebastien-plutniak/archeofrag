@@ -37,7 +37,7 @@
 }
 \references{
     \itemize{
-        \item   Chadelle, J.-P. 2026. Lithic refitting data from the Chauzeys (France) Palaeolithic occupation. https://doi.org/10.5281/zenodo.22814036.
+        \item Chadelle, J.-P. 2026. Archaeological data from the Chauzeys (France) Palaeolithic occupation (lithic material description and refits). https://doi.org/10.5281/zenodo.22814035.
 		\item Chadelle J.-P. (dir.), with M. Baillet, A. Barbeyron, M. Brenet, H. Camus, É. Claud, F. Jude, S. Kreutzer, A. Michel,  N. Mercier, M. Rabanit, S. Save, F. Sellami, A. Vaughan-Williams. 2021. Chauzeys, Saint-Médard-de-Mussidan (Dordogne, Nouvelle-Aquitaine), Rapport final d'opération archéologique, Périgueux, Conseil départemental de la Dordogne, Service départemental d'archéologie.
         }
     }

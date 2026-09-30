@@ -38,7 +38,7 @@
 }
 \references{
     \itemize{
-      \item   Chadelle J.-P. 2026. Lithic refitting data from the Villetoureix (France) Upper Palaeolithic occupation, https://doi.org/10.5281/zenodo.22813847
+      \item   Chadelle J.-P. 2026. Archaeological data from the Villetoureix (France) Upper Palaeolithic occupation (lithic material description and refits). https://doi.org/10.5281/zenodo.22813846.
       \item   Michel A. (ed.), with D. Aoustin, M. Baillet, P. Bertan, K. Charlier, I. Couchoud, J.-C. Castel, J.-P. Chadelle, C. Fat Cheung, C. Hatté, N. Limondin-Lazouet, H. Pradier, A. Queffelec. 2021. Chez Thuilet, secteur Magdalénien (Villetoureix, Dordogne). Rapport d’aide à la publication. Périgueux, Conseil départemental de la Dordogne, Service départemental d'archéologie / Ministère de la Culture.
    }
 }
