@@ -42,7 +42,7 @@ frag.graph.plot  <- function(graph, layer.attr=NULL, node.size=4.5,  ...){
     } else if(igraph::graph_attr(graph, "frag_type") == "similarity relations"){
       graph <- igraph::add_layout_(graph, igraph::with_fr(weights = NULL))
       igraph::E(graph)$color <- "green"
-    } else if(length(layers) == 2){ 
+    } else if(length(layers) == 2 & is.null(graph$layout)){ 
       # prepare coordinates if the graph has two layers:
       coords <- data.frame(layer = igraph::V(graph)$layers, miny = 0, maxy = 100) 
       coords[coords$layer == layers[1],]$miny <- 51 
