@@ -3,7 +3,7 @@
 
 \alias{CovaGran7P}
 \alias{cova.gran7p.connection}
-\alias{cova.gran7p.cave.fragments}
+\alias{cova.gran7p.fragments}
 
 \title{Dataset: Refitting relationships between lithic and bone fragments from the Cova Gran site, level 7P}
 \description{
@@ -11,16 +11,16 @@
     
     The dataset includes two tables:
     \itemize{
-        \item\code{cova.gran7p.cave.connection}: connection relationships between fragments.
-        \item\code{cova.gran7p.cave.fragments}: information about the fragments.
+        \item\code{cova.gran7p.connection}: connection relationships between fragments.
+        \item\code{cova.gran7p.fragments}: information about the fragments.
     }
     Metadata are accessible through the \code{comment()} function.
 }
-\usage{data(CuzoulDeGramatCave)}
+\usage{data(CovaGran7P)}
 \format{
     \itemize{
-        \item\code{cova.gran7p.cave.connection} is a 339x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
-        \item\code{cova.gran7p.cave.fragments} is 311x11 data frame:
+        \item\code{cova.gran7p.connection} is a 339x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
+        \item\code{cova.gran7p.fragments} is 311x11 data frame:
         \itemize{
             \item id: fragment unique identifier 
             \item level: stratigraphic level
@@ -47,7 +47,7 @@
 
 \examples{
 data(CovaGran7P)
-head(cova.gran7p.cave.fragments)
-comment(cova.gran7p.cave.fragments)
+head(cova.gran7p.fragments)
+comment(cova.gran7p.fragments)
 }
 
