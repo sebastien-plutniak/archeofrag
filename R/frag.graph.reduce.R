@@ -64,16 +64,27 @@
 }
 
 
-frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.objects.nr = FALSE, conserve.fragments.balance = FALSE, conserve.inter.units.connection = FALSE, verbose = FALSE) {
+frag.graph.reduce <- function(graph = NULL, spatial.unit.var = "layer", n.frag.to.remove = NULL, conserve.objects.nr = FALSE, conserve.fragments.balance = FALSE, conserve.inter.units.connection = FALSE, verbose = FALSE) {
   .check.frag.graph(graph)
   if( ! is.logical(conserve.objects.nr)){stop("'conserve.objects.nr' must be TRUE or FALSE.")}
   if( ! is.numeric(n.frag.to.remove)){stop("'n.frag.to.remove' must be an integer value.")}
+  # browser()
+  igraph::V(graph)$spatial.unit <- igraph::vertex_attr(graph, spatial.unit.var)
+  
+  sp.units <- unique(igraph::V(graph)$spatial.unit)
+  if(length(sp.units) > 2) stop("The 'spatial unit' variable must have no more than two different values.")
+  
+  if(length(sp.units) == 1){
+    if(conserve.fragments.balance | conserve.inter.units.connection){
+       stop("The 'spatial unit' variable has only one value. The 'conserve.fragments.balance' and 'conserve.inter.units.connection' parameters can't be set to TRUE.")
+    }
+  } else{
+    v1 <- igraph::V(graph)$spatial.unit == sort(sp.units)[1] 
+    v2 <- igraph::V(graph)$spatial.unit == sort(sp.units)[2] 
+    inter.units.edges <- igraph::E(graph)[ v1 %--% v2 ]
+  }
   
   igraph::V(graph)$preserve <- FALSE
-  
-  v1 <- igraph::V(graph)$layer == sort(unique(igraph::V(graph)$layer))[1] 
-  v2 <- igraph::V(graph)$layer == sort(unique(igraph::V(graph)$layer))[2] 
-  inter.units.edges <- igraph::E(graph)[ v1 %--% v2 ]
   
   # tag vertices with inter-unit edges to keep:
   if(conserve.inter.units.connection){
@@ -123,18 +134,21 @@ frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.ob
     }
     
     # reformat attributes:
-    igraph::V(graph)$layer <- .concatenate.attr(graph, "layer")
+    graph <- igraph::set_vertex_attr(graph, name = spatial.unit.var,
+                                     value = .concatenate.attr(graph, "spatial.unit"))
+    
     igraph::V(graph)$morphometry <- .concatenate.attr(graph, "morphometry")
     
     graph <- Reduce(igraph::delete_vertex_attr, c("morphometry_1", "morphometry_2",
+                                                  paste0(spatial.unit.var, c("_1", "_2")),
                                                   "object.id_1", "object.id_2",
-                                                  "layer_1", "layer_2",
+                                                  "spatial.unit_1", "spatial.unit_2",
                                                   "preserve_1", "preserve_2"), 
                      graph)
     
     graph <- Reduce(igraph::delete_edge_attr, c("weight_1", "weight_2",
-                                                 "scope_1", "scope_2",
-                                                 "id_1", "id_2"), 
+                                                "scope_1", "scope_2",
+                                                "id_1", "id_2"), 
                      graph)
     graph$frag_type <- graph$frag_type_1
     graph <- Reduce(igraph::delete_graph_attr, c("frag_type_1", "frag_type_2"), graph)
@@ -143,17 +157,17 @@ frag.graph.reduce <- function(graph = NULL, n.frag.to.remove = NULL, conserve.ob
     final.frag.nr <- igraph::gorder(graph) - n.frag.to.remove
     graph.reduced <- .reduce.graph(graph, final.frag.nr, conserve.objects.nr)
     
-    # add inter-units edges:
-    e.list <- igraph::as_edgelist(graph)[inter.units.edges, ]
-    e.list <- e.list[e.list[, 1] %in% igraph::V(graph.reduced)$name & e.list[, 2] %in% igraph::V(graph.reduced)$name, ]
-    e.list <- matrix(e.list, ncol = 2)
-    
-    if(nrow(e.list) > 0){
-      graph <- igraph::add_edges(graph.reduced, as.character(c(rbind(e.list[, 1], e.list[, 2]))))
-    } else {
-      graph <- graph.reduced
+    if(conserve.inter.units.connection){
+      # add inter-units edges:
+      e.list <- igraph::as_edgelist(graph)[inter.units.edges, ]
+      e.list <- e.list[e.list[, 1] %in% igraph::V(graph.reduced)$name & e.list[, 2] %in% igraph::V(graph.reduced)$name, ]
+      e.list <- matrix(e.list, ncol = 2)
+      
+      if(nrow(e.list) > 0){
+        graph <- igraph::add_edges(graph.reduced, as.character(c(rbind(e.list[, 1], e.list[, 2]))))
+      } 
     }
-    
+    graph <- graph.reduced
   }
   graph <- igraph::simplify(graph)
   igraph::E(graph)$weight <- 1 # reset weight values
