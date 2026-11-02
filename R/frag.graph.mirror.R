@@ -17,11 +17,6 @@
   igraph::V(g.mirrored)$name <- paste0(igraph::V(g.mirrored)$name, ".mirrored")
   igraph::V(g.mirrored)$layer <- "mirror"
    
-  if(! is.null(morphometry)) g.mirrored <- igraph::set_vertex_attr(g.mirrored, morphometry, value = igraph::vertex_attr(g.observed, morphometry))
-  if(! is.null(x)) g.mirrored <- igraph::set_vertex_attr(g.mirrored, x, value = igraph::vertex_attr(g.observed, x))
-  if(! is.null(y)) g.mirrored <- igraph::set_vertex_attr(g.mirrored, y, value = igraph::vertex_attr(g.observed, y))
-  if(! is.null(z)) g.mirrored <- igraph::set_vertex_attr(g.mirrored, z, value = igraph::vertex_attr(g.observed, z))
-  
   # merge the observed and mirrored graphs:
   g <- igraph::disjoint_union(g.observed, g.mirrored)
   g$frag_type <-  "cr"
