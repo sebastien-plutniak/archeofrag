@@ -10,7 +10,7 @@ test_that("cohesion for 1 layer, no optional parameters", {
   g <- make_frag_object(cr=edges, fragments=fragments.df)
   g <- make_cr_graph(g)
   
-  expect_equal(frag.layers.cohesion(g, "layer"), c("cohesion" = 0.5491))
+  expect_equal(frag.layers.cohesion(g, layer.attr = "layer"), c("cohesion" = 0.5491))
 })
 
 test_that("cohesion for 1 layer, with morphometry", {
@@ -26,7 +26,7 @@ test_that("cohesion for 1 layer, with morphometry", {
   g <- make_cr_graph(g)
   set.seed(1)
   igraph::V(g)$morpho <- sample(5:10, 32, replace = T)
-  expect_equal(frag.layers.cohesion(g, "layer", morphometry = "morpho"), c("cohesion" = 0.2884))
+  expect_equal(frag.layers.cohesion(g, "layer", morphometry = "morpho"), c("cohesion" = 0.5491))
 })
 
 test_that("cohesion for 1 layer, with coordinates", {
@@ -44,7 +44,7 @@ test_that("cohesion for 1 layer, with coordinates", {
   igraph::V(g)$x <- sample(2:30, 32, replace = T)
   igraph::V(g)$y <- sample(2:30, 32, replace = T)
   igraph::V(g)$z <- sample(2:30, 32, replace = T)
-  expect_equal(frag.layers.cohesion(g, layer.attr = "layer", x = "x", y = "y", z = "z"), c("cohesion" = 0.4431))
+  expect_equal(frag.layers.cohesion(g, layer.attr = "layer", x = "x", y = "y", z = "z"), c("cohesion" = 0.5491))
 })
 
 
@@ -66,7 +66,7 @@ test_that("cohesion for 1 layer, with morphometry and coordinates", {
   igraph::V(g)$coord.z <- sample(2:30, 32, replace = T)
   expect_equal(frag.layers.cohesion(g, layer.attr = "layer", 
                                     morphometry = "morpho", x = "coord.x", y = "coord.y", z = "coord.z"),
-               c("cohesion" = 0.4568))
+               c("cohesion" = 0.5491))
 })
 
 

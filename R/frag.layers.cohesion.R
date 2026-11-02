@@ -37,13 +37,10 @@ frag.layers.cohesion <- function(graph, layer.attr, morphometry=NULL, x=NULL, y=
  
   # 1 spatial unit: ----
   if(length(layers) == 1){
-    if(verbose) message("Only 1 spatial unit: cohesion is computed against a mirrored and minimized copy of the graph.")
+    if(verbose) message("Only 1 spatial unit: cohesion is computed against a mirrored and minimized copy of the graph. Optional weightings are not considered.")
     
-    g.mirrored <- .frag.graph.mirror(graph, morphometry, x, y, z)
-    g.mirrored <- frag.edges.weighting(g.mirrored,
-                                       "layer",
-                                       morphometry, x, y, z,
-                                       verbose)
+    g.mirrored <- .frag.graph.mirror(graph)
+    g.mirrored <- frag.edges.weighting(g.mirrored, layer.attr = "layer", verbose = verbose)
     results <- .cohesion.for.two.layers(g.mirrored, unique(igraph::V(g.mirrored)$layer))
     results <- (results[1] - .5) * 2
     return(c("cohesion" = round(results, 4)))
