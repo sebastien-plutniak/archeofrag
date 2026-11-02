@@ -1,6 +1,11 @@
 
+# archeofrag 1.3.1
+
+* `frag.graph.reduce()` can now handle graphs with only one spatial unit.
+* New dataset: Cova Gran 7P
+
 # archeofrag 1.3.0
-Released: 2026-XX-XX
+Released: 2026-09-29
 
 * New method to compute a cohesion value for a graph with one spatial unit, implemented in `frag.layers.cohesion()`. It uses a new internal `.frag.graph.mirror()` function.
 * Graph having only one or no spatial unit (i.e. 'layer.attr' vertex attribute) are now supported.
