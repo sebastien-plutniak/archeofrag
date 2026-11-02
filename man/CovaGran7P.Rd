@@ -20,10 +20,9 @@
 \format{
     \itemize{
         \item\code{cova.gran7p.connection} is a 339x2 matrix. Each line describes a connection relationship between two fragments. Their unique identifiers are given in column 'id1' and in column 'id2', respectively. 
-        \item\code{cova.gran7p.fragments} is 311x11 data frame:
+        \item\code{cova.gran7p.fragments} is 311x10 data frame:
         \itemize{
             \item id: fragment unique identifier 
-            \item level: stratigraphic level
             \item material: raw material
             \item length: length of the fragment (in millimetre)
             \item width: width of the fragment (in millimetre)
