@@ -1,8 +1,8 @@
 
 # archeofrag 1.3.1
 
-* `frag.graph.reduce()` can now handle graphs with only one spatial unit.
-* New dataset: Cova Gran 7P
+* `frag.graph.reduce()` can now handle graphs with only one spatial value.
+* New datasets: Cova Gran 7P, Gazel.s
 
 # archeofrag 1.3.0
 Released: 2026-09-29
