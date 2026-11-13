@@ -10,9 +10,14 @@ frag.cohesion.ranking <- function(cohesion.df, add.math.signs = TRUE){
   
   count <- apply(cohesion.df, 1, function(x) x[c(ncol(cohesion.df) -1, ncol(cohesion.df))][order(x[1:2])[2] ] )
   count <- sort(table(count), decreasing = TRUE)
+  tab.colnames <- names(count) 
   count <- t(as.data.frame(count, stringsAsFactors = FALSE))
   
-  sp.units <- sp.units[ ! sp.units %in% count[1, ]]
+  sp.units <- sp.units[ ! sp.units %in% tab.colnames]
+  
+  if(length(count) == 1){
+    count <- t(data.frame(tab.colnames, count))
+  }
   
   count <- cbind(count, rbind(sp.units, 0))
   res <- as.numeric(count[2, ])
